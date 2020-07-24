@@ -824,6 +824,7 @@
                     <Editor
                       v-model="preRequestScript"
                       :lang="'javascript'"
+                      :lint="true"
                       :options="{
                         maxLines: '16',
                         minLines: '8',
