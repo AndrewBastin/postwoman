@@ -46,6 +46,7 @@
 #### **Contact**
 
 [![Chat on Telegram](https://img.shields.io/badge/chat-Telegram-2CA5E0?logo=Telegram)](https://t.me/hoppscotch) [![Chat on Discord](https://img.shields.io/badge/chat-Discord-7289DA?logo=discord)](https://discord.gg/GAMWxmR)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewBastin%2Fhoppscotch.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewBastin%2Fhoppscotch?ref=badge_shield)
 
 #### **Support**
 
@@ -656,3 +657,6 @@ This project exists thanks to all the people who contribute [[Contribute](CONTRI
 ## **License**
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [`LICENSE`](LICENSE) file for details.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAndrewBastin%2Fhoppscotch.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAndrewBastin%2Fhoppscotch?ref=badge_large)
