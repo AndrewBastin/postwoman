@@ -35,7 +35,7 @@
     "lodash": "^4.17.20",
     "mustache": "^4.2.0",
     "nuxt": "^2.15.4",
-    "nuxt-i18n": "^6.26.0",
+    "nuxt-i18n": "^6.27.0",
     "paho-mqtt": "^1.1.0",
     "rxjs": "^6.6.7",
     "socket.io-client": "^4.0.1",
