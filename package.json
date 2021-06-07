@@ -68,7 +68,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/stylelint-module": "^4.0.0",
     "@nuxtjs/tailwindcss": "^4.1.2",
-    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/jest-dom": "^5.13.0",
     "@types/lodash": "^4.14.170",
     "@vue/test-utils": "^1.2.0",
     "babel-core": "^7.0.0-bridge.0",
