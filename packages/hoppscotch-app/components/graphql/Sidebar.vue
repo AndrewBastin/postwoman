@@ -236,9 +236,9 @@
 import { computed, nextTick, reactive, ref } from "@nuxtjs/composition-api"
 import { GraphQLField, GraphQLType } from "graphql"
 import { map } from "rxjs/operators"
+import { GQLHeader } from "@hoppscotch/data"
 import { useCodemirror } from "~/helpers/editor/codemirror"
 import { GQLConnection } from "~/helpers/GQLConnection"
-import { GQLHeader } from "~/helpers/types/HoppGQLRequest"
 import { copyToClipboard } from "~/helpers/utils/clipboard"
 import {
   useReadonlyStream,

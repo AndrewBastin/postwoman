@@ -71,7 +71,7 @@
 
 <script setup lang="ts">
 import { ref } from "@nuxtjs/composition-api"
-import { HoppRESTHeader } from "~/helpers/types/HoppRESTRequest"
+import { HoppRESTHeader } from "@hoppscotch/data"
 import { copyToClipboard } from "~/helpers/utils/clipboard"
 import { useI18n, useToast } from "~/helpers/utils/composables"
 

@@ -5,6 +5,7 @@ import assign from "lodash/assign"
 import isEmpty from "lodash/isEmpty"
 import * as O from "fp-ts/Option"
 import { pipe } from "fp-ts/function"
+import { translateToNewRequest } from "@hoppscotch/data"
 import {
   settingsStore,
   bulkApplySettings,
@@ -40,7 +41,6 @@ import {
   setCurrentEnvironment,
 } from "./environments"
 import { restRequest$, setRESTRequest } from "./RESTSession"
-import { translateToNewRequest } from "~/helpers/types/HoppRESTRequest"
 
 function checkAndMigrateOldSettings() {
   const vuexData = JSON.parse(window.localStorage.getItem("vuex") || "{}")

@@ -133,7 +133,7 @@
 
 <script>
 import { defineComponent } from "@nuxtjs/composition-api"
-import { translateToNewRequest } from "~/helpers/types/HoppRESTRequest"
+import { translateToNewRequest } from "@hoppscotch/data"
 import { useReadonlyStream } from "~/helpers/utils/composables"
 import {
   restSaveContext$,
