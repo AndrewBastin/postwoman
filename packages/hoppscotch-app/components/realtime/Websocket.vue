@@ -24,7 +24,7 @@
                   autocomplete="off"
                   spellcheck="false"
                   :class="{ error: !urlValid }"
-                  :placeholder="$t('websocket.url')"
+                  :placeholder="t('websocket.url').toString()"
                   :disabled="connectionState"
                   @keyup.enter="urlValid ? toggleConnection() : null"
                 />
@@ -35,8 +35,8 @@
                   name="connect"
                   :label="
                     !connectionState
-                      ? $t('action.connect')
-                      : $t('action.disconnect')
+                      ? t('action.connect').toString()
+                      : t('action.disconnect').toString()
                   "
                   :loading="connectingState"
                   @click.native="toggleConnection"
@@ -52,13 +52,13 @@
               <div class="flex">
                 <ButtonSecondary
                   v-tippy="{ theme: 'tooltip' }"
-                  :title="$t('action.clear_all')"
+                  :title="t('action.clear_all').toString()"
                   svg="trash-2"
                   @click.native="clearContent"
                 />
                 <ButtonSecondary
                   v-tippy="{ theme: 'tooltip' }"
-                  :title="$t('add.new')"
+                  :title="t('add.new').toString()"
                   svg="plus"
                   @click.native="addProtocol"
                 />
@@ -72,7 +72,9 @@
               <input
                 v-model="protocol.value"
                 class="bg-transparent flex flex-1 py-2 px-4"
-                :placeholder="$t('count.protocol', { count: index + 1 })"
+                :placeholder="
+                  t('count.protocol', { count: index + 1 }).toString()
+                "
                 name="message"
                 type="text"
                 autocomplete="off"
@@ -89,9 +91,9 @@
                   :title="
                     protocol.hasOwnProperty('active')
                       ? protocol.active
-                        ? $t('action.turn_off')
-                        : $t('action.turn_on')
-                      : $t('action.turn_off')
+                        ? t('action.turn_off').toString()
+                        : t('action.turn_on').toString()
+                      : t('action.turn_off').toString()
                   "
                   :svg="
                     protocol.hasOwnProperty('active')
@@ -112,7 +114,7 @@
               <span>
                 <ButtonSecondary
                   v-tippy="{ theme: 'tooltip' }"
-                  :title="$t('action.remove')"
+                  :title="t('action.remove').toString()"
                   svg="trash"
                   color="red"
                   @click.native="deleteProtocol({ index })"
@@ -140,7 +142,7 @@
           class="hide-scrollbar !overflow-auto"
         >
           <AppSection label="response">
-            <RealtimeLog :title="$t('websocket.log')" :log="log" />
+            <RealtimeLog :title="t('websocket.log').toString()" :log="log" />
           </AppSection>
         </Pane>
       </Splitpanes>
@@ -157,7 +159,7 @@
             for="websocket-message"
             class="font-semibold text-secondaryLight"
           >
-            {{ $t("websocket.communication") }}
+            {{ t("websocket.communication").toString() }}
           </label>
         </div>
         <div class="flex space-x-2 px-4">
@@ -168,7 +170,7 @@
             type="text"
             autocomplete="off"
             :disabled="!connectionState"
-            :placeholder="$t('websocket.message')"
+            :placeholder="t('websocket.message').toString()"
             class="input"
             @keyup.enter="connectionState ? sendMessage() : null"
             @keyup.up="connectionState ? walkHistory('up') : null"
@@ -178,7 +180,7 @@
             id="send"
             name="send"
             :disabled="!connectionState"
-            :label="$t('action.send')"
+            :label="t('action.send').toString()"
             @click.native="sendMessage"
           />
         </div>
@@ -187,8 +189,14 @@
   </Splitpanes>
 </template>
 
-<script>
-import { defineComponent } from "@nuxtjs/composition-api"
+<script setup lang="ts">
+import {
+  computed,
+  onBeforeUnmount,
+  reactive,
+  ref,
+  watch,
+} from "@nuxtjs/composition-api"
 import { Splitpanes, Pane } from "splitpanes"
 import "splitpanes/dist/splitpanes.css"
 import debounce from "lodash/debounce"
@@ -213,233 +221,248 @@ import {
   addWSLogLine,
   WSLog$,
   setWSLog,
+  HoppWSProtocol,
 } from "~/newstore/WebSocketSession"
-import { useStream } from "~/helpers/utils/composables"
+import {
+  useI18n,
+  useStream,
+  useToast,
+  useColorMode,
+  useWorker,
+} from "~/helpers/utils/composables"
 
-export default defineComponent({
-  components: { Splitpanes, Pane },
-  setup() {
-    return {
-      windowInnerWidth: useWindowSize(),
-      SIDEBAR: useSetting("SIDEBAR"),
-      COLUMN_LAYOUT: useSetting("COLUMN_LAYOUT"),
-      SIDEBAR_ON_LEFT: useSetting("SIDEBAR_ON_LEFT"),
-      url: useStream(WSEndpoint$, "", setWSEndpoint),
-      protocols: useStream(WSProtocols$, [], setWSProtocols),
-      connectionState: useStream(
-        WSConnectionState$,
-        false,
-        setWSConnectionState
-      ),
-      connectingState: useStream(
-        WSConnectingState$,
-        false,
-        setWSConnectingState
-      ),
-      socket: useStream(WSSocket$, null, setWSSocket),
-      log: useStream(WSLog$, [], setWSLog),
-    }
+const t = useI18n()
+const $worker = useWorker()
+const $toast = useToast()
+const $colorMode = useColorMode()
+
+const windowInnerWidth = useWindowSize()
+const SIDEBAR = useSetting("SIDEBAR")
+const COLUMN_LAYOUT = useSetting("COLUMN_LAYOUT")
+const SIDEBAR_ON_LEFT = useSetting("SIDEBAR_ON_LEFT")
+
+const url = useStream(WSEndpoint$, "", setWSEndpoint)
+const protocols = useStream(WSProtocols$, [], setWSProtocols)
+const connectionState = useStream(
+  WSConnectionState$,
+  false,
+  setWSConnectionState
+)
+const connectingState = useStream(
+  WSConnectingState$,
+  false,
+  setWSConnectingState
+)
+const socket = useStream(WSSocket$, null, setWSSocket)
+const log = useStream(WSLog$, [], setWSLog)
+
+const isUrlValid = ref(true)
+const communication = reactive({
+  input: "",
+})
+const currentIndex = ref(-1)
+const activeProtocols = ref([] as string[])
+
+const urlValid = computed(() => isUrlValid.value)
+
+watch(
+  protocols,
+  (newVal) => {
+    activeProtocols.value = newVal
+      .filter((item) =>
+        Object.prototype.hasOwnProperty.call(item, "active")
+          ? item.active === true
+          : true
+      )
+      .map(({ value }) => value)
   },
-  data() {
-    return {
-      isUrlValid: true,
-      communication: {
-        input: "",
-      },
-      currentIndex: -1, // index of the message log array to put in input box
-      activeProtocols: [],
-    }
-  },
-  computed: {
-    urlValid() {
-      return this.isUrlValid
+  { deep: true }
+)
+
+onBeforeUnmount(() => {
+  worker.terminate()
+})
+
+const clearContent = () => {
+  deleteAllWSProtocols()
+}
+
+const workerResponseHandler = ({
+  data,
+}: {
+  data: { url: string; result: boolean }
+}) => {
+  if (data.url === url.value) isUrlValid.value = data.result
+}
+
+const worker = $worker.createRejexWorker()
+worker.addEventListener("message", workerResponseHandler)
+
+const debouncer = debounce(function () {
+  worker.postMessage({ type: "ws", url: url.value })
+}, 1000)
+
+watch(url, () => {
+  debouncer()
+})
+
+const toggleConnection = () => {
+  if (!connectionState.value) return connect()
+  else return disconnect()
+}
+
+const connect = () => {
+  log.value = [
+    {
+      payload: t("state.connecting_to", { name: url.value }).toString(),
+      source: "info",
+      color: "var(--accent-color)",
+      ts: new Date().toLocaleTimeString(),
     },
-  },
-  watch: {
-    url() {
-      this.debouncer()
-    },
-    protocols: {
-      handler(newVal) {
-        this.activeProtocols = newVal
-          .filter((item) =>
-            Object.prototype.hasOwnProperty.call(item, "active")
-              ? item.active === true
-              : true
-          )
-          .map(({ value }) => value)
-      },
-      deep: true,
-    },
-  },
-  created() {
-    if (process.browser) {
-      this.worker = this.$worker.createRejexWorker()
-      this.worker.addEventListener("message", this.workerResponseHandler)
-    }
-  },
-  destroyed() {
-    this.worker.terminate()
-  },
-  methods: {
-    clearContent() {
-      deleteAllWSProtocols()
-    },
-    debouncer: debounce(function () {
-      this.worker.postMessage({ type: "ws", url: this.url })
-    }, 1000),
-    workerResponseHandler({ data }) {
-      if (data.url === this.url) this.isUrlValid = data.result
-    },
-    toggleConnection() {
-      // If it is connecting:
-      if (!this.connectionState) return this.connect()
-      // Otherwise, it's disconnecting.
-      else return this.disconnect()
-    },
-    connect() {
-      this.log = [
+  ]
+  try {
+    connectingState.value = true
+    socket.value = new WebSocket(url.value, activeProtocols.value)
+    socket.value.onopen = () => {
+      connectingState.value = false
+      connectionState.value = true
+      log.value = [
         {
-          payload: this.$t("state.connecting_to", { name: this.url }),
+          payload: t("state.connected_to", { name: url.value }).toString(),
           source: "info",
           color: "var(--accent-color)",
+          ts: new Date().toLocaleTimeString(),
         },
       ]
-      try {
-        this.connectingState = true
-        this.socket = new WebSocket(this.url, this.activeProtocols)
-        this.socket.onopen = () => {
-          this.connectingState = false
-          this.connectionState = true
-          this.log = [
-            {
-              payload: this.$t("state.connected_to", { name: this.url }),
-              source: "info",
-              color: "var(--accent-color)",
-              ts: new Date().toLocaleTimeString(),
-            },
-          ]
-          this.$toast.success(this.$t("state.connected"))
-        }
-        this.socket.onerror = () => {
-          this.handleError()
-        }
-        this.socket.onclose = () => {
-          this.connectionState = false
-          addWSLogLine({
-            payload: this.$t("state.disconnected_from", { name: this.url }),
-            source: "info",
-            color: "#ff5555",
-            ts: new Date().toLocaleTimeString(),
-          })
-          this.$toast.error(this.$t("state.disconnected"))
-        }
-        this.socket.onmessage = ({ data }) => {
-          addWSLogLine({
-            payload: data,
-            source: "server",
-            ts: new Date().toLocaleTimeString(),
-          })
-        }
-      } catch (e) {
-        this.handleError(e)
-        this.$toast.error(this.$t("error.something_went_wrong"))
-      }
 
-      logHoppRequestRunToAnalytics({
-        platform: "wss",
-      })
-    },
-    disconnect() {
-      if (this.socket) {
-        this.socket.close()
-        this.connectionState = false
-        this.connectingState = false
-      }
-    },
-    handleError(error) {
-      this.disconnect()
-      this.connectionState = false
+      $toast.success(t("state.connected").toString())
+    }
+    socket.value.onerror = () => {
+      handleError()
+    }
+    socket.value.onclose = () => {
+      connectionState.value = false
       addWSLogLine({
-        payload: this.$t("error.something_went_wrong"),
+        payload: t("state.disconnected_from", { name: url.value }).toString(),
         source: "info",
         color: "#ff5555",
         ts: new Date().toLocaleTimeString(),
       })
-      if (error !== null)
-        addWSLogLine({
-          payload: error,
-          source: "info",
-          color: "#ff5555",
-          ts: new Date().toLocaleTimeString(),
-        })
-    },
-    sendMessage() {
-      const message = this.communication.input
-      this.socket.send(message)
+
+      $toast.error(t("state.disconnected").toString())
+    }
+    socket.value.onmessage = ({ data }) => {
       addWSLogLine({
-        payload: message,
-        source: "client",
+        payload: data as string,
+        source: "server",
         ts: new Date().toLocaleTimeString(),
       })
-      this.communication.input = ""
-    },
-    walkHistory(direction) {
-      const clientMessages = this.log.filter(
-        ({ source }) => source === "client"
-      )
-      const length = clientMessages.length
-      switch (direction) {
-        case "up":
-          if (length > 0 && this.currentIndex !== 0) {
-            // does nothing if message log is empty or the currentIndex is 0 when up arrow is pressed
-            if (this.currentIndex === -1) {
-              this.currentIndex = length - 1
-              this.communication.input =
-                clientMessages[this.currentIndex].payload
-            } else if (this.currentIndex === 0) {
-              this.communication.input = clientMessages[0].payload
-            } else if (this.currentIndex > 0) {
-              this.currentIndex = this.currentIndex - 1
-              this.communication.input =
-                clientMessages[this.currentIndex].payload
-            }
-          }
-          break
-        case "down":
-          if (length > 0 && this.currentIndex > -1) {
-            if (this.currentIndex === length - 1) {
-              this.currentIndex = -1
-              this.communication.input = ""
-            } else if (this.currentIndex < length - 1) {
-              this.currentIndex = this.currentIndex + 1
-              this.communication.input =
-                clientMessages[this.currentIndex].payload
-            }
-          }
-          break
+    }
+  } catch (e: any) {
+    handleError(e)
+    $toast.error(t("error.something_went_wrong").toString())
+  }
+
+  logHoppRequestRunToAnalytics({
+    platform: "wss",
+  })
+}
+
+const disconnect = () => {
+  if (socket.value) {
+    socket.value.close()
+    connectionState.value = false
+    connectingState.value = false
+  }
+}
+
+const handleError = (error?: any) => {
+  disconnect()
+  connectionState.value = false
+  addWSLogLine({
+    payload: t("error.something_went_wrong").toString(),
+    source: "info",
+    color: "#ff5555",
+    ts: new Date().toLocaleTimeString(),
+  })
+  if (error)
+    addWSLogLine({
+      payload: error,
+      source: "info",
+      color: "#ff5555",
+      ts: new Date().toLocaleTimeString(),
+    })
+}
+
+const sendMessage = () => {
+  if (!socket.value) return
+
+  const message = communication.input
+
+  socket.value.send(message)
+
+  addWSLogLine({
+    payload: message,
+    source: "client",
+    ts: new Date().toLocaleTimeString(),
+  })
+
+  communication.input = ""
+}
+
+const walkHistory = (direction: "up" | "down") => {
+  const clientMessages = log.value.filter(({ source }) => source === "client")
+
+  const length = clientMessages.length
+
+  switch (direction) {
+    case "up":
+      if (length > 0 && currentIndex.value !== 0) {
+        // does nothing if message log is empty or the currentIndex is 0 when up arrow is pressed
+        if (currentIndex.value === -1) {
+          currentIndex.value = length - 1
+          communication.input = clientMessages[currentIndex.value].payload
+        } else if (currentIndex.value === 0) {
+          communication.input = clientMessages[0].payload
+        } else if (currentIndex.value > 0) {
+          currentIndex.value = currentIndex.value - 1
+          communication.input = clientMessages[currentIndex.value].payload
+        }
       }
+      break
+    case "down":
+      if (length > 0 && currentIndex.value > -1) {
+        if (currentIndex.value === length - 1) {
+          currentIndex.value = -1
+          communication.input = ""
+        } else if (currentIndex.value < length - 1) {
+          currentIndex.value = currentIndex.value + 1
+          communication.input = clientMessages[currentIndex.value].payload
+        }
+      }
+      break
+  }
+}
+const addProtocol = () => {
+  addWSProtocol({ value: "", active: true })
+}
+
+const deleteProtocol = ({ index }: { index: number }) => {
+  const oldProtocols = protocols.value.slice()
+  deleteWSProtocol(index)
+  $toast.success(t("state.deleted").toString(), {
+    duration: 4000,
+    action: {
+      text: t("action.undo").toString(),
+      onClick: (_, toastObject) => {
+        protocols.value = oldProtocols
+        toastObject.goAway()
+      },
     },
-    addProtocol() {
-      addWSProtocol({ value: "", active: true })
-    },
-    deleteProtocol({ index }) {
-      const oldProtocols = this.protocols.slice()
-      deleteWSProtocol(index)
-      this.$toast.success(this.$t("state.deleted"), {
-        action: {
-          text: this.$t("action.undo"),
-          duration: 4000,
-          onClick: (_, toastObject) => {
-            this.protocols = oldProtocols
-            toastObject.remove()
-          },
-        },
-      })
-    },
-    updateProtocol(index, updated) {
-      updateWSProtocol(index, updated)
-    },
-  },
-})
+  })
+}
+
+const updateProtocol = (index: number, updated: HoppWSProtocol) => {
+  updateWSProtocol(index, updated)
+}
 </script>

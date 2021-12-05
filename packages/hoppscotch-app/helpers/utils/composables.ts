@@ -1,3 +1,4 @@
+import { ColorModeInstance } from "@nuxtjs/color-mode/types/color-mode"
 import {
   customRef,
   DeepReadonly,
@@ -144,4 +145,17 @@ export function useI18n() {
 export function useToast() {
   const { $toast } = useContext()
   return $toast
+}
+
+export function useColorMode() {
+  const { $colorMode } = useContext() as any
+  return $colorMode as ColorModeInstance
+}
+
+export function useWorker() {
+  const { $worker } = useContext() as any
+
+  return $worker as {
+    createRejexWorker: () => Worker
+  }
 }
