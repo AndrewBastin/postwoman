@@ -1,12 +1,16 @@
 import { BehaviorSubject, Subject } from "rxjs"
 import { logHoppRequestRunToAnalytics } from "../fb/analytics"
 
+export type SSEError =
+  | { type: "BROWSER_NO_SSE_SUPPORT" }
+  | { type: "UNKNOWN_ERROR"; error: unknown }
+
 export type SSEEvent = { time: number } & (
   | { type: "STARTING" }
   | { type: "STARTED" }
   | { type: "MESSAGE_RECEIVED"; message: string }
   | { type: "STOPPED"; manual: boolean }
-  | { type: "ERROR"; error: string }
+  | { type: "ERROR"; error: SSEError }
 )
 
 export type ConnectionState = "STARTING" | "STARTED" | "STOPPED"
@@ -56,18 +60,12 @@ export class SSEConnection {
         })
       } catch (e) {
         this.handleError(e)
-
-        this.addEvent({
-          type: "ERROR",
-          time: Date.now(),
-          error: "",
-        })
       }
     } else {
       this.addEvent({
         type: "ERROR",
         time: Date.now(),
-        error: "error.browser_support_sse",
+        error: { type: "BROWSER_NO_SSE_SUPPORT" },
       })
     }
 
@@ -76,13 +74,16 @@ export class SSEConnection {
     })
   }
 
-  private handleError(error: any) {
+  private handleError(error: unknown) {
     this.stop()
 
     this.addEvent({
       time: Date.now(),
       type: "ERROR",
-      error,
+      error: {
+        type: "UNKNOWN_ERROR",
+        error,
+      },
     })
   }
 

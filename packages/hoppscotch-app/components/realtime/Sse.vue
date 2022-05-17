@@ -85,7 +85,7 @@ import {
   useStreamSubscriber,
   useReadonlyStream,
 } from "~/helpers/utils/composables"
-import { SSEConnection } from "~/helpers/realtime/SSEConnection"
+import { SSEConnection, SSEError } from "~/helpers/realtime/SSEConnection"
 
 const t = useI18n()
 const nuxt = useNuxt()
@@ -117,6 +117,11 @@ const workerResponseHandler = ({
 }) => {
   if (data.url === server.value) isUrlValid.value = data.result
 }
+
+const getErrorMessage = (error: SSEError) =>
+  error.type === "BROWSER_NO_SSE_SUPPORT"
+    ? t("error.browser_support_sse").toString()
+    : t("state.disconnected_from", { name: server.value }).toString()
 
 onMounted(() => {
   worker = nuxt.value.$worker.createRejexWorker()
@@ -157,9 +162,7 @@ onMounted(() => {
 
       case "ERROR":
         addSSELogLine({
-          payload:
-            event.error ||
-            t("state.disconnected_from", { name: server.value }).toString(),
+          payload: getErrorMessage(event.error),
           source: "info",
           color: "#ff5555",
           ts: event.time,
