@@ -142,7 +142,6 @@ const emit = defineEmits<{
 
 const t = useI18n()
 const toast = useToast()
-// const currentIndex = ref(-1) // index of the message log array to put in input box
 
 const linewrapEnabled = ref(true)
 const wsCommunicationBody = ref<any | null>(null)
