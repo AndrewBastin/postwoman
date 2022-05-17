@@ -1,4 +1,4 @@
-import { BehaviorSubject } from "rxjs"
+import { BehaviorSubject, Subject } from "rxjs"
 import { logHoppRequestRunToAnalytics } from "../fb/analytics"
 
 export type WSEvent = { time: number } & (
@@ -14,15 +14,16 @@ export type ConnectionState = "CONNECTING" | "CONNECTED" | "DISCONNECTED"
 
 export class WSConnection {
   connectionState$: BehaviorSubject<ConnectionState>
-  events$: BehaviorSubject<WSEvent[]>
+  event$: Subject<WSEvent>
   socket: WebSocket | undefined
+
   constructor() {
     this.connectionState$ = new BehaviorSubject<ConnectionState>("DISCONNECTED")
-    this.events$ = new BehaviorSubject<WSEvent[]>([])
+    this.event$ = new Subject<WSEvent>()
   }
 
   private addEvent(event: WSEvent) {
-    this.events$.next([...this.events$.value, event])
+    this.event$.next(event)
   }
 
   connect(url: string, protocols: string[]) {
