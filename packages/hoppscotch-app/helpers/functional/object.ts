@@ -61,3 +61,15 @@ export const objHasArrayProperty =
     (obj as any)[prop].every(
       (val: unknown) => typeof val === type // eslint-disable-line
     )
+
+/**
+ * Returns an array of keys of the given object
+ * NOTE: This function is an analogue to Object.keys but instead
+ * of returning a string array it returns a more concrete type.
+ * Why TypeScript implements string[] instead of a concrete type is
+ * defined here: https://stackoverflow.com/a/59459000
+ * @param obj The object to get keys to
+ * @returns Array of string keys
+ */
+export const objTypedKeys = <T>(obj: T): Array<keyof T> =>
+  Object.keys(obj) as Array<keyof T>

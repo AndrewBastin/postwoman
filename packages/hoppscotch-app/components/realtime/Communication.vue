@@ -118,6 +118,7 @@ import jsonLinter from "~/helpers/editor/linting/json"
 import { readFileAsText } from "~/helpers/functional/files"
 import { useI18n, useToast } from "~/helpers/utils/composables"
 import { isJSONContentType } from "~/helpers/utils/contenttypes"
+import { objTypedKeys } from "~/helpers/functional/object"
 
 defineProps({
   showEventField: {
@@ -144,15 +145,15 @@ const t = useI18n()
 const toast = useToast()
 
 const linewrapEnabled = ref(true)
-const wsCommunicationBody = ref<any | null>(null)
+const wsCommunicationBody = ref<HTMLElement>()
 const prettifyIcon = ref("wand")
 
 const knownContentTypes = {
   JSON: "application/ld+json",
   Raw: "text/x-yaml",
-}
+} as const
 
-const validContentTypes = Object.keys(knownContentTypes)
+const validContentTypes = objTypedKeys(knownContentTypes)
 
 const contentType = ref<keyof typeof knownContentTypes>("JSON")
 const eventName = ref("")
