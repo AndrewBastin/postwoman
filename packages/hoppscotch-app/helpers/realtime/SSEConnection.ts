@@ -1,4 +1,4 @@
-import { BehaviorSubject } from "rxjs"
+import { BehaviorSubject, Subject } from "rxjs"
 import { logHoppRequestRunToAnalytics } from "../fb/analytics"
 
 export type SSEEvent = { time: number } & (
@@ -13,26 +13,30 @@ export type ConnectionState = "STARTING" | "STARTED" | "STOPPED"
 
 export class SSEConnection {
   connectionState$: BehaviorSubject<ConnectionState>
-  events$: BehaviorSubject<SSEEvent[]>
+  event$: Subject<SSEEvent>
   sse: EventSource | undefined
+
   constructor() {
     this.connectionState$ = new BehaviorSubject<ConnectionState>("STOPPED")
-    this.events$ = new BehaviorSubject<SSEEvent[]>([])
+    this.event$ = new Subject()
   }
 
   private addEvent(event: SSEEvent) {
-    this.events$.next([...this.events$.value, event])
+    this.event$.next(event)
   }
 
   start(url: string, eventType: string) {
     this.connectionState$.next("STARTING")
+
     this.addEvent({
       time: Date.now(),
       type: "STARTING",
     })
+
     if (typeof EventSource !== "undefined") {
       try {
         this.sse = new EventSource(url)
+
         this.sse.onopen = () => {
           this.connectionState$.next("STARTED")
           this.addEvent({
@@ -40,7 +44,9 @@ export class SSEConnection {
             time: Date.now(),
           })
         }
+
         this.sse.onerror = this.handleError
+
         this.sse.addEventListener(eventType, ({ data }) => {
           this.addEvent({
             type: "MESSAGE_RECEIVED",
@@ -50,6 +56,7 @@ export class SSEConnection {
         })
       } catch (e) {
         this.handleError(e)
+
         this.addEvent({
           type: "ERROR",
           time: Date.now(),
@@ -71,6 +78,7 @@ export class SSEConnection {
 
   private handleError(error: any) {
     this.stop()
+
     this.addEvent({
       time: Date.now(),
       type: "ERROR",
