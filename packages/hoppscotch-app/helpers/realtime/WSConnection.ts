@@ -7,8 +7,13 @@ export type WSEvent = { time: number } & (
   | { type: "MESSAGE_SENT"; message: string }
   | { type: "MESSAGE_RECEIVED"; message: string }
   | { type: "DISCONNECTED"; manual: boolean }
-  | { type: "ERROR"; error: string }
+  | { type: "ERROR"; error: SyntaxError | Event }
 )
+
+/**
+ * Utility type to get an event type for a specific type of event
+ */
+export type WSEventWithType<T extends WSEvent["type"]> = WSEvent & { type: T }
 
 export type ConnectionState = "CONNECTING" | "CONNECTED" | "DISCONNECTED"
 
@@ -65,7 +70,8 @@ export class WSConnection {
         })
       }
     } catch (e) {
-      this.handleError(e)
+      // See: https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket#exceptions
+      this.handleError(e as SyntaxError)
     }
 
     logHoppRequestRunToAnalytics({
@@ -73,7 +79,7 @@ export class WSConnection {
     })
   }
 
-  private handleError(error: any) {
+  private handleError(error: SyntaxError | Event) {
     this.disconnect()
     this.addEvent({
       time: Date.now(),

@@ -172,6 +172,7 @@
     </template>
   </AppPaneLayout>
 </template>
+
 <script setup lang="ts">
 import { ref, watch, onUnmounted, onMounted } from "@nuxtjs/composition-api"
 import debounce from "lodash/debounce"
@@ -200,7 +201,7 @@ import {
   useStreamSubscriber,
   useReadonlyStream,
 } from "~/helpers/utils/composables"
-import { WSConnection } from "~/helpers/realtime/WSConnection"
+import { WSConnection, WSEventWithType } from "~/helpers/realtime/WSConnection"
 
 const nuxt = useNuxt()
 const t = useI18n()
@@ -222,10 +223,13 @@ const log = useStream(WSLog$, [], setWSLog)
 // DATA
 const isUrlValid = ref(true)
 const activeProtocols = ref<string[]>([])
+
 let worker: Worker
+
 watch(url, (newUrl) => {
   if (newUrl) debouncer()
 })
+
 watch(
   protocols,
   (newProtocols) => {
@@ -239,6 +243,7 @@ watch(
   },
   { deep: true }
 )
+
 const workerResponseHandler = ({
   data,
 }: {
@@ -246,6 +251,11 @@ const workerResponseHandler = ({
 }) => {
   if (data.url === url.value) isUrlValid.value = data.result
 }
+
+const getErrorMessage = (err: WSEventWithType<"ERROR">["error"]) =>
+  err instanceof SyntaxError
+    ? err.message
+    : t("state.disconnected_from", { name: url.value }).toString()
 
 onMounted(() => {
   worker = nuxt.value.$worker.createRejexWorker()
@@ -294,9 +304,7 @@ onMounted(() => {
 
       case "ERROR":
         addWSLogLine({
-          payload:
-            event.error ||
-            t("state.disconnected_from", { name: url.value }).toString(),
+          payload: getErrorMessage(event.error),
           source: "info",
           color: "#ff5555",
           ts: event.time,
@@ -319,9 +327,11 @@ onMounted(() => {
 onUnmounted(() => {
   if (worker) worker.terminate()
 })
+
 const clearContent = () => {
   deleteAllWSProtocols()
 }
+
 const debouncer = debounce(function () {
   worker.postMessage({ type: "ws", url: url.value })
 }, 1000)
@@ -338,9 +348,11 @@ const toggleConnection = () => {
 const sendMessage = (event: { message: string; eventName: string }) => {
   socket.value.sendMessage(event)
 }
+
 const addProtocol = () => {
   addWSProtocol({ value: "", active: true })
 }
+
 const deleteProtocol = (index: number) => {
   const oldProtocols = protocols.value.slice()
   deleteWSProtocol(index)
@@ -355,9 +367,11 @@ const deleteProtocol = (index: number) => {
     },
   })
 }
+
 const updateProtocol = (index: number, updated: HoppWSProtocol) => {
   updateWSProtocol(index, updated)
 }
+
 const clearLogEntries = () => {
   log.value = []
 }
