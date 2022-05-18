@@ -157,11 +157,7 @@ import {
   useStreamSubscriber,
   useToast,
 } from "~/helpers/utils/composables"
-import {
-  MQTTMessage,
-  MQTTConnection,
-  MQTTEvent,
-} from "~/helpers/realtime/MQTTConnection"
+import { MQTTMessage, MQTTConnection } from "~/helpers/realtime/MQTTConnection"
 
 const t = useI18n()
 const nuxt = useNuxt()
@@ -211,8 +207,7 @@ onMounted(() => {
   worker = nuxt.value.$worker.createRejexWorker()
   worker.addEventListener("message", workerResponseHandler)
 
-  subscribeToStream(socket.value.events$, (events: MQTTEvent[]) => {
-    const event = events[events.length - 1]
+  subscribeToStream(socket.value.event$, (event) => {
     switch (event?.type) {
       case "CONNECTING":
         log.value = [

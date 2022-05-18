@@ -1,5 +1,5 @@
 import Paho, { ConnectionOptions } from "paho-mqtt"
-import { BehaviorSubject } from "rxjs"
+import { BehaviorSubject, Subject } from "rxjs"
 import { logHoppRequestRunToAnalytics } from "../fb/analytics"
 
 export type MQTTMessage = { key: string; values: { [key: string]: string } }
@@ -19,16 +19,15 @@ export type ConnectionState = "CONNECTING" | "CONNECTED" | "DISCONNECTED"
 
 export class MQTTConnection {
   private mqttclient: Paho.Client | undefined
+
   subscriptionState$ = new BehaviorSubject<boolean>(false)
   connectionState$ = new BehaviorSubject<ConnectionState>("DISCONNECTED")
-  events$: BehaviorSubject<MQTTEvent[]>
+  event$ = new Subject<MQTTEvent>()
+
   private manualDisconnect = false
-  constructor() {
-    this.events$ = new BehaviorSubject<MQTTEvent[]>([])
-  }
 
   private addEvent(event: MQTTEvent) {
-    this.events$.next([...this.events$.value, event])
+    this.event$.next(event)
   }
 
   connect(url: string, username: string, password: string) {
