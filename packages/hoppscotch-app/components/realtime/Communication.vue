@@ -120,6 +120,11 @@ import { useI18n, useToast } from "~/helpers/utils/composables"
 import { isJSONContentType } from "~/helpers/utils/contenttypes"
 import { objTypedKeys } from "~/helpers/functional/object"
 
+export type RealtimeCommMsg = {
+  eventName: string
+  message: string
+}
+
 defineProps({
   showEventField: {
     type: Boolean,
@@ -132,13 +137,7 @@ defineProps({
 })
 
 const emit = defineEmits<{
-  (
-    e: "send-message",
-    body: {
-      eventName: string
-      message: string
-    }
-  ): void
+  (e: "send-message", body: RealtimeCommMsg): void
 }>()
 
 const t = useI18n()

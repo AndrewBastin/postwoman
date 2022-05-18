@@ -241,7 +241,12 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "@nuxtjs/composition-api"
 import debounce from "lodash/debounce"
-import { SIOConnection, SocketClients } from "~/helpers/realtime/SIOConnection"
+import { RealtimeCommMsg } from "./Communication.vue"
+import {
+  SIOConnection,
+  SIOMessage,
+  SocketClients,
+} from "~/helpers/realtime/SIOConnection"
 import {
   useI18n,
   useNuxt,
@@ -298,6 +303,12 @@ const workerResponseHandler = ({
   if (data.url === url.value) isUrlValid.value = data.result
 }
 
+const parseSIOMessageContent = (msg: SIOMessage["message"]) =>
+  typeof msg !== "object" ? msg : JSON.stringify(msg)
+
+const parseSIOMessage = ({ event, message }: SIOMessage) =>
+  `[${event}] ${parseSIOMessageContent(message)}`
+
 onMounted(() => {
   worker = nuxt.value.$worker.createRejexWorker()
   worker.addEventListener("message", workerResponseHandler)
@@ -329,7 +340,7 @@ onMounted(() => {
 
       case "MESSAGE_SENT":
         addSIOLogLine({
-          payload: event.message,
+          payload: parseSIOMessage(event.message),
           source: "client",
           ts: event.time,
         })
@@ -337,7 +348,7 @@ onMounted(() => {
 
       case "MESSAGE_RECEIVED":
         addSIOLogLine({
-          payload: event.message,
+          payload: parseSIOMessage(event.message),
           source: "server",
           ts: event.time,
         })
@@ -399,8 +410,11 @@ const toggleConnection = () => {
   // Otherwise, it's disconnecting.
   socket.disconnect()
 }
-const sendMessage = (event: { message: string; eventName: string }) => {
-  socket.sendMessage(event)
+const sendMessage = ({ eventName, message }: RealtimeCommMsg) => {
+  socket.sendMessage({
+    event: eventName,
+    message,
+  })
 }
 const onSelectVersion = (version: SIOClientVersion) => {
   clientVersion.value = version

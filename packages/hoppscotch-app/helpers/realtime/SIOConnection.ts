@@ -9,7 +9,12 @@ export const SocketClients = {
   v4: SIOClientV4,
 }
 
-type SIOAuth = { type: "None" | "Bearer"; token: string }
+type SIOAuth = { type: "None" } | { type: "Bearer"; token: string }
+
+export type SIOMessage = {
+  event: string
+  message: unknown
+}
 
 export type ConnectionOption = {
   url: string
@@ -21,8 +26,8 @@ export type ConnectionOption = {
 export type SIOEvent = { time: number } & (
   | { type: "CONNECTING" }
   | { type: "CONNECTED" }
-  | { type: "MESSAGE_SENT"; message: string }
-  | { type: "MESSAGE_RECEIVED"; message: string }
+  | { type: "MESSAGE_SENT"; message: SIOMessage }
+  | { type: "MESSAGE_RECEIVED"; message: SIOMessage }
   | { type: "DISCONNECTED"; manual: boolean }
   | { type: "ERROR"; error: string }
 )
@@ -71,10 +76,14 @@ export class SIOConnection {
         })
       })
 
-      this.socket.on("*", ({ data }: { data: string[] }) => {
-        const [eventName, message] = data
+      this.socket.on("*", ({ data }: { data: [string, unknown] }) => {
+        const [event, message] = data
+
         this.addEvent({
-          message: `[${eventName}] ${message ? JSON.stringify(message) : ""}`,
+          message: {
+            event,
+            message,
+          },
           type: "MESSAGE_RECEIVED",
           time: Date.now(),
         })
@@ -118,23 +127,29 @@ export class SIOConnection {
     })
   }
 
-  sendMessage(event: { message: string; eventName: string }) {
+  sendMessage(msg: SIOMessage) {
     if (this.connectionState$.value === "DISCONNECTED") return
-    const { message, eventName } = event
+    const { message, event } = msg
 
-    this.socket?.emit(eventName, message, (data: object) => {
+    this.socket?.emit(event, message, (data: unknown) => {
       // receive response from server
       this.addEvent({
         time: Date.now(),
         type: "MESSAGE_RECEIVED",
-        message: `[${eventName}] ${JSON.stringify(data)}`,
+        message: {
+          event,
+          message: data,
+        },
       })
     })
 
     this.addEvent({
       time: Date.now(),
       type: "MESSAGE_SENT",
-      message: `[${eventName}] ${JSON.stringify(message)}`,
+      message: {
+        event,
+        message,
+      },
     })
   }
 
