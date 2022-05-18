@@ -150,7 +150,7 @@ const prettifyIcon = ref("wand")
 
 const knownContentTypes = {
   JSON: "application/ld+json",
-  Raw: "text/x-yaml",
+  Raw: "text/plain",
 } as const
 
 const validContentTypes = objTypedKeys(knownContentTypes)
