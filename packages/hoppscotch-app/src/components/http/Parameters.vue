@@ -40,6 +40,7 @@
     <div v-else>
       <draggable
         v-model="workingParams"
+        item-key="id"
         animation="250"
         handle=".draggable-handle"
         draggable=".draggable-content"
@@ -47,87 +48,88 @@
         chosen-class="bg-primaryLight"
         drag-class="cursor-grabbing"
       >
-        <div
-          v-for="(param, index) in workingParams"
-          :key="`param-${param.id}-${index}`"
-          class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
-        >
-          <span>
-            <ButtonSecondary
-              :svg="IconGripVertical"
-              class="cursor-auto text-primary hover:text-primary"
-              :class="{
-                'draggable-handle group-hover:text-secondaryLight !cursor-grab':
-                  index !== workingParams?.length - 1,
-              }"
-              tabindex="-1"
-            />
-          </span>
-          <SmartEnvInput
-            v-model="param.key"
-            :placeholder="`${t('count.parameter', { count: index + 1 })}`"
-            @change="
-              updateParam(index, {
-                id: param.id,
-                key: $event,
-                value: param.value,
-                active: param.active,
-              })
-            "
-          />
-          <SmartEnvInput
-            v-model="param.value"
-            :placeholder="`${t('count.value', { count: index + 1 })}`"
-            @change="
-              updateParam(index, {
-                id: param.id,
-                key: param.key,
-                value: $event,
-                active: param.active,
-              })
-            "
-          />
-          <span>
-            <ButtonSecondary
-              v-tippy="{ theme: 'tooltip' }"
-              :title="
-                param.hasOwnProperty('active')
-                  ? param.active
-                    ? t('action.turn_off')
-                    : t('action.turn_on')
-                  : t('action.turn_off')
-              "
-              :svg="
-                param.hasOwnProperty('active')
-                  ? param.active
-                    ? IconCheckCircle
-                    : IconCircle
-                  : IconCheckCircle
-              "
-              color="green"
-              @click.native="
+        <template #item="{ element: param, index }">
+          <div
+            class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
+          >
+            <span>
+              <ButtonSecondary
+                :svg="IconGripVertical"
+                class="cursor-auto text-primary hover:text-primary"
+                :class="{
+                  'draggable-handle group-hover:text-secondaryLight !cursor-grab':
+                    index !== workingParams?.length - 1,
+                }"
+                tabindex="-1"
+              />
+            </span>
+            <SmartEnvInput
+              v-model="param.key"
+              :placeholder="`${t('count.parameter', { count: index + 1 })}`"
+              @change="
                 updateParam(index, {
                   id: param.id,
-                  key: param.key,
+                  key: $event,
                   value: param.value,
-                  active: param.hasOwnProperty('active')
-                    ? !param.active
-                    : false,
+                  active: param.active,
                 })
               "
             />
-          </span>
-          <span>
-            <ButtonSecondary
-              v-tippy="{ theme: 'tooltip' }"
-              :title="t('action.remove')"
-              :svg="IconTrash"
-              color="red"
-              @click.native="deleteParam(index)"
+            <SmartEnvInput
+              v-model="param.value"
+              :placeholder="`${t('count.value', { count: index + 1 })}`"
+              @change="
+                updateParam(index, {
+                  id: param.id,
+                  key: param.key,
+                  value: $event,
+                  active: param.active,
+                })
+              "
             />
-          </span>
-        </div>
+            <span>
+              <ButtonSecondary
+                v-tippy="{ theme: 'tooltip' }"
+                :title="
+                  param.hasOwnProperty('active')
+                    ? param.active
+                      ? t('action.turn_off')
+                      : t('action.turn_on')
+                    : t('action.turn_off')
+                "
+                :svg="
+                  param.hasOwnProperty('active')
+                    ? param.active
+                      ? IconCheckCircle
+                      : IconCircle
+                    : IconCheckCircle
+                "
+                color="green"
+                @click.native="
+                  updateParam(index, {
+                    id: param.id,
+                    key: param.key,
+                    value: param.value,
+                    active: param.hasOwnProperty('active')
+                      ? !param.active
+                      : false,
+                  })
+                "
+              />
+            </span>
+            <span>
+              <ButtonSecondary
+                v-tippy="{ theme: 'tooltip' }"
+                :title="t('action.remove')"
+                :svg="IconTrash"
+                color="red"
+                @click.native="deleteParam(index)"
+              />
+            </span>
+          </div>
+        </template>
       </draggable>
+
       <div
         v-if="workingParams.length === 0"
         class="flex flex-col items-center justify-center p-4 text-secondaryLight"
