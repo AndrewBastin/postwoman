@@ -59,32 +59,46 @@
         '!flex flex-col flex-1 overflow-y-auto hide-scrollbar': vertical,
       }"
     >
-      <slot></slot>
+      <SmartMutationObserver
+        :options="{
+          childList: true,
+          attributes: true,
+        }"
+        @mutation="onMutation"
+      >
+        <slot></slot>
+      </SmartMutationObserver>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { pipe } from "fp-ts/function"
-import { not } from "fp-ts/Predicate"
+import { pipe, flow } from "fp-ts/function"
 import * as A from "fp-ts/Array"
 import * as O from "fp-ts/Option"
-import { ref, ComputedRef, computed, provide } from "@nuxtjs/composition-api"
+import {
+  ref,
+  ComputedRef,
+  Ref,
+  computed,
+  provide,
+} from "@nuxtjs/composition-api"
 import { throwError } from "~/helpers/functional/error"
+import { domGetChildrenOfEl, domElGetAttribute } from "~/helpers/functional/dom"
 
 export type TabMeta = {
   label: string | null
   icon: string | null
   indicator: boolean
   info: string | null
+  rootEl: Element | undefined
 }
 
 export type TabProvider = {
   // Whether inactive tabs should remain rendered
   renderInactive: ComputedRef<boolean>
   activeTabID: ComputedRef<string>
-  addTabEntry: (tabID: string, meta: TabMeta) => void
-  updateTabEntry: (tabID: string, newMeta: TabMeta) => void
+  addTabEntry: (tabID: string, meta: Ref<TabMeta>) => void
   removeTabEntry: (tabID: string) => void
 }
 
@@ -113,27 +127,34 @@ const emit = defineEmits<{
 
 const tabEntries = ref<Array<[string, TabMeta]>>([])
 
-const addTabEntry = (tabID: string, meta: TabMeta) => {
+const reEvalTabOrdering = (el: Element) => {
   tabEntries.value = pipe(
-    tabEntries.value,
-    O.fromPredicate(not(A.exists(([id]) => id === tabID))),
-    O.map(A.append([tabID, meta] as [string, TabMeta])),
-    O.getOrElseW(() => throwError(`Tab with duplicate ID created: '${tabID}'`))
+    domGetChildrenOfEl(el),
+    A.filterMap(
+      flow(
+        domElGetAttribute("x-hopp-tab-id"),
+        O.filterMap((tabID) =>
+          pipe(
+            tabEntries.value,
+            A.findFirst(([id]) => id === tabID)
+          )
+        )
+      )
+    )
   )
 }
 
-const updateTabEntry = (tabID: string, newMeta: TabMeta) => {
-  tabEntries.value = pipe(
-    tabEntries.value,
-    A.findIndex(([id]) => id === tabID),
-    O.chain((index) =>
-      pipe(
-        tabEntries.value,
-        A.updateAt(index, [tabID, newMeta] as [string, TabMeta])
-      )
-    ),
-    O.getOrElseW(() => throwError(`Failed to update tab entry: ${tabID}`))
-  )
+// Change in the children tab list, re-evaluate ordering
+const onMutation = (_: MutationRecord[], el: Element) => {
+  reEvalTabOrdering(el)
+}
+
+const addTabEntry = (tabID: string, meta: Ref<TabMeta>) => {
+  if (tabEntries.value.findIndex(([id]) => id === tabID) !== -1) {
+    throw new Error(`Tab with duplicate ID created: '${tabID}'`)
+  }
+
+  tabEntries.value.push([tabID, meta.value])
 }
 
 const removeTabEntry = (tabID: string) => {
@@ -153,7 +174,7 @@ provide<TabProvider>("tabs-system", {
   renderInactive: computed(() => props.renderInactiveTabs),
   activeTabID: computed(() => props.value),
   addTabEntry,
-  updateTabEntry,
+  // updateTabEntry,
   removeTabEntry,
 })
 

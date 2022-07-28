@@ -1,6 +1,14 @@
 <template>
-  <div v-if="shouldRender" v-show="active" class="flex flex-col flex-1">
-    <slot></slot>
+  <!-- A DOM element to specify the Tab ID -->
+  <div ref="rootEl" :x-hopp-tab-id="props.id">
+    <div
+      v-if="shouldRender"
+      v-show="active"
+      ref="rootEl"
+      class="flex flex-col flex-1"
+    >
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -10,7 +18,8 @@ import {
   onBeforeUnmount,
   inject,
   computed,
-  watch,
+  // watch,
+  ref,
 } from "@nuxtjs/composition-api"
 import { TabMeta, TabProvider } from "./Tabs.vue"
 
@@ -26,18 +35,21 @@ const props = defineProps({
   },
 })
 
+const rootEl = ref<Element>()
+
 const tabMeta = computed<TabMeta>(() => ({
   icon: props.icon,
   indicator: props.indicator,
   info: props.info,
   label: props.label,
+  rootEl: rootEl.value,
 }))
 
 const {
   activeTabID,
   renderInactive,
   addTabEntry,
-  updateTabEntry,
+  // updateTabEntry,
   removeTabEntry,
 } = inject<TabProvider>("tabs-system")!
 
@@ -52,12 +64,12 @@ const shouldRender = computed(() => {
 })
 
 onMounted(() => {
-  addTabEntry(props.id, tabMeta.value)
+  addTabEntry(props.id, tabMeta)
 })
 
-watch(tabMeta, (newMeta) => {
-  updateTabEntry(props.id, newMeta)
-})
+// watch(tabMeta, (newMeta) => {
+//   updateTabEntry(props.id, newMeta)
+// })
 
 onBeforeUnmount(() => {
   removeTabEntry(props.id)
