@@ -158,6 +158,7 @@
         <div v-else>
           <draggable
             v-model="workingHeaders"
+            :item-key="(header) => `header-${header.id}`"
             animation="250"
             handle=".draggable-handle"
             draggable=".draggable-content"
@@ -165,29 +166,28 @@
             chosen-class="bg-primaryLight"
             drag-class="cursor-grabbing"
           >
-            <div
-              v-for="(header, index) in workingHeaders"
-              :key="`header-${header.id}-${index}`"
-              class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
-            >
-              <span>
-                <ButtonSecondary
-                  :svg="IconGripVertical"
-                  class="cursor-auto text-primary hover:text-primary"
-                  :class="{
-                    'draggable-handle group-hover:text-secondaryLight !cursor-grab':
-                      index !== workingHeaders?.length - 1,
-                  }"
-                  tabindex="-1"
-                />
-              </span>
-              <SmartAutoComplete
-                :placeholder="`${t('count.header', { count: index + 1 })}`"
-                :source="commonHeaders"
-                :spellcheck="false"
-                :value="header.key"
-                autofocus
-                styles="
+            <template #item="{ element: header, index }">
+              <div
+                class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
+              >
+                <span>
+                  <ButtonSecondary
+                    :svg="IconGripVertical"
+                    class="cursor-auto text-primary hover:text-primary"
+                    :class="{
+                      'draggable-handle group-hover:text-secondaryLight !cursor-grab':
+                        index !== workingHeaders?.length - 1,
+                    }"
+                    tabindex="-1"
+                  />
+                </span>
+                <SmartAutoComplete
+                  :placeholder="`${t('count.header', { count: index + 1 })}`"
+                  :source="commonHeaders"
+                  :spellcheck="false"
+                  :value="header.key"
+                  autofocus
+                  styles="
                 bg-transparent
                 flex
                 flex-1
@@ -195,23 +195,23 @@
                 px-4
                 truncate
               "
-                class="flex-1 !flex"
-                @input="
-                  updateHeader(index, {
-                    id: header.id,
-                    key: $event,
-                    value: header.value,
-                    active: header.active,
-                  })
-                "
-              />
-              <input
-                class="flex flex-1 px-4 py-2 bg-transparent"
-                :placeholder="`${t('count.value', { count: index + 1 })}`"
-                :name="`value ${String(index)}`"
-                :value="header.value"
-                autofocus
-                @change="
+                  class="flex-1 !flex"
+                  @input="
+                    updateHeader(index, {
+                      id: header.id,
+                      key: $event,
+                      value: header.value,
+                      active: header.active,
+                    })
+                  "
+                />
+                <input
+                  class="flex flex-1 px-4 py-2 bg-transparent"
+                  :placeholder="`${t('count.value', { count: index + 1 })}`"
+                  :name="`value ${String(index)}`"
+                  :value="header.value"
+                  autofocus
+                  @change="
                   updateHeader(index, {
                     id: header.id,
                     key: header.key,
@@ -219,45 +219,46 @@
                     active: header.active,
                   })
                 "
-              />
-              <span>
-                <ButtonSecondary
-                  v-tippy="{ theme: 'tooltip' }"
-                  :title="
-                    header.hasOwnProperty('active')
-                      ? header.active
-                        ? t('action.turn_off')
-                        : t('action.turn_on')
-                      : t('action.turn_off')
-                  "
-                  :svg="
-                    header.hasOwnProperty('active')
-                      ? header.active
-                        ? IconCheckCircle
-                        : IconCircle
-                      : IconCheckCircle
-                  "
-                  color="green"
-                  @click.native="
-                    updateHeader(index, {
-                      id: header.id,
-                      key: header.key,
-                      value: header.value,
-                      active: !header.active,
-                    })
-                  "
                 />
-              </span>
-              <span>
-                <ButtonSecondary
-                  v-tippy="{ theme: 'tooltip' }"
-                  :title="t('action.remove')"
-                  :svg="IconTrash"
-                  color="red"
-                  @click.native="deleteHeader(index)"
-                />
-              </span>
-            </div>
+                <span>
+                  <ButtonSecondary
+                    v-tippy="{ theme: 'tooltip' }"
+                    :title="
+                      header.hasOwnProperty('active')
+                        ? header.active
+                          ? t('action.turn_off')
+                          : t('action.turn_on')
+                        : t('action.turn_off')
+                    "
+                    :svg="
+                      header.hasOwnProperty('active')
+                        ? header.active
+                          ? IconCheckCircle
+                          : IconCircle
+                        : IconCheckCircle
+                    "
+                    color="green"
+                    @click.native="
+                      updateHeader(index, {
+                        id: header.id,
+                        key: header.key,
+                        value: header.value,
+                        active: !header.active,
+                      })
+                    "
+                  />
+                </span>
+                <span>
+                  <ButtonSecondary
+                    v-tippy="{ theme: 'tooltip' }"
+                    :title="t('action.remove')"
+                    :svg="IconTrash"
+                    color="red"
+                    @click.native="deleteHeader(index)"
+                  />
+                </span>
+              </div>
+            </template>
           </draggable>
           <div
             v-if="workingHeaders.length === 0"
@@ -629,7 +630,10 @@ useCodemirror(queryEditor, gqlQueryString, {
 
 const copyQueryIcon = refAutoReset<"copy" | "check">("copy", 1000)
 const copyVariablesIcon = refAutoReset<"copy" | "check">("copy", 1000)
-const prettifyQueryIconName = refAutoReset<"wand" | "check" | "info">("wand", 1000)
+const prettifyQueryIconName = refAutoReset<"wand" | "check" | "info">(
+  "wand",
+  1000
+)
 const prettifyVariablesIconName = refAutoReset<"wand" | "check" | "info">(
   "wand",
   1000
