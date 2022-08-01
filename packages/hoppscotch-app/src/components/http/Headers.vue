@@ -40,6 +40,7 @@
     <div v-else>
       <draggable
         v-model="workingHeaders"
+        :item-key="(header) => `header-${header.id}`"
         animation="250"
         handle=".draggable-handle"
         draggable=".draggable-content"
@@ -47,137 +48,143 @@
         chosen-class="bg-primaryLight"
         drag-class="cursor-grabbing"
       >
-        <div
-          v-for="(header, index) in workingHeaders"
-          :key="`header-${header.id}-${index}`"
-          class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
-        >
-          <span>
-            <ButtonSecondary
-              :svg="IconGripVertical"
-              class="cursor-auto text-primary hover:text-primary"
-              :class="{
-                'draggable-handle group-hover:text-secondaryLight !cursor-grab':
-                  index !== workingHeaders?.length - 1,
-              }"
-              tabindex="-1"
-            />
-          </span>
-          <SmartAutoComplete
-            :placeholder="`${t('count.header', { count: index + 1 })}`"
-            :source="commonHeaders"
-            :spellcheck="false"
-            :value="header.key"
-            autofocus
-            styles="
-            bg-transparent
-            flex
-            flex-1
-            py-1
-            px-4
-            truncate
-          "
-            class="flex-1 !flex"
-            @input="
-              updateHeader(index, {
-                id: header.id,
-                key: $event,
-                value: header.value,
-                active: header.active,
-              })
-            "
-          />
-          <SmartEnvInput
-            v-model="header.value"
-            :placeholder="`${t('count.value', { count: index + 1 })}`"
-            @change="
-              updateHeader(index, {
-                id: header.id,
-                key: header.key,
-                value: $event,
-                active: header.active,
-              })
-            "
-          />
-          <span>
-            <ButtonSecondary
-              v-tippy="{ theme: 'tooltip' }"
-              :title="
-                header.hasOwnProperty('active')
-                  ? header.active
-                    ? t('action.turn_off')
-                    : t('action.turn_on')
-                  : t('action.turn_off')
-              "
-              :svg="
-                header.hasOwnProperty('active')
-                  ? header.active
-                    ? IconCheckCircle
-                    : IconCircle
-                  : IconCheckCircle
-              "
-              color="green"
-              @click.native="
+        <template #item="{ element: header, index }">
+          <div
+            class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
+          >
+            <span>
+              <ButtonSecondary
+                :svg="IconGripVertical"
+                class="cursor-auto text-primary hover:text-primary"
+                :class="{
+                  'draggable-handle group-hover:text-secondaryLight !cursor-grab':
+                    index !== workingHeaders?.length - 1,
+                }"
+                tabindex="-1"
+              />
+            </span>
+            <SmartAutoComplete
+              :placeholder="`${t('count.header', { count: index + 1 })}`"
+              :source="commonHeaders"
+              :spellcheck="false"
+              :value="header.key"
+              autofocus
+              styles=" bg-transparent flex flex-1
+            py-1 px-4 truncate "
+              class="flex-1 !flex"
+              @input="
                 updateHeader(index, {
                   id: header.id,
-                  key: header.key,
+                  key: $event,
                   value: header.value,
-                  active: !header.active,
+                  active: header.active,
                 })
               "
             />
-          </span>
-          <span>
-            <ButtonSecondary
-              v-tippy="{ theme: 'tooltip' }"
-              :title="t('action.remove')"
-              :svg="IconTrash"
-              color="red"
-              @click.native="deleteHeader(index)"
+            <SmartEnvInput
+              v-model="header.value"
+              :placeholder="`${t('count.value', { count: index + 1 })}`"
+              @change="
+                updateHeader(index, {
+                  id: header.id,
+                  key: header.key,
+                  value: $event,
+                  active: header.active,
+                })
+              "
             />
-          </span>
-        </div>
-        <div
-          v-for="(header, index) in computedHeaders"
-          :key="`header-${index}`"
-          class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
-        >
-          <span>
-            <ButtonSecondary
-              :svg="IconLock"
-              class="opacity-25 cursor-auto text-secondaryLight bg-divider"
-              tabindex="-1"
+            <span>
+              <ButtonSecondary
+                v-tippy="{ theme: 'tooltip' }"
+                :title="
+                  header.hasOwnProperty('active')
+                    ? header.active
+                      ? t('action.turn_off')
+                      : t('action.turn_on')
+                    : t('action.turn_off')
+                "
+                :svg="
+                  header.hasOwnProperty('active')
+                    ? header.active
+                      ? IconCheckCircle
+                      : IconCircle
+                    : IconCheckCircle
+                "
+                color="green"
+                @click.native="
+                  updateHeader(index, {
+                    id: header.id,
+                    key: header.key,
+                    value: header.value,
+                    active: !header.active,
+                  })
+                "
+              />
+            </span>
+            <span>
+              <ButtonSecondary
+                v-tippy="{ theme: 'tooltip' }"
+                :title="t('action.remove')"
+                :svg="IconTrash"
+                color="red"
+                @click.native="deleteHeader(index)"
+              />
+            </span>
+          </div>
+        </template>
+      </draggable>
+
+      <draggable
+        v-model="computedHeaders"
+        item-key="id"
+        animation="250"
+        handle=".draggable-handle"
+        draggable=".draggable-content"
+        ghost-class="cursor-move"
+        chosen-class="bg-primaryLight"
+        drag-class="cursor-grabbing"
+      >
+        <template #item="{ element: header, index }">
+          <div
+            class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
+          >
+            <span>
+              <ButtonSecondary
+                :svg="IconLock"
+                class="opacity-25 cursor-auto text-secondaryLight bg-divider"
+                tabindex="-1"
+              />
+            </span>
+            <SmartEnvInput
+              v-model="header.header.key"
+              :placeholder="`${t('count.value', { count: index + 1 })}`"
+              readonly
             />
-          </span>
-          <SmartEnvInput
-            v-model="header.header.key"
-            :placeholder="`${t('count.value', { count: index + 1 })}`"
-            readonly
-          />
-          <SmartEnvInput
-            :value="mask(header)"
-            :placeholder="`${t('count.value', { count: index + 1 })}`"
-            readonly
-          />
-          <span>
-            <ButtonSecondary
-              v-if="header.source === 'auth'"
-              :svg="masking ? IconEye : IconEyeOff"
-              @click.native="toggleMask()"
+            <SmartEnvInput
+              :value="mask(header)"
+              :placeholder="`${t('count.value', { count: index + 1 })}`"
+              readonly
             />
-            <ButtonSecondary
-              v-else
-              :svg="IconArrowUpRight"
-              class="cursor-auto text-primary hover:text-primary"
-            />
-          </span>
-          <span>
-            <ButtonSecondary
-              :svg="IconArrowUpRight"
-              @click.native="changeTab(header.source)"
-            />
-          </span>
-        </div>
+            <span>
+              <ButtonSecondary
+                v-if="header.source === 'auth'"
+                :svg="masking ? IconEye : IconEyeOff"
+                @click.native="toggleMask()"
+              />
+              <ButtonSecondary
+                v-else
+                :svg="IconArrowUpRight"
+                class="cursor-auto text-primary hover:text-primary"
+              />
+            </span>
+            <span>
+              <ButtonSecondary
+                :svg="IconArrowUpRight"
+                @click.native="changeTab(header.source)"
+              />
+            </span>
+          </div>
+        </template>
       </draggable>
       <div
         v-if="workingHeaders.length === 0"
@@ -317,8 +324,8 @@ watch(
       workingHeaders.value,
       A.filterMap(
         flow(
-          O.fromPredicate((e) => e.key !== ""),
-          O.map(objRemoveKey("id"))
+          O.fromPredicate((e) => e.key !== "")
+          // O.map(objRemoveKey("id"))
         )
       )
     )
@@ -456,7 +463,12 @@ const restRequest = useReadonlyStream(restRequest$, getRESTRequest())
 const aggregateEnvs = useReadonlyStream(aggregateEnvs$, getAggregateEnvs())
 
 const computedHeaders = computed(() =>
-  getComputedHeaders(restRequest.value, aggregateEnvs.value)
+  getComputedHeaders(restRequest.value, aggregateEnvs.value).map(
+    (header, index) => ({
+      id: `header-${index}`,
+      ...header,
+    })
+  )
 )
 
 const masking = ref(true)
