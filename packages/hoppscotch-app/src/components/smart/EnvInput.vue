@@ -42,7 +42,7 @@ import { AggregateEnvironment, aggregateEnvs$ } from "~/newstore/environments"
 
 const props = withDefaults(
   defineProps<{
-    value?: string
+    modelValue?: string
     placeholder?: string
     styles?: string
     envs?: { key: string; value: string; source: string }[] | null
@@ -50,7 +50,7 @@ const props = withDefaults(
     readonly?: boolean
   }>(),
   {
-    value: "",
+    modelValue: "",
     placeholder: "",
     styles: "",
     envs: null,
@@ -60,7 +60,7 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  (e: "input", data: string): void
+  (e: "update:modelValue", data: string): void
   (e: "change", data: string): void
   (e: "paste", data: { prevValue: string; pastedValue: string }): void
   (e: "enter", ev: any): void
@@ -69,14 +69,14 @@ const emit = defineEmits<{
   (e: "click", ev: any): void
 }>()
 
-const cachedValue = ref(props.value)
+const cachedValue = ref(props.modelValue)
 
 const view = ref<EditorView>()
 
 const editor = ref<any | null>(null)
 
 watch(
-  () => props.value,
+  () => props.modelValue,
   (newVal) => {
     const singleLinedText = newVal.replaceAll("\n", "")
 
@@ -172,7 +172,7 @@ const initView = (el: any) => {
             // So, we desync cachedValue a bit so we can trigger updates
             const value = clone(cachedValue.value).replaceAll("\n", "")
 
-            emit("input", value)
+            emit("update:modelValue", value)
             emit("change", value)
 
             const pasted = !!update.transactions.find((txn) =>
@@ -202,7 +202,7 @@ const initView = (el: any) => {
   view.value = new EditorView({
     parent: el,
     state: EditorState.create({
-      doc: props.value,
+      doc: props.modelValue,
       extensions,
     }),
   })
