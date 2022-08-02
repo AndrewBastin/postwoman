@@ -324,8 +324,8 @@ watch(
       workingHeaders.value,
       A.filterMap(
         flow(
-          O.fromPredicate((e) => e.key !== "")
-          // O.map(objRemoveKey("id"))
+          O.fromPredicate((e) => e.key !== ""),
+          O.map(objRemoveKey("id"))
         )
       )
     )
