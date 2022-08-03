@@ -2,14 +2,19 @@
   <div class="autocomplete-wrapper">
     <input
       ref="acInput"
-      v-model="text"
+      :value="text"
       type="text"
       autocomplete="off"
       :placeholder="placeholder"
       :spellcheck="spellcheck"
       :autocapitalize="autocapitalize"
       :class="styles"
-      @input="updateSuggestions"
+      @input.stop="
+        (e) => {
+          $emit('input', e.target.value)
+          updateSuggestions(e)
+        }
+      "
       @keyup="updateSuggestions"
       @click="updateSuggestions"
       @keydown="handleKeystroke"
@@ -107,9 +112,6 @@ export default defineComponent({
   },
 
   watch: {
-    text() {
-      this.$emit("input", this.text)
-    },
     value(newValue) {
       this.text = newValue
     },
