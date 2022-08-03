@@ -5,7 +5,7 @@
     >
       <span class="flex items-center">
         <label class="font-semibold text-secondaryLight">
-          {{ $t("authorization.type") }}
+          {{ t("authorization.type") }}
         </label>
         <tippy
           ref="authTypeOptions"
@@ -14,89 +14,88 @@
           theme="popover"
           arrow
         >
-          <template #trigger>
-            <span class="select-wrapper">
-              <ButtonSecondary
-                class="pr-8 ml-2 rounded-none"
-                :label="authName"
+          <span class="select-wrapper">
+            <ButtonSecondary class="pr-8 ml-2 rounded-none" :label="authName" />
+          </span>
+          <template #content="{ hide }">
+            <div class="flex flex-col space-y-1">
+              <SmartItem
+                label="None"
+                :icon="
+                  authName === 'None'
+                    ? IconRadioButtonChecked
+                    : IconRadioButtonUnChecked
+                "
+                :active="authName === 'None'"
+                @click.native="
+                  () => {
+                    authType = 'none'
+                    hide()
+                  }
+                "
               />
-            </span>
+              <SmartItem
+                label="Basic Auth"
+                :icon="
+                  authName === 'Basic Auth'
+                    ? IconRadioButtonChecked
+                    : IconRadioButtonUnChecked
+                "
+                :active="authName === 'Basic Auth'"
+                @click.native="
+                  () => {
+                    authType = 'basic'
+                    hide()
+                  }
+                "
+              />
+              <SmartItem
+                label="Bearer Token"
+                :icon="
+                  authName === 'Bearer'
+                    ? IconRadioButtonChecked
+                    : IconRadioButtonUnChecked
+                "
+                :active="authName === 'Bearer'"
+                @click.native="
+                  () => {
+                    authType = 'bearer'
+                    hide()
+                  }
+                "
+              />
+              <SmartItem
+                label="OAuth 2.0"
+                :icon="
+                  authName === 'OAuth 2.0'
+                    ? IconRadioButtonChecked
+                    : IconRadioButtonUnChecked
+                "
+                :active="authName === 'OAuth 2.0'"
+                @click.native="
+                  () => {
+                    authType = 'oauth-2'
+                    hide()
+                  }
+                "
+              />
+              <SmartItem
+                label="API key"
+                :icon="
+                  authName === 'API key'
+                    ? IconRadioButtonChecked
+                    : IconRadioButtonUnChecked
+                "
+                :active="authName === 'API key'"
+                @click.native="
+                  () => {
+                    authType = 'api-key'
+                    hide()
+                  }
+                "
+              />
+            </div>
           </template>
-          <SmartItem
-            label="None"
-            :icon="
-              authName === 'None'
-                ? 'radio_button_checked'
-                : 'radio_button_unchecked'
-            "
-            :active="authName === 'None'"
-            @click.native="
-              () => {
-                authType = 'none'
-                authTypeOptions.tippy().hide()
-              }
-            "
-          />
-          <SmartItem
-            label="Basic Auth"
-            :icon="
-              authName === 'Basic Auth'
-                ? 'radio_button_checked'
-                : 'radio_button_unchecked'
-            "
-            :active="authName === 'Basic Auth'"
-            @click.native="
-              () => {
-                authType = 'basic'
-                authTypeOptions.tippy().hide()
-              }
-            "
-          />
-          <SmartItem
-            label="Bearer Token"
-            :icon="
-              authName === 'Bearer'
-                ? 'radio_button_checked'
-                : 'radio_button_unchecked'
-            "
-            :active="authName === 'Bearer'"
-            @click.native="
-              () => {
-                authType = 'bearer'
-                authTypeOptions.tippy().hide()
-              }
-            "
-          />
-          <SmartItem
-            label="OAuth 2.0"
-            :icon="
-              authName === 'OAuth 2.0'
-                ? 'radio_button_checked'
-                : 'radio_button_unchecked'
-            "
-            :active="authName === 'OAuth 2.0'"
-            @click.native="
-              () => {
-                authType = 'oauth-2'
-                authTypeOptions.tippy().hide()
-              }
-            "
-          />
-          <SmartItem
-            label="API key"
-            :icon="
-              authName === 'API key'
-                ? 'radio_button_checked'
-                : 'radio_button_unchecked'
-            "
-            :active="authName === 'API key'"
-            @click.native="
-              () => {
-                authType = 'api-key'
-                authTypeOptions.tippy().hide()
-              }
-            "
-          />
         </tippy>
       </span>
       <div class="flex">
@@ -104,26 +103,26 @@
           :on="!URLExcludes.auth"
           @change="setExclude('auth', !$event)"
         >
-          {{ $t("authorization.include_in_url") }}
+          {{ t("authorization.include_in_url") }}
         </SmartCheckbox> -->
         <SmartCheckbox
           :on="authActive"
           class="px-2"
           @change="authActive = !authActive"
         >
-          {{ $t("state.enabled") }}
+          {{ t("state.enabled") }}
         </SmartCheckbox>
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           to="https://docs.hoppscotch.io/features/authorization"
           blank
-          :title="$t('app.wiki')"
-          svg="help-circle"
+          :title="t('app.wiki')"
+          :svg="IconHelpCircle"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
-          :title="$t('action.clear')"
-          svg="trash-2"
+          :title="t('action.clear')"
+          :svg="IconTrash2"
           @click.native="clearContent"
         />
       </div>
@@ -133,20 +132,20 @@
       class="flex flex-col items-center justify-center p-4 text-secondaryLight"
     >
       <img
-        :src="`/images/states/${$colorMode.value}/login.svg`"
+        :src="`/images/states/${colorMode.value}/login.svg`"
         loading="lazy"
         class="inline-flex flex-col object-contain object-center w-16 h-16 my-4"
-        :alt="`${$t('empty.authorization')}`"
+        :alt="`${t('empty.authorization')}`"
       />
       <span class="pb-4 text-center">
-        {{ $t("empty.authorization") }}
+        {{ t("empty.authorization") }}
       </span>
       <ButtonSecondary
         outline
-        :label="$t('app.documentation')"
+        :label="t('app.documentation')"
         to="https://docs.hoppscotch.io/features/authorization"
         blank
-        svg="external-link"
+        :svg="IconExternalLink"
         reverse
         class="mb-4"
       />
@@ -157,14 +156,14 @@
           <div class="flex flex-1 border-b border-dividerLight">
             <SmartEnvInput
               v-model="basicUsername"
-              :placeholder="$t('authorization.username')"
+              :placeholder="t('authorization.username')"
               styles="bg-transparent flex flex-1 py-1 px-4"
             />
           </div>
           <div class="flex flex-1 border-b border-dividerLight">
             <SmartEnvInput
               v-model="basicPassword"
-              :placeholder="$t('authorization.password')"
+              :placeholder="t('authorization.password')"
               styles="bg-transparent flex flex-1 py-1 px-4"
             />
           </div>
@@ -205,7 +204,7 @@
           </div>
           <div class="flex items-center border-b border-dividerLight">
             <label class="ml-4 text-secondaryLight">
-              {{ $t("authorization.pass_key_by") }}
+              {{ t("authorization.pass_key_by") }}
             </label>
             <tippy
               ref="addToOptions"
@@ -214,44 +213,44 @@
               theme="popover"
               arrow
             >
-              <template #trigger>
-                <span class="select-wrapper">
-                  <ButtonSecondary
-                    :label="addTo || $t('state.none')"
-                    class="pr-8 ml-2 rounded-none"
-                  />
-                </span>
+              <span class="select-wrapper">
+                <ButtonSecondary
+                  :label="addTo || t('state.none')"
+                  class="pr-8 ml-2 rounded-none"
+                />
+              </span>
+              <template #content="{ hide }">
+                <SmartItem
+                  :icon="
+                    addTo === 'Headers'
+                      ? IconRadioButtonChecked
+                      : IconRadioButtonUnChecked
+                  "
+                  :active="addTo === 'Headers'"
+                  :label="'Headers'"
+                  @click.native="
+                    () => {
+                      addTo = 'Headers'
+                      hide()
+                    }
+                  "
+                />
+                <SmartItem
+                  :icon="
+                    addTo === 'Query params'
+                      ? IconRadioButtonChecked
+                      : IconRadioButtonUnChecked
+                  "
+                  :active="addTo === 'Query params'"
+                  :label="'Query params'"
+                  @click.native="
+                    () => {
+                      addTo = 'Query params'
+                      hide()
+                    }
+                  "
+                />
               </template>
-              <SmartItem
-                :icon="
-                  addTo === 'Headers'
-                    ? 'radio_button_checked'
-                    : 'radio_button_unchecked'
-                "
-                :active="addTo === 'Headers'"
-                :label="'Headers'"
-                @click.native="
-                  () => {
-                    addTo = 'Headers'
-                    addToOptions.tippy().hide()
-                  }
-                "
-              />
-              <SmartItem
-                :icon="
-                  addTo === 'Query params'
-                    ? 'radio_button_checked'
-                    : 'radio_button_unchecked'
-                "
-                :active="addTo === 'Query params'"
-                :label="'Query params'"
-                @click.native="
-                  () => {
-                    addTo = 'Query params'
-                    addToOptions.tippy().hide()
-                  }
-                "
-              />
             </tippy>
           </div>
         </div>
@@ -260,11 +259,11 @@
         class="sticky h-full p-4 overflow-auto bg-primary top-upperTertiaryStickyFold min-w-46 max-w-1/3 z-9"
       >
         <div class="pb-2 text-secondaryLight">
-          {{ $t("helpers.authorization") }}
+          {{ t("helpers.authorization") }}
         </div>
         <SmartAnchor
           class="link"
-          :label="`${$t('authorization.learn')} \xA0 →`"
+          :label="`${t('authorization.learn')} \xA0 →`"
           to="https://docs.hoppscotch.io/features/authorization"
           blank
         />
@@ -274,15 +273,28 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, Ref } from "@nuxtjs/composition-api"
+import { computed, ref, Ref } from "vue"
 import {
   HoppGQLAuthAPIKey,
   HoppGQLAuthBasic,
   HoppGQLAuthBearer,
   HoppGQLAuthOAuth2,
 } from "@hoppscotch/data"
-import { pluckRef, useStream } from "~/helpers/utils/composables"
+
+import { pluckRef } from "@composables/ref"
+import { useStream } from "@composables/stream"
+import { useI18n } from "@composables/i18n"
+import { useColorMode } from "@composables/theming"
 import { gqlAuth$, setGQLAuth } from "~/newstore/GQLSession"
+
+import IconTrash2 from "~icons/lucide/trash-2"
+import IconHelpCircle from "~icons/lucide/help-circle"
+import IconExternalLink from "~icons/lucide/external-link"
+import IconRadioButtonChecked from "~icons/ic/sharp-radio-button-checked"
+import IconRadioButtonUnChecked from "~icons/ic/sharp-radio-button-unchecked"
+
+const t = useI18n()
+const colorMode = useColorMode()
 
 const auth = useStream(
   gqlAuth$,
