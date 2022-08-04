@@ -143,7 +143,7 @@ a {
   }
 }
 
-.tippy-content {
+[data-theme="tooltip"] {
   @apply bg-tooltip;
   @apply text-primary;
   @apply font-semibold;
@@ -173,6 +173,24 @@ a {
       @apply text-accentContrast;
     }
   }
+}
+
+[data-theme="popover"] {
+  @apply bg-popover;
+  @apply text-secondary;
+  @apply p-2;
+  @apply shadow-lg;
+  @apply text-body;
+  @apply leading-body;
+  @apply focus:outline-none;
+
+  .tippy-roundarrow svg {
+    @apply fill-popover;
+  }
+}
+
+.tippy-content {
+  @apply p-0;
 }
 
 [interactive] > div {
