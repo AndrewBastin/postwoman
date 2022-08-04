@@ -60,6 +60,7 @@ declare module '@vue/runtime-core' {
     EnvironmentsImportExport: typeof import('./src/components/environments/ImportExport.vue')['default']
     FirebaseLogin: typeof import('./src/components/firebase/Login.vue')['default']
     FirebaseLogout: typeof import('./src/components/firebase/Logout.vue')['default']
+    GraphqlAuthorization: typeof import('./src/components/graphql/Authorization.vue')['default']
     GraphqlField: typeof import('./src/components/graphql/Field.vue')['default']
     GraphqlRequest: typeof import('./src/components/graphql/Request.vue')['default']
     GraphqlRequestOptions: typeof import('./src/components/graphql/RequestOptions.vue')['default']

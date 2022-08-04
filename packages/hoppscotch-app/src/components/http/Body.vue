@@ -41,7 +41,7 @@
                   contentTypeItems, contentTypeItemsIndex
                 ) in segmentedContentTypes"
                 :key="`contentTypeItems-${contentTypeItemsIndex}`"
-                class="flex flex-col py-2 text-left"
+                class="flex flex-col text-left"
               >
                 <div class="flex rounded py-2 px-4">
                   <span class="text-tiny text-secondaryLight font-bold">
@@ -55,7 +55,9 @@
                     ) in contentTypeItems.contentTypes"
                     :key="`contentTypeItem-${contentTypeIndex}`"
                     :label="contentTypeItem"
-                    :info-icon="contentTypeItem === contentType ? IconDone : null"
+                    :info-icon="
+                      contentTypeItem === contentType ? IconDone : null
+                    "
                     :active-info-icon="contentTypeItem === contentType"
                     @click.native="
                       () => {

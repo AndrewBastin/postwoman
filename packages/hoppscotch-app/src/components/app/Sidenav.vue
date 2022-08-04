@@ -10,12 +10,11 @@
         :exact="navigation.exact"
       >
         <div v-if="navigation.svg">
-          <component
-            :is="navigation.svg"
-            class="svg-icons"
-          />
+          <component :is="navigation.svg" class="svg-icons" />
         </div>
-        <span v-if="EXPAND_NAVIGATION">{{ navigation.title }}</span>
+        <span v-if="EXPAND_NAVIGATION" class="nav-title">
+          {{ navigation.title }}
+        </span>
         <tippy
           v-if="!EXPAND_NAVIGATION"
           :placement="mdAndLarger ? 'right' : 'bottom'"
@@ -107,7 +106,7 @@ const primaryNavigation = [
     @apply opacity-75;
   }
 
-  span {
+  .nav-title {
     @apply mt-2;
     @apply text-tiny;
   }

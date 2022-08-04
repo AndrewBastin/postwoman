@@ -177,7 +177,7 @@ a {
 
 [data-theme="popover"] {
   @apply flex flex-col;
-  @apply max-h-44;
+  @apply max-h-46;
   @apply items-stretch;
   @apply overflow-y-auto;
   @apply bg-popover;
@@ -294,6 +294,20 @@ pre.ace_editor {
 .select-wrapper {
   @apply flex flex-1;
   @apply relative;
+
+  &::after {
+    @apply absolute;
+    @apply flex;
+    @apply inset-y-0;
+    @apply items-center;
+    @apply justify-center;
+    @apply pointer-events-none;
+    @apply font-icon;
+    @apply text-secondaryLight;
+    @apply right-3;
+
+    content: "\e313";
+  }
 }
 
 .info-response {
@@ -417,6 +431,14 @@ pre.ace_editor {
   @apply justify-center;
   @apply text-dividerDark;
   @apply font-icon;
+}
+
+.smart-splitter.splitpanes--vertical > .splitpanes__splitter::after {
+  content: "\e5d4";
+}
+
+.smart-splitter.splitpanes--horizontal > .splitpanes__splitter::after {
+  content: "\e5d3";
 }
 
 .smart-splitter .splitpanes__splitter:hover::before {

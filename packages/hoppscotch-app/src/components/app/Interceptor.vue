@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col p-4 space-y-4">
-    <div class="flex flex-col">
+  <div class="flex flex-col space-y-4">
+    <div class="flex pt-2 px-4 flex-col">
       <h2 class="inline-flex pb-1 font-semibold text-secondaryDark">
         {{ t("settings.interceptor") }}
       </h2>
