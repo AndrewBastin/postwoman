@@ -5,7 +5,7 @@ import {
   EditorView,
   MatchDecorator,
   ViewPlugin,
-  hoverTooltip
+  hoverTooltip,
 } from "@codemirror/view"
 import * as E from "fp-ts/Either"
 import { parseTemplateStringE } from "@hoppscotch/data"
@@ -83,7 +83,8 @@ const cursorTooltipField = (aggregateEnvs: AggregateEnvironment[]) =>
           xmp.textContent = finalEnv
           dom.appendChild(document.createTextNode(`${envName} `))
           dom.appendChild(xmp)
-          dom.className = "tooltip-theme"
+          dom.className = "tippy-box"
+          dom.dataset.theme = "tooltip"
           return { dom }
         },
       }

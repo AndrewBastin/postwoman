@@ -90,7 +90,6 @@ declare module '@vue/runtime-core' {
     IconIcInfoOutline: typeof import('~icons/ic/info-outline')['default']
     IconIcSharpCheckCircle: typeof import('~icons/ic/sharp-check-circle')['default']
     IconIcSharpManageSearch: typeof import('~icons/ic/sharp-manage-search')['default']
-    IconLucideChevronRight: typeof import('~icons/lucide/chevron-right')['default']
     IconLucideInbox: typeof import('~icons/lucide/inbox')['default']
     IconLucideLayers: typeof import('~icons/lucide/layers')['default']
     LensesHeadersRenderer: typeof import('./src/components/lenses/HeadersRenderer.vue')['default']

@@ -45,68 +45,68 @@
             arrow
             :on-shown="() => tippyActions.focus()"
           >
-            <template #trigger>
-              <ButtonSecondary
-                v-tippy="{ theme: 'tooltip' }"
-                :title="t('action.more')"
-                :svg="IconMoreVertical"
-              />
+            <ButtonSecondary
+              v-tippy="{ theme: 'tooltip' }"
+              :title="t('action.more')"
+              :svg="IconMoreVertical"
+            />
+            <template #content="{ hide }">
+              <div
+                ref="tippyActions"
+                class="flex flex-col focus:outline-none"
+                tabindex="0"
+                role="menu"
+                @keyup.e="edit.$el.click()"
+                @keyup.d="duplicate.$el.click()"
+                @keyup.delete="deleteAction.$el.click()"
+                @keyup.escape="hide()"
+              >
+                <SmartItem
+                  ref="edit"
+                  :svg="IconEdit"
+                  :label="`${t('action.edit')}`"
+                  :shortcut="['E']"
+                  @click.native="
+                    () => {
+                      $emit('edit-request', {
+                        request,
+                        requestIndex,
+                        folderPath,
+                      })
+                      hide()
+                    }
+                  "
+                />
+                <SmartItem
+                  ref="duplicate"
+                  :svg="IconCopy"
+                  :label="`${t('action.duplicate')}`"
+                  :shortcut="['D']"
+                  @click.native="
+                    () => {
+                      $emit('duplicate-request', {
+                        request,
+                        requestIndex,
+                        folderPath,
+                      })
+                      hide()
+                    }
+                  "
+                />
+                <SmartItem
+                  ref="deleteAction"
+                  :svg="IconTrash2"
+                  :label="`${t('action.delete')}`"
+                  :shortcut="['⌫']"
+                  @click.native="
+                    () => {
+                      confirmRemove = true
+                      hide()
+                    }
+                  "
+                />
+              </div>
             </template>
-            <div
-              ref="tippyActions"
-              class="flex flex-col focus:outline-none"
-              tabindex="0"
-              role="menu"
-              @keyup.e="edit.$el.click()"
-              @keyup.d="duplicate.$el.click()"
-              @keyup.delete="deleteAction.$el.click()"
-              @keyup.escape="options.tippy().hide()"
-            >
-              <SmartItem
-                ref="edit"
-                :svg="IconEdit"
-                :label="`${t('action.edit')}`"
-                :shortcut="['E']"
-                @click.native="
-                  () => {
-                    $emit('edit-request', {
-                      request,
-                      requestIndex,
-                      folderPath,
-                    })
-                    options.tippy().hide()
-                  }
-                "
-              />
-              <SmartItem
-                ref="duplicate"
-                :svg="IconCopy"
-                :label="`${t('action.duplicate')}`"
-                :shortcut="['D']"
-                @click.native="
-                  () => {
-                    $emit('duplicate-request', {
-                      request,
-                      requestIndex,
-                      folderPath,
-                    })
-                    options.tippy().hide()
-                  }
-                "
-              />
-              <SmartItem
-                ref="deleteAction"
-                :svg="IconTrash2"
-                :label="`${t('action.delete')}`"
-                :shortcut="['⌫']"
-                @click.native="
-                  () => {
-                    confirmRemove = true
-                    options.tippy().hide()
-                  }
-                "
-              />
-            </div>
           </tippy>
         </span>
       </div>
@@ -157,19 +157,16 @@ const props = defineProps({
 })
 
 // TODO: Better types please
-const emit = defineEmits([
-  "select",
-  "edit-request",
-  "duplicate-request"
-])
+const emit = defineEmits(["select", "edit-request", "duplicate-request"])
 
 const dragging = ref(false)
 const confirmRemove = ref(false)
 
-const isSelected = computed(() =>
-  props.picked?.pickedType === "gql-my-request" &&
-  props.picked?.folderPath === props.folderPath &&
-  props.picked?.requestIndex === props.requestIndex
+const isSelected = computed(
+  () =>
+    props.picked?.pickedType === "gql-my-request" &&
+    props.picked?.folderPath === props.folderPath &&
+    props.picked?.requestIndex === props.requestIndex
 )
 
 const pick = () => {
@@ -181,7 +178,6 @@ const pick = () => {
     },
   })
 }
-
 
 const selectRequest = () => {
   if (props.savingMode) {

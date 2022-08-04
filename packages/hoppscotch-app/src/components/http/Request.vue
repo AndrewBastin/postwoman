@@ -1,9 +1,9 @@
 <template>
   <div
-    class="sticky top-0 z-10 flex-none p-4 overflow-x-auto sm:flex sm:flex-shrink-0 sm:space-x-2 bg-primary hide-scrollbar"
+    class="sticky top-0 z-10 flex-none p-4 sm:flex sm:flex-shrink-0 sm:space-x-2 bg-primary hide-scrollbar"
   >
     <div
-      class="flex flex-1 overflow-auto border rounded min-w-52 border-divider whitespace-nowrap hide-scrollbar"
+      class="flex flex-1 border rounded min-w-52 border-divider whitespace-nowrap hide-scrollbar"
     >
       <div class="relative flex">
         <label for="method">
@@ -48,7 +48,6 @@
         />
       </div>
     </div>
-
     <div class="flex mt-2 sm:mt-0">
       <ButtonPrimary
         id="send"
@@ -241,7 +240,11 @@ import {
 } from "~/newstore/RESTSession"
 import { editRESTRequest } from "~/newstore/collections"
 import { runRESTRequest$ } from "~/helpers/RequestRunner"
-import { useStream, useStreamSubscriber, useReadonlyStream } from "@composables/stream"
+import {
+  useStream,
+  useStreamSubscriber,
+  useReadonlyStream,
+} from "@composables/stream"
 import { useI18n } from "@composables/i18n"
 import { useToast } from "@composables/toast"
 import { useSetting } from "@composables/settings"

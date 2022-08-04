@@ -137,13 +137,13 @@ a {
 }
 
 .cm-tooltip {
-  .tooltip-theme {
+  .tippy-box {
     @apply fixed;
     @apply -mt-6;
   }
 }
 
-[data-theme="tooltip"] {
+.tippy-box[data-theme="tooltip"] {
   @apply bg-tooltip;
   @apply text-primary;
   @apply font-semibold;
@@ -175,7 +175,7 @@ a {
   }
 }
 
-[data-theme="popover"] {
+.tippy-box[data-theme="popover"] {
   @apply flex flex-col;
   @apply max-h-46;
   @apply items-stretch;
