@@ -1,4 +1,4 @@
-import eq from "lodash/eq"
+import isEqual from "lodash/isEqual"
 import { pluck } from "rxjs/operators"
 import {
   HoppRESTRequest,
@@ -138,7 +138,7 @@ const RESTHistoryDispatchers = defineDispatchers({
     { entry }: { entry: RESTHistoryEntry }
   ) {
     return {
-      state: currentVal.state.filter((e) => !eq(e, entry)),
+      state: currentVal.state.filter((e) => !isEqual(e, entry)),
     }
   },
   clearHistory() {
@@ -152,7 +152,7 @@ const RESTHistoryDispatchers = defineDispatchers({
   ) {
     return {
       state: currentVal.state.map((e) => {
-        if (eq(e, entry) && e.star !== undefined) {
+        if (isEqual(e, entry) && e.star !== undefined) {
           return {
             ...e,
             star: !e.star,
@@ -186,7 +186,7 @@ const GQLHistoryDispatchers = defineDispatchers({
     { entry }: { entry: GQLHistoryEntry }
   ) {
     return {
-      state: currentVal.state.filter((e) => !eq(e, entry)),
+      state: currentVal.state.filter((e) => !isEqual(e, entry)),
     }
   },
   clearHistory() {
@@ -200,7 +200,7 @@ const GQLHistoryDispatchers = defineDispatchers({
   ) {
     return {
       state: currentVal.state.map((e) => {
-        if (eq(e, entry) && e.star !== undefined) {
+        if (isEqual(e, entry) && e.star !== undefined) {
           return {
             ...e,
             star: !e.star,
