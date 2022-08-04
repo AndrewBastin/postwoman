@@ -64,13 +64,12 @@
             arrow
             :on-shown="() => tippyActions.focus()"
           >
-            <template #trigger>
-              <ButtonSecondary
-                v-tippy="{ theme: 'tooltip' }"
-                :title="t('action.more')"
-                :svg="IconMoreVertical"
-              />
-            </template>
+            <ButtonSecondary
+              v-tippy="{ theme: 'tooltip' }"
+              :title="t('action.more')"
+              :svg="IconMoreVertical"
+            />
+
             <template #content="{ hide }">
               <div
                 ref="tippyActions"
