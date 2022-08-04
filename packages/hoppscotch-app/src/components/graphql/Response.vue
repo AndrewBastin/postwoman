@@ -28,14 +28,16 @@
             ref="downloadResponse"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
-            :svg="downloadResponseIcon"
+            :svg="
+              downloadResponseIcon === 'download' ? IconDownload : IconCheck
+            "
             @click.native="downloadResponse"
           />
           <ButtonSecondary
             ref="copyResponseButton"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
-            :svg="copyResponseIcon"
+            :svg="copyResponseIcon === 'copy' ? IconCopy : IconCheck"
             @click.native="copyResponse"
           />
         </div>
@@ -79,7 +81,10 @@
 <script setup lang="ts">
 import IconWrapText from "~icons/lucide/wrap-text"
 import IconExternalLink from "~icons/lucide/external-link"
-import { reactive, ref } from "vue"
+import IconDownload from "~icons/lucide/download"
+import IconCheck from "~icons/lucide/check"
+import IconCopy from "~icons/lucide/copy"
+import { computed, reactive, ref } from "vue"
 import { refAutoReset } from "@vueuse/core"
 import { useCodemirror } from "@composables/codemirror"
 import { copyToClipboard } from "~/helpers/utils/clipboard"

@@ -32,7 +32,7 @@
             @click.native="toggleConnection"
           />
         </div>
-        <div class="flex space-x-4">
+        <div class="flex space-x-2">
           <input
             id="mqtt-username"
             v-model="username"
@@ -132,13 +132,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  onMounted,
-  onUnmounted,
-  ref,
-  watch,
-} from "vue"
+import { computed, onMounted, onUnmounted, ref, watch } from "vue"
 import debounce from "lodash/debounce"
 import { MQTTConnection, MQTTError } from "~/helpers/realtime/MQTTConnection"
 import { useI18n } from "@composables/i18n"

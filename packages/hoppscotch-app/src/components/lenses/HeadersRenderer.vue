@@ -12,7 +12,7 @@
           ref="copyHeaders"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
-          :svg="copyIcon === 'copy' ? IconCopy : null"
+          :svg="copyIcon === 'copy' ? IconCopy : IconCheck"
           @click.native="copyHeaders"
         />
       </div>
@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import IconCopy from "~icons/lucide/copy"
+import IconCheck from "~icons/lucide/check"
 import { HoppRESTHeader } from "@hoppscotch/data"
 import { refAutoReset } from "@vueuse/core"
 import { copyToClipboard } from "~/helpers/utils/clipboard"

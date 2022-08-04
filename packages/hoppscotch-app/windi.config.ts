@@ -13,9 +13,9 @@ export default defineConfig({
         upperMobilePrimaryStickyFold: "var(--upper-mobile-primary-sticky-fold)",
         upperMobileSecondaryStickyFold:
           "var(--upper-mobile-secondary-sticky-fold)",
-        upperMobileRawStickyFold: "var(--upper-mobile-raw-sticky-fold)",
-        upperMobileRawTertiaryStickyFold:
-          "var(--upper-mobile-raw-tertiary-sticky-fold)",
+        upperMobileStickyFold: "var(--upper-mobile-sticky-fold)",
+        upperMobileTertiaryStickyFold:
+          "var(--upper-mobile-tertiary-sticky-fold)",
         lowerPrimaryStickyFold: "var(--lower-primary-sticky-fold)",
         lowerSecondaryStickyFold: "var(--lower-secondary-sticky-fold)",
         lowerTertiaryStickyFold: "var(--lower-tertiary-sticky-fold)",

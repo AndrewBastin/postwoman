@@ -4,8 +4,8 @@
     :class="{ 'flex-col h-auto': !vertical }"
   >
     <div
-      class="relative tabs hide-scrollbar"
-      :class="[{ 'border-r border-dividerLight': vertical }, styles]"
+      class="relative tabs hide-scrollbar border-dividerLight"
+      :class="[vertical ? 'border-r' : 'border-b', styles]"
     >
       <div class="flex flex-1">
         <div
@@ -17,7 +17,10 @@
               v-for="([tabID, tabMeta], index) in tabEntries"
               :key="`tab-${index}`"
               class="tab"
-              :class="[{ active: modelValue === tabID }, { vertical: vertical }]"
+              :class="[
+                { active: modelValue === tabID },
+                { vertical: vertical },
+              ]"
               :aria-label="tabMeta.label || ''"
               role="button"
               @keyup.enter="selectTab(tabID)"
