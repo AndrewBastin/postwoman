@@ -13,6 +13,7 @@
             trigger="click"
             theme="popover"
             arrow
+            :on-shown="() => methodTippyActions.focus()"
           >
             <span class="select-wrapper">
               <input
@@ -24,13 +25,24 @@
                 @input="onSelectMethod($event.target.value)"
               />
             </span>
-            <template #content>
-              <div class="flex flex-col" role="menu">
+            <template #content="{ hide }">
+              <div
+                ref="methodTippyActions"
+                class="flex flex-col focus:outline-none"
+                tabindex="0"
+                role="menu"
+                @keyup.escape="hide()"
+              >
                 <SmartItem
                   v-for="(method, index) in methods"
                   :key="`method-${index}`"
                   :label="method"
-                  @click.native="onSelectMethod(method)"
+                  @click.native="
+                    () => {
+                      onSelectMethod(method)
+                      hide()
+                    }
+                  "
                 />
               </div>
             </template>
@@ -290,6 +302,7 @@ const hasNavigatorShare = !!navigator.share
 const methodOptions = ref<any | null>(null)
 const saveOptions = ref<any | null>(null)
 const sendOptions = ref<any | null>(null)
+const methodTippyActions = ref<any | null>(null)
 const sendTippyActions = ref<any | null>(null)
 const saveTippyActions = ref<any | null>(null)
 const curl = ref<any | null>(null)
@@ -394,8 +407,6 @@ const updateMethod = (method: string) => {
 
 const onSelectMethod = (method: string) => {
   updateMethod(method)
-  // Vue-tippy has no typescript support yet
-  methodOptions.value.tippy().hide()
 }
 
 const clearContent = () => {
