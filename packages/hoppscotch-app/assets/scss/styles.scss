@@ -472,12 +472,12 @@ pre.ace_editor {
 
 .cm-editor {
   .cm-line::selection {
-    background-color: var(--accent-dark-color) !important;
-    color: var(--accent-contrast-color) !important;
+    @apply bg-accentDark #{!important};
+    @apply text-accentContrast #{!important};
   }
   .cm-line ::selection {
-    background-color: var(--accent-dark-color) !important;
-    color: var(--accent-contrast-color) !important;
+    @apply bg-accentDark #{!important};
+    @apply text-accentContrast #{!important};
   }
 }
 
@@ -510,4 +510,8 @@ details summary::-webkit-details-marker {
   * {
     @apply text-accentContrast;
   }
+}
+
+#nprogress .bar {
+  @apply bg-accent #{!important};
 }
