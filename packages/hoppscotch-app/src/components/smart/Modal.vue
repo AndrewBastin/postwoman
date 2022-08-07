@@ -24,15 +24,7 @@
           aria-hidden="true"
           >&#8203;</span
         >
-        <transition
-          appear
-          enter-active-class="transition"
-          enter-class="scale-95 translate-y-4"
-          enter-to-class="scale-100 translate-y-0"
-          leave-active-class="transition"
-          leave-class="scale-100 translate-y-0"
-          leave-to-class="scale-95 translate-y-4"
-        >
+        <transition appear name="bounce">
           <div
             class="inline-block w-full overflow-hidden text-left align-bottom shadow-lg transition-all transform bg-primary sm:rounded-xl sm:align-middle"
             :class="[
@@ -188,3 +180,22 @@ const getPortal = () => {
   return el
 }
 </script>
+
+<style lang="scss" scoped>
+.bounce-enter-active {
+  animation: bounce-in 0.1s;
+}
+
+.bounce-leave-active {
+  animation: bounce-in 0.1s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
