@@ -36,7 +36,7 @@
         open
       >
         <summary
-          class="flex items-center justify-between flex-1 min-w-0 cursor-pointer transition focus:outline-none text-secondaryLight text-tiny group"
+          class="flex items-center justify-between flex-1 min-w-0 transition cursor-pointer focus:outline-none text-secondaryLight text-tiny group"
         >
           <span
             class="px-4 py-2 truncate transition group-hover:text-secondary capitalize-first"
@@ -52,20 +52,17 @@
             @click.native="deleteBatchHistoryEntry(filteredHistoryGroup)"
           />
         </summary>
-        <div
+        <component
           v-for="(entry, index) in filteredHistoryGroup"
           :key="`entry-${index}`"
-        >
-          <component
-            :is="page == 'rest' ? HistoryRestCard : HistoryGraphqlCard"
-            :id="index"
-            :entry="entry.entry"
-            :show-more="showMore"
-            @toggle-star="toggleStar(entry.entry)"
-            @delete-entry="deleteHistory(entry.entry)"
-            @use-entry="useHistory(entry.entry)"
-          />
-        </div>
+          :is="page == 'rest' ? HistoryRestCard : HistoryGraphqlCard"
+          :id="index"
+          :entry="entry.entry"
+          :show-more="showMore"
+          @toggle-star="toggleStar(entry.entry)"
+          @delete-entry="deleteHistory(entry.entry)"
+          @use-entry="useHistory(entry.entry)"
+        />
       </details>
     </div>
     <div

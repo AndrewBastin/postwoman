@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'rounded border border-divider': saveRequest }">
     <div
-      class="sticky z-10 flex flex-col border-b rounded-t divide-y divide-dividerLight bg-primary border-dividerLight"
+      class="sticky z-10 flex flex-col border-b divide-y rounded-t divide-dividerLight bg-primary border-dividerLight"
       :style="saveRequest ? 'top: calc(-1 * var(--font-size-body))' : 'top: 0'"
     >
       <div v-if="!saveRequest" class="flex flex-col">
@@ -241,10 +241,7 @@ import {
   getRESTRequest,
   getRESTSaveContext,
 } from "~/newstore/RESTSession"
-import {
-  useReadonlyStream,
-  useStreamSubscriber,
-} from "@composables/stream"
+import { useReadonlyStream, useStreamSubscriber } from "@composables/stream"
 import { runMutation } from "~/helpers/backend/GQLClient"
 import {
   CreateChildCollectionDocument,
@@ -279,7 +276,7 @@ export default defineComponent({
       currentUser: useReadonlyStream(currentUser$, null),
       colorMode: useColorMode(),
       toast: useToast(),
-      t: useI18n()
+      t: useI18n(),
     }
   },
   data() {
@@ -323,7 +320,7 @@ export default defineComponent({
     "select-request",
     "select",
     "use-collection",
-    "remove-collection"
+    "remove-collection",
   ],
   computed: {
     showTeamCollections() {

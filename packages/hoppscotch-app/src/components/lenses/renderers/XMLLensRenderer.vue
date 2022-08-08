@@ -43,7 +43,11 @@ import { computed, ref, reactive } from "vue"
 import { useCodemirror } from "@composables/codemirror"
 import type { HoppRESTResponse } from "~/helpers/types/HoppRESTResponse"
 import { useI18n } from "@composables/i18n"
-import { useResponseBody, useDownloadResponse, useCopyResponse } from "@composables/lens-actions"
+import {
+  useResponseBody,
+  useDownloadResponse,
+  useCopyResponse,
+} from "@composables/lens-actions"
 
 const t = useI18n()
 

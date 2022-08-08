@@ -43,8 +43,8 @@
                 :key="`contentTypeItems-${contentTypeItemsIndex}`"
                 class="flex flex-col text-left"
               >
-                <div class="flex rounded py-2 px-4">
-                  <span class="text-tiny text-secondaryLight font-bold">
+                <div class="flex px-4 py-2 rounded">
+                  <span class="font-bold text-tiny text-secondaryLight">
                     {{ t(contentTypeItems.title) }}
                   </span>
                 </div>

@@ -48,7 +48,11 @@ import * as O from "fp-ts/Option"
 import { useCodemirror } from "@composables/codemirror"
 import { HoppRESTResponse } from "~/helpers/types/HoppRESTResponse"
 import { useI18n } from "@composables/i18n"
-import { useResponseBody, useDownloadResponse, useCopyResponse } from "@composables/lens-actions"
+import {
+  useResponseBody,
+  useDownloadResponse,
+  useCopyResponse,
+} from "@composables/lens-actions"
 import { objFieldMatches } from "~/helpers/functional/object"
 
 const t = useI18n()

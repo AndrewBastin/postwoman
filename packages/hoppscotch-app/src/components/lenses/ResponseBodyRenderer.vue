@@ -63,7 +63,7 @@ export default defineComponent({
 
     return {
       testResults,
-      t: useI18n()
+      t: useI18n(),
     }
   },
   data() {

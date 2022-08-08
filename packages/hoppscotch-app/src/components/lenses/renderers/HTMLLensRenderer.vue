@@ -63,7 +63,12 @@ import IconWrapText from "~icons/lucide/wrap-text"
 import IconEye from "~icons/lucide/eye"
 import IconEyeOff from "~icons/lucide/eye-off"
 import { ref, reactive } from "vue"
-import { usePreview, useResponseBody, useCopyResponse, useDownloadResponse } from "@composables/lens-actions"
+import {
+  usePreview,
+  useResponseBody,
+  useCopyResponse,
+  useDownloadResponse,
+} from "@composables/lens-actions"
 import { useCodemirror } from "@composables/codemirror"
 import { useI18n } from "@composables/i18n"
 import type { HoppRESTResponse } from "~/helpers/types/HoppRESTResponse"

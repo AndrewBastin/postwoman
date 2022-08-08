@@ -171,8 +171,8 @@ const toast = useToast()
  * prompt.
  */
 
-const showInstallButton = computed(() =>
-  pwaInstalled.value && !!pwaDefferedPrompt.value
+const showInstallButton = computed(
+  () => pwaInstalled.value && !!pwaDefferedPrompt.value
 )
 
 const showLogin = ref(false)

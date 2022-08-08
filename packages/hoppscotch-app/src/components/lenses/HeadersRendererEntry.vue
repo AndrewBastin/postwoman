@@ -10,7 +10,7 @@
       </span>
     </span>
     <span
-      class="flex flex-1 min-w-0 pl-4 py-2 transition group-hover:text-secondaryDark justify-between"
+      class="flex justify-between flex-1 min-w-0 py-2 pl-4 transition group-hover:text-secondaryDark"
     >
       <span class="truncate rounded-sm select-all">
         {{ header.value }}

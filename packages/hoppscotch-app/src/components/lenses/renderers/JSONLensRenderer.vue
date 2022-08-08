@@ -46,13 +46,13 @@
     </div>
     <div
       v-if="toggleFilter"
-      class="bg-primary flex sticky top-lowerTertiaryStickyFold z-10 border-b border-dividerLight"
+      class="sticky z-10 flex border-b bg-primary top-lowerTertiaryStickyFold border-dividerLight"
     >
       <div
-        class="bg-primaryLight border-divider text-secondaryDark inline-flex flex-1 items-center"
+        class="inline-flex items-center flex-1 bg-primaryLight border-divider text-secondaryDark"
       >
-        <span class="inline-flex flex-1 items-center px-4">
-          <icon-lucide-search class="h-4 w-4 text-secondaryLight" />
+        <span class="inline-flex items-center flex-1 px-4">
+          <icon-lucide-search class="w-4 h-4 text-secondaryLight" />
           <input
             v-model="filterQueryText"
             v-focus
@@ -63,7 +63,7 @@
         </span>
         <div
           v-if="filterResponseError"
-          class="px-2 py-1 text-tiny flex items-center justify-center text-accentContrast rounded"
+          class="flex items-center justify-center px-2 py-1 rounded text-tiny text-accentContrast"
           :class="{
             'bg-red-500':
               filterResponseError.type === 'JSON_PARSE_FAILED' ||
@@ -208,7 +208,11 @@ import {
   convertLineChToIndex,
 } from "~/helpers/editor/utils"
 import { useI18n } from "@composables/i18n"
-import { useCopyResponse, useResponseBody, useDownloadResponse } from "@composables/lens-actions"
+import {
+  useCopyResponse,
+  useResponseBody,
+  useDownloadResponse,
+} from "@composables/lens-actions"
 
 const t = useI18n()
 

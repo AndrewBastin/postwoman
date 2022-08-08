@@ -2,17 +2,12 @@
   <AppPaneLayout>
     <template #primary>
       <div
-        class="sticky top-0 z-10 flex flex-shrink-0 p-4 overflow-x-auto space-x-2 bg-primary hide-scrollbar"
+        class="sticky top-0 z-10 flex flex-shrink-0 p-4 space-x-2 overflow-x-auto bg-primary hide-scrollbar"
       >
         <div class="inline-flex flex-1 space-x-2">
           <div class="flex flex-1">
             <label for="client-version">
-              <tippy
-                interactive
-                trigger="click"
-                theme="popover"
-                arrow
-              >
+              <tippy interactive trigger="click" theme="popover" arrow>
                 <span class="select-wrapper">
                   <input
                     id="client-version"
@@ -34,10 +29,12 @@
                       v-for="version in SIOVersions"
                       :key="`client-${version}`"
                       :label="`Client ${version}`"
-                      @click.native="() => {
-                        onSelectVersion(version)
-                        hide()
-                      }"
+                      @click.native="
+                        () => {
+                          onSelectVersion(version)
+                          hide()
+                        }
+                      "
                     />
                   </div>
                 </template>
@@ -110,12 +107,7 @@
               <label class="font-semibold text-secondaryLight">
                 {{ t("authorization.type") }}
               </label>
-              <tippy
-                interactive
-                trigger="click"
-                theme="popover"
-                arrow
-              >
+              <tippy interactive trigger="click" theme="popover" arrow>
                 <span class="select-wrapper">
                   <ButtonSecondary
                     class="pr-8 ml-2 rounded-none"

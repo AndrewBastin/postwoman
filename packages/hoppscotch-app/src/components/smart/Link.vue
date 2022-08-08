@@ -1,7 +1,7 @@
 <template>
   <button
     v-if="renderedTag === 'BUTTON'"
-    aria-label="Button"
+    aria-label="button"
     role="button"
     v-bind="$attrs"
   >
@@ -27,11 +27,7 @@
   >
     <slot></slot>
   </a>
-  <router-link
-    v-else
-    :to="to"
-    v-bind="$attrs"
-  >
+  <router-link v-else :to="to" v-bind="$attrs">
     <slot></slot>
   </router-link>
 </template>
@@ -48,7 +44,7 @@ const props = defineProps({
   blank: {
     type: Boolean,
     default: false,
-  }
+  },
 })
 
 const renderedTag = computed(() => {

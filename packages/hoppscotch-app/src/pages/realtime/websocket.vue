@@ -2,9 +2,12 @@
   <AppPaneLayout>
     <template #primary>
       <div
-        class="sticky top-0 z-10 flex flex-shrink-0 p-4 overflow-x-auto space-x-2 bg-primary hide-scrollbar"
+        class="sticky top-0 z-10 flex flex-shrink-0 p-4 space-x-2 overflow-x-auto bg-primary hide-scrollbar"
       >
-        <div class="inline-flex flex-1 space-x-2"> <input id="websocket-url" v-model="url"
+        <div class="inline-flex flex-1 space-x-2">
+          <input
+            id="websocket-url"
+            v-model="url"
             class="w-full px-4 py-2 border rounded bg-primaryLight border-divider text-secondaryDark"
             type="url"
             autocomplete="off"
@@ -198,7 +201,11 @@ import {
   WSSocket$,
 } from "~/newstore/WebSocketSession"
 import { useI18n } from "@composables/i18n"
-import { useStream, useStreamSubscriber, useReadonlyStream } from "@composables/stream"
+import {
+  useStream,
+  useStreamSubscriber,
+  useReadonlyStream,
+} from "@composables/stream"
 import { useToast } from "@composables/toast"
 import { useColorMode } from "@composables/theming"
 import { WSConnection, WSErrorMessage } from "@helpers/realtime/WSConnection"
@@ -220,12 +227,12 @@ const protocolsWithID = computed({
   get() {
     return protocols.value.map((protocol, index) => ({
       id: `protocol-${index}-${protocol.value}`,
-      protocol
+      protocol,
     }))
   },
   set(newData) {
     protocols.value = newData.map(({ protocol }) => protocol)
-  }
+  },
 })
 
 const socket = useStream(WSSocket$, new WSConnection(), setWSSocket)

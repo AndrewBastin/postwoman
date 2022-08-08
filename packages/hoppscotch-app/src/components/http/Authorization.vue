@@ -15,19 +15,14 @@
           arrow
         >
           <span class="select-wrapper">
-            <ButtonSecondary
-              class="pr-8 ml-2 rounded-none"
-              :label="authName"
-            />
+            <ButtonSecondary class="pr-8 ml-2 rounded-none" :label="authName" />
           </span>
           <template #content="{ hide }">
             <div class="flex flex-col" role="menu">
               <SmartItem
                 label="None"
                 :icon="
-                  authName === 'None'
-                    ? IconRadioChecked
-                    : IconRadioUnchecked
+                  authName === 'None' ? IconRadioChecked : IconRadioUnchecked
                 "
                 :active="authName === 'None'"
                 @click.native="
@@ -55,9 +50,7 @@
               <SmartItem
                 label="Bearer Token"
                 :icon="
-                  authName === 'Bearer'
-                    ? IconRadioChecked
-                    : IconRadioUnchecked
+                  authName === 'Bearer' ? IconRadioChecked : IconRadioUnchecked
                 "
                 :active="authName === 'Bearer'"
                 @click.native="
@@ -85,9 +78,7 @@
               <SmartItem
                 label="API key"
                 :icon="
-                  authName === 'API key'
-                    ? IconRadioChecked
-                    : IconRadioUnchecked
+                  authName === 'API key' ? IconRadioChecked : IconRadioUnchecked
                 "
                 :active="authName === 'API key'"
                 @click.native="
@@ -195,12 +186,12 @@
               theme="popover"
               arrow
             >
-                <span class="select-wrapper">
-                  <ButtonSecondary
-                    :label="addTo || t('state.none')"
-                    class="pr-8 ml-2 rounded-none"
-                  />
-                </span>
+              <span class="select-wrapper">
+                <ButtonSecondary
+                  :label="addTo || t('state.none')"
+                  class="pr-8 ml-2 rounded-none"
+                />
+              </span>
               <template #content="{ hide }">
                 <div class="flex flex-col" role="menu">
                   <SmartItem
@@ -314,6 +305,6 @@ const clearContent = () => {
     authActive: true,
   }
 }
-const authTypeOptions= ref<any | null>(null)
+const authTypeOptions = ref<any | null>(null)
 const addToOptions = ref<any | null>(null)
 </script>

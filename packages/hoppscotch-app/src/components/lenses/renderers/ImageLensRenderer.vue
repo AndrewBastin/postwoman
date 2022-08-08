@@ -46,7 +46,7 @@ export default defineComponent({
   setup() {
     return {
       t: useI18n(),
-      toast: useToast()
+      toast: useToast(),
     }
   },
   computed: {
