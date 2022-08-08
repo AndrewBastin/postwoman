@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-0 z-10 flex-none p-4 sm:flex sm:flex-shrink-0 sm:space-x-2 bg-primary hide-scrollbar"
+    class="sticky top-0 z-20 flex-none p-4 sm:flex sm:flex-shrink-0 sm:space-x-2 bg-primary hide-scrollbar"
   >
     <div
       class="flex flex-1 border rounded min-w-52 border-divider whitespace-nowrap hide-scrollbar"
