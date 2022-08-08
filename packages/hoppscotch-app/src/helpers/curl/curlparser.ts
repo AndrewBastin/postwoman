@@ -1,4 +1,9 @@
-import parser from "yargs-parser"
+/**
+ * the direct import from yargs-parser uses fs which is a built in node module,
+ * just adding the /browser import as a fix for now, which does not have type info on DefinitelyTyped.
+ * remove/update this comment before merging the vue3 port.
+ */
+import parser from "yargs-parser/browser"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"
 import { pipe, flow } from "fp-ts/function"
