@@ -38,12 +38,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "@nuxtjs/composition-api"
+import { ref, watch } from "vue"
 import { refAutoReset } from "@vueuse/core"
-import { useCodemirror } from "~/helpers/editor/codemirror"
+import { useCodemirror } from "@composables/codemirror"
 import { setRESTRequest } from "~/newstore/RESTSession"
-import { useI18n, useToast } from "~/helpers/utils/composables"
+import { useI18n } from "@composables/i18n"
+import { useToast } from "@composables/toast"
 import { parseCurlToHoppRESTReq } from "~/helpers/curl"
+
+import IconClipboard from "~icons/lucide/clipboard"
+import IconCheck from "~icons/lucide/check"
 
 const t = useI18n()
 
@@ -96,7 +100,7 @@ const handleImport = () => {
   hideModal()
 }
 
-const pasteIcon = refAutoReset<"clipboard" | "check">("clipboard", 1000)
+const pasteIcon = refAutoReset<IconClipboard | IconCheck>(IconClipboard, 1000)
 
 const handlePaste = async () => {
   try {
