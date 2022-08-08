@@ -56,13 +56,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount, ref, watch } from 'vue';
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
-import { Splitpanes, Pane } from "splitpanes";
-import "splitpanes/dist/splitpanes.css";
-import { RouterView } from 'vue-router'
-import { useSetting } from '@composables/settings';
-import { defineActionHandler } from '~/helpers/actions';
+import { computed, onBeforeMount, ref, watch } from "vue"
+import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
+import { Splitpanes, Pane } from "splitpanes"
+import "splitpanes/dist/splitpanes.css"
+import { RouterView, useRouter } from "vue-router"
+import { useSetting } from "@composables/settings"
+import { defineActionHandler } from "~/helpers/actions"
+import { hookKeybindingsListener } from "~/helpers/keybindings"
+
+const router = useRouter()
 
 const showSearch = ref(false)
 const showSupport = ref(false)
@@ -115,7 +118,27 @@ const spacerClass = computed(() => {
     return "spacer-expand"
 })
 
+defineActionHandler("navigation.jump.rest", () => {
+  router.push({ path: "/" })
+})
 
+defineActionHandler("navigation.jump.graphql", () => {
+  router.push({ path: "/graphql" })
+})
+
+defineActionHandler("navigation.jump.realtime", () => {
+  router.push({ path: "/realtime" })
+})
+
+defineActionHandler("navigation.jump.settings", () => {
+  router.push({ path: "/settings" })
+})
+
+defineActionHandler("navigation.jump.profile", () => {
+  router.push({ path: "/profile" })
+})
+
+hookKeybindingsListener()
 </script>
 
 <style scoped>
