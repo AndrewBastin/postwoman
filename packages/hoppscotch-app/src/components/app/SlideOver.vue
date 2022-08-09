@@ -10,7 +10,7 @@
       </div>
     </transition>
     <aside
-      class="fixed top-0 right-0 z-30 flex flex-col h-full max-w-full overflow-auto transition duration-300 ease-in-out transform bg-primary w-96 hide-scrollbar"
+      class="fixed top-0 right-0 z-30 flex flex-col h-full max-w-full overflow-auto transition duration-300 ease-in-out transform bg-primary w-96"
       :class="show ? 'shadow-xl translate-x-0' : 'translate-x-full'"
     >
       <slot name="content"></slot>

@@ -87,7 +87,7 @@
     <div ref="jsonResponse" class="flex flex-col flex-1 h-auto h-full"></div>
     <div
       v-if="outlinePath"
-      class="sticky bottom-0 z-10 flex px-2 overflow-auto border-t bg-primaryLight border-dividerLight flex-nowrap hide-scrollbar"
+      class="sticky bottom-0 z-10 flex px-2 overflow-auto border-t bg-primaryLight border-dividerLight flex-nowrap"
     >
       <div
         v-for="(item, index) in outlinePath"

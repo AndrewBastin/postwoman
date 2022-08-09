@@ -4,10 +4,7 @@
       <Pane v-if="!zenMode" style="height: auto">
         <AppHeader />
       </Pane>
-      <Pane
-        :class="spacerClass"
-        class="flex flex-1 hide-scrollbar !overflow-auto md:mb-0"
-      >
+      <Pane :class="spacerClass" class="flex flex-1 !overflow-auto md:mb-0">
         <Splitpanes
           class="no-splitter"
           :dbl-click-splitter="false"
@@ -15,17 +12,17 @@
         >
           <Pane
             style="width: auto; height: auto"
-            class="hide-scrollbar !overflow-auto hidden md:flex md:flex-col"
+            class="!overflow-auto hidden md:flex md:flex-col"
           >
             <AppSidenav />
           </Pane>
-          <Pane class="flex flex-1 hide-scrollbar !overflow-auto">
+          <Pane class="flex flex-1 !overflow-auto">
             <Splitpanes
               class="no-splitter"
               :dbl-click-splitter="false"
               horizontal
             >
-              <Pane class="flex flex-1 hide-scrollbar !overflow-auto">
+              <Pane class="flex flex-1 !overflow-auto">
                 <main class="flex flex-1 w-full" role="main">
                   <router-view class="flex flex-1" />
                 </main>
@@ -40,7 +37,7 @@
       <Pane
         v-else
         style="height: auto"
-        class="hide-scrollbar !overflow-auto flex flex-col fixed inset-x-0 bottom-0 z-10"
+        class="!overflow-auto flex flex-col fixed inset-x-0 bottom-0 z-10"
       >
         <AppSidenav />
       </Pane>

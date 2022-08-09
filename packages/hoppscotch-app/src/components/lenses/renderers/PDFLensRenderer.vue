@@ -19,7 +19,7 @@
     </div>
     <vue-pdf-embed
       :source="pdfsrc"
-      class="flex flex-1 overflow-auto border-b hide-scrollbar border-dividerLight"
+      class="flex flex-1 overflow-auto border-b border-dividerLight"
       type="application/pdf"
     />
   </div>

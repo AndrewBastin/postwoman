@@ -4,7 +4,7 @@
     :class="{ 'flex-col h-auto': !vertical }"
   >
     <div
-      class="relative tabs hide-scrollbar border-dividerLight"
+      class="relative tabs border-dividerLight"
       :class="[vertical ? 'border-r' : 'border-b', styles]"
     >
       <div class="flex flex-1">
@@ -59,7 +59,7 @@
     <div
       class="w-full h-full contents"
       :class="{
-        '!flex flex-col flex-1 overflow-y-auto hide-scrollbar': vertical,
+        '!flex flex-col flex-1 overflow-y-auto ': vertical,
       }"
     >
       <slot></slot>

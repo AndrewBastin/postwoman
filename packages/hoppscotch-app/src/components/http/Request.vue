@@ -1,9 +1,9 @@
 <template>
   <div
-    class="sticky top-0 z-20 flex-none p-4 sm:flex sm:flex-shrink-0 sm:space-x-2 bg-primary hide-scrollbar"
+    class="sticky top-0 z-20 flex-none p-4 sm:flex sm:flex-shrink-0 sm:space-x-2 bg-primary"
   >
     <div
-      class="flex flex-1 border rounded min-w-52 border-divider whitespace-nowrap hide-scrollbar"
+      class="flex flex-1 border rounded min-w-52 border-divider whitespace-nowrap"
     >
       <div class="relative flex">
         <label for="method">
@@ -50,7 +50,7 @@
         </label>
       </div>
       <div
-        class="flex flex-1 overflow-auto border-l rounded-r transition border-divider bg-primaryLight whitespace-nowrap hide-scrollbar"
+        class="flex flex-1 overflow-auto border-l rounded-r transition border-divider bg-primaryLight whitespace-nowrap"
       >
         <SmartEnvInput
           v-model="newEndpoint"

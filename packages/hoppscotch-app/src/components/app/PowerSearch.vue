@@ -18,7 +18,7 @@
           class="flex flex-shrink-0 p-6 text-base bg-transparent text-secondaryDark"
         />
         <div
-          class="flex flex-shrink-0 text-tiny text-secondaryLight px-4 pb-4 justify-between whitespace-nowrap overflow-auto hide-scrollbar <sm:hidden"
+          class="flex flex-shrink-0 text-tiny text-secondaryLight px-4 pb-4 justify-between whitespace-nowrap overflow-auto <sm:hidden"
         >
           <div class="flex items-center">
             <kbd class="shortcut-key">↑</kbd>
@@ -47,7 +47,7 @@
       />
       <div
         v-else
-        class="flex flex-col flex-1 overflow-auto space-y-4 divide-y divide-dividerLight hide-scrollbar"
+        class="flex flex-col flex-1 overflow-auto space-y-4 divide-y divide-dividerLight"
       >
         <div
           v-for="(map, mapIndex) in mappings"

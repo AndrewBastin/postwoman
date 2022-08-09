@@ -66,7 +66,7 @@
               })
             "
           />
-          <div v-if="entry.isFile" class="file-chips-container hide-scrollbar">
+          <div v-if="entry.isFile" class="file-chips-container">
             <div class="space-x-2 file-chips-wrapper">
               <SmartFileChip
                 v-for="(file, fileIndex) in entry.value"

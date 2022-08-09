@@ -22,7 +22,7 @@
     />
     <ul
       v-if="suggestions.length > 0 && suggestionsVisible"
-      class="suggestions hide-scrollbar"
+      class="suggestions"
       :style="{ transform: `translate(${suggestionsOffsetLeft}px, 0)` }"
     >
       <li

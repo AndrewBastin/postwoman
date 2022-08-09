@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center flex-1 flex-shrink-0 overflow-auto whitespace-nowrap hide-scrollbar"
+    class="flex items-center flex-1 flex-shrink-0 overflow-auto whitespace-nowrap"
   >
     <div
       ref="editor"
@@ -16,21 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  onMounted,
-  watch,
-  nextTick,
-  computed,
-  Ref,
-} from "vue"
+import { ref, onMounted, watch, nextTick, computed, Ref } from "vue"
 import {
   EditorView,
   placeholder as placeholderExt,
   ViewPlugin,
   ViewUpdate,
   keymap,
-  tooltips
+  tooltips,
 } from "@codemirror/view"
 import { EditorState, Extension } from "@codemirror/state"
 import clone from "lodash/clone"

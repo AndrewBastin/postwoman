@@ -2,7 +2,7 @@
   <transition name="fade" appear @leave="onTransitionLeaveStart">
     <div
       ref="modal"
-      class="fixed inset-0 z-10 z-50 overflow-y-auto transition hide-scrollbar"
+      class="fixed inset-0 z-10 z-50 overflow-y-auto transition"
       role="dialog"
       aria-modal="true"
     >
@@ -48,7 +48,7 @@
               </span>
             </div>
             <div
-              class="flex flex-col overflow-y-auto max-h-md hide-scrollbar"
+              class="flex flex-col overflow-y-auto max-h-md"
               :class="{ 'py-2': !fullWidth }"
             >
               <slot name="body"></slot>

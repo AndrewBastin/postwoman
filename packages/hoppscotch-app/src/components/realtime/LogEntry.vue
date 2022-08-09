@@ -91,34 +91,27 @@
       <div ref="editor"></div>
       <div
         v-if="outlinePath && selectedTab === 'json'"
-        class="sticky bottom-0 z-10 flex px-2 overflow-auto border-t bg-primaryLight border-dividerLight flex-nowrap hide-scrollbar"
+        class="sticky bottom-0 z-10 flex px-2 overflow-auto border-t bg-primaryLight border-dividerLight flex-nowrap"
       >
         <div
           v-for="(item, index) in outlinePath"
           :key="`item-${index}`"
           class="flex items-center"
         >
-          <tippy
-            interactive
-            trigger="click"
-            theme="popover"
-            arrow
-          >
-              <div v-if="item.kind === 'RootObject'" class="outline-item">
-                {}
-              </div>
-              <div v-if="item.kind === 'RootArray'" class="outline-item">
-                []
-              </div>
-              <div v-if="item.kind === 'ArrayMember'" class="outline-item">
-                {{ item.index }}
-              </div>
-              <div v-if="item.kind === 'ObjectMember'" class="outline-item">
-                {{ item.name }}
-              </div>
+          <tippy interactive trigger="click" theme="popover" arrow>
+            <div v-if="item.kind === 'RootObject'" class="outline-item">{}</div>
+            <div v-if="item.kind === 'RootArray'" class="outline-item">[]</div>
+            <div v-if="item.kind === 'ArrayMember'" class="outline-item">
+              {{ item.index }}
+            </div>
+            <div v-if="item.kind === 'ObjectMember'" class="outline-item">
+              {{ item.name }}
+            </div>
             <template #content="{ hide }">
               <div
-                v-if="item.kind === 'ArrayMember' || item.kind === 'ObjectMember'"
+                v-if="
+                  item.kind === 'ArrayMember' || item.kind === 'ObjectMember'
+                "
               >
                 <div
                   v-if="item.kind === 'ArrayMember'"
