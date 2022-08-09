@@ -11,43 +11,45 @@
           {{ t("request.choose_language") }}
         </label>
         <tippy ref="options" interactive trigger="click" theme="popover" arrow>
-          <template #trigger>
-            <span class="select-wrapper">
-              <ButtonSecondary
-                :label="
-                  CodegenDefinitions.find((x) => x.name === codegenType).caption
-                "
-                outline
-                class="flex-1 pr-8"
-              />
-            </span>
+          <span class="select-wrapper">
+            <ButtonSecondary
+              v-tippy="{ placement: 'bottom' }"
+              :label="
+                CodegenDefinitions.find((x) => x.name === codegenType).caption
+              "
+              outline
+              class="flex-1 pr-8"
+            />
+          </span>
+
+          <template #content="{ hide }">
+            <div class="flex flex-col space-y-2">
+              <div class="sticky top-0">
+                <input
+                  v-model="searchQuery"
+                  type="search"
+                  autocomplete="off"
+                  class="flex w-full p-4 py-2 !bg-popover input"
+                  :placeholder="`${t('action.search')}`"
+                />
+              </div>
+              <div class="flex flex-col" role="menu">
+                <SmartItem
+                  v-for="codegen in filteredCodegenDefinitions"
+                  :key="codegen.name"
+                  :label="codegen.caption"
+                  :info-icon="codegen.name === codegenType ? 'done' : ''"
+                  :active-info-icon="codegen.name === codegenType"
+                  @click.native="
+                    () => {
+                      codegenType = codegen.name
+                      hide()
+                    }
+                  "
+                />
+              </div>
+            </div>
           </template>
-          <div class="flex flex-col space-y-2">
-            <div class="sticky top-0">
-              <input
-                v-model="searchQuery"
-                type="search"
-                autocomplete="off"
-                class="flex w-full p-4 py-2 !bg-popover input"
-                :placeholder="`${t('action.search')}`"
-              />
-            </div>
-            <div class="flex flex-col" role="menu">
-              <SmartItem
-                v-for="codegen in filteredCodegenDefinitions"
-                :key="codegen.name"
-                :label="codegen.caption"
-                :info-icon="codegen.name === codegenType ? 'done' : ''"
-                :active-info-icon="codegen.name === codegenType"
-                @click.native="
-                  () => {
-                    codegenType = codegen.name
-                    options.tippy().hide()
-                  }
-                "
-              />
-            </div>
-          </div>
         </tippy>
         <div class="flex justify-between flex-1">
           <label for="generatedCode" class="p-4">
@@ -84,11 +86,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "@nuxtjs/composition-api"
+import { computed, ref, watch } from "vue"
 import * as O from "fp-ts/Option"
 import { Environment, makeRESTRequest } from "@hoppscotch/data"
 import { refAutoReset } from "@vueuse/core"
-import { useCodemirror } from "~/helpers/editor/codemirror"
+import { useCodemirror } from "@composables/codemirror"
 import { copyToClipboard } from "~/helpers/utils/clipboard"
 import {
   getEffectiveRESTRequest,
@@ -96,12 +98,16 @@ import {
 } from "~/helpers/utils/EffectiveURL"
 import { getAggregateEnvs } from "~/newstore/environments"
 import { getRESTRequest } from "~/newstore/RESTSession"
-import { useI18n, useToast } from "~/helpers/utils/composables"
+import { useI18n } from "@composables/i18n"
+import { useToast } from "@composables/toast"
 import {
   CodegenDefinitions,
   CodegenName,
   generateCode,
 } from "~/helpers/new-codegen"
+
+import IconCopy from "~icons/lucide/copy"
+import IconCheck from "~icons/lucide/check"
 
 const t = useI18n()
 
@@ -121,7 +127,7 @@ const request = ref(getRESTRequest())
 const codegenType = ref<CodegenName>("shell-curl")
 const errorState = ref(false)
 
-const copyIcon = refAutoReset<"copy" | "check">("copy", 1000)
+const copyIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 const requestCode = computed(() => {
   const aggregateEnvs = getAggregateEnvs()
@@ -184,7 +190,7 @@ const hideModal = () => emit("hide-modal")
 
 const copyRequestCode = () => {
   copyToClipboard(requestCode.value)
-  copyIcon.value = "check"
+  copyIcon.value = IconCheck
   toast.success(`${t("state.copied_to_clipboard")}`)
 }
 

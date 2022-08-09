@@ -46,6 +46,7 @@
     "graphql": "^16.5.0",
     "graphql-language-service-interface": "^2.10.2",
     "graphql-tag": "^2.12.6",
+    "httpsnippet": "^2.0.0",
     "insomnia-importers": "^3.3.0",
     "js-yaml": "^4.1.0",
     "jsonpath-plus": "^7.0.0",
