@@ -21,7 +21,7 @@
         />
       </span>
       <span
-        class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
+        class="flex flex-1 min-w-0 py-2 pr-2 transition cursor-pointer group-hover:text-secondaryDark"
         @click="toggleShowChildren()"
       >
         <span class="truncate" :class="{ 'text-accent': isSelected }">
@@ -152,7 +152,6 @@
           :folder="subFolder"
           :folder-index="subFolderIndex"
           :collection-index="collectionIndex"
-          :doc="doc"
           :save-request="saveRequest"
           :collections-type="collectionsType"
           :folder-path="`${folderPath}/${subFolderIndex}`"
@@ -177,7 +176,6 @@
           :folder-index="folderIndex"
           :folder-name="folder.name"
           :request-index="request.id"
-          :doc="doc"
           :save-request="saveRequest"
           :collections-type="collectionsType"
           :picked="picked"
@@ -244,7 +242,6 @@ export default defineComponent({
     folderIndex: { type: Number, default: null },
     collectionIndex: { type: Number, default: null },
     folderPath: { type: String, default: null },
-    doc: Boolean,
     saveRequest: Boolean,
     isFiltered: Boolean,
     collectionsType: { type: Object, default: () => {} },
@@ -272,7 +269,7 @@ export default defineComponent({
       IconMoreVertical,
       IconEdit,
       IconDownload,
-      IconTrash2
+      IconTrash2,
     }
   },
   data() {

@@ -10,7 +10,7 @@
         :label="`${t('collection.my_collections')}`"
       />
       <SmartTab
-        v-if="currentUser && !doc"
+        v-if="currentUser"
         :id="'team-collections'"
         :label="`${t('collection.team_collections')}`"
       >
@@ -46,9 +46,13 @@
                   :key="`team-${index}`"
                   :label="team.name"
                   :info-icon="
-                    team.id === collectionsType.selectedTeam?.id ? IconDone : null
+                    team.id === collectionsType.selectedTeam?.id
+                      ? IconDone
+                      : null
                   "
-                  :active-info-icon="team.id === collectionsType.selectedTeam?.id"
+                  :active-info-icon="
+                    team.id === collectionsType.selectedTeam?.id
+                  "
                   :svg="IconUsers"
                   @click.native="
                     () => {
@@ -87,7 +91,6 @@ const t = useI18n()
 const selectedCollectionTab = ref<CollectionTabs>("my-collections")
 
 defineProps<{
-  doc: boolean
   show: boolean
   collectionsType: {
     type: "my-collections" | "team-collections"

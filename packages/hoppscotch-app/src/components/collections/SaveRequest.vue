@@ -27,7 +27,6 @@
         </label>
         <CollectionsGraphql
           v-if="mode === 'graphql'"
-          :doc="false"
           :show-coll-actions="false"
           :picked="picked"
           :saving-mode="true"

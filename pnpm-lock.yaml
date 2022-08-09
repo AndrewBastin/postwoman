@@ -80,6 +80,7 @@ importers:
       '@types/paho-mqtt': ^1.0.6
       '@types/postman-collection': ^3.5.7
       '@types/splitpanes': ^2.2.1
+      '@types/yargs-parser': ^21.0.0
       '@urql/core': ^2.5.0
       '@urql/devtools': ^2.0.3
       '@urql/exchange-auth': ^0.1.7
@@ -137,6 +138,7 @@ importers:
       vuedraggable: ^4.1.0
       windicss: ^3.5.6
       wonka: ^4.0.15
+      yargs-parser: ^21.1.1
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.0.0
       '@clayzar/vue-toasted': 1.1.28
@@ -196,6 +198,7 @@ importers:
       vue-tippy: 6.0.0-alpha.58_vue@3.2.37
       vuedraggable: 4.1.0_vue@3.2.37
       wonka: 4.0.15
+      yargs-parser: 21.1.1
     devDependencies:
       '@esbuild-plugins/node-globals-polyfill': 0.1.1
       '@esbuild-plugins/node-modules-polyfill': 0.1.4
@@ -218,6 +221,7 @@ importers:
       '@types/paho-mqtt': 1.0.6
       '@types/postman-collection': 3.5.7
       '@types/splitpanes': 2.2.1
+      '@types/yargs-parser': 21.0.0
       '@vitejs/plugin-vue': 2.3.3_vite@2.9.13+vue@3.2.37
       npm-run-all: 4.1.5
       openapi-types: 12.0.0
@@ -5315,8 +5319,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      is-text-path: 1.0.1
       JSONStream: 1.3.5
+      is-text-path: 1.0.1
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2
@@ -11559,10 +11563,9 @@ packages:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
     engines: {node: '>=10'}
 
-  /yargs-parser/21.0.1:
-    resolution: {integrity: sha512-9BK1jFpLzJROCI5TzwZL/TU4gqjK5xiHV/RfWLOahrjAko/e4DJkRDZQXfvqAsiZzzYhgAzbgz6lg48jcm4GLg==}
+  /yargs-parser/21.1.1:
+    resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
-    dev: true
 
   /yargs-unparser/2.0.0:
     resolution: {integrity: sha512-7pRTIA9Qc1caZ0bZ6RYRGbHJthJWuakf+WmHK0rVeLkNrrGhfoabBNdue6kdINI6r4if7ocq9aD/n7xwKOdzOA==}
@@ -11613,7 +11616,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 21.0.1
+      yargs-parser: 21.1.1
     dev: true
 
   /yauzl/2.10.0:

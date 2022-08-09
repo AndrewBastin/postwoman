@@ -11,7 +11,7 @@
     >
       <span
         class="flex items-center justify-center w-16 px-2 truncate cursor-pointer"
-        @click="!doc ? selectRequest() : {}"
+        @click="selectRequest()"
       >
         <component
           :is="isSelected ? IconCheckCircle : IconFile"
@@ -20,8 +20,8 @@
         />
       </span>
       <span
-        class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
-        @click="!doc ? selectRequest() : {}"
+        class="flex flex-1 min-w-0 py-2 pr-2 transition cursor-pointer group-hover:text-secondaryDark"
+        @click="selectRequest()"
       >
         <span class="truncate" :class="{ 'text-accent': isSelected }">
           {{ request.name }}
@@ -34,7 +34,7 @@
           :svg="IconRotateCCW"
           :title="t('action.restore')"
           class="hidden group-hover:inline-flex"
-          @click.native="!doc ? selectRequest() : {}"
+          @click.native="selectRequest()"
         />
         <span>
           <tippy
@@ -153,7 +153,6 @@ const props = defineProps({
   request: { type: Object as PropType<HoppGQLRequest>, default: () => {} },
   folderPath: { type: String, default: null },
   requestIndex: { type: Number, default: null },
-  doc: Boolean,
 })
 
 // TODO: Better types please

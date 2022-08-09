@@ -16,7 +16,6 @@
       <CollectionsChooseType
         :collections-type="collectionsType"
         :show="showTeamCollections"
-        :doc="doc"
         @update-collection-type="updateCollectionType"
         @update-selected-team="updateSelectedTeam"
       />
@@ -74,9 +73,7 @@
         :key="`collection-${index}`"
         :collection-index="index"
         :collection="collection"
-        :doc="doc"
         :is-filtered="filterText.length > 0"
-        :selected="selected.some((coll) => coll == collection)"
         :save-request="saveRequest"
         :collections-type="collectionsType"
         :picked="picked"
@@ -261,8 +258,6 @@ export default defineComponent({
     CollectionsTeamsCollection,
   },
   props: {
-    doc: Boolean,
-    selected: { type: Array, default: () => [] },
     saveRequest: Boolean,
     picked: { type: Object, default: () => {} },
   },

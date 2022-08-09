@@ -21,7 +21,7 @@
         />
       </span>
       <span
-        class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
+        class="flex flex-1 min-w-0 py-2 pr-2 transition cursor-pointer group-hover:text-secondaryDark"
         @click="toggleShowChildren()"
       >
         <span class="truncate" :class="{ 'text-accent': isSelected }">
@@ -151,7 +151,6 @@
           :folder-index="index"
           :folder-path="`${collectionIndex}/${String(index)}`"
           :collection-index="collectionIndex"
-          :doc="doc"
           :is-filtered="isFiltered"
           @add-request="$emit('add-request', $event)"
           @add-folder="$emit('add-folder', $event)"
@@ -171,7 +170,6 @@
           :folder-name="collection.name"
           :folder-path="`${collectionIndex}`"
           :request-index="index"
-          :doc="doc"
           @edit-request="$emit('edit-request', $event)"
           @duplicate-request="$emit('duplicate-request', $event)"
           @select="$emit('select', $event)"
@@ -227,7 +225,6 @@ const props = defineProps({
   savingMode: { type: Boolean, default: false },
   collectionIndex: { type: Number, default: null },
   collection: { type: Object, default: () => {} },
-  doc: Boolean,
   isFiltered: Boolean,
 })
 
@@ -258,9 +255,10 @@ const dragging = ref(false)
 const selectedFolder = ref({})
 const confirmRemove = ref(false)
 
-const isSelected = computed(() =>
-  props.picked?.pickedType === "gql-my-collection" &&
-  props.picked?.collectionIndex === props.collectionIndex
+const isSelected = computed(
+  () =>
+    props.picked?.pickedType === "gql-my-collection" &&
+    props.picked?.collectionIndex === props.collectionIndex
 )
 const collectionIcon = computed(() => {
   if (isSelected.value) return IconCheckCircle

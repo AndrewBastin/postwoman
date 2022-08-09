@@ -21,7 +21,7 @@
         />
       </span>
       <span
-        class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
+        class="flex flex-1 min-w-0 py-2 pr-2 transition cursor-pointer group-hover:text-secondaryDark"
         @click="toggleShowChildren()"
       >
         <span class="truncate" :class="{ 'text-accent': isSelected }">
@@ -30,23 +30,6 @@
       </span>
       <div class="flex">
         <ButtonSecondary
-          v-if="doc && !selected"
-          v-tippy="{ theme: 'tooltip' }"
-          :title="t('import.title')"
-          :svg="IconCircle"
-          color="green"
-          @click.native="$emit('select-collection')"
-        />
-        <ButtonSecondary
-          v-if="doc && selected"
-          v-tippy="{ theme: 'tooltip' }"
-          :title="t('action.remove')"
-          :svg="IconCheckCircle"
-          color="green"
-          @click.native="$emit('unselect-collection')"
-        />
-        <ButtonSecondary
-          v-if="!doc"
           v-tippy="{ theme: 'tooltip' }"
           :svg="IconFilePlus"
           :title="t('request.new')"
@@ -58,7 +41,6 @@
           "
         />
         <ButtonSecondary
-          v-if="!doc"
           v-tippy="{ theme: 'tooltip' }"
           :svg="IconFolderPlus"
           :title="t('folder.new')"
@@ -180,7 +162,6 @@
           :folder-index="index"
           :folder-path="`${collectionIndex}/${index}`"
           :collection-index="collectionIndex"
-          :doc="doc"
           :save-request="saveRequest"
           :collections-type="collectionsType"
           :is-filtered="isFiltered"
@@ -203,7 +184,6 @@
           :folder-name="collection.name"
           :folder-path="`${collectionIndex}`"
           :request-index="index"
-          :doc="doc"
           :save-request="saveRequest"
           :collections-type="collectionsType"
           :picked="picked"
@@ -257,9 +237,7 @@ export default defineComponent({
   props: {
     collectionIndex: { type: Number, default: null },
     collection: { type: Object, default: () => {} },
-    doc: Boolean,
     isFiltered: Boolean,
-    selected: Boolean,
     saveRequest: Boolean,
     collectionsType: { type: Object, default: () => {} },
     picked: { type: Object, default: () => {} },
@@ -312,7 +290,7 @@ export default defineComponent({
     "remove-request",
     "select-collection",
     "unselect-collection",
-    "edit-collection"
+    "edit-collection",
   ],
   computed: {
     isSelected(): boolean {

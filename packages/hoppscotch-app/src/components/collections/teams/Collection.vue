@@ -21,7 +21,7 @@
         />
       </span>
       <span
-        class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
+        class="flex flex-1 min-w-0 py-2 pr-2 transition cursor-pointer group-hover:text-secondaryDark"
         @click="toggleShowChildren()"
       >
         <span class="truncate" :class="{ 'text-accent': isSelected }">
@@ -29,22 +29,6 @@
         </span>
       </span>
       <div class="flex">
-        <ButtonSecondary
-          v-if="doc && !selected"
-          v-tippy="{ theme: 'tooltip' }"
-          :title="t('import.title')"
-          :svg="IconCircle"
-          color="green"
-          @click.native="$emit('select-collection')"
-        />
-        <ButtonSecondary
-          v-if="doc && selected"
-          v-tippy="{ theme: 'tooltip' }"
-          :title="t('action.remove')"
-          :svg="IconCheckCircle"
-          color="green"
-          @click.native="$emit('unselect-collection')"
-        />
         <ButtonSecondary
           v-if="collectionsType.selectedTeam.myRole !== 'VIEWER'"
           v-tippy="{ theme: 'tooltip' }"
@@ -81,11 +65,11 @@
             arrow
             :on-shown="() => tippyActions.focus()"
           >
-              <ButtonSecondary
-                v-tippy="{ theme: 'tooltip' }"
-                :title="t('action.more')"
-                :svg="IconMoreVertical"
-              />
+            <ButtonSecondary
+              v-tippy="{ theme: 'tooltip' }"
+              :title="t('action.more')"
+              :svg="IconMoreVertical"
+            />
             <template #content="{ hide }">
               <div
                 ref="tippyActions"
@@ -180,7 +164,6 @@
           :folder-index="index"
           :folder-path="`${collectionIndex}/${index}`"
           :collection-index="collectionIndex"
-          :doc="doc"
           :save-request="saveRequest"
           :collections-type="collectionsType"
           :is-filtered="isFiltered"
@@ -204,7 +187,6 @@
           :folder-index="-1"
           :folder-name="collection.name"
           :request-index="request.id"
-          :doc="doc"
           :save-request="saveRequest"
           :collection-i-d="collection.id"
           :collections-type="collectionsType"
@@ -271,9 +253,7 @@ export default defineComponent({
   props: {
     collectionIndex: { type: Number, default: null },
     collection: { type: Object, default: () => {} },
-    doc: Boolean,
     isFiltered: Boolean,
-    selected: Boolean,
     saveRequest: Boolean,
     collectionsType: { type: Object, default: () => {} },
     picked: { type: Object, default: () => {} },
@@ -302,12 +282,11 @@ export default defineComponent({
       IconEdit,
       IconDownload,
       IconTrash2,
-      IconMoreVertical
+      IconMoreVertical,
     }
   },
   data() {
     return {
-
       showChildren: false,
       dragging: false,
       selectedFolder: {},

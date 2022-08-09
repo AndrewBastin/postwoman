@@ -21,7 +21,7 @@
         />
       </span>
       <span
-        class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
+        class="flex flex-1 min-w-0 py-2 pr-2 transition cursor-pointer group-hover:text-secondaryDark"
         @click="toggleShowChildren()"
       >
         <span class="truncate" :class="{ 'text-accent': isSelected }">
@@ -138,7 +138,6 @@
           :folder-index="subFolderIndex"
           :folder-path="`${folderPath}/${String(subFolderIndex)}`"
           :collection-index="collectionIndex"
-          :doc="doc"
           :is-filtered="isFiltered"
           @add-request="emit('add-request', $event)"
           @add-folder="emit('add-folder', $event)"
@@ -158,7 +157,6 @@
           :folder-path="folderPath"
           :folder-name="folder.name"
           :request-index="index"
-          :doc="doc"
           @edit-request="emit('edit-request', $event)"
           @duplicate-request="emit('duplicate-request', $event)"
           @select="emit('select', $event)"
@@ -220,7 +218,6 @@ const props = defineProps({
   folderIndex: { type: Number, default: null },
   collectionIndex: { type: Number, default: null },
   folderPath: { type: String, default: null },
-  doc: Boolean,
   isFiltered: Boolean,
 })
 
@@ -230,7 +227,7 @@ const emit = defineEmits([
   "edit-request",
   "add-folder",
   "edit-folder",
-  "duplicate-request"
+  "duplicate-request",
 ])
 
 const tippyActions = ref<any | null>(null)
@@ -244,11 +241,12 @@ const showChildren = ref(false)
 const dragging = ref(false)
 const confirmRemove = ref(false)
 
-const isSelected = computed(() =>
-  props.picked?.pickedType === "gql-my-folder" &&
-  props.picked?.folderPath === props.folderPath
+const isSelected = computed(
+  () =>
+    props.picked?.pickedType === "gql-my-folder" &&
+    props.picked?.folderPath === props.folderPath
 )
-const collectionIcon = computed(() =>{
+const collectionIcon = computed(() => {
   if (isSelected.value) return IconCheckCircle
   else if (!showChildren.value && !props.isFiltered) return IconFolder
   else if (showChildren.value || !props.isFiltered) return IconFolderOpen

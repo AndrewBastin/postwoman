@@ -12,7 +12,7 @@
       <span
         class="flex items-center justify-center w-16 px-2 truncate cursor-pointer"
         :class="getRequestLabelColor(request.method)"
-        @click="!doc ? selectRequest() : {}"
+        @click="selectRequest()"
       >
         <component
           v-if="isSelected"
@@ -25,8 +25,8 @@
         </span>
       </span>
       <span
-        class="flex items-center flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
-        @click="!doc ? selectRequest() : {}"
+        class="flex items-center flex-1 min-w-0 py-2 pr-2 transition cursor-pointer group-hover:text-secondaryDark"
+        @click="selectRequest()"
       >
         <span class="truncate" :class="{ 'text-accent': isSelected }">
           {{ request.name }}
@@ -48,12 +48,12 @@
       </span>
       <div class="flex">
         <ButtonSecondary
-          v-if="!saveRequest && !doc"
+          v-if="!saveRequest"
           v-tippy="{ theme: 'tooltip' }"
           :svg="IconRotateCCW"
           :title="t('action.restore')"
           class="hidden group-hover:inline-flex"
-          @click.native="!doc ? selectRequest() : {}"
+          @click.native="selectRequest()"
         />
         <span>
           <tippy
@@ -65,11 +65,11 @@
             arrow
             :on-shown="() => tippyActions.focus()"
           >
-              <ButtonSecondary
-                v-tippy="{ theme: 'tooltip' }"
-                :title="t('action.more')"
-                :svg="IconMoreVertical"
-              />
+            <ButtonSecondary
+              v-tippy="{ theme: 'tooltip' }"
+              :title="t('action.more')"
+              :svg="IconMoreVertical"
+            />
             <template #content="{ hide }">
               <div
                 ref="tippyActions"
@@ -184,7 +184,6 @@ const props = defineProps<{
   folderIndex: number
   folderName?: string
   requestIndex: string
-  doc: boolean
   saveRequest: boolean
   collectionsType: {
     type: "my-collections" | "team-collections"
