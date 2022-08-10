@@ -10,10 +10,16 @@
         <label for="requestType" class="px-4 pb-4">
           {{ t("request.choose_language") }}
         </label>
-        <tippy ref="options" interactive trigger="click" theme="popover" arrow>
+        <tippy
+          placement="bottom"
+          ref="options"
+          interactive
+          trigger="click"
+          theme="popover"
+          arrow
+        >
           <span class="select-wrapper">
             <ButtonSecondary
-              v-tippy="{ placement: 'bottom' }"
               :label="
                 CodegenDefinitions.find((x) => x.name === codegenType).caption
               "
