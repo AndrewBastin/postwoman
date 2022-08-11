@@ -31,7 +31,7 @@
                     '!text-green-500': hasFile,
                   }"
                 >
-                  <icon-ic-sharp-check-circle class="material-icons" />
+                  <icon-mdi-check-circle class="svg-icons" />
                 </span>
                 <span>
                   {{ t(`${step.metadata.caption}`) }}
@@ -57,7 +57,7 @@
                     '!text-green-500': hasGist,
                   }"
                 >
-                  <icon-ic-sharp-check-circle class="material-icons" />
+                  <icon-mdi-check-circle class="svg-icons" />
                 </span>
                 <span>
                   {{ t(`${step.metadata.caption}`) }}

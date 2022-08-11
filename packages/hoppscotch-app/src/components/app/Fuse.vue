@@ -13,7 +13,7 @@
       v-if="searchResults.length === 0"
       class="flex flex-col items-center justify-center p-4 text-secondaryLight"
     >
-      <icon-ic-sharp-manage-search class="pb-2 opacity-75 material-icons" />
+      <icon-mdi-text-search-variant class="pb-2 opacity-75 svg-icons" />
       <span class="my-2 text-center">
         {{ t("state.nothing_found") }} "{{ search }}"
       </span>

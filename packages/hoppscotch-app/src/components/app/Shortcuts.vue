@@ -6,10 +6,7 @@
           class="flex items-center justify-between p-2 border-b border-dividerLight"
         >
           <h3 class="ml-4 heading">{{ t("app.shortcuts") }}</h3>
-          <ButtonSecondary
-            :svg="IconX"
-            @click.native="close()"
-          />
+          <ButtonSecondary :svg="IconX" @click.native="close()" />
         </div>
         <div class="flex flex-col px-6 py-4 border-b border-dividerLight">
           <input
@@ -40,7 +37,7 @@
           v-if="searchResults.length === 0"
           class="flex flex-col items-center justify-center p-4 text-secondaryLight"
         >
-          <icon-ic-sharp-manage-search class="pb-2 opacity-75 material-icons" />
+          <icon-mdi-text-search-variant class="pb-2 opacity-75 svg-icons" />
           <span class="my-2 text-center">
             {{ t("state.nothing_found") }} "{{ filterText }}"
           </span>

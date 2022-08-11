@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade" appear @leave="onTransitionLeaveStart">
+  <Transition name="fade" appear @leave="onTransitionLeaveStart">
     <div
       ref="modal"
       class="fixed inset-0 z-10 z-50 overflow-y-auto transition"
@@ -9,7 +9,7 @@
       <div
         class="flex items-end justify-center min-h-screen text-center sm:block"
       >
-        <transition name="fade" appear>
+        <Transition name="fade" appear>
           <div
             class="fixed inset-0 transition bg-primaryLight opacity-90"
             @touchstart="!dialog ? close() : null"
@@ -17,14 +17,14 @@
             @mouseup="!dialog ? close() : null"
             @mousedown="!dialog ? close() : null"
           ></div>
-        </transition>
+        </Transition>
         <span
           v-if="placement === 'center'"
           class="sm:h-screen <sm:hidden sm:align-middle"
           aria-hidden="true"
           >&#8203;</span
         >
-        <transition appear name="bounce">
+        <Transition appear name="bounce">
           <div
             class="inline-block w-full overflow-hidden text-left align-bottom shadow-lg transition-all transform bg-primary sm:rounded-xl sm:align-middle"
             :class="[
@@ -60,10 +60,10 @@
               <slot name="footer"></slot>
             </div>
           </div>
-        </transition>
+        </Transition>
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script lang="ts">
@@ -183,11 +183,9 @@ const getPortal = () => {
 
 <style lang="scss" scoped>
 .bounce-enter-active {
-  animation: bounce-in 0.1s;
-}
+  @apply transition;
 
-.bounce-leave-active {
-  animation: bounce-in 0.1s reverse;
+  animation: bounce-in 150ms;
 }
 
 @keyframes bounce-in {

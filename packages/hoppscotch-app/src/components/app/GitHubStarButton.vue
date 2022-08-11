@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade" appear>
+  <Transition name="fade" appear>
     <GithubButton
       title="Star Hoppscotch"
       href="https://github.com/hoppscotch/hoppscotch"
@@ -15,7 +15,7 @@
       aria-label="Star Hoppscotch on GitHub"
       :data-size="size"
     />
-  </transition>
+  </Transition>
 </template>
 
 <script setup lang="ts">

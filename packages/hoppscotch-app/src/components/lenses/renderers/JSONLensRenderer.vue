@@ -180,9 +180,9 @@
             </div>
           </template>
         </tippy>
-        <icon-ic-sharp-chevron-right
+        <icon-mdi-chevron-right
           v-if="index + 1 !== outlinePath.length"
-          class="opacity-50 text-secondaryLight material-icons"
+          class="opacity-50 text-secondaryLight svg-icons"
         />
       </div>
     </div>

@@ -251,8 +251,8 @@
 import IconHelpCircle from "~icons/lucide/help-circle"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconExternalLink from "~icons/lucide/external-link"
-import IconRadioChecked from "~icons/ic/sharp-radio-button-checked"
-import IconRadioUnchecked from "~icons/ic/sharp-radio-button-unchecked"
+import IconRadioChecked from "~icons/mdi/radiobox-marked"
+import IconRadioUnchecked from "~icons/mdi/radiobox-blank"
 import { computed, ref, Ref } from "vue"
 import {
   HoppRESTAuthBasic,

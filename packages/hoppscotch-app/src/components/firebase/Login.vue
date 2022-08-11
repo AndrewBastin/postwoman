@@ -153,7 +153,7 @@ export default defineComponent({
       IconGithub,
       IconGoogle,
       IconEmail,
-      IconMicrosoft
+      IconMicrosoft,
     }
   },
   data() {
@@ -186,7 +186,9 @@ export default defineComponent({
       } catch (e) {
         console.error(e)
         // An error happened.
-        if ((e as any).code === "auth/account-exists-with-different-credential") {
+        if (
+          (e as any).code === "auth/account-exists-with-different-credential"
+        ) {
           // Step 2.
           // User's email already exists.
           // The pending Google credential.
@@ -227,7 +229,9 @@ export default defineComponent({
       } catch (e) {
         console.error(e)
         // An error happened.
-        if ((e as any).code === "auth/account-exists-with-different-credential") {
+        if (
+          (e as any).code === "auth/account-exists-with-different-credential"
+        ) {
           // Step 2.
           // User's email already exists.
           // The pending Google credential.
@@ -263,7 +267,9 @@ export default defineComponent({
       } catch (e) {
         console.error(e)
         // An error happened.
-        if ((e as any).code === "auth/account-exists-with-different-credential") {
+        if (
+          (e as any).code === "auth/account-exists-with-different-credential"
+        ) {
           // Step 2.
           // User's email already exists.
           // The pending Microsoft credential.

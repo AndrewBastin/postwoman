@@ -1,14 +1,18 @@
 <template>
   <div>
-    <transition v-if="show" name="fade" appear>
-      <div class="fixed inset-0 z-20 transition-opacity" @keydown.esc="close()">
+    <Transition name="fade" appear>
+      <div
+        v-if="show"
+        class="fixed inset-0 z-20 transition-opacity"
+        @keydown.esc="close()"
+      >
         <div
           class="absolute inset-0 bg-primaryLight opacity-90"
           tabindex="0"
           @click="close()"
         ></div>
       </div>
-    </transition>
+    </Transition>
     <aside
       class="fixed top-0 right-0 z-30 flex flex-col h-full max-w-full overflow-auto transition duration-300 ease-in-out transform bg-primary w-96"
       :class="show ? 'shadow-xl translate-x-0' : 'translate-x-full'"

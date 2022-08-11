@@ -4,7 +4,7 @@
       class="sticky z-10 flex flex-col border-b divide-y rounded-t divide-dividerLight bg-primary border-dividerLight"
       :style="saveRequest ? 'top: calc(-1 * var(--font-size-body))' : 'top: 0'"
     >
-      <div v-if="!saveRequest" class="flex flex-col">
+      <div class="flex flex-col">
         <input
           v-model="filterText"
           type="search"
@@ -138,7 +138,7 @@
       v-if="filterText.length !== 0 && filteredCollections.length === 0"
       class="flex flex-col items-center justify-center p-4 text-secondaryLight"
     >
-      <i class="pb-2 opacity-75 material-icons">manage_search</i>
+      <i class="pb-2 opacity-75 svg-icons">manage_search</i>
       <span class="my-2 text-center">
         {{ t("state.nothing_found") }} "{{ filterText }}"
       </span>

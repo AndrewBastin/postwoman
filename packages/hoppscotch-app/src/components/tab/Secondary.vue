@@ -23,7 +23,7 @@
       v-if="icon"
       :is="icon"
       :class="label ? 'mr-4 opacity-75' : ''"
-      class="material-icons"
+      class="svg-icons"
     />
     <component
       v-if="svg"

@@ -20,7 +20,7 @@
           class="svg-icons"
           :class="{ 'text-accent': isSelected }"
         />
-        <span v-else class="truncate">
+        <span v-else class="truncate text-tiny font-semibold">
           {{ request.method }}
         </span>
       </span>

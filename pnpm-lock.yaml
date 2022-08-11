@@ -68,8 +68,8 @@ importers:
       '@hoppscotch/codemirror-lang-graphql': workspace:^0.2.0
       '@hoppscotch/data': workspace:^0.4.2
       '@hoppscotch/js-sandbox': workspace:^2.1.0
-      '@iconify-json/ic': ^1.1.6
       '@iconify-json/lucide': ^1.1.36
+      '@iconify-json/mdi': ^1.1.30
       '@intlify/unplugin-vue-i18n': ^0.2.1
       '@intlify/vite-plugin-vue-i18n': ^3.4.0
       '@lezer/highlight': ^1.0.0
@@ -212,8 +212,8 @@ importers:
       '@graphql-codegen/typescript-urql-graphcache': 2.3.1_22n2rr3d4mm4k7uaycgzkfthqy
       '@graphql-codegen/urql-introspection': 2.2.0_graphql@16.5.0
       '@graphql-typed-document-node/core': 3.1.1_graphql@16.5.0
-      '@iconify-json/ic': 1.1.6
       '@iconify-json/lucide': 1.1.36
+      '@iconify-json/mdi': 1.1.30
       '@intlify/unplugin-vue-i18n': 0.2.1_ok2vr3izc5tvtuuot2yw6handq
       '@intlify/vite-plugin-vue-i18n': 3.4.0_ok2vr3izc5tvtuuot2yw6handq
       '@types/js-yaml': 4.0.5
@@ -2964,14 +2964,14 @@ packages:
   /@iarna/toml/2.2.5:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
 
-  /@iconify-json/ic/1.1.6:
-    resolution: {integrity: sha512-l5wTHkRBPXoZa9kB/KXgbd5NH9oNh3fxTU936mwSHm60HEN8PvbSHxAuEUmF9RsLOLoDE9loZCc3RBO5RzrxCg==}
+  /@iconify-json/lucide/1.1.36:
+    resolution: {integrity: sha512-b2CKgI50Am4Bh2VWJFQepz6yKXpBHA4GXCV/Cgzn6WX3UGEe1E6ETaY5EzxwE9KrRy96J3CamjDOyf+vduvDQg==}
     dependencies:
       '@iconify/types': 1.1.0
     dev: true
 
-  /@iconify-json/lucide/1.1.36:
-    resolution: {integrity: sha512-b2CKgI50Am4Bh2VWJFQepz6yKXpBHA4GXCV/Cgzn6WX3UGEe1E6ETaY5EzxwE9KrRy96J3CamjDOyf+vduvDQg==}
+  /@iconify-json/mdi/1.1.30:
+    resolution: {integrity: sha512-mNhZT/14mReJRNDd//cs3oJ2RQq3nBkYj1fcDFr8sgYce4k8Br3CsOC61SIPsdw5rfNBMsXEpfJ4AOry36i0XQ==}
     dependencies:
       '@iconify/types': 1.1.0
     dev: true

@@ -10,9 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import ButtonChecked from "~icons/ic/round-radio-button-checked"
-import ButtonUnchecked from "~icons/ic/round-radio-button-unchecked"
-
+import ButtonChecked from "~icons/mdi/radiobox-marked"
+import ButtonUnchecked from "~icons/mdi/radiobox-blank"
 
 defineProps({
   value: {

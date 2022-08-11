@@ -26,7 +26,7 @@
       <component
         v-if="icon"
         :is="icon"
-        class="opacity-75 material-icons"
+        class="opacity-75 svg-icons"
         :class="[
           label ? (reverse ? 'ml-4' : 'mr-4') : '',
           { 'text-accent': active },
@@ -57,7 +57,7 @@
     <component
       v-if="infoIcon"
       :is="infoIcon"
-      class="items-center self-center ml-4 material-icons"
+      class="items-center self-center ml-4 svg-icons"
       :class="{ 'text-accent': activeInfoIcon }"
     />
     <div v-if="shortcut.length" class="ml-2 <sm:hidden font-medium">
@@ -73,7 +73,6 @@
 </template>
 
 <script setup lang="ts">
-
 defineProps({
   to: {
     type: String,

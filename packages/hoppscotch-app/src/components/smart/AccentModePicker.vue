@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import IconLens from "~icons/ic/sharp-lens"
+import IconLens from "~icons/mdi/circle"
 import {
   HoppAccentColors,
   HoppAccentColor,

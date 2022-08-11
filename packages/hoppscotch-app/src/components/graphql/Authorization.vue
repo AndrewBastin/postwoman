@@ -272,8 +272,8 @@ import { gqlAuth$, setGQLAuth } from "~/newstore/GQLSession"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconHelpCircle from "~icons/lucide/help-circle"
 import IconExternalLink from "~icons/lucide/external-link"
-import IconRadioButtonChecked from "~icons/ic/sharp-radio-button-checked"
-import IconRadioButtonUnChecked from "~icons/ic/sharp-radio-button-unchecked"
+import IconRadioButtonChecked from "~icons/mdi/radiobox-marked"
+import IconRadioButtonUnChecked from "~icons/mdi/radiobox-blank"
 
 const t = useI18n()
 const colorMode = useColorMode()

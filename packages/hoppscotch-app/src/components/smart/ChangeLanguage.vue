@@ -41,7 +41,7 @@
 import { ref } from "vue"
 import { useFullI18n } from "@composables/i18n"
 import IconLanguages from "~icons/lucide/languages"
-import IconDone from "~icons/ic/sharp-done"
+import IconDone from "~icons/lucide/check"
 
 // TODO: This component might be completely whack right now
 

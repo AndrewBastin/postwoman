@@ -8,7 +8,9 @@
       :title="`${duration}`"
       @click="$emit('use-entry')"
     >
-      {{ entry.request.method }}
+      <span class="truncate text-tiny font-semibold">
+        {{ entry.request.method }}
+      </span>
     </span>
     <span
       class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
@@ -52,8 +54,8 @@ import findStatusGroup from "~/helpers/findStatusGroup"
 import { useI18n } from "@composables/i18n"
 import { RESTHistoryEntry } from "~/newstore/history"
 
-import IconStarSolid from "~icons/ic/sharp-star"
-import IconStar from "~icons/ic/sharp-star-border"
+import IconStarSolid from "~icons/mdi/star"
+import IconStar from "~icons/mdi/star-outline"
 import IconTrash from "~icons/lucide/trash"
 
 const props = defineProps<{

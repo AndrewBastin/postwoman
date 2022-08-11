@@ -99,14 +99,6 @@ body {
   @apply opacity-0;
 }
 
-.material-icons {
-  @apply flex-shrink-0;
-  @apply overflow-hidden;
-
-  font-size: var(--line-height-body) !important;
-  width: var(--line-height-body);
-}
-
 .svg-icons {
   @apply flex-shrink-0;
   @apply overflow-hidden;
@@ -496,8 +488,16 @@ pre.ace_editor {
   @apply first-letter:capitalize;
 }
 
+details {
+  @apply select-none;
+}
+
 details summary::-webkit-details-marker {
   @apply hidden;
+}
+
+details[open] summary .indicator {
+  @apply transform rotate-90;
 }
 
 @media (max-width: 767px) {

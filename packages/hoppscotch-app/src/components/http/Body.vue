@@ -122,7 +122,7 @@
 </template>
 
 <script setup lang="ts">
-import IconDone from "~icons/ic/sharp-done"
+import IconDone from "~icons/lucide/check"
 import IconInfo from "~icons/lucide/info"
 import IconRefreshCW from "~icons/lucide/refresh-cw"
 import IconExternalLink from "~icons/lucide/external-link"

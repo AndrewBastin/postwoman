@@ -39,9 +39,12 @@
           class="flex items-center justify-between flex-1 min-w-0 transition cursor-pointer focus:outline-none text-secondaryLight text-tiny group"
         >
           <span
-            class="px-4 py-2 truncate transition group-hover:text-secondary capitalize-first"
+            class="inline-flex items-center justify-center px-4 py-2 transition group-hover:text-secondary"
           >
-            {{ filteredHistoryGroupIndex }}
+            <icon-lucide-chevron-right class="indicator mr-2" />
+            <span class="capitalize-first truncate">
+              {{ filteredHistoryGroupIndex }}
+            </span>
           </span>
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
@@ -69,7 +72,7 @@
       v-if="!(filteredHistory.length !== 0 || history.length === 0)"
       class="flex flex-col items-center justify-center p-4 text-secondaryLight"
     >
-      <i class="pb-2 opacity-75 material-icons">manage_search</i>
+      <i class="pb-2 opacity-75 svg-icons">manage_search</i>
       <span class="my-2 text-center">
         {{ t("state.nothing_found") }} "{{ filterText }}"
       </span>

@@ -182,7 +182,7 @@
           </tippy>
           <icon-lucide-chevron-right
             v-if="index + 1 !== outlinePath.length"
-            class="opacity-50 text-secondaryLight material-icons"
+            class="opacity-50 text-secondaryLight svg-icons"
           />
         </div>
       </div>

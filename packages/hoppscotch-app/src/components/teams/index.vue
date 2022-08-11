@@ -47,7 +47,7 @@
         />
       </div>
       <div v-if="!loading && adapterError" class="flex flex-col items-center">
-        <i class="mb-4 material-icons">help_outline</i>
+        <i class="mb-4 svg-icons">help_outline</i>
         {{ t("error.something_went_wrong") }}
       </div>
     </div>

@@ -237,8 +237,8 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "vue"
-import IconRadioChecked from "~icons/ic/sharp-radio-button-checked"
-import IconRadioUnchecked from "~icons/ic/sharp-radio-button-unchecked"
+import IconRadioChecked from "~icons/mdi/radiobox-marked"
+import IconRadioUnchecked from "~icons/mdi/radiobox-blank"
 import IconHelpCircle from "~icons/lucide/help-circle"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconExternalLink from "~icons/lucide/external-link"

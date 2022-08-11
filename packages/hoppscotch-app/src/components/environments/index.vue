@@ -2,27 +2,27 @@
   <div>
     <div class="sticky top-0 z-10 flex flex-col rounded-t bg-primary">
       <tippy ref="options" interactive trigger="click" theme="popover" arrow>
-          <span
-            v-tippy="{ theme: 'tooltip' }"
-            :title="`${t('environment.select')}`"
-            class="flex-1 bg-transparent border-b border-dividerLight select-wrapper"
-          >
-            <ButtonSecondary
-              v-if="selectedEnvironmentIndex !== -1"
-              :label="environments[selectedEnvironmentIndex].name"
-              class="flex-1 !justify-start pr-8 rounded-none"
-            />
-            <ButtonSecondary
-              v-else
-              :label="`${t('environment.select')}`"
-              class="flex-1 !justify-start pr-8 rounded-none"
-            />
-          </span>
+        <span
+          v-tippy="{ theme: 'tooltip' }"
+          :title="`${t('environment.select')}`"
+          class="flex-1 bg-transparent border-b border-dividerLight select-wrapper"
+        >
+          <ButtonSecondary
+            v-if="selectedEnvironmentIndex !== -1"
+            :label="environments[selectedEnvironmentIndex].name"
+            class="flex-1 !justify-start pr-8 rounded-none"
+          />
+          <ButtonSecondary
+            v-else
+            :label="`${t('environment.select')}`"
+            class="flex-1 !justify-start pr-8 rounded-none"
+          />
+        </span>
         <template #content="{ hide }">
           <div class="flex flex-col" role="menu">
             <SmartItem
               :label="`${t('environment.no_environment')}`"
-              :info-icon="selectedEnvironmentIndex === -1 ? IconDone  : null"
+              :info-icon="selectedEnvironmentIndex === -1 ? IconDone : null"
               :active-info-icon="selectedEnvironmentIndex === -1"
               @click.native="
                 () => {
@@ -121,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import IconDone from "~icons/ic/sharp-done"
+import IconDone from "~icons/lucide/check"
 import IconPlus from "~icons/lucide/plus"
 import IconHelpCircle from "~icons/lucide/help-circle"
 import IconArchive from "~icons/lucide/archive"

@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import IconExpandLess from "~icons/ic/sharp-expand-less"
-import IconExpandMore from "~icons/ic/sharp-expand-more"
+import IconExpandLess from "~icons/mdi/chevron-up"
+import IconExpandMore from "~icons/mdi/chevron-down"
 import { ref } from "vue"
 import { useI18n } from "@composables/i18n"
 

@@ -72,7 +72,7 @@
 
 <script setup lang="ts">
 import IconUsers from "~icons/lucide/users"
-import IconDone from "~icons/ic/sharp-done"
+import IconDone from "~icons/lucide/check"
 import { ref, watch } from "vue"
 import { GetMyTeamsQuery, Team } from "~/helpers/backend/graphql"
 import { currentUserInfo$ } from "~/helpers/teams/BackendUserInfo"

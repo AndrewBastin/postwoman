@@ -36,8 +36,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import IconRadioChecked from "~icons/ic/sharp-radio-button-checked"
-import IconRadioUnchecked from "~icons/ic/sharp-radio-button-unchecked"
+import IconRadioChecked from "~icons/mdi/radiobox-marked"
+import IconRadioUnchecked from "~icons/mdi/radiobox-blank"
 import IconType from "~icons/lucide/type"
 import { HoppFontSizes, HoppFontSize, applySetting } from "~/newstore/settings"
 import { useSetting } from "@composables/settings"
