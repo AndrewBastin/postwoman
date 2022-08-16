@@ -7,7 +7,7 @@
         :class="getStyle(status)"
         :title="`${t(getTooltip(status))}`"
       >
-        {{ getIcon(status) }}
+        <component :is="getIcon(status)"></component>
       </i>
       <span class="text-secondaryDark">
         {{ env.key }}
@@ -32,7 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from "~/helpers/utils/composables"
+import { useI18n } from "@composables/i18n"
+
+import IconPlusCircle from "~icons/mdi/plus-circle"
+import IconCheckCircle from "~icons/mdi/check-circle"
+import IconMinusCircle from "~icons/mdi/minus-circle"
 
 type Status = "updations" | "additions" | "deletions"
 type Props = {
@@ -54,11 +58,11 @@ const t = useI18n()
 const getIcon = (status: Status) => {
   switch (status) {
     case "additions":
-      return "add_circle"
+      return IconPlusCircle
     case "updations":
-      return "check_circle"
+      return IconCheckCircle
     case "deletions":
-      return "remove_circle"
+      return IconMinusCircle
   }
 }
 
