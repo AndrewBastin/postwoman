@@ -17,7 +17,7 @@
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
-          svg="trash-2"
+          :svg="IconTrash2"
           @click.native="clearContent()"
         />
       </div>
@@ -177,7 +177,7 @@
         :label="`${t('action.learn_more')}`"
         to="https://docs.hoppscotch.io/features/tests"
         blank
-        svg="external-link"
+        :svg="IconExternalLink"
         reverse
         class="my-4"
       />
@@ -192,13 +192,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Ref, ref } from "@nuxtjs/composition-api"
+import { computed, Ref, ref } from "vue"
 import isEqual from "lodash/isEqual"
-import {
-  useReadonlyStream,
-  useI18n,
-  useStream,
-} from "~/helpers/utils/composables"
+import { useReadonlyStream, useStream } from "@composables/stream"
+import { useI18n } from "@composables/i18n"
 import {
   globalEnv$,
   selectedEnvIndex$,
@@ -207,6 +204,9 @@ import {
 } from "~/newstore/environments"
 import { restTestResults$, setRESTTestResults } from "~/newstore/RESTSession"
 import { HoppTestResult } from "~/helpers/types/HoppTestResult"
+
+import IconTrash2 from "~icons/lucide/trash-2"
+import IconExternalLink from "~icons/lucide/external-link"
 
 const t = useI18n()
 
