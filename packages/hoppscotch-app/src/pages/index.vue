@@ -74,12 +74,14 @@ function oAuthURL() {
   const oauth2Token = pluckRef(auth as Ref<HoppRESTAuthOAuth2>, "token")
 
   onBeforeMount(async () => {
-    const tokenInfo = await oauthRedirect()
-    if (Object.prototype.hasOwnProperty.call(tokenInfo, "access_token")) {
-      if (typeof tokenInfo === "object") {
-        oauth2Token.value = tokenInfo.access_token
+    try {
+      const tokenInfo = await oauthRedirect()
+      if (Object.prototype.hasOwnProperty.call(tokenInfo, "access_token")) {
+        if (typeof tokenInfo === "object") {
+          oauth2Token.value = tokenInfo.access_token
+        }
       }
-    }
+    } catch (_) {}
   })
 }
 
