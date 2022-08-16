@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "@nuxtjs/composition-api"
+import { PropType } from "vue"
 import { HoppTestResult } from "~/helpers/types/HoppTestResult"
 
 defineProps({

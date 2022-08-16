@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from "@nuxtjs/composition-api"
+import { computed, PropType } from "vue"
 import {
   HoppTestExpectResult,
   HoppTestResult,
