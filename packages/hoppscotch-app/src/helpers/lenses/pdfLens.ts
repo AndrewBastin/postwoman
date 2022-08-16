@@ -1,3 +1,4 @@
+import { defineAsyncComponent } from "vue"
 import { Lens } from "./lenses"
 
 const pdfLens: Lens = {
@@ -5,8 +6,9 @@ const pdfLens: Lens = {
   isSupportedContentType: (contentType) =>
     /\bapplication\/pdf\b/i.test(contentType),
   renderer: "pdfres",
-  rendererImport: () =>
-    import("~/components/lenses/renderers/PDFLensRenderer.vue"),
+  rendererImport: defineAsyncComponent(
+    () => import("~/components/lenses/renderers/PDFLensRenderer.vue")
+  ),
 }
 
 export default pdfLens

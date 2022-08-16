@@ -5,12 +5,13 @@ import imageLens from "./imageLens"
 import htmlLens from "./htmlLens"
 import xmlLens from "./xmlLens"
 import pdfLens from "./pdfLens"
+import { defineAsyncComponent } from "vue"
 
 export type Lens = {
   lensName: string
   isSupportedContentType: (contentType: string) => boolean
   renderer: string
-  rendererImport: () => Promise<typeof import("*.vue")>
+  rendererImport: ReturnType<typeof defineAsyncComponent>
 }
 
 export const lenses: Lens[] = [

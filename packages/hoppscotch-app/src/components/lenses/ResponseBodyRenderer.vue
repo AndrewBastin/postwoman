@@ -43,7 +43,7 @@
   </SmartTabs>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue"
 import { getSuitableLenses, getLensRenderers } from "~/helpers/lenses/lenses"
 import { useReadonlyStream } from "@composables/stream"

@@ -1,3 +1,4 @@
+import { defineAsyncComponent } from "vue"
 import { Lens } from "./lenses"
 
 const imageLens: Lens = {
@@ -7,8 +8,9 @@ const imageLens: Lens = {
       contentType
     ),
   renderer: "imageres",
-  rendererImport: () =>
-    import("~/components/lenses/renderers/ImageLensRenderer.vue"),
+  rendererImport: defineAsyncComponent(
+    () => import("~/components/lenses/renderers/ImageLensRenderer.vue")
+  ),
 }
 
 export default imageLens
