@@ -7,8 +7,8 @@
   </span>
 </template>
 
-<script>
-import { defineComponent } from "@nuxtjs/composition-api"
+<script lang="ts">
+import { defineComponent } from "vue"
 import { GraphQLScalarType } from "graphql"
 
 export default defineComponent({
