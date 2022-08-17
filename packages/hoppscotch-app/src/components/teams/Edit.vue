@@ -23,7 +23,7 @@
           </label>
           <div class="flex">
             <ButtonSecondary
-              svg="user-plus"
+              :svg="IconUserMinus"
               :label="t('team.invite')"
               filled
               @click.native="
@@ -54,7 +54,7 @@
             class="flex flex-col items-center justify-center p-4 text-secondaryLight"
           >
             <img
-              :src="`/images/states/${$colorMode.value}/add_group.svg`"
+              :src="`/images/states/${colorMode.value}/add_group.svg`"
               loading="lazy"
               class="inline-flex flex-col object-contain object-center w-16 h-16 my-4"
               :alt="`${t('empty.members')}`"
@@ -63,7 +63,7 @@
               {{ t("empty.members") }}
             </span>
             <ButtonSecondary
-              svg="user-plus"
+              :svg="IconUserPlus"
               :label="t('team.invite')"
               @click.native="
                 () => {
@@ -139,8 +139,8 @@
                       label="VIEWER"
                       :icon="
                         member.role === 'VIEWER'
-                          ? 'radio_button_checked'
-                          : 'radio_button_unchecked'
+                          ? IconRadioButtonChecked
+                          : IconRadioButtonUnchecked
                       "
                       :active="member.role === 'VIEWER'"
                       @click.native="
@@ -158,7 +158,7 @@
                   id="member"
                   v-tippy="{ theme: 'tooltip' }"
                   :title="t('action.remove')"
-                  svg="user-minus"
+                  :svg="IconUserMinus"
                   color="red"
                   :loading="isLoadingIndex === index"
                   @click.native="removeExistingTeamMember(member.userID, index)"
@@ -193,7 +193,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, toRef, watch } from "@nuxtjs/composition-api"
+import { computed, ref, toRef, watch } from "vue"
 import * as E from "fp-ts/Either"
 import {
   GetTeamDocument,
@@ -211,9 +211,18 @@ import {
 } from "~/helpers/backend/mutations/Team"
 import { TeamNameCodec } from "~/helpers/backend/types/TeamName"
 import { useGQLQuery } from "~/helpers/backend/GQLClient"
-import { useI18n, useToast } from "~/helpers/utils/composables"
+
+import { useI18n } from "@composables/i18n"
+import { useToast } from "@composables/toast"
+import { useColorMode } from "@composables/theming"
+
+import IconRadioButtonChecked from "~icons/ic/baseline-radio-button-checked"
+import IconRadioButtonUnchecked from "~icons/ic/baseline-radio-button-unchecked"
+import IconUserPlus from "~icons/lucide/user-plus"
+import IconUserMinus from "~icons/lucide/user-minus"
 
 const t = useI18n()
+const colorMode = useColorMode()
 
 const emit = defineEmits<{
   (e: "hide-modal"): void
