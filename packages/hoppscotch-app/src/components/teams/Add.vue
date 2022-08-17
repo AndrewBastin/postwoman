@@ -34,12 +34,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "@nuxtjs/composition-api"
+import { ref } from "vue"
 import { pipe } from "fp-ts/function"
 import * as TE from "fp-ts/TaskEither"
 import { createTeam } from "~/helpers/backend/mutations/Team"
 import { TeamNameCodec } from "~/helpers/backend/types/TeamName"
-import { useI18n, useToast } from "~/helpers/utils/composables"
+import { useI18n } from "@composables/i18n"
+import { useToast } from "@composables/toast"
 
 const t = useI18n()
 
