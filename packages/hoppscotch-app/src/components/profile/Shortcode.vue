@@ -36,7 +36,7 @@
         :title="t('action.open_workspace')"
         :to="`https://hopp.sh/r/${shortcode.id}`"
         blank
-        svg="external-link"
+        :svg="IconExternalLink"
         class="px-3 text-accent hover:text-accent"
       />
       <ButtonSecondary
@@ -50,7 +50,7 @@
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.delete')"
-        svg="trash"
+        :svg="IconTrash"
         color="red"
         class="px-3"
         @click.native="deleteShortcode(shortcode.id)"
@@ -60,15 +60,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "@nuxtjs/composition-api"
+import { ref, computed } from "vue"
 import { pipe } from "fp-ts/function"
 import * as RR from "fp-ts/ReadonlyRecord"
 import * as O from "fp-ts/Option"
 import { translateToNewRequest } from "@hoppscotch/data"
 import { refAutoReset } from "@vueuse/core"
-import { useI18n, useToast } from "~/helpers/utils/composables"
+import { useI18n } from "@composables/i18n"
+import { useToast } from "@composables/toast"
 import { copyToClipboard } from "~/helpers/utils/clipboard"
 import { Shortcode } from "~/helpers/shortcodes/Shortcode"
+
+import IconTrash from "~icons/lucide/trash"
+import IconExternalLink from "~icons/lucide/external-link"
+import IconCopy from "~icons/lucide/copy"
+import IconCheck from "~icons/lucide/check"
 
 const t = useI18n()
 const toast = useToast()
@@ -95,7 +101,7 @@ const requestMethodLabels = {
 
 const timeStampRef = ref()
 
-const copyIconRefs = refAutoReset<"copy" | "check">("copy", 1000)
+const copyIconRefs = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 const parseShortcodeRequest = computed(() =>
   pipe(props.shortcode.request, JSON.parse, translateToNewRequest)
@@ -119,7 +125,7 @@ const timeStamp = computed(() =>
 const copyShortcode = (codeID: string) => {
   copyToClipboard(`https://hopp.sh/r/${codeID}`)
   toast.success(`${t("state.copied_to_clipboard")}`)
-  copyIconRefs.value = "check"
+  copyIconRefs.value = IconCheck
 }
 </script>
 
