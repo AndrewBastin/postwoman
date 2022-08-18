@@ -93,64 +93,65 @@
                   theme="popover"
                   arrow
                 >
-                  <template #trigger>
-                    <span class="select-wrapper">
-                      <input
-                        class="flex flex-1 px-4 py-2 bg-transparent cursor-pointer"
-                        :placeholder="`${t('team.permissions')}`"
-                        :name="'value' + index"
-                        :value="member.role"
-                        readonly
+                  <span class="select-wrapper">
+                    <input
+                      class="flex flex-1 px-4 py-2 bg-transparent cursor-pointer"
+                      :placeholder="`${t('team.permissions')}`"
+                      :name="'value' + index"
+                      :value="member.role"
+                      readonly
+                    />
+                  </span>
+
+                  <template #content="{ hide }">
+                    <div class="flex flex-col" role="menu">
+                      <SmartItem
+                        label="OWNER"
+                        :icon="
+                          member.role === 'OWNER'
+                            ? IconRadioButtonChecked
+                            : IconRadioButtonUnchecked
+                        "
+                        :active="member.role === 'OWNER'"
+                        @click.native="
+                          () => {
+                            updateMemberRole(member.userID, 'OWNER')
+                            hide()
+                          }
+                        "
                       />
-                    </span>
+                      <SmartItem
+                        label="EDITOR"
+                        :icon="
+                          member.role === 'EDITOR'
+                            ? IconRadioButtonChecked
+                            : IconRadioButtonUnchecked
+                        "
+                        :active="member.role === 'EDITOR'"
+                        @click.native="
+                          () => {
+                            updateMemberRole(member.userID, 'EDITOR')
+                            hide()
+                          }
+                        "
+                      />
+                      <SmartItem
+                        label="VIEWER"
+                        :icon="
+                          member.role === 'VIEWER'
+                            ? IconRadioButtonChecked
+                            : IconRadioButtonUnchecked
+                        "
+                        :active="member.role === 'VIEWER'"
+                        @click.native="
+                          () => {
+                            updateMemberRole(member.userID, 'VIEWER')
+                            hide()
+                          }
+                        "
+                      />
+                    </div>
                   </template>
-                  <div class="flex flex-col" role="menu">
-                    <SmartItem
-                      label="OWNER"
-                      :icon="
-                        member.role === 'OWNER'
-                          ? 'radio_button_checked'
-                          : 'radio_button_unchecked'
-                      "
-                      :active="member.role === 'OWNER'"
-                      @click.native="
-                        () => {
-                          updateMemberRole(member.userID, 'OWNER')
-                          memberOptions[index].tippy().hide()
-                        }
-                      "
-                    />
-                    <SmartItem
-                      label="EDITOR"
-                      :icon="
-                        member.role === 'EDITOR'
-                          ? 'radio_button_checked'
-                          : 'radio_button_unchecked'
-                      "
-                      :active="member.role === 'EDITOR'"
-                      @click.native="
-                        () => {
-                          updateMemberRole(member.userID, 'EDITOR')
-                          memberOptions[index].tippy().hide()
-                        }
-                      "
-                    />
-                    <SmartItem
-                      label="VIEWER"
-                      :icon="
-                        member.role === 'VIEWER'
-                          ? IconRadioButtonChecked
-                          : IconRadioButtonUnchecked
-                      "
-                      :active="member.role === 'VIEWER'"
-                      @click.native="
-                        () => {
-                          updateMemberRole(member.userID, 'VIEWER')
-                          memberOptions[index].tippy().hide()
-                        }
-                      "
-                    />
-                  </div>
                 </tippy>
               </span>
               <div class="flex">
@@ -210,14 +211,14 @@ import {
   updateTeamMemberRole,
 } from "~/helpers/backend/mutations/Team"
 import { TeamNameCodec } from "~/helpers/backend/types/TeamName"
-import { useGQLQuery } from "~/helpers/backend/GQLClient"
 
+import { useGQLQuery } from "~/composables/graphql"
 import { useI18n } from "@composables/i18n"
 import { useToast } from "@composables/toast"
 import { useColorMode } from "@composables/theming"
 
-import IconRadioButtonChecked from "~icons/ic/baseline-radio-button-checked"
-import IconRadioButtonUnchecked from "~icons/ic/baseline-radio-button-unchecked"
+import IconRadioButtonChecked from "~icons/mdi/radiobox-marked"
+import IconRadioButtonUnchecked from "~icons/mdi/radiobox-blank"
 import IconUserPlus from "~icons/lucide/user-plus"
 import IconUserMinus from "~icons/lucide/user-minus"
 

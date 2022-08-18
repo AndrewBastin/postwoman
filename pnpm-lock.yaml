@@ -98,6 +98,7 @@ importers:
       graphql-tag: ^2.12.6
       httpsnippet: ^2.0.0
       insomnia-importers: ^3.3.0
+      io-ts: ^2.2.16
       js-yaml: ^4.1.0
       jsonpath-plus: ^7.0.0
       lodash: ^4.17.21
@@ -174,6 +175,7 @@ importers:
       graphql-tag: 2.12.6_graphql@16.5.0
       httpsnippet: 2.0.0
       insomnia-importers: 3.3.0_openapi-types@12.0.0
+      io-ts: 2.2.16_fp-ts@2.12.1
       js-yaml: 4.1.0
       jsonpath-plus: 7.0.0
       lodash: 4.17.21
@@ -3006,7 +3008,7 @@ packages:
         optional: true
     dependencies:
       '@intlify/message-compiler': 9.1.10
-      '@intlify/shared': 9.1.10
+      '@intlify/shared': 9.2.0
       jsonc-eslint-parser: 1.4.1
       source-map: 0.6.1
       vue-i18n: 9.1.10_vue@3.2.37

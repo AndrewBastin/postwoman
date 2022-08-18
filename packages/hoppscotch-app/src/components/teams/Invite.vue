@@ -3,7 +3,7 @@
     <template #body>
       <div v-if="sendInvitesResult.length" class="flex flex-col px-4">
         <div class="flex flex-col items-center justify-center max-w-md">
-          <SmartIcon class="w-6 h-6 text-accent" name="users" />
+          <icon-lucide-users class="w-6 h-6 text-accent" />
           <h3 class="my-2 text-lg text-center">
             {{ t("team.we_sent_invite_link") }}
           </h3>
@@ -87,7 +87,7 @@
                   <ButtonSecondary
                     v-tippy="{ theme: 'tooltip' }"
                     :title="t('action.remove')"
-                    svg="trash"
+                    :svg="IconTrash"
                     color="red"
                     :loading="isLoadingIndex === index"
                     @click.native="removeInvitee(invitee.id, index)"
@@ -121,7 +121,7 @@
           </label>
           <div class="flex">
             <ButtonSecondary
-              svg="plus"
+              :svg="IconPlus"
               :label="t('add.new')"
               filled
               @click.native="addNewInvitee"
@@ -149,64 +149,65 @@
                 theme="popover"
                 arrow
               >
-                <template #trigger>
-                  <span class="select-wrapper">
-                    <input
-                      class="flex flex-1 px-4 py-2 bg-transparent cursor-pointer"
-                      :placeholder="`${t('team.permissions')}`"
-                      :name="'value' + index"
-                      :value="invitee.value"
-                      readonly
+                <span class="select-wrapper">
+                  <input
+                    class="flex flex-1 px-4 py-2 bg-transparent cursor-pointer"
+                    :placeholder="`${t('team.permissions')}`"
+                    :name="'value' + index"
+                    :value="invitee.value"
+                    readonly
+                  />
+                </span>
+
+                <template #content="{ hide }">
+                  <div class="flex flex-col" role="menu">
+                    <SmartItem
+                      label="OWNER"
+                      :icon="
+                        invitee.value === 'OWNER'
+                          ? IconRadioButtonChecked
+                          : IconRadioButtonUnchecked
+                      "
+                      :active="invitee.value === 'OWNER'"
+                      @click.native="
+                        () => {
+                          updateNewInviteeRole(index, 'OWNER')
+                          newInviteeOptions[index].tippy().hide()
+                        }
+                      "
                     />
-                  </span>
+                    <SmartItem
+                      label="EDITOR"
+                      :icon="
+                        invitee.value === 'EDITOR'
+                          ? IconRadioButtonChecked
+                          : IconRadioButtonUnchecked
+                      "
+                      :active="invitee.value === 'EDITOR'"
+                      @click.native="
+                        () => {
+                          updateNewInviteeRole(index, 'EDITOR')
+                          newInviteeOptions[index].tippy().hide()
+                        }
+                      "
+                    />
+                    <SmartItem
+                      label="VIEWER"
+                      :icon="
+                        invitee.value === 'VIEWER'
+                          ? IconRadioButtonChecked
+                          : IconRadioButtonUnchecked
+                      "
+                      :active="invitee.value === 'VIEWER'"
+                      @click.native="
+                        () => {
+                          updateNewInviteeRole(index, 'VIEWER')
+                          newInviteeOptions[index].tippy().hide()
+                        }
+                      "
+                    />
+                  </div>
                 </template>
-                <div class="flex flex-col" role="menu">
-                  <SmartItem
-                    label="OWNER"
-                    :icon="
-                      invitee.value === 'OWNER'
-                        ? 'radio_button_checked'
-                        : 'radio_button_unchecked'
-                    "
-                    :active="invitee.value === 'OWNER'"
-                    @click.native="
-                      () => {
-                        updateNewInviteeRole(index, 'OWNER')
-                        newInviteeOptions[index].tippy().hide()
-                      }
-                    "
-                  />
-                  <SmartItem
-                    label="EDITOR"
-                    :icon="
-                      invitee.value === 'EDITOR'
-                        ? 'radio_button_checked'
-                        : 'radio_button_unchecked'
-                    "
-                    :active="invitee.value === 'EDITOR'"
-                    @click.native="
-                      () => {
-                        updateNewInviteeRole(index, 'EDITOR')
-                        newInviteeOptions[index].tippy().hide()
-                      }
-                    "
-                  />
-                  <SmartItem
-                    label="VIEWER"
-                    :icon="
-                      invitee.value === 'VIEWER'
-                        ? 'radio_button_checked'
-                        : 'radio_button_unchecked'
-                    "
-                    :active="invitee.value === 'VIEWER'"
-                    @click.native="
-                      () => {
-                        updateNewInviteeRole(index, 'VIEWER')
-                        newInviteeOptions[index].tippy().hide()
-                      }
-                    "
-                  />
-                </div>
               </tippy>
             </span>
             <div class="flex">
@@ -214,7 +215,7 @@
                 id="member"
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('action.remove')"
-                svg="trash"
+                :svg="IconTrash"
                 color="red"
                 @click.native="removeNewInvitee(index)"
               />
@@ -328,7 +329,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, ref, reactive, computed } from "@nuxtjs/composition-api"
+import { watch, ref, reactive, computed } from "vue"
 import * as T from "fp-ts/Task"
 import * as E from "fp-ts/Either"
 import * as A from "fp-ts/Array"
@@ -348,8 +349,19 @@ import {
   CreateTeamInvitationErrors,
   revokeTeamInvitation,
 } from "../../helpers/backend/mutations/TeamInvitation"
-import { GQLError, useGQLQuery } from "~/helpers/backend/GQLClient"
-import { useI18n, useToast } from "~/helpers/utils/composables"
+import { GQLError } from "~/helpers/backend/GQLClient"
+import { useGQLQuery } from "@composables/graphql"
+
+import { useI18n } from "@composables/i18n"
+import { useToast } from "@composables/toast"
+
+import IconTrash from "~icons/lucide/trash"
+import IconPlus from "~icons/lucide/plus"
+import IconHelpOutline from "~icons/mdi/help-circle-outline"
+import IconErrorOutline from "~icons/mdi/alert-circle-outline"
+import IconMarkEmailRead from "~icons/mdi/email-open"
+import IconRadioButtonChecked from "~icons/mdi/radiobox-marked"
+import IconRadioButtonUnchecked from "~icons/mdi/radiobox-blank"
 
 const t = useI18n()
 
