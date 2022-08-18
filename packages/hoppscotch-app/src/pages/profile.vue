@@ -13,7 +13,7 @@
           class="flex flex-col items-center justify-center"
         >
           <img
-            :src="`/images/states/${$colorMode.value}/login.svg`"
+            :src="`/images/states/${colorMode.value}/login.svg`"
             loading="lazy"
             class="inline-flex flex-col object-contain object-center w-24 h-24 my-4"
             :alt="`${t('empty.parameters')}`"
@@ -55,15 +55,16 @@
                 </label>
                 <p class="flex items-center text-secondaryLight">
                   {{ currentUser.email }}
-                  <SmartIcon
+
+                  <icon-lucide-verified
                     v-if="currentUser.emailVerified"
-                    name="verified"
                     class="ml-2 text-green-500 svg-icons"
                   />
+
                   <ButtonSecondary
                     v-else
                     :label="t('settings.verify_email')"
-                    svg="verified"
+                    :svg="IconVerified"
                     class="px-1 py-0 ml-2"
                     :loading="verifyingEmailAddress"
                     @click.native="sendEmailVerification"
@@ -75,7 +76,7 @@
               <div>
                 <SmartItem
                   to="/settings"
-                  svg="settings"
+                  :svg="IconSettings"
                   :label="t('profile.app_settings')"
                   outline
                 />
@@ -204,7 +205,7 @@
                       class="flex flex-col items-center justify-center p-4 text-secondaryLight"
                     >
                       <img
-                        :src="`/images/states/${$colorMode.value}/add_files.svg`"
+                        :src="`/images/states/${colorMode.value}/add_files.svg`"
                         loading="lazy"
                         class="inline-flex flex-col object-contain object-center w-16 h-16 mb-8"
                         :alt="`${t('empty.shortcodes')}`"
@@ -288,13 +289,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  useMeta,
-  defineComponent,
-  watchEffect,
-  computed,
-} from "@nuxtjs/composition-api"
+import { ref, defineComponent, watchEffect, computed } from "vue"
 import { pipe } from "fp-ts/function"
 import * as TE from "fp-ts/TaskEither"
 import { GQLError } from "~/helpers/backend/GQLClient"
@@ -304,16 +299,21 @@ import {
   setDisplayName,
   setEmailAddress,
   verifyEmailAddress,
-  onLoggedIn,
 } from "~/helpers/fb/auth"
-import {
-  useReadonlyStream,
-  useI18n,
-  useToast,
-} from "~/helpers/utils/composables"
-import { toggleSetting, useSetting } from "~/newstore/settings"
+
+import { onLoggedIn } from "@composables/auth"
+import { useReadonlyStream } from "@composables/stream"
+import { useI18n } from "@composables/i18n"
+import { useToast } from "@composables/toast"
+import { useSetting } from "@composables/settings"
+import { useColorMode } from "~/composables/theming"
+
+import { toggleSetting } from "~/newstore/settings"
 import ShortcodeListAdapter from "~/helpers/shortcodes/ShortcodeListAdapter"
 import { deleteShortcode as backendDeleteShortcode } from "~/helpers/backend/mutations/Shortcode"
+
+import IconVerified from "~icons/lucide/verified"
+import IconSettings from "~icons/lucide/settings"
 
 type ProfileTabs = "sync" | "teams"
 
@@ -321,6 +321,7 @@ const selectedProfileTab = ref<ProfileTabs>("sync")
 
 const t = useI18n()
 const toast = useToast()
+const colorMode = useColorMode()
 
 const showLogin = ref(false)
 
@@ -432,10 +433,6 @@ const getErrorMessage = (err: GQLError<string>) => {
     }
   }
 }
-
-useMeta({
-  title: `${t("navigation.profile")} • Hoppscotch`,
-})
 </script>
 
 <script lang="ts">
