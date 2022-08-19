@@ -12,7 +12,7 @@
     aria-label="Link"
     :href="to"
     role="link"
-    v-bind="$attrs"
+    v-bind="updatedAttrs"
   >
     <slot></slot>
   </a>
@@ -23,18 +23,30 @@
     role="link"
     target="_blank"
     rel="noopener"
-    v-bind="$attrs"
+    v-bind="updatedAttrs"
   >
     <slot></slot>
   </a>
-  <router-link v-else :to="to" v-bind="$attrs">
+  <router-link v-else :to="to" v-bind="updatedAttrs">
     <slot></slot>
   </router-link>
 </template>
 
+<script lang="ts">
+/**
+ * for preventing the automatic binding of $attrs.
+ * we are manually binding $attrs or updatedAttrs.
+ * if this is not set to false, along with manually binded updatedAttrs, it will also bind $attrs.
+ */
+export default {
+  inheritAttrs: false,
+}
+</script>
+
 <script setup lang="ts">
-import { computed } from "vue"
+import { computed, useAttrs } from "vue"
 import { RouterLink } from "vue-router"
+import omit from "lodash/omit"
 
 const props = defineProps({
   to: {
@@ -59,4 +71,20 @@ const renderedTag = computed(() => {
     return "ANCHOR" as const
   }
 })
+
+const $attrs = useAttrs()
+
+/**
+ * tippy checks if the disabled attribute exists on the anchor tag, if it exists it won't show the tooltip.
+ * and when directly binding the disabled attribute using v-bind="attrs",
+ * vue renders the disabled attribute as disabled="false" ("false" being a string),
+ * which causes tippy to think the disabled attribute is present, ( it does a targetElement.hasAttribute("disabled") check ) and it won't show the tooltip.
+ *
+ * here we are just omiting disabled if it is false.
+ */
+const updatedAttrs = computed(() =>
+  renderedTag.value === "ANCHOR" && !$attrs.disabled
+    ? omit($attrs, "disabled")
+    : $attrs
+)
 </script>
