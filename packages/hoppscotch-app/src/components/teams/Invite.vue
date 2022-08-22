@@ -217,7 +217,7 @@
             class="flex flex-col items-center justify-center p-4 text-secondaryLight"
           >
             <img
-              :src="`/images/states/${$colorMode.value}/add_group.svg`"
+              :src="`/images/states/${colorMode.value}/add_group.svg`"
               loading="lazy"
               class="inline-flex flex-col object-contain object-center w-16 h-16 mb-4"
               :alt="`${t('empty.invites')}`"
@@ -348,6 +348,7 @@ import { useGQLQuery } from "@composables/graphql"
 
 import { useI18n } from "@composables/i18n"
 import { useToast } from "@composables/toast"
+import { useColorMode } from "~/composables/theming"
 
 import IconTrash from "~icons/lucide/trash"
 import IconPlus from "~icons/lucide/plus"
@@ -360,6 +361,8 @@ import IconCircle from "~icons/lucide/circle"
 const t = useI18n()
 
 const toast = useToast()
+
+const colorMode = useColorMode()
 
 const newInviteeOptions = ref<any | null>(null)
 
