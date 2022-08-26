@@ -43,7 +43,6 @@ importers:
   packages/hoppscotch-app:
     specifiers:
       '@apidevtools/swagger-parser': ^10.1.0
-      '@clayzar/vue-toasted': ^1.1.28
       '@codemirror/autocomplete': ^6.0.3
       '@codemirror/commands': ^6.0.1
       '@codemirror/lang-javascript': ^6.0.1
@@ -68,6 +67,7 @@ importers:
       '@hoppscotch/codemirror-lang-graphql': workspace:^0.2.0
       '@hoppscotch/data': workspace:^0.4.2
       '@hoppscotch/js-sandbox': workspace:^2.1.0
+      '@hoppscotch/vue-toasted': ^0.1.0
       '@iconify-json/lucide': ^1.1.36
       '@iconify-json/mdi': ^1.1.30
       '@intlify/unplugin-vue-i18n': ^0.2.1
@@ -143,7 +143,6 @@ importers:
       yargs-parser: ^21.1.1
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.0.0
-      '@clayzar/vue-toasted': 1.1.28
       '@codemirror/autocomplete': 6.0.3
       '@codemirror/commands': 6.0.1
       '@codemirror/lang-javascript': 6.0.1
@@ -158,6 +157,7 @@ importers:
       '@hoppscotch/codemirror-lang-graphql': link:../codemirror-lang-graphql
       '@hoppscotch/data': link:../hoppscotch-data
       '@hoppscotch/js-sandbox': link:../hoppscotch-js-sandbox
+      '@hoppscotch/vue-toasted': 0.1.0_vue@3.2.37
       '@lezer/highlight': 1.0.0
       '@urql/core': 2.5.0_graphql@16.5.0
       '@urql/devtools': 2.0.3_q3jgffpabqicv5cmmol7ny3ajq
@@ -1682,10 +1682,6 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@clayzar/vue-toasted/1.1.28:
-    resolution: {integrity: sha512-VOd+YDDzfJiDQRuYtsFGtbpZVnuYll0k8lrMx/CHlwtw4EoYMLWlCd8CH3ZvMgJLjBzZ7SNNOqBxnQyeyDtMjQ==}
-    dev: false
-
   /@codemirror/autocomplete/6.0.3:
     resolution: {integrity: sha512-JTSBDC4tUyR8iRmCwQJaYpTXtOZmRn4gKjw1Fu4xIatFPqTJ7m0QRCdkdbzlvMovzjTiuHp4a8WUEB1c/LtiHg==}
     dependencies:
@@ -2946,6 +2942,14 @@ packages:
       long: 4.0.0
       protobufjs: 6.11.3
       yargs: 16.2.0
+    dev: false
+
+  /@hoppscotch/vue-toasted/0.1.0_vue@3.2.37:
+    resolution: {integrity: sha512-DIgmeTHxWwX5UeaHLEqDYNLJFGRosx/5N1fCHkaO8zt+sZv8GrHlkrIpjfKF2drmA3kKw5cY42Cw7WuCoabR3g==}
+    peerDependencies:
+      vue: ^3.2.37
+    dependencies:
+      vue: 3.2.37
     dev: false
 
   /@humanwhocodes/config-array/0.9.5:
@@ -5341,8 +5345,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      JSONStream: 1.3.5
       is-text-path: 1.0.1
+      JSONStream: 1.3.5
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2

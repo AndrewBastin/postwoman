@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.0",
-    "@clayzar/vue-toasted": "^1.1.28",
     "@codemirror/autocomplete": "^6.0.3",
     "@codemirror/commands": "^6.0.1",
     "@codemirror/lang-javascript": "^6.0.1",
@@ -31,6 +30,7 @@
     "@hoppscotch/codemirror-lang-graphql": "workspace:^0.2.0",
     "@hoppscotch/data": "workspace:^0.4.2",
     "@hoppscotch/js-sandbox": "workspace:^2.1.0",
+    "@hoppscotch/vue-toasted": "^0.1.0",
     "@lezer/highlight": "^1.0.0",
     "@urql/core": "^2.5.0",
     "@urql/devtools": "^2.0.3",

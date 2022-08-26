@@ -1,6 +1,8 @@
-import Toasted from "@clayzar/vue-toasted"
-import type { ToastOptions } from "@clayzar/vue-toasted";
+import Toasted from "@hoppscotch/vue-toasted"
+import type { ToastOptions } from "@hoppscotch/vue-toasted";
 import { HoppModule } from "~/types";
+
+import "@hoppscotch/vue-toasted/style.css"
 
 // We are using a fork of Vue Toasted (github.com/clayzar/vue-toasted) which is a bit of
 // an untrusted fork, we will either want to make our own fork or move to a more stable one
