@@ -1,12 +1,16 @@
 import { HoppModule } from "~/types"
-import VueTippy, { TippyOptions } from "vue-tippy"
-import 'tippy.js/dist/tippy.css' // optional for styling
+import VueTippy, { setDefaultProps, roundArrow } from "vue-tippy"
+
+import 'tippy.js/dist/tippy.css'
+import 'tippy.js/dist/svg-arrow.css'
 
 const tippyModule: HoppModule = ({ app }) => {
-  app.use(VueTippy, <TippyOptions>{
+  app.use(VueTippy)
+
+  setDefaultProps({
     allowHTML: false,
     animateFill: false,
-    arrow: true, // TODO: arrowType: "round"
+    arrow: roundArrow,
     popperOptions: {
       modifiers: [
         {
