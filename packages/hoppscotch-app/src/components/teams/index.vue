@@ -47,7 +47,7 @@
         />
       </div>
       <div v-if="!loading && adapterError" class="flex flex-col items-center">
-        <i class="mb-4 svg-icons">help_outline</i>
+        <component :is="IconHelpCircle" class="mb-4 svg-icons" />
         {{ t("error.something_went_wrong") }}
       </div>
     </div>
@@ -81,6 +81,8 @@ import TeamListAdapter from "~/helpers/teams/TeamListAdapter"
 import { useI18n } from "@composables/i18n"
 import { useReadonlyStream } from "@composables/stream"
 import { useColorMode } from "@composables/theming"
+
+import IconHelpCircle from "~icons/lucide/help-circle"
 
 const t = useI18n()
 

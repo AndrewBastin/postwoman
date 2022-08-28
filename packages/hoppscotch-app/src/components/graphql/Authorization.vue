@@ -21,11 +21,7 @@
             <div class="flex flex-col space-y-1">
               <SmartItem
                 label="None"
-                :icon="
-                  authName === 'None'
-                    ? IconRadioButtonChecked
-                    : IconRadioButtonUnChecked
-                "
+                :icon="authName === 'None' ? IconCircleDot : IconCircle"
                 :active="authName === 'None'"
                 @click.native="
                   () => {
@@ -36,11 +32,7 @@
               />
               <SmartItem
                 label="Basic Auth"
-                :icon="
-                  authName === 'Basic Auth'
-                    ? IconRadioButtonChecked
-                    : IconRadioButtonUnChecked
-                "
+                :icon="authName === 'Basic Auth' ? IconCircleDot : IconCircle"
                 :active="authName === 'Basic Auth'"
                 @click.native="
                   () => {
@@ -51,11 +43,7 @@
               />
               <SmartItem
                 label="Bearer Token"
-                :icon="
-                  authName === 'Bearer'
-                    ? IconRadioButtonChecked
-                    : IconRadioButtonUnChecked
-                "
+                :icon="authName === 'Bearer' ? IconCircleDot : IconCircle"
                 :active="authName === 'Bearer'"
                 @click.native="
                   () => {
@@ -66,11 +54,7 @@
               />
               <SmartItem
                 label="OAuth 2.0"
-                :icon="
-                  authName === 'OAuth 2.0'
-                    ? IconRadioButtonChecked
-                    : IconRadioButtonUnChecked
-                "
+                :icon="authName === 'OAuth 2.0' ? IconCircleDot : IconCircle"
                 :active="authName === 'OAuth 2.0'"
                 @click.native="
                   () => {
@@ -81,11 +65,7 @@
               />
               <SmartItem
                 label="API key"
-                :icon="
-                  authName === 'API key'
-                    ? IconRadioButtonChecked
-                    : IconRadioButtonUnChecked
-                "
+                :icon="authName === 'API key' ? IconCircleDot : IconCircle"
                 :active="authName === 'API key'"
                 @click.native="
                   () => {
@@ -203,11 +183,7 @@
               </span>
               <template #content="{ hide }">
                 <SmartItem
-                  :icon="
-                    addTo === 'Headers'
-                      ? IconRadioButtonChecked
-                      : IconRadioButtonUnChecked
-                  "
+                  :icon="addTo === 'Headers' ? IconCircleDot : IconCircle"
                   :active="addTo === 'Headers'"
                   :label="'Headers'"
                   @click.native="
@@ -218,11 +194,7 @@
                   "
                 />
                 <SmartItem
-                  :icon="
-                    addTo === 'Query params'
-                      ? IconRadioButtonChecked
-                      : IconRadioButtonUnChecked
-                  "
+                  :icon="addTo === 'Query params' ? IconCircleDot : IconCircle"
                   :active="addTo === 'Query params'"
                   :label="'Query params'"
                   @click.native="
@@ -272,8 +244,8 @@ import { gqlAuth$, setGQLAuth } from "~/newstore/GQLSession"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconHelpCircle from "~icons/lucide/help-circle"
 import IconExternalLink from "~icons/lucide/external-link"
-import IconRadioButtonChecked from "~icons/mdi/radiobox-marked"
-import IconRadioButtonUnChecked from "~icons/mdi/radiobox-blank"
+import IconCircleDot from "~icons/lucide/circle-dot"
+import IconCircle from "~icons/lucide/circle"
 
 const t = useI18n()
 const colorMode = useColorMode()

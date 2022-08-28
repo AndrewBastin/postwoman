@@ -21,9 +21,7 @@
             <div class="flex flex-col" role="menu">
               <SmartItem
                 label="None"
-                :icon="
-                  authName === 'None' ? IconRadioChecked : IconRadioUnchecked
-                "
+                :icon="authName === 'None' ? IconCircleDot : IconCircle"
                 :active="authName === 'None'"
                 @click.native="
                   () => {
@@ -34,11 +32,7 @@
               />
               <SmartItem
                 label="Basic Auth"
-                :icon="
-                  authName === 'Basic Auth'
-                    ? IconRadioChecked
-                    : IconRadioUnchecked
-                "
+                :icon="authName === 'Basic Auth' ? IconCircleDot : IconCircle"
                 :active="authName === 'Basic Auth'"
                 @click.native="
                   () => {
@@ -49,9 +43,7 @@
               />
               <SmartItem
                 label="Bearer Token"
-                :icon="
-                  authName === 'Bearer' ? IconRadioChecked : IconRadioUnchecked
-                "
+                :icon="authName === 'Bearer' ? IconCircleDot : IconCircle"
                 :active="authName === 'Bearer'"
                 @click.native="
                   () => {
@@ -62,11 +54,7 @@
               />
               <SmartItem
                 label="OAuth 2.0"
-                :icon="
-                  authName === 'OAuth 2.0'
-                    ? IconRadioChecked
-                    : IconRadioUnchecked
-                "
+                :icon="authName === 'OAuth 2.0' ? IconCircleDot : IconCircle"
                 :active="authName === 'OAuth 2.0'"
                 @click.native="
                   () => {
@@ -77,9 +65,7 @@
               />
               <SmartItem
                 label="API key"
-                :icon="
-                  authName === 'API key' ? IconRadioChecked : IconRadioUnchecked
-                "
+                :icon="authName === 'API key' ? IconCircleDot : IconCircle"
                 :active="authName === 'API key'"
                 @click.native="
                   () => {
@@ -195,11 +181,7 @@
               <template #content="{ hide }">
                 <div class="flex flex-col" role="menu">
                   <SmartItem
-                    :icon="
-                      addTo === 'Headers'
-                        ? IconRadioChecked
-                        : IconRadioUnchecked
-                    "
+                    :icon="addTo === 'Headers' ? IconCircleDot : IconCircle"
                     :active="addTo === 'Headers'"
                     :label="'Headers'"
                     @click.native="
@@ -211,9 +193,7 @@
                   />
                   <SmartItem
                     :icon="
-                      addTo === 'Query params'
-                        ? IconRadioChecked
-                        : IconRadioUnchecked
+                      addTo === 'Query params' ? IconCircleDot : IconCircle
                     "
                     :active="addTo === 'Query params'"
                     :label="'Query params'"
@@ -251,8 +231,8 @@
 import IconHelpCircle from "~icons/lucide/help-circle"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconExternalLink from "~icons/lucide/external-link"
-import IconRadioChecked from "~icons/mdi/radiobox-marked"
-import IconRadioUnchecked from "~icons/mdi/radiobox-blank"
+import IconCircleDot from "~icons/lucide/circle-dot"
+import IconCircle from "~icons/lucide/circle"
 import { computed, ref, Ref } from "vue"
 import {
   HoppRESTAuthBasic,

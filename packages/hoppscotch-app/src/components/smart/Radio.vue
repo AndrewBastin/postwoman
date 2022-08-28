@@ -1,7 +1,7 @@
 <template>
   <SmartItem
     :label="label"
-    :icon="selected ? ButtonChecked : ButtonUnchecked"
+    :icon="selected ? IconCircleDot : IconCircle"
     :active="selected"
     role="radio"
     :aria-checked="selected"
@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import ButtonChecked from "~icons/mdi/radiobox-marked"
-import ButtonUnchecked from "~icons/mdi/radiobox-blank"
+import IconCircleDot from "~icons/lucide/circle-dot"
+import IconCircle from "~icons/lucide/circle"
 
 defineProps({
   value: {

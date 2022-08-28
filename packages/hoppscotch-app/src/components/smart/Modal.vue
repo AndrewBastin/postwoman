@@ -41,6 +41,8 @@
               <span class="flex">
                 <slot name="actions"></slot>
                 <ButtonSecondary
+                  v-tippy="{ theme: 'tooltip', delay: [500, 20] }"
+                  :title="t('action.close')"
                   v-if="dimissible"
                   :svg="IconX"
                   @click.native="close"
@@ -87,6 +89,9 @@ const stack = (() => {
 import IconX from "~icons/lucide/x"
 import { ref, computed, useSlots, onMounted, onBeforeUnmount } from "vue"
 import { useKeybindingDisabler } from "~/helpers/keybindings"
+import { useI18n } from "@composables/i18n"
+
+const t = useI18n()
 
 const props = defineProps({
   dialog: {

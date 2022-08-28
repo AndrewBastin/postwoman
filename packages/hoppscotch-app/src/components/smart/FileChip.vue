@@ -1,6 +1,6 @@
 <template>
   <span class="chip">
-    <i class="opacity-75 material-icons">attachment</i>
+    <component :is="IconFile" class="opacity-75 svg-icons" />
     <span class="px-2 truncate max-w-32"><slot></slot></span>
   </span>
 </template>
@@ -16,3 +16,7 @@
   @apply bg-primaryDark;
 }
 </style>
+
+<script setup lang="ts">
+import IconFile from "~icons/lucide/file"
+</script>

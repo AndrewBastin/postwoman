@@ -270,7 +270,7 @@
                       v-if="!loading && adapterError"
                       class="flex flex-col items-center py-4"
                     >
-                      <i class="mb-4 material-icons">help_outline</i>
+                      <component :is="IconHelpCircle" class="mb-4 svg-icons" />
                       {{ getErrorMessage(adapterError) }}
                     </div>
                   </div>
@@ -314,6 +314,7 @@ import { deleteShortcode as backendDeleteShortcode } from "~/helpers/backend/mut
 
 import IconVerified from "~icons/lucide/verified"
 import IconSettings from "~icons/lucide/settings"
+import IconHelpCircle from "~icons/lucide/help-circle"
 
 type ProfileTabs = "sync" | "teams"
 

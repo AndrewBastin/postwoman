@@ -40,7 +40,7 @@
       v-tippy="{ theme: 'tooltip' }"
       :title="!entry.star ? t('add.star') : t('remove.star')"
       :class="{ 'group-hover:inline-flex hidden': !entry.star }"
-      :svg="entry.star ? IconStarSolid : IconStar"
+      :svg="entry.star ? IconStarOff : IconStar"
       color="yellow"
       data-testid="star_button"
       @click.native="$emit('toggle-star')"
@@ -54,8 +54,8 @@ import findStatusGroup from "~/helpers/findStatusGroup"
 import { useI18n } from "@composables/i18n"
 import { RESTHistoryEntry } from "~/newstore/history"
 
-import IconStarSolid from "~icons/mdi/star"
-import IconStar from "~icons/mdi/star-outline"
+import IconStar from "~icons/lucide/star"
+import IconStarOff from "~icons/lucide/star-off"
 import IconTrash from "~icons/lucide/trash"
 
 const props = defineProps<{

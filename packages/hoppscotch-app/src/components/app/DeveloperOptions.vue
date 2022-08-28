@@ -11,9 +11,7 @@
       </p>
       <div class="flex flex-1">
         <button class="share-link" @click="copyUserAuthToken">
-          <component
-            :is="copyIcon === 'copy' ? IconCopy : IconCheck"
-          />
+          <component :is="copyIcon === 'copy' ? IconCopy : IconCheck" />
           <span>
             {{ t("app.copy_user_id") }}
           </span>

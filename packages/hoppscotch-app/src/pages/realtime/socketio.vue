@@ -119,11 +119,7 @@
                   <div class="flex flex-col" role="menu">
                     <SmartItem
                       label="None"
-                      :icon="
-                        authType === 'None'
-                          ? IconRadioChecked
-                          : IconRadioUnchecked
-                      "
+                      :icon="authType === 'None' ? IconCircleDot : IconCircle"
                       :active="authType === 'None'"
                       @click.native="
                         () => {
@@ -134,11 +130,7 @@
                     />
                     <SmartItem
                       label="Bearer Token"
-                      :icon="
-                        authType === 'Bearer'
-                          ? IconRadioChecked
-                          : IconRadioUnchecked
-                      "
+                      :icon="authType === 'Bearer' ? IconCircleDot : IconCircle"
                       :active="authType === 'Bearer'"
                       @click.native="
                         () => {
@@ -237,8 +229,8 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "vue"
-import IconRadioChecked from "~icons/mdi/radiobox-marked"
-import IconRadioUnchecked from "~icons/mdi/radiobox-blank"
+import IconCircleDot from "~icons/lucide/circle-dot"
+import IconCircle from "~icons/lucide/circle"
 import IconHelpCircle from "~icons/lucide/help-circle"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconExternalLink from "~icons/lucide/external-link"

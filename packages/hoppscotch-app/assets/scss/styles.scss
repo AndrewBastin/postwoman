@@ -165,6 +165,10 @@ a {
       @apply text-accentContrast;
     }
   }
+
+  .tippy-svg-arrow svg {
+    @apply fill-tooltip;
+  }
 }
 
 .tippy-box[data-theme="popover"] {
@@ -180,7 +184,7 @@ a {
   @apply leading-body;
   @apply focus:outline-none;
 
-  .tippy-roundarrow svg {
+  .tippy-svg-arrow svg {
     @apply fill-popover;
   }
 }
@@ -191,10 +195,6 @@ a {
 
 [data-v-tippy] {
   @apply flex flex-1;
-}
-
-.tippy-arrow {
-  @apply text-tooltip;
 }
 
 [interactive] > div {

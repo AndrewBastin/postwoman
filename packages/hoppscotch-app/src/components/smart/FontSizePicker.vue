@@ -19,7 +19,7 @@
             v-for="(size, index) in fontSizes"
             :key="`size-${index}`"
             :label="`${getFontSizeName(size)}`"
-            :icon="size === active ? IconRadioChecked : IconRadioUnchecked"
+            :icon="size === active ? IconCircleDot : IconCircle"
             :active="size === active"
             @click.native="
               () => {
@@ -36,8 +36,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import IconRadioChecked from "~icons/mdi/radiobox-marked"
-import IconRadioUnchecked from "~icons/mdi/radiobox-blank"
+import IconCircleDot from "~icons/lucide/circle-dot"
+import IconCircle from "~icons/lucide/circle"
 import IconType from "~icons/lucide/type"
 import { HoppFontSizes, HoppFontSize, applySetting } from "~/newstore/settings"
 import { useSetting } from "@composables/settings"

@@ -19,18 +19,15 @@
             :key="`invitee-${index}`"
           >
             <p class="flex items-center">
-              <i
-                class="mr-4 material-icons"
+              <component
+                :is="
+                  invitee.status === 'error' ? IconAlertTriangle : IconMailCheck
+                "
+                class="mr-4 svg-icons"
                 :class="
                   invitee.status === 'error' ? 'text-red-500' : 'text-green-500'
                 "
-              >
-                {{
-                  invitee.status === "error"
-                    ? "error_outline"
-                    : "mark_email_read"
-                }}
-              </i>
+              />
               <span class="truncate">{{ invitee.email }}</span>
             </p>
             <p v-if="invitee.status === 'error'" class="mt-2 ml-8 text-red-500">
@@ -110,7 +107,7 @@
               v-if="!pendingInvites.loading && E.isLeft(pendingInvites.data)"
               class="flex flex-col items-center p-4"
             >
-              <i class="mb-4 material-icons">help_outline</i>
+              <component :is="IconHelpCircle" class="mb-4 svg-icons" />
               {{ t("error.something_went_wrong") }}
             </div>
           </div>
@@ -164,9 +161,7 @@
                     <SmartItem
                       label="OWNER"
                       :icon="
-                        invitee.value === 'OWNER'
-                          ? IconRadioButtonChecked
-                          : IconRadioButtonUnchecked
+                        invitee.value === 'OWNER' ? IconCircleDot : IconCircle
                       "
                       :active="invitee.value === 'OWNER'"
                       @click.native="
@@ -179,9 +174,7 @@
                     <SmartItem
                       label="EDITOR"
                       :icon="
-                        invitee.value === 'EDITOR'
-                          ? IconRadioButtonChecked
-                          : IconRadioButtonUnchecked
+                        invitee.value === 'EDITOR' ? IconCircleDot : IconCircle
                       "
                       :active="invitee.value === 'EDITOR'"
                       @click.native="
@@ -194,9 +187,7 @@
                     <SmartItem
                       label="VIEWER"
                       :icon="
-                        invitee.value === 'VIEWER'
-                          ? IconRadioButtonChecked
-                          : IconRadioButtonUnchecked
+                        invitee.value === 'VIEWER' ? IconCircleDot : IconCircle
                       "
                       :active="invitee.value === 'VIEWER'"
                       @click.native="
@@ -248,7 +239,10 @@
           <span
             class="flex items-center justify-center px-2 py-1 mb-4 font-semibold border rounded-full bg-primaryDark border-divider"
           >
-            <i class="mr-2 text-secondaryLight material-icons">help_outline</i>
+            <component
+              :is="IconHelpCircle"
+              class="mr-2 text-secondaryLight svg-icons"
+            />
             {{ t("profile.roles") }}
           </span>
           <p>
@@ -357,11 +351,11 @@ import { useToast } from "@composables/toast"
 
 import IconTrash from "~icons/lucide/trash"
 import IconPlus from "~icons/lucide/plus"
-import IconHelpOutline from "~icons/mdi/help-circle-outline"
-import IconErrorOutline from "~icons/mdi/alert-circle-outline"
-import IconMarkEmailRead from "~icons/mdi/email-open"
-import IconRadioButtonChecked from "~icons/mdi/radiobox-marked"
-import IconRadioButtonUnchecked from "~icons/mdi/radiobox-blank"
+import IconHelpCircle from "~icons/lucide/help-circle"
+import IconAlertTriangle from "~icons/lucide/alert-triangle"
+import IconMailCheck from "~icons/lucide/mail-check"
+import IconCircleDot from "~icons/lucide/circle-dot"
+import IconCircle from "~icons/lucide/circle"
 
 const t = useI18n()
 

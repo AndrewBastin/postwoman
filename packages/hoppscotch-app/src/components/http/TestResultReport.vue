@@ -1,9 +1,9 @@
 <template>
-  <div class="flex items-center p-2">
+  <div class="flex items-center px-4 py-2">
     <SmartProgressRing
-      class="text-red-500"
-      :radius="16"
-      :stroke="4"
+      class="text-red-500 mr-2"
+      :radius="8"
+      :stroke="1.5"
       :progress="(failedTests / totalTests) * 100"
     />
     <div class="ml-2">

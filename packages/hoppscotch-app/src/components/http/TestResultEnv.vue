@@ -1,14 +1,13 @@
 <template>
   <div class="flex items-center justify-between px-4 py-2">
     <div class="flex items-center">
-      <i
+      <component
+        :is="getIcon(status)"
         v-tippy="{ theme: 'tooltip' }"
-        class="mr-4 material-icons cursor-help"
+        class="mr-4 svg-icons cursor-help"
         :class="getStyle(status)"
         :title="`${t(getTooltip(status))}`"
-      >
-        <component :is="getIcon(status)"></component>
-      </i>
+      ></component>
       <span class="text-secondaryDark">
         {{ env.key }}
       </span>
@@ -34,9 +33,9 @@
 <script setup lang="ts">
 import { useI18n } from "@composables/i18n"
 
-import IconPlusCircle from "~icons/mdi/plus-circle"
-import IconCheckCircle from "~icons/mdi/check-circle"
-import IconMinusCircle from "~icons/mdi/minus-circle"
+import IconPlusCircle from "~icons/lucide/plus-circle"
+import IconCheckCircle from "~icons/lucide/check-circle-2"
+import IconMinusCircle from "~icons/lucide/minus-circle"
 
 type Status = "updations" | "additions" | "deletions"
 type Props = {

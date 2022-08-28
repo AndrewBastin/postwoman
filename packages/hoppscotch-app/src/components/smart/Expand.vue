@@ -6,7 +6,7 @@
     <slot name="body"></slot>
     <div class="sticky inset-x-0 bottom-0 flex items-center justify-center">
       <ButtonSecondary
-        :icon="expand ? IconExpandLess : IconExpandMore"
+        :icon="expand ? IconChevronUp : IconChevronDown"
         :label="expand ? t('action.less') : t('action.more')"
         filled
         rounded
@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import IconExpandLess from "~icons/mdi/chevron-up"
-import IconExpandMore from "~icons/mdi/chevron-down"
+import IconChevronUp from "~icons/lucide/chevron-up"
+import IconChevronDown from "~icons/lucide/chevron-down"
 import { ref } from "vue"
 import { useI18n } from "@composables/i18n"
 

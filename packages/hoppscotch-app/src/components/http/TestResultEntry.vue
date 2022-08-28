@@ -16,12 +16,11 @@
         :key="`result-${index}`"
         class="flex items-center px-4 py-2"
       >
-        <i
-          class="mr-4 material-icons"
+        <component
+          :is="result.status === 'pass' ? IconCheck : IconClose"
+          class="mr-4 svg-icons"
           :class="result.status === 'pass' ? 'text-green-500' : 'text-red-500'"
-        >
-          {{ result.status === "pass" ? "check" : "close" }}
-        </i>
+        />
         <span v-if="result.message" class="text-secondaryDark">
           {{ result.message }}
         </span>
@@ -41,6 +40,9 @@
 import { PropType } from "vue"
 import { HoppTestResult } from "~/helpers/types/HoppTestResult"
 import { useI18n } from "@composables/i18n"
+
+import IconCheck from "~icons/lucide/check"
+import IconClose from "~icons/lucide/x"
 
 const t = useI18n()
 

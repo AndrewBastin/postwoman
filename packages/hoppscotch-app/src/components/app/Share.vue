@@ -18,10 +18,7 @@
             target="_blank"
             class="share-link"
           >
-            <component
-              :is="platform.icon"
-              class="w-6 h-6"
-            />
+            <component :is="platform.icon" class="w-6 h-6" />
             <span class="mt-3">
               {{ platform.name }}
             </span>

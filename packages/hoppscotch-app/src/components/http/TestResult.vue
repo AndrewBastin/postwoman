@@ -39,7 +39,7 @@
                 class="flex p-4 bg-error text-secondaryDark"
                 role="alert"
               >
-                <i class="mr-4 material-icons"> warning </i>
+                <component :is="IconAlertTriangle" class="mr-4 svg-icons" />
                 <div class="flex flex-col">
                   <p>
                     {{ t("environment.no_environment_description") }}
@@ -115,14 +115,13 @@
             :key="`result-${index}`"
             class="flex items-center px-4 py-2"
           >
-            <i
-              class="mr-4 material-icons"
+            <component
+              :is="result.status === 'pass' ? IconCheck : IconClose"
+              class="mr-4 svg-icons"
               :class="
                 result.status === 'pass' ? 'text-green-500' : 'text-red-500'
               "
-            >
-              {{ result.status === "pass" ? "check" : "close" }}
-            </i>
+            />
             <span v-if="result.message" class="text-secondaryDark">
               {{ result.message }}
             </span>
@@ -207,6 +206,9 @@ import { HoppTestResult } from "~/helpers/types/HoppTestResult"
 
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconExternalLink from "~icons/lucide/external-link"
+import IconAlertTriangle from "~icons/lucide/alert-triangle"
+import IconCheck from "~icons/lucide/check"
+import IconClose from "~icons/lucide/x"
 
 import { useColorMode } from "~/composables/theming"
 

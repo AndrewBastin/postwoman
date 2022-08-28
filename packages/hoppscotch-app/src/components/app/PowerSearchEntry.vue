@@ -44,7 +44,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'action', action: string): void
+  (e: "action", action: string): void
 }>()
 </script>
 

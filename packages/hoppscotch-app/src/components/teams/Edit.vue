@@ -108,9 +108,7 @@
                       <SmartItem
                         label="OWNER"
                         :icon="
-                          member.role === 'OWNER'
-                            ? IconRadioButtonChecked
-                            : IconRadioButtonUnchecked
+                          member.role === 'OWNER' ? IconCircleDot : IconCircle
                         "
                         :active="member.role === 'OWNER'"
                         @click.native="
@@ -123,9 +121,7 @@
                       <SmartItem
                         label="EDITOR"
                         :icon="
-                          member.role === 'EDITOR'
-                            ? IconRadioButtonChecked
-                            : IconRadioButtonUnchecked
+                          member.role === 'EDITOR' ? IconCircleDot : IconCircle
                         "
                         :active="member.role === 'EDITOR'"
                         @click.native="
@@ -138,9 +134,7 @@
                       <SmartItem
                         label="VIEWER"
                         :icon="
-                          member.role === 'VIEWER'
-                            ? IconRadioButtonChecked
-                            : IconRadioButtonUnchecked
+                          member.role === 'VIEWER' ? IconCircleDot : IconCircle
                         "
                         :active="member.role === 'VIEWER'"
                         @click.native="
@@ -172,7 +166,7 @@
           v-if="!teamDetails.loading && E.isLeft(teamDetails.data)"
           class="flex flex-col items-center"
         >
-          <i class="mb-4 material-icons">help_outline</i>
+          <component :is="IconHelpCircle" class="mb-4 svg-icons" />
           {{ t("error.something_went_wrong") }}
         </div>
       </div>
@@ -217,10 +211,11 @@ import { useI18n } from "@composables/i18n"
 import { useToast } from "@composables/toast"
 import { useColorMode } from "@composables/theming"
 
-import IconRadioButtonChecked from "~icons/mdi/radiobox-marked"
-import IconRadioButtonUnchecked from "~icons/mdi/radiobox-blank"
+import IconCircleDot from "~icons/lucide/circle-dot"
+import IconCircle from "~icons/lucide/circle"
 import IconUserPlus from "~icons/lucide/user-plus"
 import IconUserMinus from "~icons/lucide/user-minus"
+import IconHelpCircle from "~icons/lucide/help-circle"
 
 const t = useI18n()
 const colorMode = useColorMode()
