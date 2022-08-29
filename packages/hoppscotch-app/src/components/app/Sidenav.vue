@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core"
 import IconLink2 from "~icons/lucide/link-2"
-import IconGraphql from "~icons/mdi/graphql"
+import IconGraphql from "~icons/hopp/graphql"
 import IconGlobe from "~icons/lucide/globe"
 import IconSettings from "~icons/lucide/settings"
 import { useSetting } from "@composables/settings"

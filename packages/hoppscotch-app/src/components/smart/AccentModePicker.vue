@@ -16,7 +16,7 @@
       :title="`${color.charAt(0).toUpperCase()}${color.slice(1)}`"
       :class="[{ 'bg-primaryLight': color === active }]"
       class="rounded"
-      :icon="IconLens"
+      :icon="IconCircle"
       :color="color"
       @click.native="setActiveColor(color)"
     />
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import IconLens from "~icons/mdi/circle"
+import IconCircle from "~icons/lucide/circle"
 import {
   HoppAccentColors,
   HoppAccentColor,

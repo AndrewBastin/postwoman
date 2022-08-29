@@ -89,7 +89,6 @@
     "@graphql-codegen/urql-introspection": "^2.2.0",
     "@graphql-typed-document-node/core": "^3.1.1",
     "@iconify-json/lucide": "^1.1.40",
-    "@iconify-json/mdi": "^1.1.30",
     "@intlify/unplugin-vue-i18n": "^0.2.1",
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
     "@types/js-yaml": "^4.0.5",

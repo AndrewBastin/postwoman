@@ -72,7 +72,7 @@
       v-if="!(filteredHistory.length !== 0 || history.length === 0)"
       class="flex flex-col items-center justify-center p-4 text-secondaryLight"
     >
-      <i class="pb-2 opacity-75 svg-icons">manage_search</i>
+      <icon-lucide-search class="pb-2 opacity-75 svg-icons" />
       <span class="my-2 text-center">
         {{ t("state.nothing_found") }} "{{ filterText }}"
       </span>

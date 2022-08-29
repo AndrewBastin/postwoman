@@ -80,7 +80,7 @@
       v-if="!(filteredCollections.length !== 0 || collections.length === 0)"
       class="flex flex-col items-center justify-center p-4 text-secondaryLight"
     >
-      <i class="pb-2 opacity-75 svg-icons">manage_search</i>
+      <icon-lucide-search class="pb-2 opacity-75 svg-icons" />
       <span class="my-2 text-center">
         {{ t("state.nothing_found") }} "{{ filterText }}"
       </span>

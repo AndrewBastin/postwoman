@@ -69,7 +69,6 @@ importers:
       '@hoppscotch/js-sandbox': workspace:^2.1.0
       '@hoppscotch/vue-toasted': ^0.1.0
       '@iconify-json/lucide': ^1.1.40
-      '@iconify-json/mdi': ^1.1.30
       '@intlify/unplugin-vue-i18n': ^0.2.1
       '@intlify/vite-plugin-vue-i18n': ^3.4.0
       '@lezer/highlight': ^1.0.0
@@ -215,7 +214,6 @@ importers:
       '@graphql-codegen/urql-introspection': 2.2.0_graphql@16.5.0
       '@graphql-typed-document-node/core': 3.1.1_graphql@16.5.0
       '@iconify-json/lucide': 1.1.40
-      '@iconify-json/mdi': 1.1.30
       '@intlify/unplugin-vue-i18n': 0.2.1_ok2vr3izc5tvtuuot2yw6handq
       '@intlify/vite-plugin-vue-i18n': 3.4.0_ok2vr3izc5tvtuuot2yw6handq
       '@types/js-yaml': 4.0.5
@@ -2978,12 +2976,6 @@ packages:
 
   /@iconify-json/lucide/1.1.40:
     resolution: {integrity: sha512-4GeQtaiv3mJ+b0sn/c2KL8Tgf4XQvsX1AHDOseuGRhgoLCWG+ZdNRFxF5sp1I6T/VcQccegLPOp5XHn3NC1mmA==}
-    dependencies:
-      '@iconify/types': 1.1.0
-    dev: true
-
-  /@iconify-json/mdi/1.1.30:
-    resolution: {integrity: sha512-mNhZT/14mReJRNDd//cs3oJ2RQq3nBkYj1fcDFr8sgYce4k8Br3CsOC61SIPsdw5rfNBMsXEpfJ4AOry36i0XQ==}
     dependencies:
       '@iconify/types': 1.1.0
     dev: true
