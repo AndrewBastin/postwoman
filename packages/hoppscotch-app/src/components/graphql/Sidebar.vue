@@ -128,7 +128,7 @@
         </SmartTabs>
       </div>
     </SmartTab>
-    <SmartTab :id="'schema'" icon="box" :label="`${t('tab.schema')}`">
+    <SmartTab :id="'schema'" :icon="IconBox" :label="`${t('tab.schema')}`">
       <div
         v-if="schemaString"
         class="sticky top-0 z-10 flex items-center justify-between pl-4 border-b bg-primary border-dividerLight"
@@ -199,6 +199,7 @@ import IconDownload from "~icons/lucide/download"
 import IconCheck from "~icons/lucide/check"
 import IconClock from "~icons/lucide/clock"
 import IconCopy from "~icons/lucide/copy"
+import IconBox from "~icons/lucide/box"
 import { computed, nextTick, reactive, ref } from "vue"
 import { GraphQLField, GraphQLType } from "graphql"
 import { map } from "rxjs/operators"
