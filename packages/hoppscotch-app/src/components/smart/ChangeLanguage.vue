@@ -1,6 +1,6 @@
 <template>
   <span class="inline-flex">
-    <tippy ref="language" interactive trigger="click" theme="popover" arrow>
+    <tippy interactive trigger="click" theme="popover" arrow>
       <span class="select-wrapper">
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
@@ -8,27 +8,25 @@
           class="pr-8"
           outline
           :svg="IconLanguages"
-          :label="`${i18n.availableLocales.find(
-            (locale) => locale === i18n.locale.value
-          )}`"
+          :label="currentLocale.name"
         />
       </span>
       <template #content="{ hide }">
         <div class="flex flex-col" role="menu">
           <SmartLink
-            v-for="(locale, index) in i18n.availableLocales"
-            :key="`locale-${index}`"
+            v-for="locale in APP_LANGUAGES"
+            :key="`locale-${locale.code}`"
             @click="
               () => {
-                changeLocale(locale)
+                changeLocale(locale.code)
                 hide()
               }
             "
           >
             <SmartItem
-              :label="locale"
-              :active-info-icon="i18n.locale.value === locale"
-              :info-icon="i18n.locale.value === locale ? IconDone : null"
+              :label="locale.name"
+              :active-info-icon="currentLocale.code === locale.code"
+              :info-icon="currentLocale.code === locale.code ? IconDone : null"
             />
           </SmartLink>
         </div>
@@ -38,7 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { pipe } from "fp-ts/function"
+import * as A from "fp-ts/Array"
+import * as O from "fp-ts/Option"
+import { computed } from "vue"
+import { APP_LANGUAGES, FALLBACK_LANG, changeAppLanguage } from "@modules/i18n"
 import { useFullI18n } from "@composables/i18n"
 import IconLanguages from "~icons/lucide/languages"
 import IconDone from "~icons/lucide/check"
@@ -48,9 +50,16 @@ import IconDone from "~icons/lucide/check"
 const i18n = useFullI18n()
 const t = i18n.t
 
-const language = ref<any | null>(null)
+const currentLocale = computed(() =>
+  pipe(
+    APP_LANGUAGES,
+    A.findFirst(({ code }) => code === i18n.locale.value),
+    O.getOrElse(() => FALLBACK_LANG)
+  )
+)
 
 const changeLocale = (locale: string) => {
   // TODO: Implement
+  changeAppLanguage(locale)
 }
 </script>
