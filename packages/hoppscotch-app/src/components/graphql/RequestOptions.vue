@@ -172,6 +172,8 @@
               >
                 <span>
                   <ButtonSecondary
+                    v-tippy="{ theme: 'tooltip', delay: [500, 20] }"
+                    :title="t('action.drag')"
                     :svg="IconGripVertical"
                     class="cursor-auto text-primary hover:text-primary"
                     :class="{
@@ -212,13 +214,13 @@
                   :value="header.value"
                   autofocus
                   @change="
-                  updateHeader(index, {
-                    id: header.id,
-                    key: header.key,
-                    value: ($event!.target! as HTMLInputElement).value,
-                    active: header.active,
-                  })
-                "
+                    updateHeader(index, {
+                      id: header.id,
+                      key: header.key,
+                      value: ($event!.target! as HTMLInputElement).value,
+                      active: header.active,
+                    })
+                  "
                 />
                 <span>
                   <ButtonSecondary

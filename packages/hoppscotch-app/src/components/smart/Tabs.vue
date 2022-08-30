@@ -25,17 +25,16 @@
               role="button"
               @keyup.enter="selectTab(tabID)"
               @click="selectTab(tabID)"
+              v-tippy="{
+                theme: 'tooltip',
+                placement: 'left',
+                content: vertical ? tabMeta.label : null,
+              }"
             >
               <component
                 v-if="tabMeta.icon"
                 class="svg-icons"
                 :is="tabMeta.icon"
-              />
-              <tippy
-                v-if="vertical && tabMeta.label"
-                placement="left"
-                theme="tooltip"
-                :content="tabMeta.label"
               />
               <span v-else-if="tabMeta.label">{{ tabMeta.label }}</span>
               <span
