@@ -6,8 +6,8 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('settings.choose_language')"
           class="pr-8"
-          outline
           :svg="IconLanguages"
+          outline
           :label="currentLocale.name"
         />
       </span>
@@ -22,6 +22,7 @@
                 hide()
               }
             "
+            class="flex flex-1"
           >
             <SmartItem
               :label="locale.name"

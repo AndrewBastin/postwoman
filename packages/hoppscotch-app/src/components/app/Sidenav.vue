@@ -13,13 +13,13 @@
           <component :is="navigation.svg" class="svg-icons" />
         </div>
         <span v-if="EXPAND_NAVIGATION" class="nav-title">
-          {{ navigation.title }}
+          {{ t(navigation.title) }}
         </span>
         <tippy
           v-if="!EXPAND_NAVIGATION"
           :placement="mdAndLarger ? 'right' : 'bottom'"
           theme="tooltip"
-          :content="navigation.title"
+          :content="t(navigation.title)"
         />
       </router-link>
     </nav>
@@ -46,25 +46,25 @@ const primaryNavigation = [
   {
     target: "/",
     svg: IconLink2,
-    title: t("navigation.rest"),
+    title: "navigation.rest",
     exact: true,
   },
   {
     target: "/graphql",
     svg: IconGraphql,
-    title: t("navigation.graphql"),
+    title: "navigation.graphql",
     exact: false,
   },
   {
     target: "/realtime",
     svg: IconGlobe,
-    title: t("navigation.realtime"),
+    title: "navigation.realtime",
     exact: false,
   },
   {
     target: "/settings",
     svg: IconSettings,
-    title: t("navigation.settings"),
+    title: "navigation.settings",
     exact: false,
   },
 ]

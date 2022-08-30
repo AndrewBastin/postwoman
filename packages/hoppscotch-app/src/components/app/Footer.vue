@@ -22,12 +22,7 @@
           }"
           @click.native="ZEN_MODE = !ZEN_MODE"
         />
-        <tippy
-          interactive
-          trigger="click"
-          theme="popover"
-          arrow
-        >
+        <tippy interactive trigger="click" theme="popover" arrow>
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="t('settings.interceptor')"
