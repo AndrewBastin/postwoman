@@ -1,3 +1,4 @@
+import clone from "lodash/clone"
 import { Observable, Subscription } from "rxjs"
 import { customRef, onBeforeUnmount, readonly, ref, Ref } from "vue"
 
@@ -16,7 +17,8 @@ export function useReadonlyStream<T>(
   const targetRef = ref(initialValue) as Ref<T>
 
   sub = stream$.subscribe((value) => {
-    targetRef.value = value
+    // Perform shallow clone to force trigger reactivity updates
+    targetRef.value = clone(value)
   })
 
   return readonly(targetRef) as Ref<T>
