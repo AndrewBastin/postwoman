@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex flex-col flex-1 border rounded border-divider"
-    @contextmenu.prevent="!compact ? options.tippy().show() : null"
+    @contextmenu.prevent="!compact ? options.tippy.show() : null"
   >
     <div
       class="flex items-start flex-1"

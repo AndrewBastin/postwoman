@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex items-stretch group"
-    @contextmenu.prevent="options.tippy().show()"
+    @contextmenu.prevent="options.tippy.show()"
   >
     <span
       class="flex items-center justify-center px-4 cursor-pointer"

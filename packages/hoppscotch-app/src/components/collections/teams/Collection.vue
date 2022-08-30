@@ -8,7 +8,7 @@
       @drop="dragging = false"
       @dragleave="dragging = false"
       @dragend="dragging = false"
-      @contextmenu.prevent="options.tippy().show()"
+      @contextmenu.prevent="options.tippy.show()"
     >
       <span
         class="flex items-center justify-center px-4 cursor-pointer"
