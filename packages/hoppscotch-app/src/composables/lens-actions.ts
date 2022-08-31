@@ -73,7 +73,6 @@ export function useDownloadResponse(
   }
 }
 
-
 export function usePreview(
   previewEnabledDefault: boolean,
   responseBodyText: Ref<string>

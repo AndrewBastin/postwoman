@@ -11,7 +11,7 @@
           v-if="headers"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
-          :svg="copyIcon === 'copy' ? IconCopy : IconCheck"
+          :svg="copyIcon"
           @click.native="copyHeaders"
         />
       </div>
@@ -41,11 +41,11 @@ const props = defineProps<{
   headers: Array<HoppRESTHeader>
 }>()
 
-const copyIcon = refAutoReset<"copy" | "check">("copy", 1000)
+const copyIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 const copyHeaders = () => {
   copyToClipboard(JSON.stringify(props.headers))
-  copyIcon.value = "check"
+  copyIcon.value = IconCheck
   toast.success(`${t("state.copied_to_clipboard")}`)
 }
 </script>

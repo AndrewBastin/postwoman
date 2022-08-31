@@ -413,21 +413,10 @@ const clearContent = () => {
   resetRESTRequest()
 }
 
-const copyLinkIconName = refAutoReset<"share-2" | "copy" | "check">(
-  hasNavigatorShare ? "share-2" : "copy",
+const copyLinkIcon = refAutoReset<IconShare2 | IconCopy | IconCheck>(
+  hasNavigatorShare ? IconShare2 : IconCopy,
   1000
 )
-
-const copyLinkIcon = computed(() => {
-  switch (copyLinkIconName.value) {
-    case "share-2":
-      return IconShare2
-    case "copy":
-      return IconCopy
-    case "check":
-      return IconCheck
-  }
-})
 
 const shareLink = ref<string | null>("")
 const fetchingShareLink = ref(false)
@@ -480,7 +469,7 @@ const copyShareLink = (shareLink: string) => {
       .then(() => {})
       .catch(() => {})
   } else {
-    copyLinkIconName.value = "check"
+    copyLinkIcon.value = IconCheck
     copyToClipboard(`https://hopp.sh/r${shareLink}`)
     toast.success(`${t("state.copied_to_clipboard")}`)
   }

@@ -155,14 +155,14 @@
             ref="downloadSchema"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
-            :svg="downloadSchemaIcon === 'download' ? IconDownload : IconCheck"
+            :svg="downloadSchemaIcon"
             @click.native="downloadSchema"
           />
           <ButtonSecondary
             ref="copySchemaCode"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
-            :svg="copySchemaIcon === 'copy' ? IconCopy : IconCheck"
+            :svg="copySchemaIcon"
             @click.native="copySchema"
           />
         </div>
@@ -318,8 +318,11 @@ const graphqlTypes = useReadonlyStream(
   []
 )
 
-const downloadSchemaIcon = refAutoReset<"download" | "check">("download", 1000)
-const copySchemaIcon = refAutoReset<"copy" | "check">("copy", 1000)
+const downloadSchemaIcon = refAutoReset<IconDownload | IconCheck>(
+  IconDownload,
+  1000
+)
+const copySchemaIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 const graphqlFieldsFilterText = ref("")
 
@@ -430,7 +433,7 @@ const downloadSchema = () => {
   a.download = `${url.split("/").pop()!.split("#")[0].split("?")[0]}.graphql`
   document.body.appendChild(a)
   a.click()
-  downloadSchemaIcon.value = "check"
+  downloadSchemaIcon.value = IconCheck
   toast.success(`${t("state.download_started")}`)
   setTimeout(() => {
     document.body.removeChild(a)
@@ -442,7 +445,7 @@ const copySchema = () => {
   if (!schemaString.value) return
 
   copyToClipboard(schemaString.value)
-  copySchemaIcon.value = "check"
+  copySchemaIcon.value = IconCheck
 }
 
 const handleUseHistory = (entry: GQLHistoryEntry) => {

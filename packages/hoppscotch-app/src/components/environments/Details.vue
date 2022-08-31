@@ -31,7 +31,7 @@
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
-              :svg="clearIcon === 'trash-2' ? IconTrash2 : IconCheck"
+              :svg="clearIcon"
               @click.native="clearContent()"
             />
             <ButtonSecondary
@@ -181,7 +181,7 @@ const vars = ref<EnvironmentVariable[]>([
   { id: idTicker.value++, env: { key: "", value: "" } },
 ])
 
-const clearIcon = refAutoReset<"trash-2" | "check">("trash-2", 1000)
+const clearIcon = refAutoReset<IconTrash2 | IconCheck>(IconTrash2, 1000)
 
 const globalVars = useReadonlyStream(globalEnv$, [])
 
@@ -258,7 +258,7 @@ const clearContent = () => {
       },
     },
   ]
-  clearIcon.value = "check"
+  clearIcon.value = IconCheck
   toast.success(`${t("state.cleared")}`)
 }
 

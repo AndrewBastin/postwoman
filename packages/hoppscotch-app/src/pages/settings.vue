@@ -206,7 +206,7 @@
               <ButtonSecondary
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('settings.reset_default')"
-                :svg="clearIcon === 'rotate-ccw' ? IconRotateCCW : IconCheck"
+                :svg="clearIcon"
                 outline
                 class="rounded"
                 @click.native="resetProxy"
@@ -279,7 +279,7 @@ const hasFirefoxExtInstalled = computed(
   () => browserIsFirefox() && currentExtensionStatus.value === "available"
 )
 
-const clearIcon = refAutoReset<"rotate-ccw" | "check">("rotate-ccw", 1000)
+const clearIcon = refAutoReset<IconRotateCCW | IconCheck>(IconRotateCCW, 1000)
 
 const confirmRemove = ref(false)
 
@@ -323,7 +323,7 @@ const showConfirmModal = () => {
 
 const resetProxy = () => {
   applySetting("PROXY_URL", `https://proxy.hoppscotch.io/`)
-  clearIcon.value = "check"
+  clearIcon.value = IconCheck
   toast.success(`${t("state.cleared")}`)
 }
 

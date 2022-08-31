@@ -60,7 +60,7 @@
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.copy')"
-              :svg="copyQueryIcon === 'copy' ? IconCopy : IconCheck"
+              :svg="copyQueryIcon"
               @click.native="copyQuery"
             />
           </div>
@@ -102,7 +102,7 @@
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.copy')"
-              :svg="copyVariablesIcon === 'copy' ? IconCopy : IconCheck"
+              :svg="copyVariablesIcon"
               @click.native="copyVariables"
             />
           </div>
@@ -630,44 +630,22 @@ useCodemirror(queryEditor, gqlQueryString, {
   environmentHighlights: false,
 })
 
-const copyQueryIcon = refAutoReset<"copy" | "check">("copy", 1000)
-const copyVariablesIcon = refAutoReset<"copy" | "check">("copy", 1000)
-const prettifyQueryIconName = refAutoReset<"wand" | "check" | "info">(
-  "wand",
+const copyQueryIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
+const copyVariablesIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
+const prettifyQueryIcon = refAutoReset<IconWand | IconCheck | IconInfo>(
+  IconWand,
   1000
 )
-const prettifyVariablesIconName = refAutoReset<"wand" | "check" | "info">(
-  "wand",
+const prettifyVariablesIcon = refAutoReset<IconWand | IconCheck | IconInfo>(
+  IconWand,
   1000
 )
-
-const prettifyQueryIcon = computed(() => {
-  switch (prettifyQueryIconName.value) {
-    case "wand":
-      return IconWand
-    case "check":
-      return IconCheck
-    case "info":
-      return IconInfo
-  }
-})
-
-const prettifyVariablesIcon = computed(() => {
-  switch (prettifyVariablesIconName.value) {
-    case "wand":
-      return IconWand
-    case "check":
-      return IconCheck
-    case "info":
-      return IconInfo
-  }
-})
 
 const showSaveRequestModal = ref(false)
 
 const copyQuery = () => {
   copyToClipboard(gqlQueryString.value)
-  copyQueryIcon.value = "check"
+  copyQueryIcon.value = IconCheck
   toast.success(`${t("state.copied_to_clipboard")}`)
 }
 
@@ -739,10 +717,10 @@ const hideRequestModal = () => {
 const prettifyQuery = () => {
   try {
     gqlQueryString.value = gql.print(gql.parse(gqlQueryString.value))
-    prettifyQueryIconName.value = "check"
+    prettifyQueryIcon.value = IconCheck
   } catch (e) {
     toast.error(`${t("error.gql_prettify_invalid_query")}`)
-    prettifyQueryIconName.value = "info"
+    prettifyQueryIcon.value = IconInfo
   }
 }
 
@@ -752,7 +730,7 @@ const saveRequest = () => {
 
 const copyVariables = () => {
   copyToClipboard(variableString.value)
-  copyVariablesIcon.value = "check"
+  copyVariablesIcon.value = IconCheck
   toast.success(`${t("state.copied_to_clipboard")}`)
 }
 
@@ -760,10 +738,10 @@ const prettifyVariableString = () => {
   try {
     const jsonObj = JSON.parse(variableString.value)
     variableString.value = JSON.stringify(jsonObj, null, 2)
-    prettifyVariablesIconName.value = "check"
+    prettifyVariablesIcon.value = IconCheck
   } catch (e) {
     console.error(e)
-    prettifyVariablesIconName.value = "info"
+    prettifyVariablesIcon.value = IconInfo
     toast.error(`${t("error.json_prettify_invalid_body")}`)
   }
 }

@@ -11,7 +11,7 @@
       </p>
       <div class="flex flex-1">
         <button class="share-link" @click="copyUserAuthToken">
-          <component :is="copyIcon === 'copy' ? IconCopy : IconCheck" />
+          <component :is="copyIcon" />
           <span>
             {{ t("app.copy_user_id") }}
           </span>
@@ -45,13 +45,13 @@ const emit = defineEmits<{
   (e: "hide-modal"): void
 }>()
 
-const copyIcon = refAutoReset<"copy" | "check">("copy", 1000)
+const copyIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 // Copy user auth token to clipboard
 const copyUserAuthToken = () => {
   if (userAuthToken.value) {
     copyToClipboard(userAuthToken.value)
-    copyIcon.value = "check"
+    copyIcon.value = IconCheck
     toast.success(`${t("state.copied_to_clipboard")}`)
   } else {
     toast.error(`${t("error.something_went_wrong")}`)

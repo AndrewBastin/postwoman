@@ -26,16 +26,14 @@
             ref="downloadResponse"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
-            :svg="
-              downloadResponseIcon === 'download' ? IconDownload : IconCheck
-            "
+            :svg="downloadResponseIcon"
             @click.native="downloadResponse"
           />
           <ButtonSecondary
             ref="copyResponseButton"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
-            :svg="copyResponseIcon === 'copy' ? IconCopy : IconCheck"
+            :svg="copyResponseIcon"
             @click.native="copyResponse"
           />
         </div>
@@ -115,15 +113,15 @@ useCodemirror(
   })
 )
 
-const downloadResponseIcon = refAutoReset<"download" | "check">(
-  "download",
+const downloadResponseIcon = refAutoReset<IconDownload | IconCheck>(
+  IconDownload,
   1000
 )
-const copyResponseIcon = refAutoReset<"copy" | "check">("copy", 1000)
+const copyResponseIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 const copyResponse = () => {
   copyToClipboard(responseString.value!)
-  copyResponseIcon.value = "check"
+  copyResponseIcon.value = IconCheck
   toast.success(`${t("state.copied_to_clipboard")}`)
 }
 
@@ -136,7 +134,7 @@ const downloadResponse = () => {
   a.download = `${url.split("/").pop()!.split("#")[0].split("?")[0]}`
   document.body.appendChild(a)
   a.click()
-  downloadResponseIcon.value = "check"
+  downloadResponseIcon.value = IconCheck
   toast.success(`${t("state.download_started")}`)
   setTimeout(() => {
     document.body.removeChild(a)

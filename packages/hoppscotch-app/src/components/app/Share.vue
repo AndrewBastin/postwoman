@@ -24,10 +24,7 @@
             </span>
           </a>
           <button class="share-link" @click="copyAppLink">
-            <component
-              :is="copyIcon === 'copy' ? IconCopy : IconCheck"
-              class="w-6 h-6 text-xl"
-            />
+            <component :is="copyIcon" class="w-6 h-6 text-xl" />
             <span class="mt-3">
               {{ t("app.copy") }}
             </span>
@@ -71,7 +68,7 @@ const subject = "Checkout Hoppscotch - an open source API development ecosystem"
 const summary = `Hi there!%0D%0A%0D%0AI thought you'll like this new platform that I joined called Hoppscotch - https://hoppscotch.io.%0D%0AIt is a simple and intuitive interface for creating and managing your APIs. You can build, test, document, and share your APIs.%0D%0A%0D%0AThe best part about Hoppscotch is that it is open source and free to get started.%0D%0A%0D%0A`
 const twitter = "hoppscotch_io"
 
-const copyIcon = refAutoReset<"copy" | "check">("copy", 1000)
+const copyIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 const platforms = [
   {
@@ -103,7 +100,7 @@ const platforms = [
 
 const copyAppLink = () => {
   copyToClipboard(url)
-  copyIcon.value = "check"
+  copyIcon.value = IconCheck
   toast.success(`${t("state.copied_to_clipboard")}`)
 }
 

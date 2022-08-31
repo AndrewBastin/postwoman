@@ -102,17 +102,10 @@ const rawParamsBody = pluckRef(
   "body"
 )
 
-const prettifyIconName = refAutoReset<"wand" | "check" | "info">("wand", 1000)
-const prettifyIcon = computed(() => {
-  switch (prettifyIconName.value) {
-    case "wand":
-      return IconWand
-    case "check":
-      return IconCheck
-    case "info":
-      return IconInfo
-  }
-})
+const prettifyIcon = refAutoReset<IconWand | IconCheck | IconInfo>(
+  IconWand,
+  1000
+)
 
 const rawInputEditorLang = computed(() =>
   getEditorLangForMimeType(props.contentType)
@@ -163,10 +156,10 @@ const prettifyRequestBody = () => {
   try {
     const jsonObj = JSON.parse(rawParamsBody.value)
     rawParamsBody.value = JSON.stringify(jsonObj, null, 2)
-    prettifyIconName.value = "check"
+    prettifyIcon.value = IconCheck
   } catch (e) {
     console.error(e)
-    prettifyIconName.value = "info"
+    prettifyIcon.value = IconInfo
     toast.error(`${t("error.json_prettify_invalid_body")}`)
   }
 }

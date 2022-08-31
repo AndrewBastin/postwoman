@@ -18,7 +18,7 @@
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.copy')"
-        :svg="copyIcon === 'copy' ? IconCopy : null"
+        :svg="copyIcon"
         class="hidden group-hover:inline-flex !py-0"
         @click.native="copyHeader(header.value)"
       />
@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import IconCopy from "~icons/lucide/copy"
+import IconCheck from "~icons/lucide/check"
 import { refAutoReset } from "@vueuse/core"
 import type { HoppRESTHeader } from "@hoppscotch/data"
 import { copyToClipboard } from "~/helpers/utils/clipboard"
@@ -42,11 +43,11 @@ defineProps<{
   header: HoppRESTHeader
 }>()
 
-const copyIcon = refAutoReset<"copy" | "check">("copy", 1000)
+const copyIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 const copyHeader = (headerValue: string) => {
   copyToClipboard(headerValue)
-  copyIcon.value = "check"
+  copyIcon.value = IconCheck
   toast.success(`${t("state.copied_to_clipboard")}`)
 }
 </script>
