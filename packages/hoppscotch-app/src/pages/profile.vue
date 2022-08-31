@@ -243,9 +243,7 @@
                       <div
                         class="w-full max-h-sm flex flex-col items-center justify-between overflow-y-scroll rounded lg:rounded-t-none border lg:divide-y border-dividerLight divide-dividerLight"
                       >
-                        <div
-                          class="flex flex-col h-auto h-full border-r border-dividerLight w-full"
-                        >
+                        <div class="flex flex-col h-auto h-full w-full">
                           <ProfileShortcode
                             v-for="(shortcode, shortcodeIndex) in myShortcodes"
                             :key="`shortcode-${shortcodeIndex}`"

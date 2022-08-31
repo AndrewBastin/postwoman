@@ -8,6 +8,11 @@
         class="nav-link"
         tabindex="0"
         :exact="navigation.exact"
+        v-tippy="{
+          theme: 'tooltip',
+          placement: mdAndLarger ? 'right' : 'bottom',
+          content: !EXPAND_NAVIGATION ? t(navigation.title) : null,
+        }"
       >
         <div v-if="navigation.svg">
           <component :is="navigation.svg" class="svg-icons" />
@@ -15,12 +20,6 @@
         <span v-if="EXPAND_NAVIGATION" class="nav-title">
           {{ t(navigation.title) }}
         </span>
-        <tippy
-          v-if="!EXPAND_NAVIGATION"
-          :placement="mdAndLarger ? 'right' : 'bottom'"
-          theme="tooltip"
-          :content="t(navigation.title)"
-        />
       </router-link>
     </nav>
   </aside>
