@@ -9,7 +9,6 @@
       <div class="flex">
         <ButtonSecondary
           v-if="response.body"
-          ref="downloadResponse"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
           :svg="downloadIcon"

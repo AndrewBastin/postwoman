@@ -16,7 +16,6 @@
         {{ header.value }}
       </span>
       <ButtonSecondary
-        ref="copyHeader"
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.copy')"
         :svg="copyIcon === 'copy' ? IconCopy : null"

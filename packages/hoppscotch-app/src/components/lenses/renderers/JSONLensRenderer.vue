@@ -28,7 +28,6 @@
         />
         <ButtonSecondary
           v-if="response.body"
-          ref="downloadResponse"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
           :svg="downloadIcon"
@@ -36,7 +35,6 @@
         />
         <ButtonSecondary
           v-if="response.body"
-          ref="copyResponse"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
           :svg="copyIcon"

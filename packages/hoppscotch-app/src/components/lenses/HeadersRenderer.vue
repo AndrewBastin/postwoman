@@ -9,7 +9,6 @@
       <div class="flex">
         <ButtonSecondary
           v-if="headers"
-          ref="copyHeaders"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
           :svg="copyIcon === 'copy' ? IconCopy : IconCheck"
