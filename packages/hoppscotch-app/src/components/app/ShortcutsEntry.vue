@@ -3,13 +3,13 @@
     <span class="flex flex-1 mr-4">
       {{ t(shortcut.label) }}
     </span>
-    <span
+    <kbd
       v-for="(key, index) in shortcut.keys"
       :key="`key-${String(index)}`"
       class="shortcut-key"
     >
       {{ key }}
-    </span>
+    </kbd>
   </div>
 </template>
 

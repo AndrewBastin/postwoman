@@ -55,10 +55,10 @@
         </div>
         <div class="flex flex-col space-y-4">
           <div class="flex">
-            <span class="shortcut-key">/</span>
+            <kbd class="shortcut-key">/</kbd>
           </div>
           <div class="flex">
-            <span class="shortcut-key">?</span>
+            <kbd class="shortcut-key">?</kbd>
           </div>
         </div>
       </div>

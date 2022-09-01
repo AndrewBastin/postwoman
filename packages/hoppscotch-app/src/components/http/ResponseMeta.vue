@@ -23,18 +23,18 @@
         </div>
         <div class="flex flex-col space-y-4">
           <div class="flex">
-            <span class="shortcut-key">{{ getSpecialKey() }}</span>
-            <span class="shortcut-key">G</span>
+            <kbd class="shortcut-key">{{ getSpecialKey() }}</kbd>
+            <kbd class="shortcut-key">G</kbd>
           </div>
           <div class="flex">
-            <span class="shortcut-key">{{ getSpecialKey() }}</span>
-            <span class="shortcut-key">K</span>
+            <kbd class="shortcut-key">{{ getSpecialKey() }}</kbd>
+            <kbd class="shortcut-key">K</kbd>
           </div>
           <div class="flex">
-            <span class="shortcut-key">/</span>
+            <kbd class="shortcut-key">/</kbd>
           </div>
           <div class="flex">
-            <span class="shortcut-key">?</span>
+            <kbd class="shortcut-key">?</kbd>
           </div>
         </div>
       </div>

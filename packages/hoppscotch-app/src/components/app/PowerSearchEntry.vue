@@ -17,13 +17,13 @@
     >
       {{ t(shortcut.label) }}
     </span>
-    <span
+    <kbd
       v-for="(key, keyIndex) in shortcut.keys"
       :key="`key-${String(keyIndex)}`"
       class="shortcut-key"
     >
       {{ key }}
-    </span>
+    </kbd>
   </button>
 </template>
 
