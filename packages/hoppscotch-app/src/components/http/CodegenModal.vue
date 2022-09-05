@@ -44,7 +44,7 @@
                   v-for="codegen in filteredCodegenDefinitions"
                   :key="codegen.name"
                   :label="codegen.caption"
-                  :info-icon="codegen.name === codegenType ? 'done' : ''"
+                  :info-icon="codegen.name === codegenType ? IconCheck : null"
                   :active-info-icon="codegen.name === codegenType"
                   @click.native="
                     () => {

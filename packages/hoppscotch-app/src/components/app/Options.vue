@@ -16,7 +16,7 @@
           :svg="IconSidebar"
           :label="EXPAND_NAVIGATION ? t('hide.sidebar') : t('show.sidebar')"
           :description="t('layout.collapse_sidebar')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="expandNavigation"
         />
@@ -24,7 +24,7 @@
           :svg="IconSidebarOpen"
           :label="SIDEBAR ? t('hide.collection') : t('show.collection')"
           :description="t('layout.collapse_collection')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="expandCollection"
         />
@@ -36,7 +36,7 @@
           :label="t('app.documentation')"
           to="https://docs.hoppscotch.io"
           :description="t('support.documentation')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           blank
           @click.native="hideModal()"
@@ -46,7 +46,7 @@
           :label="t('app.whats_new')"
           to="https://docs.hoppscotch.io/changelog"
           :description="t('support.changelog')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           blank
           @click.native="hideModal()"
@@ -57,7 +57,7 @@
           to="https://status.hoppscotch.io"
           blank
           :description="t('app.status_description')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="hideModal()"
         />
@@ -67,7 +67,7 @@
           to="https://docs.hoppscotch.io/privacy"
           blank
           :description="t('app.terms_and_privacy')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="hideModal()"
         />
@@ -80,7 +80,7 @@
           to="https://hoppscotch.io/discord"
           blank
           :description="t('app.join_discord_community')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="hideModal()"
         />
@@ -90,7 +90,7 @@
           to="https://hoppscotch.io/twitter"
           blank
           :description="t('support.twitter')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="hideModal()"
         />
@@ -100,7 +100,7 @@
           to="https://github.com/hoppscotch/hoppscotch"
           blank
           :description="t('support.github')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="hideModal()"
         />
@@ -108,7 +108,7 @@
           :svg="IconMessageCircle"
           :label="t('app.chat_with_us')"
           :description="t('support.chat')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="chatWithUs()"
         />
@@ -116,7 +116,7 @@
           :svg="IconUserPlus"
           :label="`${t('app.invite')}`"
           :description="t('shortcut.miscellaneous.invite')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="expandInvite()"
         />
@@ -126,7 +126,7 @@
           :svg="IconShare2"
           :label="`${t('request.share')}`"
           :description="t('request.share_description')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="nativeShare()"
         />
@@ -150,6 +150,7 @@ import IconGithub from "~icons/hopp/github"
 import IconMessageCircle from "~icons/lucide/message-circle"
 import IconUserPlus from "~icons/lucide/user-plus"
 import IconShare2 from "~icons/lucide/share-2"
+import IconChevronRight from "~icons/lucide/chevron-right"
 import { useSetting } from "@composables/settings"
 import { defineActionHandler } from "~/helpers/actions"
 import { showChat } from "@modules/crisp"

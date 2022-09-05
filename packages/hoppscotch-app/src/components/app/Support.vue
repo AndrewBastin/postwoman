@@ -13,7 +13,7 @@
           :label="t('app.documentation')"
           to="https://docs.hoppscotch.io"
           :description="t('support.documentation')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           blank
           @click.native="hideModal()"
@@ -22,7 +22,7 @@
           :svg="IconZap"
           :label="t('app.keyboard_shortcuts')"
           :description="t('support.shortcuts')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="showShortcuts()"
         />
@@ -31,7 +31,7 @@
           :label="t('app.whats_new')"
           to="https://docs.hoppscotch.io/changelog"
           :description="t('support.changelog')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           blank
           @click.native="hideModal()"
@@ -40,7 +40,7 @@
           :svg="IconMessageCircle"
           :label="t('app.chat_with_us')"
           :description="t('support.chat')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="chatWithUs()"
         />
@@ -50,7 +50,7 @@
           to="https://hoppscotch.io/discord"
           blank
           :description="t('support.community')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="hideModal()"
         />
@@ -60,7 +60,7 @@
           to="https://hoppscotch.io/twitter"
           blank
           :description="t('support.twitter')"
-          info-icon="chevron_right"
+          :info-icon="IconChevronRight"
           active
           @click.native="hideModal()"
         />
@@ -76,6 +76,7 @@ import IconMessageCircle from "~icons/lucide/message-circle"
 import IconGift from "~icons/lucide/gift"
 import IconZap from "~icons/lucide/zap"
 import IconBook from "~icons/lucide/book"
+import IconChevronRight from "~icons/lucide/chevron-right"
 import { invokeAction } from "@helpers/actions"
 import { showChat } from "@modules/crisp"
 import { useI18n } from "@composables/i18n"
