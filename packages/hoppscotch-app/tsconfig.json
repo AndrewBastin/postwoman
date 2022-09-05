@@ -9,8 +9,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "esModuleInterop": true, "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
@@ -43,6 +42,13 @@
       "vite-plugin-pwa/client"
     ],
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "./components.d.ts"],
+  "include": [
+    "meta.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "./components.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

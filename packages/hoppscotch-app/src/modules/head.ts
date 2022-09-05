@@ -1,10 +1,11 @@
 import { createHead, useHead } from "@vueuse/head"
+import { APP_INFO } from "~/../meta"
 import { HoppModule } from "."
 
 export default <HoppModule>{
   onVueAppInit(app) {
     const head = createHead({
-      title: "Hoppscotch",
+      title: `${APP_INFO.name} • ${APP_INFO.shortDescription}`,
       titleTemplate(title) {
         return (title === "Hoppscotch")
           ? title

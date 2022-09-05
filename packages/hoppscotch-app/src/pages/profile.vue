@@ -313,6 +313,7 @@ import { deleteShortcode as backendDeleteShortcode } from "~/helpers/backend/mut
 import IconVerified from "~icons/lucide/verified"
 import IconSettings from "~icons/lucide/settings"
 import IconHelpCircle from "~icons/lucide/help-circle"
+import { usePageHead } from "~/composables/head"
 
 type ProfileTabs = "sync" | "teams"
 
@@ -321,6 +322,10 @@ const selectedProfileTab = ref<ProfileTabs>("sync")
 const t = useI18n()
 const toast = useToast()
 const colorMode = useColorMode()
+
+usePageHead({
+  title: computed(() => t("navigation.profile"))
+})
 
 const showLogin = ref(false)
 
@@ -432,10 +437,4 @@ const getErrorMessage = (err: GQLError<string>) => {
     }
   }
 }
-</script>
-
-<script lang="ts">
-export default defineComponent({
-  head: {},
-})
 </script>
