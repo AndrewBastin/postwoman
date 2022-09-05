@@ -1,4 +1,4 @@
-import { HoppModule } from "~/types";
+import { HoppModule } from ".";
 import { ref } from "vue";
 
 import { registerSW } from "virtual:pwa-register";
@@ -44,44 +44,44 @@ export const installPWA = async () => {
 
 // TODO: Update install prompt stuff
 
-const pwaModule: HoppModule = () => {
-  pwaInstalled.value = getLocalConfig("pwaInstalled") === "yes"
+export default <HoppModule>{
+  onVueAppInit() {
+    pwaInstalled.value = getLocalConfig("pwaInstalled") === "yes"
 
-  if (!pwaInstalled.value && window.matchMedia("(display-mode: standalone)").matches) {
-    setLocalConfig("pwaInstalled", "yes")
-    pwaInstalled.value = true
-  }
+    if (!pwaInstalled.value && window.matchMedia("(display-mode: standalone)").matches) {
+      setLocalConfig("pwaInstalled", "yes")
+      pwaInstalled.value = true
+    }
 
-  if (!pwaInstalled.value && (window.navigator as any).standalone === true) {
-    setLocalConfig("pwaInstalled", "yes")
-    pwaInstalled.value = true
-  }
+    if (!pwaInstalled.value && (window.navigator as any).standalone === true) {
+      setLocalConfig("pwaInstalled", "yes")
+      pwaInstalled.value = true
+    }
 
-  window.addEventListener("beforeinstallprompt", (event) => {
-    pwaDefferedPrompt.value = event
-  })
+    window.addEventListener("beforeinstallprompt", (event) => {
+      pwaDefferedPrompt.value = event
+    })
 
-  updateApp = registerSW({
-    immediate: true,
-    onNeedRefresh() {
-      pwaNeedsRefresh.value = true
-    },
-    onOfflineReady() {
-      pwaReadyForOffline.value = true
-    },
-    onRegistered(registration) {
-      pwaRegistered.value = {
-        status: "INSTALLED",
-        registration
-      }
-    },
-    onRegisterError(error) {
-      pwaRegistered.value = {
-        status: "INSTALL_FAILED",
-        error
-      }
-    },
-  })
+    updateApp = registerSW({
+      immediate: true,
+      onNeedRefresh() {
+        pwaNeedsRefresh.value = true
+      },
+      onOfflineReady() {
+        pwaReadyForOffline.value = true
+      },
+      onRegistered(registration) {
+        pwaRegistered.value = {
+          status: "INSTALLED",
+          registration
+        }
+      },
+      onRegisterError(error) {
+        pwaRegistered.value = {
+          status: "INSTALL_FAILED",
+          error
+        }
+      },
+    })
+  },
 }
-
-export default pwaModule

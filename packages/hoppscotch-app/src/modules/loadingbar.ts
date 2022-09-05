@@ -1,4 +1,4 @@
-import { HoppModule } from "~/types"
+import { HoppModule } from "."
 import NProgress from "nprogress"
 
 export const startPageProgress = () => {
@@ -13,8 +13,8 @@ export const removePageProgress = () => {
   NProgress.remove()
 }
 
-const loadingBarModule: HoppModule = () => {
-  NProgress.configure({ showSpinner: false })
+export default <HoppModule>{
+  onVueAppInit() {
+    NProgress.configure({ showSpinner: false })
+  }
 }
-
-export default loadingBarModule

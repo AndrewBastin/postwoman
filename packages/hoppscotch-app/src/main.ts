@@ -1,10 +1,8 @@
-import { pipe } from "fp-ts/function"
-import * as A from "fp-ts/Array"
 import { createApp } from "vue"
 import { setupLocalPersistence } from "./newstore/localpersistence"
 import { performMigrations } from "./helpers/migrations"
 import { initializeFirebase } from "./helpers/fb"
-import { HoppModule } from "./types"
+import { HOPP_MODULES } from "@modules/."
 
 import "virtual:windi.css"
 import "../assets/scss/themes.scss"
@@ -20,17 +18,8 @@ initializeFirebase()
 setupLocalPersistence()
 performMigrations()
 
-const modules = pipe(
-  import.meta.globEager("@modules/*.ts"),
-  Object.values,
-  A.map(({ default: defaultVal }) => defaultVal as HoppModule)
-)
 
-modules.forEach((mod) =>
-  mod({
-    app,
-  })
-)
+HOPP_MODULES.forEach((mod) => mod.onVueAppInit?.(app))
 
 app.mount("#app")
 

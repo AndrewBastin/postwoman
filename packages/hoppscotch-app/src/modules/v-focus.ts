@@ -1,19 +1,19 @@
 import { nextTick } from "vue";
-import { HoppModule } from "~/types";
+import { HoppModule } from ".";
 
 /*
   Declares a `v-focus` directive that can be used for components
   to acquire focus instantly once mounted
 */
 
-const focusDirectiveModule: HoppModule = ({ app }) => {
-  app.directive('focus', {
-    mounted(el) {
-      nextTick(() => {
-        el.focus()
-      })
-    }
-  })
+export default <HoppModule>{
+  onVueAppInit(app) {
+    app.directive('focus', {
+      mounted(el) {
+        nextTick(() => {
+          el.focus()
+        })
+      }
+    })
+  },
 }
-
-export default focusDirectiveModule

@@ -2,7 +2,7 @@ import { usePreferredDark, useStorage } from "@vueuse/core"
 import { App, computed, reactive, Ref, watch } from "vue"
 import type { HoppBgColor } from "~/newstore/settings"
 import { useSettingStatic } from "@composables/settings"
-import { HoppModule } from "~/types"
+import { HoppModule } from "."
 
 
 export type HoppColorMode = {
@@ -58,13 +58,10 @@ const applyFontSize = (app: App) => {
   }, { immediate: true })
 }
 
-/**
- * A rough emulation of the Nuxt Color Mode API features we use
- */
-export const colorMode: HoppModule = ({ app }) => {
-  applyColorMode(app)
-  applyAccentColor(app)
-  applyFontSize(app)
+export default <HoppModule>{
+  onVueAppInit(app) {
+    applyColorMode(app)
+    applyAccentColor(app)
+    applyFontSize(app)
+  }
 }
-
-export default colorMode

@@ -1,4 +1,6 @@
 import { defineConfig } from "vite"
+import { META_TAGS } from "./meta"
+import HtmlConfig from "vite-plugin-html-config"
 import Vue from "@vitejs/plugin-vue"
 import VueI18n from "@intlify/unplugin-vue-i18n/vite"
 import Components from "unplugin-vue-components/vite"
@@ -114,6 +116,9 @@ export default defineConfig({
     },
   },
   plugins: [
+    HtmlConfig({
+      metas: META_TAGS
+    }),
     Vue(),
     Pages({
       routeStyle: "nuxt",

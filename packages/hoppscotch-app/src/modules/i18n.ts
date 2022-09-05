@@ -3,7 +3,7 @@ import * as A from "fp-ts/Array"
 import * as O from "fp-ts/Option"
 import { pipe } from "fp-ts/function"
 import { createI18n, I18n, I18nOptions } from "vue-i18n";
-import { HoppModule } from "~/types";
+import { HoppModule } from ".";
 
 import languages from "../../languages.json"
 
@@ -66,31 +66,6 @@ const resolveCurrentLocale = () => pipe(
   O.getOrElse(() => FALLBACK_LANG_CODE)
 )
 
-const i18nModule: HoppModule = ({ app }) => {
-
-  const i18n = createI18n(<I18nOptions>{
-    locale: 'en', // TODO: i18n system!
-    fallbackLocale: 'en',
-    legacy: false,
-    allowComposition: true,
-
-    // TODO: Fix this to allow for dynamic imports
-    messages: {
-      en
-    }
-  })
-
-  app.use(i18n)
-
-  i18nInstance = i18n
-
-  // TODO: Global loading state to hide the resolved lang loading
-  const currentLocale = resolveCurrentLocale()
-  changeAppLanguage(currentLocale)
-
-  setLocalConfig("locale", currentLocale)
-}
-
 /**
  * Changes the application language. This function returns a promise as
  * the locale files are lazy loaded on demand
@@ -115,4 +90,28 @@ export const changeAppLanguage = async (locale: string) => {
   setLocalConfig("locale", locale)
 }
 
-export default i18nModule
+export default <HoppModule>{
+  onVueAppInit(app) {
+    const i18n = createI18n(<I18nOptions>{
+      locale: 'en', // TODO: i18n system!
+      fallbackLocale: 'en',
+      legacy: false,
+      allowComposition: true,
+
+      // TODO: Fix this to allow for dynamic imports
+      messages: {
+        en
+      }
+    })
+
+    app.use(i18n)
+
+    i18nInstance = i18n
+
+    // TODO: Global loading state to hide the resolved lang loading
+    const currentLocale = resolveCurrentLocale()
+    changeAppLanguage(currentLocale)
+
+    setLocalConfig("locale", currentLocale)
+  }
+}

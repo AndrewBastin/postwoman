@@ -238,7 +238,7 @@ import IconCheckCircle from "~icons/lucide/check-circle"
 import IconFirefox from "~icons/brands/firefox"
 import IconRotateCCW from "~icons/lucide/rotate-ccw"
 import IconCheck from "~icons/lucide/check"
-import { ref, computed, watch, defineComponent } from "vue"
+import { ref, computed, watch } from "vue"
 import { refAutoReset } from "@vueuse/core"
 import { applySetting, toggleSetting } from "~/newstore/settings"
 import { useSetting } from "@composables/settings"
@@ -249,10 +249,15 @@ import { useReadonlyStream } from "@composables/stream"
 
 import { browserIsChrome, browserIsFirefox } from "~/helpers/utils/userAgent"
 import { extensionStatus$ } from "~/newstore/HoppExtension"
+import { usePageHead } from "@composables/head"
 
 const t = useI18n()
 const toast = useToast()
 const colorMode = useColorMode()
+
+usePageHead({
+  title: computed(() => t("navigation.settings"))
+})
 
 const ACCENT_COLOR = useSetting("THEME_COLOR")
 const PROXY_ENABLED = useSetting("PROXY_ENABLED")
