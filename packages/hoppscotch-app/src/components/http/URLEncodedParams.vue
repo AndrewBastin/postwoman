@@ -212,16 +212,13 @@ useCodemirror(bulkEditor, bulkUrlEncodedParams, {
 })
 
 // The functional urlEncodedParams list (the urlEncodedParams actually in the system)
-const urlEncodedParamsRaw = pluckRef(
-  useRESTRequestBody() as Ref<
-    HoppRESTReqBody & { contentType: "application/x-www-form-urlencoded" }
-  >,
-  "body"
-)
+const urlEncodedParamsRaw = pluckRef(useRESTRequestBody(), "body")
 
 const urlEncodedParams = computed<RawKeyValueEntry[]>({
   get() {
-    return parseRawKeyValueEntries(urlEncodedParamsRaw.value)
+    return typeof urlEncodedParamsRaw.value == "string"
+      ? parseRawKeyValueEntries(urlEncodedParamsRaw.value)
+      : []
   },
   set(newValue) {
     urlEncodedParamsRaw.value = rawKeyValueEntriesToString(newValue)

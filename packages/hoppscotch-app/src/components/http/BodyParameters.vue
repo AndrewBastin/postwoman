@@ -202,9 +202,7 @@ const idTicker = ref(0)
 
 const deletionToast = ref<{ goAway: (delay: number) => void } | null>(null)
 
-const bodyParams = pluckRef<any, any>(useRESTRequestBody(), "body") as Ref<
-  FormDataKeyValue[]
->
+const bodyParams = pluckRef<any, any>(useRESTRequestBody(), "body")
 
 // The UI representation of the parameters list (has the empty end param)
 const workingParams = ref<WorkingFormDataKeyValue[]>([
@@ -241,6 +239,8 @@ watch(workingParams, (paramsList) => {
 watch(
   bodyParams,
   (newParamsList) => {
+    if (!Array.isArray(newParamsList)) return
+
     // Sync should overwrite working params
     const filteredWorkingParams = pipe(
       workingParams.value,
