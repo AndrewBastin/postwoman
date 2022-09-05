@@ -10,15 +10,17 @@ export default <HoppModule>{
 
     setDefaultProps({
       animation: "scale-subtle",
+      appendTo: document.body,
       allowHTML: false,
       animateFill: false,
       arrow: false,
       popperOptions: {
+        // https://popper.js.org/docs/v2/utils/detect-overflow/
         modifiers: [
           {
             name: "preventOverflow",
             options: {
-              boundariesElement: "window",
+              rootBoundary: "document"
             },
           },
         ],
