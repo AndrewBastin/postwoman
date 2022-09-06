@@ -127,6 +127,7 @@ importers:
       vite: ^2.9.9
       vite-plugin-fonts: ^0.6.0
       vite-plugin-html-config: ^1.0.9
+      vite-plugin-inspect: ^0.6.1
       vite-plugin-pages: ^0.25.0
       vite-plugin-pwa: ^0.12.2
       vite-plugin-vue-layouts: ^0.6.0
@@ -238,6 +239,7 @@ importers:
       vite: 2.9.13_sass@1.53.0
       vite-plugin-fonts: 0.6.0_vite@2.9.13
       vite-plugin-html-config: 1.0.9_vite@2.9.13
+      vite-plugin-inspect: 0.6.1_vite@2.9.13
       vite-plugin-pages: 0.25.0_vite@2.9.13
       vite-plugin-pwa: 0.12.2_vite@2.9.13
       vite-plugin-vue-layouts: 0.6.0_ejrxu5f7emmykowg4tmbkgdici
@@ -3525,6 +3527,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+
+  /@polka/url/1.0.0-next.21:
+    resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
+    dev: true
 
   /@popperjs/core/2.11.5:
     resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
@@ -8786,6 +8792,11 @@ packages:
       yargs-unparser: 2.0.0
     dev: true
 
+  /mrmime/1.0.1:
+    resolution: {integrity: sha512-hzzEagAgDyoU1Q6yg5uI+AorQgdvMCur3FcKf7NhMKWsaYg+RnbTyHRa/9IlLF9rf455MOCtcqqrQQ83pPP7Uw==}
+    engines: {node: '>=10'}
+    dev: true
+
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
     dev: false
@@ -9928,6 +9939,15 @@ packages:
     resolution: {integrity: sha512-6+eerH9fEnNmi/hyM1DXcRK3pWdoMQtlkQ+ns0ntzunjKqp5i3sKCc80ym8Fib3iaYhdJUOPdhlJWj1tvge2Ww==}
     dev: true
 
+  /sirv/2.0.2:
+    resolution: {integrity: sha512-4Qog6aE29nIjAOKe/wowFTxOdmbEZKb+3tsLljaBRzJwtqto0BChD2zzH0LhgCSXiI+V7X+Y45v14wBZQ1TK3w==}
+    engines: {node: '>= 10'}
+    dependencies:
+      '@polka/url': 1.0.0-next.21
+      mrmime: 1.0.1
+      totalist: 3.0.0
+    dev: true
+
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
     dev: true
@@ -10537,6 +10557,11 @@ packages:
     dependencies:
       is-number: 7.0.0
 
+  /totalist/3.0.0:
+    resolution: {integrity: sha512-eM+pCBxXO/njtF7vdFsHuqb+ElbxqtI4r5EAvk6grfAFyJ6IvWlSkfZ5T9ozC6xWw3Fj1fGoSmrl0gUs46JVIw==}
+    engines: {node: '>=6'}
+    dev: true
+
   /tough-cookie/4.0.0:
     resolution: {integrity: sha512-tHdtEpQCMrc1YLrMaqXXcj6AxhYi/xgit6mZu1+EDWUn+qhUf8wMQoFIy9NXuq23zAwtcB0t/MjACGR18pcRbg==}
     engines: {node: '>=6'}
@@ -10821,6 +10846,10 @@ packages:
     resolution: {integrity: sha512-00y/AXhx0/SsnI51fTc0rLRmafiGOM4/O+ny10Ps7f+j/b8p/ZY11ytMgznXkOVo4GQ+KwQG5UQLkLGirsACRg==}
     dev: true
 
+  /ufo/0.8.5:
+    resolution: {integrity: sha512-e4+UtA5IRO+ha6hYklwj6r7BjiGMxS0O+UaSg9HbaTefg4kMkzj4tXzEBajRR+wkxf+golgAWKzLbytCUDMJAA==}
+    dev: true
+
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
     dependencies:
@@ -11081,6 +11110,22 @@ packages:
       vite: '>=2.0.0'
     dependencies:
       vite: 2.9.13_sass@1.53.0
+    dev: true
+
+  /vite-plugin-inspect/0.6.1_vite@2.9.13:
+    resolution: {integrity: sha512-MQzIgMoPyiPDuHoO6p7QBOrmheBU/ntg0cgtgcnm21S/Xds5oak1CbVLSAvv4fK1ZpetLK+tlJ+2mlFO9fG3SQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      vite: ^3.0.0
+    dependencies:
+      '@rollup/pluginutils': 4.2.1
+      debug: 4.3.4
+      kolorist: 1.5.1
+      sirv: 2.0.2
+      ufo: 0.8.5
+      vite: 2.9.13_sass@1.53.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vite-plugin-pages/0.25.0_vite@2.9.13:

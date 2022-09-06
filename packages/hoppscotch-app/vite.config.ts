@@ -5,6 +5,7 @@ import Vue from "@vitejs/plugin-vue"
 import VueI18n from "@intlify/unplugin-vue-i18n/vite"
 import Components from "unplugin-vue-components/vite"
 import Icons from "unplugin-icons/vite"
+import Inspect from "vite-plugin-inspect"
 import WindiCSS from "vite-plugin-windicss"
 import { VitePWA } from "vite-plugin-pwa"
 import NodePolyfills from "rollup-plugin-polyfill-node"
@@ -116,6 +117,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    Inspect(), // go to url -> /__inspect
     HtmlConfig({
       metas: META_TAGS
     }),
