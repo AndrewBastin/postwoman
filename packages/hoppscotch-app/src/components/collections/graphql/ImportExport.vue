@@ -9,15 +9,15 @@
     <template #actions>
       <span>
         <tippy interactive trigger="click" theme="popover" arrow>
-            <ButtonSecondary
-              v-tippy="{ theme: 'tooltip' }"
-              :title="t('action.more')"
-              :svg="IconMoreVertical"
-            />
+          <ButtonSecondary
+            v-tippy="{ theme: 'tooltip' }"
+            :title="t('action.more')"
+            :svg="IconMoreVertical"
+          />
           <template #content="{ hide }">
             <div class="flex flex-col" role="menu">
               <SmartItem
-                icon="assignment_returned"
+                :svg="IconGithub"
                 :label="t('import.from_gist')"
                 @click.native="
                   () => {
@@ -44,7 +44,7 @@
                       ? true
                       : false
                   "
-                  icon="assignment_turned_in"
+                  :svg="IconGithub"
                   :label="t('export.create_secret_gist')"
                   @click.native="
                     () => {
@@ -91,6 +91,7 @@ import axios from "axios"
 import IconMoreVertical from "~icons/lucide/more-vertical"
 import IconFolderPlus from "~icons/lucide/folder-plus"
 import IconDownload from "~icons/lucide/download"
+import IconGithub from "~icons/lucide/github"
 import { computed, ref } from "vue"
 import { currentUser$ } from "~/helpers/fb/auth"
 import { useI18n } from "@composables/i18n"
