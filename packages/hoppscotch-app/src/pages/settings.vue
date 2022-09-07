@@ -256,7 +256,7 @@ const toast = useToast()
 const colorMode = useColorMode()
 
 usePageHead({
-  title: computed(() => t("navigation.settings"))
+  title: computed(() => t("navigation.settings")),
 })
 
 const ACCENT_COLOR = useSetting("THEME_COLOR")
@@ -349,5 +349,6 @@ const getColorModeName = (colorMode: string) => {
 </script>
 
 <route lang="yaml">
-layout: default
+meta:
+  layout: default
 </route>

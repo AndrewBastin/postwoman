@@ -72,5 +72,6 @@ watch(
 </script>
 
 <route lang="yaml">
-layout: default
+meta:
+  layout: default
 </route>
