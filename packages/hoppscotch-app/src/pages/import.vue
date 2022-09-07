@@ -8,12 +8,14 @@ import * as TO from "fp-ts/TaskOption"
 import * as TE from "fp-ts/TaskEither"
 import * as RA from "fp-ts/ReadonlyArray"
 
-import { useRoute, useRouter, onMounted } from "@nuxtjs/composition-api"
+import { onMounted } from "vue"
+import { useRoute, useRouter } from "vue-router"
 import * as E from "fp-ts/Either"
 import { pipe } from "fp-ts/function"
 import { HoppRESTRequest, HoppCollection } from "@hoppscotch/data"
 import { appendRESTCollections } from "~/newstore/collections"
-import { useToast, useI18n } from "~/helpers/utils/composables"
+import { useI18n } from "@composables/i18n"
+import { useToast } from "@composables/toast"
 import { URLImporters } from "~/helpers/import-export/import/importers"
 import { IMPORTER_INVALID_FILE_FORMAT } from "~/helpers/import-export/import"
 import { OPENAPI_DEREF_ERROR } from "~/helpers/import-export/import/openapi"
@@ -62,7 +64,7 @@ const importCollections = (url: unknown, type: unknown) =>
 type ImportCollectionsError = TELeftType<ReturnType<typeof importCollections>>
 
 onMounted(async () => {
-  const { query } = route.value
+  const { query } = route
 
   const url = query.url
   const type = query.type
