@@ -6,10 +6,10 @@
     >
       <i class="pb-2 opacity-75 material-icons">error_outline</i>
       <h1 class="text-center heading">
-        {{ $t("team.invalid_invite_link") }}
+        {{ t("team.invalid_invite_link") }}
       </h1>
       <p class="mt-2 text-center">
-        {{ $t("team.invalid_invite_link_description") }}
+        {{ t("team.invalid_invite_link_description") }}
       </p>
     </div>
     <div
@@ -22,10 +22,10 @@
       v-else-if="currentUser === null"
       class="flex flex-col items-center justify-center flex-1 p-4"
     >
-      <h1 class="heading">{{ $t("team.login_to_continue") }}</h1>
-      <p class="mt-2">{{ $t("team.login_to_continue_description") }}</p>
+      <h1 class="heading">{{ t("team.login_to_continue") }}</h1>
+      <p class="mt-2">{{ t("team.login_to_continue_description") }}</p>
       <ButtonPrimary
-        :label="$t('auth.login_to_hoppscotch')"
+        :label="t('auth.login_to_hoppscotch')"
         class="mt-8"
         @click.native="showLogin = true"
       />
@@ -50,7 +50,7 @@
             class="flex flex-col items-center p-4 mt-8 border rounded border-dividerLight"
           >
             <span class="mb-4">
-              {{ $t("team.logout_and_try_again") }}
+              {{ t("team.logout_and_try_again") }}
             </span>
             <span class="flex">
               <FirebaseLogout
@@ -70,14 +70,14 @@
         >
           <h1 class="heading">
             {{
-              $t("team.join_team", {
+              t("team.join_team", {
                 team: inviteDetails.data.right.teamInvitation.team.name,
               })
             }}
           </h1>
           <p class="mt-2 text-secondaryLight">
             {{
-              $t("team.invited_to_team", {
+              t("team.invited_to_team", {
                 owner:
                   inviteDetails.data.right.teamInvitation.creator.displayName,
                 team: inviteDetails.data.right.teamInvitation.team.name,
@@ -87,7 +87,7 @@
           <div class="mt-8">
             <ButtonPrimary
               :label="
-                $t('team.join_team', {
+                t('team.join_team', {
                   team: inviteDetails.data.right.teamInvitation.team.name,
                 })
               "
@@ -107,20 +107,25 @@
         >
           <h1 class="heading">
             {{
-              $t("team.joined_team", {
+              t("team.joined_team", {
                 team: inviteDetails.data.right.teamInvitation.team.name,
               })
             }}
           </h1>
           <p class="mt-2 text-secondaryLight">
             {{
-              $t("team.joined_team_description", {
+              t("team.joined_team_description", {
                 team: inviteDetails.data.right.teamInvitation.team.name,
               })
             }}
           </p>
           <div class="mt-8">
-            <ButtonSecondary to="/" svg="home" filled :label="$t('app.home')" />
+            <ButtonSecondary
+              to="/"
+              :svg="IconHome"
+              filled
+              :label="t('app.home')"
+            />
           </div>
         </div>
       </div>
@@ -137,11 +142,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, useRoute } from "@nuxtjs/composition-api"
+import { computed, defineComponent } from "vue"
+import { useRoute } from "vue-router"
 import * as E from "fp-ts/Either"
 import * as TE from "fp-ts/TaskEither"
 import { pipe } from "fp-ts/function"
-import { GQLError, useGQLQuery } from "~/helpers/backend/GQLClient"
+import { GQLError } from "~/helpers/backend/GQLClient"
+import { useGQLQuery } from "@composables/graphql"
 import {
   GetInviteDetailsDocument,
   GetInviteDetailsQuery,
@@ -149,8 +156,12 @@ import {
 } from "~/helpers/backend/graphql"
 import { acceptTeamInvitation } from "~/helpers/backend/mutations/TeamInvitation"
 import { initializeFirebase } from "~/helpers/fb"
-import { currentUser$, onLoggedIn, probableUser$ } from "~/helpers/fb/auth"
-import { useReadonlyStream } from "~/helpers/utils/composables"
+import { currentUser$, probableUser$ } from "~/helpers/fb/auth"
+import { onLoggedIn } from "@composables/auth"
+import { useReadonlyStream } from "@composables/stream"
+import { useToast } from "@composables/toast"
+import { useI18n } from "~/composables/i18n"
+import IconHome from "~icons/lucide/home"
 
 type GetInviteDetailsError =
   | "team_invite/not_valid_viewer"
@@ -172,15 +183,15 @@ export default defineComponent({
     >({
       query: GetInviteDetailsDocument,
       variables: {
-        inviteID: route.value.query.id as string,
+        inviteID: route.query.id as string,
       },
       defer: true,
     })
 
     onLoggedIn(() => {
-      if (typeof route.value.query.id === "string") {
+      if (typeof route.query.id === "string") {
         inviteDetails.execute({
-          inviteID: route.value.query.id,
+          inviteID: route.query.id,
         })
       }
     })
@@ -199,6 +210,8 @@ export default defineComponent({
       inviteDetails,
       loadingCurrentUser,
       currentUser,
+      toast: useToast(),
+      t: useI18n(),
     }
   },
   data() {
@@ -230,7 +243,7 @@ export default defineComponent({
         TE.matchW(
           () => {
             this.loading = false
-            this.$toast.error(`${this.$t("error.something_went_wrong")}`)
+            this.toast.error(`${this.t("error.something_went_wrong")}`)
           },
           () => {
             this.joinTeamSuccess = true
@@ -241,21 +254,21 @@ export default defineComponent({
     },
     getErrorMessage(error: GQLError<GetInviteDetailsError>) {
       if (error.type === "network_error") {
-        return this.$t("error.network_error")
+        return this.t("error.network_error")
       } else {
         switch (error.error) {
           case "team_invite/not_valid_viewer":
-            return this.$t("team.not_valid_viewer")
+            return this.t("team.not_valid_viewer")
           case "team_invite/not_found":
-            return this.$t("team.not_found")
+            return this.t("team.not_found")
           case "team_invite/no_invite_found":
-            return this.$t("team.no_invite_found")
+            return this.t("team.no_invite_found")
           case "team_invite/already_member":
-            return this.$t("team.already_member")
+            return this.t("team.already_member")
           case "team_invite/email_do_not_match":
-            return this.$t("team.email_do_not_match")
+            return this.t("team.email_do_not_match")
           default:
-            return this.$t("error.something_went_wrong")
+            return this.t("error.something_went_wrong")
         }
       }
     },
