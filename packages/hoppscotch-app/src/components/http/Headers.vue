@@ -163,7 +163,7 @@
               readonly
             />
             <SmartEnvInput
-              :value="mask(header)"
+              :model-value="mask(header)"
               :placeholder="`${t('count.value', { count: index + 1 })}`"
               readonly
             />
