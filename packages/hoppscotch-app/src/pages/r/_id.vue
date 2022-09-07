@@ -6,10 +6,10 @@
     >
       <i class="pb-2 opacity-75 material-icons">error_outline</i>
       <h1 class="text-center heading">
-        {{ $t("error.invalid_link") }}
+        {{ t("error.invalid_link") }}
       </h1>
       <p class="mt-2 text-center">
-        {{ $t("error.invalid_link_description") }}
+        {{ t("error.invalid_link_description") }}
       </p>
     </div>
     <div v-else class="flex flex-col items-center justify-center flex-1 p-4">
@@ -26,16 +26,21 @@
         >
           <i class="pb-2 opacity-75 material-icons">error_outline</i>
           <h1 class="text-center heading">
-            {{ $t("error.invalid_link") }}
+            {{ t("error.invalid_link") }}
           </h1>
           <p class="mt-2 text-center">
-            {{ $t("error.invalid_link_description") }}
+            {{ t("error.invalid_link_description") }}
           </p>
           <p class="mt-4">
-            <ButtonSecondary to="/" svg="home" filled :label="$t('app.home')" />
             <ButtonSecondary
-              svg="refresh-cw"
-              :label="$t('app.reload')"
+              to="/"
+              :svg="IconHome"
+              filled
+              :label="t('app.home')"
+            />
+            <ButtonSecondary
+              :svg="IconRefreshCW"
+              :label="t('app.reload')"
               filled
               @click.native="reloadApplication"
             />
@@ -46,7 +51,7 @@
           class="flex flex-col items-center justify-center flex-1 p-4"
         >
           <h1 class="heading">
-            {{ $t("state.loading") }}
+            {{ t("state.loading") }}
           </h1>
         </div>
       </div>
@@ -55,16 +60,12 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  useContext,
-  useRoute,
-  useRouter,
-  watch,
-} from "@nuxtjs/composition-api"
+import { defineComponent, watch } from "vue"
+import { useRoute, useRouter } from "vue-router"
 import * as E from "fp-ts/Either"
 import { safelyExtractRESTRequest } from "@hoppscotch/data"
-import { useGQLQuery } from "~/helpers/backend/GQLClient"
+import { useGQLQuery } from "@composables/graphql"
+import { useI18n } from "@composables/i18n"
 import {
   ResolveShortcodeDocument,
   ResolveShortcodeQuery,
@@ -72,11 +73,15 @@ import {
 } from "~/helpers/backend/graphql"
 import { getDefaultRESTRequest, setRESTRequest } from "~/newstore/RESTSession"
 
+import IconHome from "~icons/lucide/home"
+import IconRefreshCW from "~icons/lucide/refresh-cw"
+
 export default defineComponent({
   setup() {
     const route = useRoute()
     const router = useRouter()
-    const { localePath } = useContext() as any
+
+    const t = useI18n()
 
     const shortcodeDetails = useGQLQuery<
       ResolveShortcodeQuery,
@@ -85,7 +90,7 @@ export default defineComponent({
     >({
       query: ResolveShortcodeDocument,
       variables: {
-        code: route.value.params.id as string,
+        code: route.params.id as string,
       },
     })
 
@@ -105,7 +110,7 @@ export default defineComponent({
             safelyExtractRESTRequest(request, getDefaultRESTRequest())
           )
 
-          router.push({ path: localePath("/") })
+          router.push({ path: "/" })
         }
       }
     )
@@ -118,6 +123,7 @@ export default defineComponent({
       E,
       shortcodeDetails,
       reloadApplication,
+      t,
     }
   },
   data() {
