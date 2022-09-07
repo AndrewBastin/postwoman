@@ -7,13 +7,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api"
+import { defineComponent } from "vue"
 import { initializeFirebase } from "~/helpers/fb"
 import { isSignInWithEmailLink, signInWithEmailLink } from "~/helpers/fb/auth"
 import { getLocalConfig, removeLocalConfig } from "~/newstore/localpersistence"
 
 export default defineComponent({
-  layout: "empty",
   data() {
     return {
       signingInWithEmail: false,
@@ -51,3 +50,8 @@ export default defineComponent({
   },
 })
 </script>
+
+<route lang="yaml">
+meta:
+  layout: empty
+</route>
