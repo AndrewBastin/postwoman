@@ -61,6 +61,7 @@ import { RouterView, useRouter } from "vue-router"
 import { useSetting } from "@composables/settings"
 import { defineActionHandler } from "~/helpers/actions"
 import { hookKeybindingsListener } from "~/helpers/keybindings"
+import { applySetting } from "~/newstore/settings"
 
 const router = useRouter()
 
@@ -133,6 +134,22 @@ defineActionHandler("navigation.jump.settings", () => {
 
 defineActionHandler("navigation.jump.profile", () => {
   router.push({ path: "/profile" })
+})
+
+defineActionHandler("settings.theme.system", () => {
+  applySetting("BG_COLOR", "system")
+})
+
+defineActionHandler("settings.theme.light", () => {
+  applySetting("BG_COLOR", "light")
+})
+
+defineActionHandler("settings.theme.dark", () => {
+  applySetting("BG_COLOR", "dark")
+})
+
+defineActionHandler("settings.theme.black", () => {
+  applySetting("BG_COLOR", "black")
 })
 
 hookKeybindingsListener()

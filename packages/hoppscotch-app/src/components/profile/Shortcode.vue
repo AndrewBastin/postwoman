@@ -1,37 +1,23 @@
 <template>
   <div
-    class="table-row-groups lg:flex block my-6 lg:my-0 w-full border lg:border-0 divide-y lg:divide-y-0 lg:divide-x divide-dividerLight border-dividerLight"
+    class="lg:flex block my-6 lg:my-0 w-full border lg:border-0 divide-y lg:divide-y-0 lg:divide-x divide-dividerLight border-dividerLight"
   >
-    <div
-      class="table-column font-mono text-tiny"
-      :data-label="t('shortcodes.short_code')"
-    >
+    <div class="font-mono text-tiny table-box">
       {{ shortcode.id }}
     </div>
-    <div
-      class="table-column"
-      :class="requestLabelColor"
-      :data-label="t('shortcodes.method')"
-    >
+    <div class="table-box" :class="requestLabelColor">
       {{ parseShortcodeRequest.method }}
     </div>
-    <div class="table-column" :data-label="t('shortcodes.url')">
+    <div class="table-box">
       {{ parseShortcodeRequest.endpoint }}
     </div>
-    <div
-      ref="timeStampRef"
-      class="table-column"
-      :data-label="t('shortcodes.created_on')"
-    >
+    <div ref="timeStampRef" class="table-box">
       <span v-tippy="{ theme: 'tooltip' }" :title="timeStamp">
         {{ dateStamp }}
       </span>
     </div>
-    <div
-      class="flex flex-1 items-center justify-center px-3"
-      :data-label="t('shortcodes.actions')"
-    >
-      <SmartAnchor
+    <div class="justify-center table-box">
+      <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.open_workspace')"
         :to="`https://hopp.sh/r/${shortcode.id}`"
@@ -129,14 +115,8 @@ const copyShortcode = (codeID: string) => {
 }
 </script>
 
-<style lang="scss">
-.table-column {
-  @apply flex flex-1 items-center px-3 py-3 truncate;
-}
-
-.table-row-groups {
-  .table-column {
-    @apply before:text-secondary before:font-bold before:content-[attr(data-label)] lg:before:hidden;
-  }
+<style lang="scss" scoped>
+.table-box {
+  @apply flex flex-1 items-center px-4 py-1 truncate;
 }
 </style>

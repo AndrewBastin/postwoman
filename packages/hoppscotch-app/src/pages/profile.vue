@@ -216,26 +216,22 @@
                     </div>
                     <div v-else-if="!loading">
                       <div
-                        class="bg-primaryLight hidden lg:flex rounded-t w-full"
+                        class="bg-primaryLight hidden lg:flex rounded-t w-full border-x border-t border-dividerLight"
                       >
-                        <div
-                          class="flex w-full overflow-y-scroll lg:divide-x divide-primaryLight"
-                        >
-                          <div class="flex flex-1 p-3 font-semibold">
+                        <div class="flex w-full overflow-y-scroll">
+                          <div class="table-box">
                             {{ t("shortcodes.short_code") }}
                           </div>
-                          <div class="flex flex-1 p-3 font-semibold">
+                          <div class="table-box">
                             {{ t("shortcodes.method") }}
                           </div>
-                          <div class="flex flex-1 p-3 font-semibold">
+                          <div class="table-box">
                             {{ t("shortcodes.url") }}
                           </div>
-                          <div class="flex flex-1 p-3 font-semibold">
+                          <div class="table-box">
                             {{ t("shortcodes.created_on") }}
                           </div>
-                          <div
-                            class="flex flex-1 p-3 font-semibold justify-center"
-                          >
+                          <div class="justify-center table-box">
                             {{ t("shortcodes.actions") }}
                           </div>
                         </div>
@@ -243,25 +239,23 @@
                       <div
                         class="w-full max-h-sm flex flex-col items-center justify-between overflow-y-scroll rounded lg:rounded-t-none border lg:divide-y border-dividerLight divide-dividerLight"
                       >
-                        <div class="flex flex-col h-auto h-full w-full">
-                          <ProfileShortcode
-                            v-for="(shortcode, shortcodeIndex) in myShortcodes"
-                            :key="`shortcode-${shortcodeIndex}`"
-                            :shortcode="shortcode"
-                            @delete-shortcode="deleteShortcode"
-                          />
-                          <SmartIntersection
-                            v-if="hasMoreShortcodes && myShortcodes.length > 0"
-                            @intersecting="loadMoreShortcodes()"
+                        <ProfileShortcode
+                          v-for="(shortcode, shortcodeIndex) in myShortcodes"
+                          :key="`shortcode-${shortcodeIndex}`"
+                          :shortcode="shortcode"
+                          @delete-shortcode="deleteShortcode"
+                        />
+                        <SmartIntersection
+                          v-if="hasMoreShortcodes && myShortcodes.length > 0"
+                          @intersecting="loadMoreShortcodes()"
+                        >
+                          <div
+                            v-if="adapterLoading"
+                            class="flex flex-col items-center py-3"
                           >
-                            <div
-                              v-if="adapterLoading"
-                              class="flex flex-col items-center py-3"
-                            >
-                              <SmartSpinner />
-                            </div>
-                          </SmartIntersection>
-                        </div>
+                            <SmartSpinner />
+                          </div>
+                        </SmartIntersection>
                       </div>
                     </div>
                     <div
@@ -285,6 +279,12 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.table-box {
+  @apply flex flex-1 items-center px-4 py-2 truncate;
+}
+</style>
 
 <script setup lang="ts">
 import { ref, defineComponent, watchEffect, computed } from "vue"
@@ -324,7 +324,7 @@ const toast = useToast()
 const colorMode = useColorMode()
 
 usePageHead({
-  title: computed(() => t("navigation.profile"))
+  title: computed(() => t("navigation.profile")),
 })
 
 const showLogin = ref(false)
