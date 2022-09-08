@@ -140,6 +140,7 @@ declare module '@vue/runtime-core' {
     SmartTab: typeof import('./src/components/smart/Tab.vue')['default']
     SmartTabs: typeof import('./src/components/smart/Tabs.vue')['default']
     SmartToggle: typeof import('./src/components/smart/Toggle.vue')['default']
+    TabPrimary: typeof import('./src/components/tab/Primary.vue')['default']
     TabSecondary: typeof import('./src/components/tab/Secondary.vue')['default']
     Teams: typeof import('./src/components/teams/index.vue')['default']
     TeamsAdd: typeof import('./src/components/teams/Add.vue')['default']

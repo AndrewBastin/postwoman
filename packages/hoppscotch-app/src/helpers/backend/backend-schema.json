@@ -446,6 +446,17 @@
             ]
           },
           {
+            "name": "deleteUser",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
             "name": "importCollectionFromUserFirestore",
             "type": {
               "kind": "NON_NULL",
@@ -1637,6 +1648,18 @@
                 }
               }
             ]
+          },
+          {
+            "name": "userDeleted",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "args": []
           }
         ],
         "interfaces": []

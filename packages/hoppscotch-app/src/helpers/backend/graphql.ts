@@ -60,6 +60,8 @@ export type Mutation = {
   deleteTeam: Scalars['Boolean'];
   /** Delete a Team Environment for given Team ID */
   deleteTeamEnvironment: Scalars['Boolean'];
+  /** Delete an user account */
+  deleteUser: Scalars['Boolean'];
   /** Import collection from user firestore */
   importCollectionFromUserFirestore: TeamCollection;
   /** Import collections from JSON string to the specified Team */
@@ -404,6 +406,8 @@ export type Subscription = {
   teamRequestDeleted: Scalars['ID'];
   /** Emitted when a request has been updated */
   teamRequestUpdated: TeamRequest;
+  /** Listen for user deletion */
+  userDeleted: User;
 };
 
 
@@ -1108,6 +1112,7 @@ export type GraphCacheOptimisticUpdaters = {
   deleteRequest?: GraphCacheOptimisticMutationResolver<MutationDeleteRequestArgs, Scalars['Boolean']>,
   deleteTeam?: GraphCacheOptimisticMutationResolver<MutationDeleteTeamArgs, Scalars['Boolean']>,
   deleteTeamEnvironment?: GraphCacheOptimisticMutationResolver<MutationDeleteTeamEnvironmentArgs, Scalars['Boolean']>,
+  deleteUser?: GraphCacheOptimisticMutationResolver<Record<string, never>, Scalars['Boolean']>,
   importCollectionFromUserFirestore?: GraphCacheOptimisticMutationResolver<MutationImportCollectionFromUserFirestoreArgs, WithTypename<TeamCollection>>,
   importCollectionsFromJSON?: GraphCacheOptimisticMutationResolver<MutationImportCollectionsFromJsonArgs, Scalars['Boolean']>,
   leaveTeam?: GraphCacheOptimisticMutationResolver<MutationLeaveTeamArgs, Scalars['Boolean']>,
@@ -1140,6 +1145,7 @@ export type GraphCacheUpdaters = {
     deleteRequest?: GraphCacheUpdateResolver<{ deleteRequest: Scalars['Boolean'] }, MutationDeleteRequestArgs>,
     deleteTeam?: GraphCacheUpdateResolver<{ deleteTeam: Scalars['Boolean'] }, MutationDeleteTeamArgs>,
     deleteTeamEnvironment?: GraphCacheUpdateResolver<{ deleteTeamEnvironment: Scalars['Boolean'] }, MutationDeleteTeamEnvironmentArgs>,
+    deleteUser?: GraphCacheUpdateResolver<{ deleteUser: Scalars['Boolean'] }, Record<string, never>>,
     importCollectionFromUserFirestore?: GraphCacheUpdateResolver<{ importCollectionFromUserFirestore: WithTypename<TeamCollection> }, MutationImportCollectionFromUserFirestoreArgs>,
     importCollectionsFromJSON?: GraphCacheUpdateResolver<{ importCollectionsFromJSON: Scalars['Boolean'] }, MutationImportCollectionsFromJsonArgs>,
     leaveTeam?: GraphCacheUpdateResolver<{ leaveTeam: Scalars['Boolean'] }, MutationLeaveTeamArgs>,
@@ -1170,7 +1176,8 @@ export type GraphCacheUpdaters = {
     teamMemberUpdated?: GraphCacheUpdateResolver<{ teamMemberUpdated: WithTypename<TeamMember> }, SubscriptionTeamMemberUpdatedArgs>,
     teamRequestAdded?: GraphCacheUpdateResolver<{ teamRequestAdded: WithTypename<TeamRequest> }, SubscriptionTeamRequestAddedArgs>,
     teamRequestDeleted?: GraphCacheUpdateResolver<{ teamRequestDeleted: Scalars['ID'] }, SubscriptionTeamRequestDeletedArgs>,
-    teamRequestUpdated?: GraphCacheUpdateResolver<{ teamRequestUpdated: WithTypename<TeamRequest> }, SubscriptionTeamRequestUpdatedArgs>
+    teamRequestUpdated?: GraphCacheUpdateResolver<{ teamRequestUpdated: WithTypename<TeamRequest> }, SubscriptionTeamRequestUpdatedArgs>,
+    userDeleted?: GraphCacheUpdateResolver<{ userDeleted: WithTypename<User> }, Record<string, never>>
   },
 };
 

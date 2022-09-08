@@ -54,7 +54,7 @@ watch(
   (updateRoute) => {
     const path = updateRoute.path
 
-    if (path.endsWith("realtime")) {
+    if (updateRoute.name?.toString() === "realtime") {
       router.replace(`/realtime/websocket`)
       return
     }
