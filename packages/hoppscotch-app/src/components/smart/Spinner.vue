@@ -1,3 +1,3 @@
 <template>
-  <icon-hopp-loader class="animate-spin svg-icons" />
+  <icon-lucide-loader class="animate-spin svg-icons" />
 </template>

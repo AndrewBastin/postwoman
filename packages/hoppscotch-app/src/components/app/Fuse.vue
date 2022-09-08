@@ -1,14 +1,16 @@
 <template>
-  <div key="outputHash" class="flex flex-col">
-    <AppPowerSearchEntry
-      v-for="(shortcut, shortcutIndex) in searchResults"
-      :key="`shortcut-${shortcutIndex}`"
-      :ref="`item-${shortcutIndex}`"
-      :active="shortcutIndex === selectedEntry"
-      :shortcut="shortcut.item"
-      @action="emit('action', shortcut.item.action)"
-      @mouseover.native="selectedEntry = shortcutIndex"
-    />
+  <div key="outputHash" class="flex flex-col flex-1 overflow-auto">
+    <div class="flex flex-col">
+      <AppPowerSearchEntry
+        v-for="(shortcut, shortcutIndex) in searchResults"
+        :key="`shortcut-${shortcutIndex}`"
+        :ref="`item-${shortcutIndex}`"
+        :active="shortcutIndex === selectedEntry"
+        :shortcut="shortcut.item"
+        @action="emit('action', shortcut.item.action)"
+        @mouseover.native="selectedEntry = shortcutIndex"
+      />
+    </div>
     <div
       v-if="searchResults.length === 0"
       class="flex flex-col items-center justify-center p-4 text-secondaryLight"

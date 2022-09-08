@@ -16,7 +16,7 @@
       :title="`${color.charAt(0).toUpperCase()}${color.slice(1)}`"
       :class="[{ 'bg-primaryLight': color === active }]"
       class="rounded"
-      :icon="IconCircle"
+      :icon="color === active ? IconCircleDot : IconCircle"
       :color="color"
       @click.native="setActiveColor(color)"
     />
@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import IconCircle from "~icons/lucide/circle"
+import IconCircleDot from "~icons/lucide/circle-dot"
 import {
   HoppAccentColors,
   HoppAccentColor,
