@@ -72,11 +72,11 @@ const resolveCurrentLocale = () => pipe(
  * @param locale The locale code of the language to load
  */
 export const changeAppLanguage = async (locale: string) => {
-  const localeData = await pipe(
+  const localeData = (await pipe(
     LOCALES,
     R.lookup(`../../locales/${locale}.json`),
     O.getOrElseW(() => throwError(`Tried to change app language to non-existent locale '${locale}'`))
-  )()
+  )() as any).default
 
   if (!i18nInstance) {
     throw new Error("Tried to change language without active i18n instance")

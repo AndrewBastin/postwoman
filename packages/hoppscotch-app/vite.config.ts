@@ -2,7 +2,7 @@ import { defineConfig } from "vite"
 import { META_TAGS } from "./meta"
 import HtmlConfig from "vite-plugin-html-config"
 import Vue from "@vitejs/plugin-vue"
-import VueI18n from "@intlify/unplugin-vue-i18n/vite"
+import VueI18n from "@intlify/vite-plugin-vue-i18n"
 import Components from "unplugin-vue-components/vite"
 import Icons from "unplugin-icons/vite"
 import Inspect from "vite-plugin-inspect"
@@ -131,7 +131,9 @@ export default defineConfig({
       defaultLayout: "default",
     }),
     VueI18n({
-      include: path.resolve(__dirname, "./locales"),
+      runtimeOnly: true,
+      compositionOnly: true,
+      include: [path.resolve(__dirname, "locales")],
     }),
     WindiCSS(),
     Components({
