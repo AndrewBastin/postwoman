@@ -44,6 +44,9 @@ export default defineConfig({
     // For 'util' polyfill required by dep of '@apidevtools/swagger-parser'
     "process.env": {},
   },
+  server: {
+    port: 3000
+  },
   optimizeDeps: {
     include: ["@hoppscotch/data"],
 
