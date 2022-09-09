@@ -2,6 +2,7 @@ import { createApp } from "vue"
 import { setupLocalPersistence } from "./newstore/localpersistence"
 import { performMigrations } from "./helpers/migrations"
 import { initializeFirebase } from "./helpers/fb"
+import { initUserInfo } from "./helpers/teams/BackendUserInfo"
 import { HOPP_MODULES } from "@modules/."
 
 import "virtual:windi.css"
@@ -17,7 +18,7 @@ const app = createApp(App)
 initializeFirebase()
 setupLocalPersistence()
 performMigrations()
-
+initUserInfo()
 
 HOPP_MODULES.forEach((mod) => mod.onVueAppInit?.(app))
 
