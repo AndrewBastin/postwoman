@@ -2,6 +2,11 @@
   <div class="flex flex-col group">
     <div class="flex items-center">
       <span
+        v-tippy="{
+          theme: 'tooltip',
+          delay: [500, 20],
+          content: entry.updatedOn ? shortDateTime(entry.updatedOn) : null,
+        }"
         class="flex flex-1 min-w-0 py-2 pl-4 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
         data-testid="restore_history_entry"
         @click="useEntry"
@@ -9,12 +14,6 @@
         <span class="truncate">
           {{ entry.request.url }}
         </span>
-        <tippy
-          v-if="entry.updatedOn"
-          theme="tooltip"
-          :delay="[500, 20]"
-          :content="`${new Date(entry.updatedOn).toLocaleString()}`"
-        />
       </span>
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
@@ -61,6 +60,7 @@ import { makeGQLRequest } from "@hoppscotch/data"
 import { cloneDeep } from "lodash"
 import { setGQLSession } from "~/newstore/GQLSession"
 import { GQLHistoryEntry } from "~/newstore/history"
+import { shortDateTime } from "~/helpers/utils/date"
 
 import IconStar from "~icons/lucide/star"
 import IconStarOff from "~icons/lucide/star-off"

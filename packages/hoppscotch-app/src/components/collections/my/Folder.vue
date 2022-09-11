@@ -57,7 +57,6 @@
               :title="t('action.more')"
               :svg="IconMoreVertical"
             />
-
             <template #content="{ hide }">
               <div
                 ref="tippyActions"

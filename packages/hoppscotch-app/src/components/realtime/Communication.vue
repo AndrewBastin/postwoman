@@ -31,9 +31,13 @@
               class="pr-8 ml-2 rounded-none"
             />
           </span>
-
           <template #content="{ hide }">
-            <div class="flex flex-col" role="menu">
+            <div
+              class="flex flex-col"
+              tabindex="0"
+              role="menu"
+              @keyup.escape="hide()"
+            >
               <SmartItem
                 v-for="(contentTypeItem, index) in validContentTypes"
                 :key="`contentTypeItem-${index}`"

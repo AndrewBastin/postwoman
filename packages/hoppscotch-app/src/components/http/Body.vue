@@ -16,17 +16,19 @@
         >
           <span class="select-wrapper">
             <ButtonSecondary
-              :label="contentType || t('state.none').toLowerCase()"
+              :label="contentType || t('state.none')"
               class="pr-8 ml-2 rounded-none"
             />
           </span>
           <template #content="{ hide }">
             <div
               class="flex flex-col space-y-1 divide-y divide-dividerLight"
+              tabindex="0"
               role="menu"
+              @keyup.escape="hide()"
             >
               <SmartItem
-                :label="t('state.none').toLowerCase()"
+                :label="t('state.none')"
                 :info-icon="contentType === null ? IconDone : null"
                 :active-info-icon="contentType === null"
                 @click.native="

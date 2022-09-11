@@ -18,7 +18,12 @@
             <ButtonSecondary class="pr-8 ml-2 rounded-none" :label="authName" />
           </span>
           <template #content="{ hide }">
-            <div class="flex flex-col" role="menu">
+            <div
+              class="flex flex-col"
+              tabindex="0"
+              role="menu"
+              @keyup.escape="hide()"
+            >
               <SmartItem
                 label="None"
                 :icon="authName === 'None' ? IconCircleDot : IconCircle"
@@ -179,7 +184,12 @@
                 />
               </span>
               <template #content="{ hide }">
-                <div class="flex flex-col" role="menu">
+                <div
+                  class="flex flex-col"
+                  tabindex="0"
+                  role="menu"
+                  @keyup.escape="hide()"
+                >
                   <SmartItem
                     :icon="addTo === 'Headers' ? IconCircleDot : IconCircle"
                     :active="addTo === 'Headers'"

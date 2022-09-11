@@ -12,7 +12,12 @@
         />
       </span>
       <template #content="{ hide }">
-        <div class="flex flex-col" role="menu">
+        <div
+          class="flex flex-col"
+          tabindex="0"
+          role="menu"
+          @keyup.escape="hide()"
+        >
           <SmartLink
             v-for="locale in APP_LANGUAGES"
             :key="`locale-${locale.code}`"

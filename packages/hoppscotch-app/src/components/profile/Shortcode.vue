@@ -12,9 +12,7 @@
       {{ parseShortcodeRequest.endpoint }}
     </div>
     <div ref="timeStampRef" class="table-box">
-      <span v-tippy="{ theme: 'tooltip' }" :title="timeStamp">
-        {{ dateStamp }}
-      </span>
+      {{ dateStamp }}
     </div>
     <div class="justify-center table-box">
       <ButtonSecondary
@@ -56,6 +54,7 @@ import { useI18n } from "@composables/i18n"
 import { useToast } from "@composables/toast"
 import { copyToClipboard } from "~/helpers/utils/clipboard"
 import { Shortcode } from "~/helpers/shortcodes/Shortcode"
+import { shortDateTime } from "~/helpers/utils/date"
 
 import IconTrash from "~icons/lucide/trash"
 import IconExternalLink from "~icons/lucide/external-link"
@@ -101,12 +100,7 @@ const requestLabelColor = computed(() =>
   )
 )
 
-const dateStamp = computed(() =>
-  new Date(props.shortcode.createdOn).toLocaleDateString()
-)
-const timeStamp = computed(() =>
-  new Date(props.shortcode.createdOn).toLocaleTimeString()
-)
+const dateStamp = computed(() => shortDateTime(props.shortcode.createdOn))
 
 const copyShortcode = (codeID: string) => {
   copyToClipboard(`https://hopp.sh/r/${codeID}`)

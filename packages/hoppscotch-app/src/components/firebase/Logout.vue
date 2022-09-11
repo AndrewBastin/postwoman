@@ -1,17 +1,12 @@
 <template>
-  <div class="flex" @click="logoutItem!.click()">
+  <div class="flex" @click="OpenLogoutModal()">
     <SmartItem
       ref="logoutItem"
       :svg="IconLogOut"
       :label="`${t('auth.logout')}`"
       :outline="outline"
       :shortcut="shortcut"
-      @click.native="
-        () => {
-          emit('confirm-logout')
-          confirmLogout = true
-        }
-      "
+      @click.native="OpenLogoutModal()"
     />
     <SmartConfirmModal
       :show="confirmLogout"
@@ -23,11 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import IconLogOut from "~icons/lucide/log-out";
-import { useToast } from "@composables/toast";
-import { useI18n } from "@composables/i18n";
-import { signOutUser } from "~/helpers/fb/auth";
+import { ref } from "vue"
+import IconLogOut from "~icons/lucide/log-out"
+import { useToast } from "@composables/toast"
+import { useI18n } from "@composables/i18n"
+import { signOutUser } from "~/helpers/fb/auth"
 
 defineProps({
   outline: {
@@ -58,5 +53,10 @@ const logout = async () => {
     console.error(e)
     toast.error(`${t("error.something_went_wrong")}`)
   }
+}
+
+const OpenLogoutModal = () => {
+  emit("confirm-logout")
+  confirmLogout.value = true
 }
 </script>

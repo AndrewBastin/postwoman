@@ -12,14 +12,14 @@
           </div>
           <div
             v-if="entry.ts !== undefined"
-            class="items-center hidden px-1 w-18 sm:inline-flex"
+            class="items-center hidden px-1 w-34 sm:inline-flex"
           >
             <span
               v-tippy="{ theme: 'tooltip' }"
               :title="relativeTime"
               class="mx-auto truncate ts-font text-secondaryLight hover:text-secondary hover:text-center"
             >
-              {{ new Date(entry.ts).toLocaleTimeString() }}
+              {{ shortDateTime(entry.ts) }}
             </span>
           </div>
           <div
@@ -116,7 +116,9 @@
                 <div
                   v-if="item.kind === 'ArrayMember'"
                   class="flex flex-col"
+                  tabindex="0"
                   role="menu"
+                  @keyup.escape="hide()"
                 >
                   <SmartItem
                     v-for="(arrayMember, astIndex) in item.astParent.values"
@@ -133,7 +135,9 @@
                 <div
                   v-if="item.kind === 'ObjectMember'"
                   class="flex flex-col"
+                  tabindex="0"
                   role="menu"
+                  @keyup.escape="hide()"
                 >
                   <SmartItem
                     v-for="(objectMember, astIndex) in item.astParent.members"
@@ -216,6 +220,7 @@ import {
   convertIndexToLineCh,
   convertLineChToIndex,
 } from "~/helpers/editor/utils"
+import { shortDateTime } from "~/helpers/utils/date"
 
 const t = useI18n()
 

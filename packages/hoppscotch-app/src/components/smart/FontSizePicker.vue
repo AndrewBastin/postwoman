@@ -14,7 +14,12 @@
         />
       </span>
       <template #content="{ hide }">
-        <div class="flex flex-col" role="menu">
+        <div
+          class="flex flex-col"
+          tabindex="0"
+          role="menu"
+          @keyup.escape="hide()"
+        >
           <SmartItem
             v-for="(size, index) in fontSizes"
             :key="`size-${index}`"

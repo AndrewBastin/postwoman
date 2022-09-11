@@ -91,7 +91,7 @@
                 "
               />
               <template #content="{ hide }">
-                <div class="flex flex-col px-2 text-tiny" role="menu">
+                <div class="flex flex-col px-2 text-tiny">
                   <span class="inline-flex font-semibold truncate">
                     {{ currentUser.displayName }}
                   </span>
@@ -104,6 +104,7 @@
                   ref="tippyActions"
                   class="flex flex-col focus:outline-none"
                   tabindex="0"
+                  role="menu"
                   @keyup.enter="profile.$el.click()"
                   @keyup.s="settings.$el.click()"
                   @keyup.l="logout.$el.click()"

@@ -27,7 +27,6 @@
               class="flex-1 pr-8"
             />
           </span>
-
           <template #content="{ hide }">
             <div class="flex flex-col space-y-2">
               <div class="sticky top-0">
@@ -39,7 +38,12 @@
                   :placeholder="`${t('action.search')}`"
                 />
               </div>
-              <div class="flex flex-col" role="menu">
+              <div
+                class="flex flex-col"
+                tabindex="0"
+                role="menu"
+                @keyup.escape="hide()"
+              >
                 <SmartItem
                   v-for="codegen in filteredCodegenDefinitions"
                   :key="codegen.name"

@@ -13,6 +13,11 @@
       </span>
     </span>
     <span
+      v-tippy="{
+        theme: 'tooltip',
+        delay: [500, 20],
+        content: entry.updatedOn ? shortDateTime(entry.updatedOn) : null,
+      }"
       class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
       data-testid="restore_history_entry"
       @click="$emit('use-entry')"
@@ -20,12 +25,6 @@
       <span class="truncate">
         {{ entry.request.endpoint }}
       </span>
-      <tippy
-        v-if="entry.updatedOn"
-        theme="tooltip"
-        :delay="[500, 20]"
-        :content="`${new Date(entry.updatedOn).toLocaleString()}`"
-      />
     </span>
     <ButtonSecondary
       v-tippy="{ theme: 'tooltip' }"
@@ -53,6 +52,7 @@ import { computed } from "vue"
 import findStatusGroup from "~/helpers/findStatusGroup"
 import { useI18n } from "@composables/i18n"
 import { RESTHistoryEntry } from "~/newstore/history"
+import { shortDateTime } from "~/helpers/utils/date"
 
 import IconStar from "~icons/lucide/star"
 import IconStarOff from "~icons/lucide/star-off"

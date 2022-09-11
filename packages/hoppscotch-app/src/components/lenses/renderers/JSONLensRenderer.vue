@@ -114,7 +114,9 @@
               <div
                 v-if="item.kind === 'ArrayMember'"
                 class="flex flex-col"
+                tabindex="0"
                 role="menu"
+                @keyup.escape="hide()"
               >
                 <SmartItem
                   v-for="(arrayMember, astIndex) in item.astParent.values"
@@ -131,7 +133,9 @@
               <div
                 v-if="item.kind === 'ObjectMember'"
                 class="flex flex-col"
+                tabindex="0"
                 role="menu"
+                @keyup.escape="hide()"
               >
                 <SmartItem
                   v-for="(objectMember, astIndex) in item.astParent.members"
