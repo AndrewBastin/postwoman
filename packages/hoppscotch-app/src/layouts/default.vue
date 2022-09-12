@@ -24,7 +24,11 @@
             >
               <Pane class="flex flex-1 !overflow-auto">
                 <main class="flex flex-1 w-full" role="main">
-                  <router-view class="flex flex-1" />
+                  <router-view class="flex flex-1" v-slot="{ Component }">
+                    <transition name="fade" mode="out-in">
+                      <component :is="Component"></component>
+                    </transition>
+                  </router-view>
                 </main>
               </Pane>
             </Splitpanes>
