@@ -167,56 +167,58 @@
             <SmartEnvInput v-model="apiValue" placeholder="Value" />
           </div>
           <div class="flex items-center border-b border-dividerLight">
-            <label class="ml-4 text-secondaryLight">
-              {{ t("authorization.pass_key_by") }}
-            </label>
-            <tippy
-              ref="addToOptions"
-              interactive
-              trigger="click"
-              theme="popover"
-              arrow
-            >
-              <span class="select-wrapper">
-                <ButtonSecondary
-                  :label="addTo || t('state.none')"
-                  class="pr-8 ml-2 rounded-none"
-                />
-              </span>
-              <template #content="{ hide }">
-                <div
-                  class="flex flex-col"
-                  tabindex="0"
-                  role="menu"
-                  @keyup.escape="hide()"
-                >
-                  <SmartItem
-                    :icon="addTo === 'Headers' ? IconCircleDot : IconCircle"
-                    :active="addTo === 'Headers'"
-                    :label="'Headers'"
-                    @click.native="
-                      () => {
-                        addTo = 'Headers'
-                        hide()
-                      }
-                    "
+            <span class="flex items-center">
+              <label class="ml-4 text-secondaryLight">
+                {{ t("authorization.pass_key_by") }}
+              </label>
+              <tippy
+                ref="addToOptions"
+                interactive
+                trigger="click"
+                theme="popover"
+                arrow
+              >
+                <span class="select-wrapper">
+                  <ButtonSecondary
+                    :label="addTo || t('state.none')"
+                    class="pr-8 ml-2 rounded-none"
                   />
-                  <SmartItem
-                    :icon="
-                      addTo === 'Query params' ? IconCircleDot : IconCircle
-                    "
-                    :active="addTo === 'Query params'"
-                    :label="'Query params'"
-                    @click.native="
-                      () => {
-                        addTo = 'Query params'
-                        hide()
-                      }
-                    "
-                  />
-                </div>
-              </template>
-            </tippy>
+                </span>
+                <template #content="{ hide }">
+                  <div
+                    class="flex flex-col"
+                    tabindex="0"
+                    role="menu"
+                    @keyup.escape="hide()"
+                  >
+                    <SmartItem
+                      :icon="addTo === 'Headers' ? IconCircleDot : IconCircle"
+                      :active="addTo === 'Headers'"
+                      :label="'Headers'"
+                      @click.native="
+                        () => {
+                          addTo = 'Headers'
+                          hide()
+                        }
+                      "
+                    />
+                    <SmartItem
+                      :icon="
+                        addTo === 'Query params' ? IconCircleDot : IconCircle
+                      "
+                      :active="addTo === 'Query params'"
+                      :label="'Query params'"
+                      @click.native="
+                        () => {
+                          addTo = 'Query params'
+                          hide()
+                        }
+                      "
+                    />
+                  </div>
+                </template>
+              </tippy>
+            </span>
           </div>
         </div>
       </div>

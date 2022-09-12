@@ -55,12 +55,12 @@
                 </label>
                 <p class="flex items-center text-secondaryLight">
                   {{ currentUser.email }}
-
                   <icon-lucide-verified
                     v-if="currentUser.emailVerified"
-                    class="ml-2 text-green-500 svg-icons"
+                    v-tippy="{ theme: 'tooltip' }"
+                    :title="t('settings.verified_email')"
+                    class="ml-2 text-green-500 svg-icons cursor-help"
                   />
-
                   <ButtonSecondary
                     v-else
                     :label="t('settings.verify_email')"

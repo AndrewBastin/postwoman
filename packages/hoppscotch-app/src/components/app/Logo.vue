@@ -1,34 +1,24 @@
 <template>
   <svg
-    class="logo"
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    aria-hidden="true"
-    role="img"
-    width="24"
-    height="24"
+    width="1em"
+    height="1em"
     preserveAspectRatio="xMidYMid meet"
     viewBox="0 0 24 24"
   >
-    <path
-      d="M17 10.54C16.78 7.44 14.63 5 12 5s-4.78 2.44-5 5.54C4 11.23 2 12.5 2 14c0 2.21 4.5 4 10 4s10-1.79 10-4c0-1.5-2-2.77-5-3.46m-2.07 1.3c-1.9.21-3.96.21-5.86 0c-.04-.28-.07-.56-.07-.84c0-2.2 1.35-4 3-4s3 1.8 3 4c0 .28 0 .56-.07.84z"
-      fill="currentColor"
-    />
+    <g
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+    >
+      <path
+        d="M16.95 9.01c3.02.739 5.05 2.123 5.05 3.714C22 15.091 17.52 17 12 17S2 15.091 2 12.724C2 11.134 4.04 9.739 7.07 9"
+      />
+      <path
+        d="M7 9c0 1.105 2.239 2 5 2s5-.895 5-2v-.035C17 6.223 14.761 4 12 4S7 6.223 7 8.965V9m8 8l2 3m-8.5-3L7 20m5-6h.01M7 13h.01M17 13h.01"
+      />
+    </g>
   </svg>
 </template>
-
-<style scoped lang="scss">
-.logo {
-  animation: 200ms appear;
-}
-
-@keyframes appear {
-  0% {
-    @apply opacity-0;
-  }
-
-  100% {
-    @apply opacity-100;
-  }
-}
-</style>

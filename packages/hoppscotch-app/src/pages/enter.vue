@@ -1,18 +1,31 @@
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen">
-    <SmartSpinner v-if="signingInWithEmail" />
-    <SmartLoadingIndicator v-else />
-    <pre v-if="error">{{ error }}</pre>
+    <div v-if="signingInWithEmail">
+      <SmartSpinner />
+      <div class="mt-2 text-secondaryLight text-sm">
+        {{ t("state.loading") }}
+      </div>
+    </div>
+    <div v-else class="text-secondaryLight animate-pulse">
+      <AppLogo class="w-8 h-8" />
+    </div>
+    <pre v-if="error" class="mt-4">{{ error }}</pre>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
+import { useI18n } from "@composables/i18n"
 import { initializeFirebase } from "~/helpers/fb"
 import { isSignInWithEmailLink, signInWithEmailLink } from "~/helpers/fb/auth"
 import { getLocalConfig, removeLocalConfig } from "~/newstore/localpersistence"
 
 export default defineComponent({
+  setup() {
+    return {
+      t: useI18n(),
+    }
+  },
   data() {
     return {
       signingInWithEmail: false,

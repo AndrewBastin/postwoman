@@ -320,6 +320,7 @@ pre.ace_editor {
 
       .action {
         @apply relative;
+        @apply flex flex-shrink-0;
         @apply px-4;
         @apply ml-auto;
         @apply last:ml-4;
