@@ -1,3 +1,5 @@
+<!-- The Catch-All Page -->
+<!-- Reserved for Critical Errors and 404 ONLY -->
 <template>
   <div class="page page-error">
     <img
@@ -38,11 +40,11 @@ const props = defineProps({
 })
 
 const statusCode = computed(() =>
-  props.error?.statusCode ?? 500
+  props.error?.statusCode ?? 404
 )
 
 const message = computed(() =>
-  props.error?.message ?? t("error.something_went_wrong")
+  props.error?.message ?? t("error.page_not_found")
 )
 
 const reloadApplication = () => {
