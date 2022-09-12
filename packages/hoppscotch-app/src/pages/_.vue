@@ -29,12 +29,17 @@ import { PropType, computed } from "vue"
 import { useI18n } from "@composables/i18n"
 import { useColorMode } from "@composables/theming"
 
+export type ErrorPageData = {
+  message: string
+  statusCode: number
+}
+
 const colorMode = useColorMode()
 const t = useI18n()
 
 const props = defineProps({
   error: {
-    type: Object as PropType<{ message?: string, statusCode ?: number } | null>,
+    type: Object as PropType<ErrorPageData | null>,
     default: null,
   },
 })
