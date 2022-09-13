@@ -37,7 +37,6 @@
     },
     "types": [
       "unplugin-icons/types/vue",
-      "@intlify/unplugin-plugin-vue-i18n/messages",
       "vite-plugin-vue-layouts/client",
       "vite-plugin-pwa/client"
     ],
@@ -48,7 +47,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "./components.d.ts"
+    "components.d.ts",
+    "src/env.d.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

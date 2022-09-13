@@ -7,6 +7,7 @@ import Components from "unplugin-vue-components/vite"
 import Icons from "unplugin-icons/vite"
 import Inspect from "vite-plugin-inspect"
 import WindiCSS from "vite-plugin-windicss"
+import Checker from "vite-plugin-checker"
 import { VitePWA } from "vite-plugin-pwa"
 import NodePolyfills from "rollup-plugin-polyfill-node"
 import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill"
@@ -45,7 +46,7 @@ export default defineConfig({
     "process.env": {},
   },
   server: {
-    port: 3000
+    port: 3000,
   },
   optimizeDeps: {
     include: ["@hoppscotch/data"],
@@ -121,8 +122,17 @@ export default defineConfig({
   },
   plugins: [
     Inspect(), // go to url -> /__inspect
+    Checker({
+      eslint: {
+        lintCommand: "eslint src --ext .ts,.js,.vue --ignore-path .gitignore .",
+      },
+      overlay: {
+        initialIsOpen: true,
+        position: "br",
+      },
+    }),
     HtmlConfig({
-      metas: META_TAGS
+      metas: META_TAGS,
     }),
     Vue(),
     Pages({
