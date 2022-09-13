@@ -54,8 +54,14 @@
           >
             <span>
               <ButtonSecondary
-                v-tippy="{ theme: 'tooltip', delay: [500, 20] }"
-                :title="t('action.drag')"
+                v-tippy="{
+                  theme: 'tooltip',
+                  delay: [500, 20],
+                  content:
+                    index !== workingParams?.length - 1
+                      ? t('action.drag')
+                      : null,
+                }"
                 :svg="IconGripVertical"
                 class="cursor-auto text-primary hover:text-primary"
                 :class="{
