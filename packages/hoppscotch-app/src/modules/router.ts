@@ -15,10 +15,6 @@ export default <HoppModule>{
     })
 
     router.beforeEach((to, from) => {
-      if (to.path !== from.path) {
-        startPageProgress()
-      }
-
       HOPP_MODULES.forEach((mod) => {
         mod.onBeforeRouteChange?.(to, from, router)
       })
@@ -28,8 +24,6 @@ export default <HoppModule>{
     // module to expose a stream of router events that can be independently
     // subbed to
     router.afterEach((to) => {
-      completePageProgress()
-
       logPageView(to.fullPath)
 
       HOPP_MODULES.forEach((mod) => {
