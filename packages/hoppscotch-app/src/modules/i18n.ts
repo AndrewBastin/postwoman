@@ -16,8 +16,20 @@ import { getLocalConfig, setLocalConfig } from "~/newstore/localpersistence";
   1. Locale -> A locale is termed as the i18n entries present in the /locales folder
   2. Language -> A language is an entry in the /languages.json folder
 
-  Each language entry should correspond to one locale entry for the most part
+  Each language entry should correspond to a locale entry.
 */
+
+/*
+ * As we migrate out of Nuxt I18n into our own system for i18n management,
+ * Some stuff has changed regarding how it works.
+ *
+ * The previous system works by using paths to represent locales to load.
+ * Basically, /es/realtime will load the /realtime page but with 'es' language
+ *
+ * In the new system instead of relying on the lang code, we store the language
+ * in the application local config store (localStorage). The URLs don't have
+ * a locale path effect
+ */
 
 // TODO: Syncing into settings ?
 
@@ -32,8 +44,11 @@ type LanguagesDef = {
 }
 
 const FALLBACK_LANG_CODE = "en"
+
 // TypeScript cannot understand dir is restricted to "ltr" or "rtl" yet, hence assertion
 export const APP_LANGUAGES: LanguagesDef[] = languages as LanguagesDef[]
+
+export const APP_LANG_CODES = languages.map(({ code }) => code)
 
 export const FALLBACK_LANG = pipe(
   APP_LANGUAGES,
@@ -113,5 +128,18 @@ export default <HoppModule>{
     changeAppLanguage(currentLocale)
 
     setLocalConfig("locale", currentLocale)
-  }
+  },
+  onBeforeRouteChange(to, _, router) {
+    // Convert old locale path format to new format
+    const oldLocalePathLangCode = APP_LANG_CODES.find((langCode) =>
+      to.path.startsWith(`/${langCode}/`)
+    )
+
+    // Change language to the correct lang code
+    if (oldLocalePathLangCode) {
+      changeAppLanguage(oldLocalePathLangCode)
+
+      router.replace(to.path.substring(`/${oldLocalePathLangCode}`.length))
+    }
+  },
 }
