@@ -1,6 +1,7 @@
 import { App } from "vue"
 import { pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"
+import { RouteLocationNormalized, Router } from "vue-router"
 
 export type HoppModule = {
   /**
@@ -18,6 +19,17 @@ export type HoppModule = {
    * root component
    */
   onRootSetup?: () => void
+
+  /**
+   * Called by the router to tell all the modules before a route navigation
+   * is made.
+   */
+  onBeforeRouteChange?: (to: RouteLocationNormalized, from: RouteLocationNormalized, router: Router) => void
+
+  /**
+   * Called by the router to tell all the modules that a route navigation has completed
+   */
+  onAfterRouteChange?: (to: RouteLocationNormalized, router: Router) => void
 }
 
 /**

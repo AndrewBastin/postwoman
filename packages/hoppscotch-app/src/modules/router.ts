@@ -1,4 +1,4 @@
-import { HoppModule } from "."
+import { HoppModule, HOPP_MODULES } from "."
 import { createRouter, createWebHistory } from "vue-router"
 import { setupLayouts } from "virtual:generated-layouts"
 import generatedRoutes from "virtual:generated-pages"
@@ -18,6 +18,10 @@ export default <HoppModule>{
       if (to.path !== from.path) {
         startPageProgress()
       }
+
+      HOPP_MODULES.forEach((mod) => {
+        mod.onBeforeRouteChange?.(to, from, router)
+      })
     })
 
     // Instead of this a better architecture is for the router
@@ -27,6 +31,10 @@ export default <HoppModule>{
       completePageProgress()
 
       logPageView(to.fullPath)
+
+      HOPP_MODULES.forEach((mod) => {
+        mod.onAfterRouteChange?.(to, router)
+      })
     })
 
     app.use(router)
