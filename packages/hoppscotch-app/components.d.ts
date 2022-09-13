@@ -131,7 +131,6 @@ declare module '@vue/runtime-core' {
     SmartIntersection: typeof import('./src/components/smart/Intersection.vue')['default']
     SmartItem: typeof import('./src/components/smart/Item.vue')['default']
     SmartLink: typeof import('./src/components/smart/Link.vue')['default']
-    SmartLoadingIndicator: typeof import('./src/components/smart/LoadingIndicator.vue')['default']
     SmartModal: typeof import('./src/components/smart/Modal.vue')['default']
     SmartProgressRing: typeof import('./src/components/smart/ProgressRing.vue')['default']
     SmartRadio: typeof import('./src/components/smart/Radio.vue')['default']

@@ -1,16 +1,18 @@
 <!-- The Catch-All Page -->
 <!-- Reserved for Critical Errors and 404 ONLY -->
 <template>
-  <div class="page page-error">
+  <div class="flex flex-col items-center justify-center">
     <img
       :src="`/images/states/${colorMode.value}/youre_lost.svg`"
       loading="lazy"
-      class="inline-flex flex-col object-contain object-center my-4 h-46 w-46"
+      class="inline-flex flex-col object-contain object-center mb-2 h-46 w-46"
       :alt="message"
     />
-    <h1 class="mb-4 text-4xl heading">{{ statusCode }}</h1>
-    <h3 class="select-text">{{ message }}</h3>
-    <p class="mt-4">
+    <h1 class="mb-2 text-4xl heading">
+      {{ statusCode }}
+    </h1>
+    <p class="mb-4 text-secondaryLight">{{ message }}</p>
+    <p class="mt-4 space-x-2">
       <ButtonSecondary to="/" :svg="IconHome" filled :label="t('app.home')" />
       <ButtonSecondary
         :svg="IconRefreshCW"
@@ -44,29 +46,13 @@ const props = defineProps({
   },
 })
 
-const statusCode = computed(() =>
-  props.error?.statusCode ?? 404
-)
+const statusCode = computed(() => props.error?.statusCode ?? 404)
 
-const message = computed(() =>
-  props.error?.message ?? t("error.page_not_found")
+const message = computed(
+  () => props.error?.message ?? t("error.page_not_found")
 )
 
 const reloadApplication = () => {
   window.location.reload()
 }
 </script>
-
-<style scoped lang="scss">
-.page-error {
-  @apply flex flex-col;
-  @apply items-center;
-  @apply justify-center;
-  @apply text-center;
-}
-
-.error_banner {
-  @apply w-24;
-  @apply mb-12;
-}
-</style>
