@@ -1,9 +1,6 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-pages/client" />
 
-import { TippyComponent } from 'vue-tippy'
-import { PWExtensionHook, HoppExtensionStatusHook } from "./types/pw-ext-hook"
-
 // Environment Variables Intellisense
 interface ImportMetaEnv {
   readonly VITE_GA_ID: string
@@ -29,7 +26,22 @@ interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 
-// Hoppscotch Browser Extension
+// // Hoppscotch Browser Extension
+interface PWExtensionHook {
+  getVersion: () => { major: number; minor: number }
+  sendRequest: (
+    req: AxiosRequestConfig & { wantsBinary: boolean }
+  ) => Promise<NetworkResponse>
+  cancelRunningRequest: () => void
+}
+
+type HoppExtensionStatusHook = {
+  status: ExtensionStatus
+  _subscribers: {
+    status?: ((...args: any[]) => any)[] | undefined
+  }
+  subscribe(prop: "status", func: (...args: any[]) => any): void
+}
 declare global {
   interface Window {
     __POSTWOMAN_EXTENSION_HOOK__: PWExtensionHook | undefined
@@ -45,9 +57,9 @@ declare module '*.vue' {
   export default component
 }
 
-// Tippy
+// // Tippy
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    tippy: TippyComponent
+    tippy: typeof import("vue-tippy")["default"]
   }
 }

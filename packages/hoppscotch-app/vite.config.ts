@@ -150,7 +150,7 @@ export default defineConfig({
     }),
     WindiCSS(),
     Components({
-      dts: true,
+      dts: "./src/components.d.ts",
       directoryAsNamespace: true,
       resolvers: [
         IconResolver({
