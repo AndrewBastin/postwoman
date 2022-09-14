@@ -11,8 +11,8 @@
           {{ t("request.choose_language") }}
         </label>
         <tippy
-          placement="bottom"
           ref="options"
+          placement="bottom"
           interactive
           trigger="click"
           theme="popover"

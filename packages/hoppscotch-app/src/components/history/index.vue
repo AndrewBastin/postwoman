@@ -56,10 +56,10 @@
           />
         </summary>
         <component
-          v-for="(entry, index) in filteredHistoryGroup"
-          :key="`entry-${index}`"
           :is="page == 'rest' ? HistoryRestCard : HistoryGraphqlCard"
+          v-for="(entry, index) in filteredHistoryGroup"
           :id="index"
+          :key="`entry-${index}`"
           :entry="entry.entry"
           :show-more="showMore"
           @toggle-star="toggleStar(entry.entry)"

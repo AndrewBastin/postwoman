@@ -20,14 +20,14 @@
     type="button"
   >
     <component
-      v-if="icon"
       :is="icon"
+      v-if="icon"
       :class="label ? 'mr-4 opacity-75' : ''"
       class="svg-icons"
     />
     <component
-      v-if="svg"
       :is="svg"
+      v-if="svg"
       :class="label ? 'mr-4 opacity-75' : ''"
       class="svg-icons"
     />

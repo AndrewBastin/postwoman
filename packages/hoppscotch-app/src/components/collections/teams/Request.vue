@@ -15,8 +15,8 @@
         @click="selectRequest()"
       >
         <component
-          v-if="isSelected"
           :is="IconCheckCircle"
+          v-if="isSelected"
           class="svg-icons"
           :class="{ 'text-accent': isSelected }"
         />

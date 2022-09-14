@@ -41,9 +41,9 @@
               <span class="flex">
                 <slot name="actions"></slot>
                 <ButtonSecondary
+                  v-if="dimissible"
                   v-tippy="{ theme: 'tooltip', delay: [500, 20] }"
                   :title="t('action.close')"
-                  v-if="dimissible"
                   :svg="IconX"
                   @click="close"
                 />

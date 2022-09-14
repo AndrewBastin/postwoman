@@ -4,15 +4,15 @@
       <router-link
         v-for="(navigation, index) in primaryNavigation"
         :key="`navigation-${index}`"
-        :to="navigation.target"
-        class="nav-link"
-        tabindex="0"
-        :exact="navigation.exact"
         v-tippy="{
           theme: 'tooltip',
           placement: mdAndLarger ? 'right' : 'bottom',
           content: !EXPAND_NAVIGATION ? t(navigation.title) : null,
         }"
+        :to="navigation.target"
+        class="nav-link"
+        tabindex="0"
+        :exact="navigation.exact"
       >
         <div v-if="navigation.svg">
           <component :is="navigation.svg" class="svg-icons" />

@@ -6,7 +6,7 @@
       :key="target"
       :label="title"
     >
-      <router-view />
+      <RouterView />
     </SmartTab>
   </SmartTabs>
 </template>

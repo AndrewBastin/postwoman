@@ -16,6 +16,11 @@
             <button
               v-for="([tabID, tabMeta], index) in tabEntries"
               :key="`tab-${index}`"
+              v-tippy="{
+                theme: 'tooltip',
+                placement: 'left',
+                content: vertical ? tabMeta.label : null,
+              }"
               class="tab"
               :class="[
                 { active: modelValue === tabID },
@@ -25,16 +30,11 @@
               role="button"
               @keyup.enter="selectTab(tabID)"
               @click="selectTab(tabID)"
-              v-tippy="{
-                theme: 'tooltip',
-                placement: 'left',
-                content: vertical ? tabMeta.label : null,
-              }"
             >
               <component
+                :is="tabMeta.icon"
                 v-if="tabMeta.icon"
                 class="svg-icons"
-                :is="tabMeta.icon"
               />
               <span v-else-if="tabMeta.label">{{ tabMeta.label }}</span>
               <span

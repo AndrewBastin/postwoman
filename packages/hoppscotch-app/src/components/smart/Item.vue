@@ -24,8 +24,8 @@
       :class="{ 'self-start': !!infoIcon }"
     >
       <component
-        v-if="icon"
         :is="icon"
+        v-if="icon"
         class="opacity-75 svg-icons"
         :class="[
           label ? (reverse ? 'ml-4' : 'mr-4') : '',
@@ -33,8 +33,8 @@
         ]"
       />
       <component
-        v-if="svg"
         :is="svg"
+        v-if="svg"
         class="opacity-75 svg-icons"
         :class="[
           label ? (reverse ? 'ml-4' : 'mr-4') : '',
@@ -55,8 +55,8 @@
       </p>
     </div>
     <component
-      v-if="infoIcon"
       :is="infoIcon"
+      v-if="infoIcon"
       class="items-center self-center ml-4 svg-icons"
       :class="{ 'text-accent': activeInfoIcon }"
     />

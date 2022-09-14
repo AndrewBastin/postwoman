@@ -21,13 +21,13 @@
           <SmartLink
             v-for="locale in APP_LANGUAGES"
             :key="`locale-${locale.code}`"
+            class="flex flex-1"
             @click="
               () => {
                 changeLocale(locale.code)
                 hide()
               }
             "
-            class="flex flex-1"
           >
             <SmartItem
               :label="locale.name"
