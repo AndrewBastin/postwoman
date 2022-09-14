@@ -10,28 +10,28 @@
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.delete')"
-          :svg="IconTrash"
+          :icon="IconTrash"
           @click="emit('delete')"
         />
         <ButtonSecondary
           id="bottompage"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.scroll_to_top')"
-          :svg="IconArrowUp"
+          :icon="IconArrowUp"
           @click="scrollTo('top')"
         />
         <ButtonSecondary
           id="bottompage"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.scroll_to_bottom')"
-          :svg="IconArrowDown"
+          :icon="IconArrowDown"
           @click="scrollTo('bottom')"
         />
         <ButtonSecondary
           id="bottompage"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.autoscroll')"
-          :svg="IconChevronsDown"
+          :icon="IconChevronsDown"
           :class="toggleAutoscrollColor"
           @click="toggleAutoscroll()"
         />

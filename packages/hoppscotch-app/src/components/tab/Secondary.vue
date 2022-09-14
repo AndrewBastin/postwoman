@@ -22,14 +22,8 @@
     <component
       :is="icon"
       v-if="icon"
-      :class="label ? 'mr-4 opacity-75' : ''"
       class="svg-icons"
-    />
-    <component
-      :is="svg"
-      v-if="svg"
       :class="label ? 'mr-4 opacity-75' : ''"
-      class="svg-icons"
     />
     <span class="truncate">
       {{ label }}

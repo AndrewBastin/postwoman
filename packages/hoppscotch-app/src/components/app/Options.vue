@@ -13,7 +13,7 @@
           {{ t("layout.name") }}
         </h2>
         <SmartItem
-          :svg="IconSidebar"
+          :icon="IconSidebar"
           :label="EXPAND_NAVIGATION ? t('hide.sidebar') : t('show.sidebar')"
           :description="t('layout.collapse_sidebar')"
           :info-icon="IconChevronRight"
@@ -21,7 +21,7 @@
           @click="expandNavigation"
         />
         <SmartItem
-          :svg="IconSidebarOpen"
+          :icon="IconSidebarOpen"
           :label="SIDEBAR ? t('hide.collection') : t('show.collection')"
           :description="t('layout.collapse_collection')"
           :info-icon="IconChevronRight"
@@ -32,7 +32,7 @@
           {{ t("support.title") }}
         </h2>
         <SmartItem
-          :svg="IconBook"
+          :icon="IconBook"
           :label="t('app.documentation')"
           to="https://docs.hoppscotch.io"
           :description="t('support.documentation')"
@@ -42,7 +42,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconGift"
+          :icon="IconGift"
           :label="t('app.whats_new')"
           to="https://docs.hoppscotch.io/changelog"
           :description="t('support.changelog')"
@@ -52,7 +52,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconActivity"
+          :icon="IconActivity"
           :label="t('app.status')"
           to="https://status.hoppscotch.io"
           blank
@@ -62,7 +62,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconLock"
+          :icon="IconLock"
           :label="`${t('app.terms_and_privacy')}`"
           to="https://docs.hoppscotch.io/privacy"
           blank
@@ -75,7 +75,7 @@
           {{ t("settings.follow") }}
         </h2>
         <SmartItem
-          :svg="IconDiscord"
+          :icon="IconDiscord"
           :label="t('app.discord')"
           to="https://hoppscotch.io/discord"
           blank
@@ -85,7 +85,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconTwitter"
+          :icon="IconTwitter"
           :label="t('app.twitter')"
           to="https://hoppscotch.io/twitter"
           blank
@@ -95,7 +95,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconGithub"
+          :icon="IconGithub"
           :label="`${t('app.github')}`"
           to="https://github.com/hoppscotch/hoppscotch"
           blank
@@ -105,7 +105,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconMessageCircle"
+          :icon="IconMessageCircle"
           :label="t('app.chat_with_us')"
           :description="t('support.chat')"
           :info-icon="IconChevronRight"
@@ -113,7 +113,7 @@
           @click="chatWithUs()"
         />
         <SmartItem
-          :svg="IconUserPlus"
+          :icon="IconUserPlus"
           :label="`${t('app.invite')}`"
           :description="t('shortcut.miscellaneous.invite')"
           :info-icon="IconChevronRight"
@@ -123,7 +123,7 @@
         <SmartItem
           v-if="navigatorShare"
           v-tippy="{ theme: 'tooltip' }"
-          :svg="IconShare2"
+          :icon="IconShare2"
           :label="`${t('request.share')}`"
           :description="t('request.share_description')"
           :info-icon="IconChevronRight"

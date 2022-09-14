@@ -58,7 +58,7 @@
               to="https://docs.hoppscotch.io/quickstart/graphql"
               blank
               :title="t('app.wiki')"
-              :svg="IconHelpCircle"
+              :icon="IconHelpCircle"
             />
           </div>
         </div>
@@ -142,27 +142,27 @@
             to="https://docs.hoppscotch.io/quickstart/graphql"
             blank
             :title="t('app.wiki')"
-            :svg="IconHelpCircle"
+            :icon="IconHelpCircle"
           />
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="t('state.linewrap')"
             :class="{ '!text-accent': linewrapEnabled }"
-            :svg="IconWrapText"
+            :icon="IconWrapText"
             @click.prevent="linewrapEnabled = !linewrapEnabled"
           />
           <ButtonSecondary
             ref="downloadSchema"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
-            :svg="downloadSchemaIcon"
+            :icon="downloadSchemaIcon"
             @click="downloadSchema"
           />
           <ButtonSecondary
             ref="copySchemaCode"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
-            :svg="copySchemaIcon"
+            :icon="copySchemaIcon"
             @click="copySchema"
           />
         </div>

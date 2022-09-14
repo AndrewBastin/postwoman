@@ -60,13 +60,13 @@
               <ButtonSecondary
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('action.clear_all')"
-                :svg="IconTrash2"
+                :icon="IconTrash2"
                 @click="clearContent"
               />
               <ButtonSecondary
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('add.new')"
-                :svg="IconPlus"
+                :icon="IconPlus"
                 @click="addProtocol"
               />
             </div>
@@ -95,7 +95,7 @@
                           ? t('action.drag')
                           : null,
                     }"
-                    :svg="IconGripVertical"
+                    :icon="IconGripVertical"
                     class="cursor-auto text-primary hover:text-primary"
                     :class="{
                       'draggable-handle group-hover:text-secondaryLight !cursor-grab':
@@ -128,7 +128,7 @@
                           : t('action.turn_on')
                         : t('action.turn_off')
                     "
-                    :svg="
+                    :icon="
                       protocol.hasOwnProperty('active')
                         ? protocol.active
                           ? IconCheckCircle
@@ -148,7 +148,7 @@
                   <ButtonSecondary
                     v-tippy="{ theme: 'tooltip' }"
                     :title="t('action.remove')"
-                    :svg="IconTrash"
+                    :icon="IconTrash"
                     color="red"
                     @click="deleteProtocol(index)"
                   />

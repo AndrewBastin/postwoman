@@ -122,7 +122,7 @@
           <div class="mt-8">
             <ButtonSecondary
               to="/"
-              :svg="IconHome"
+              :icon="IconHome"
               filled
               :label="t('app.home')"
             />

@@ -16,7 +16,7 @@
       <ButtonSecondary
         to="https://chrome.google.com/webstore/detail/hoppscotch-browser-extens/amknoiejhlmhancpahfcfcfhllgkpbld"
         blank
-        :svg="IconChrome"
+        :icon="IconChrome"
         label="Chrome"
         outline
         class="!flex-1"
@@ -24,7 +24,7 @@
       <ButtonSecondary
         to="https://addons.mozilla.org/en-US/firefox/addon/hoppscotch"
         blank
-        :svg="IconFirefox"
+        :icon="IconFirefox"
         label="Firefox"
         outline
         class="!flex-1"

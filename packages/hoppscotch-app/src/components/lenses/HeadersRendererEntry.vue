@@ -18,7 +18,7 @@
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.copy')"
-        :svg="copyIcon"
+        :icon="copyIcon"
         class="hidden group-hover:inline-flex !py-0"
         @click="copyHeader(header.value)"
       />

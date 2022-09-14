@@ -10,24 +10,24 @@
       <div v-if="mode === 'sign-in'" class="flex flex-col px-2 space-y-2">
         <SmartItem
           :loading="signingInWithGitHub"
-          :svg="IconGithub"
+          :icon="IconGithub"
           :label="`${t('auth.continue_with_github')}`"
           @click="signInWithGithub"
         />
         <SmartItem
           :loading="signingInWithGoogle"
-          :svg="IconGoogle"
+          :icon="IconGoogle"
           :label="`${t('auth.continue_with_google')}`"
           @click="signInWithGoogle"
         />
         <SmartItem
           :loading="signingInWithMicrosoft"
-          :svg="IconMicrosoft"
+          :icon="IconMicrosoft"
           :label="`${t('auth.continue_with_microsoft')}`"
           @click="signInWithMicrosoft"
         />
         <SmartItem
-          :svg="IconEmail"
+          :icon="IconEmail"
           :label="`${t('auth.continue_with_email')}`"
           @click="mode = 'email'"
         />
@@ -134,6 +134,7 @@ import IconGithub from "~icons/auth/github"
 import IconGoogle from "~icons/auth/google"
 import IconEmail from "~icons/auth/email"
 import IconMicrosoft from "~icons/auth/microsoft"
+import IconArrowLeft from "~icons/lucide/arrow-left"
 import { setLocalConfig } from "~/newstore/localpersistence"
 import { useStreamSubscriber } from "@composables/stream"
 import { useToast } from "@composables/toast"

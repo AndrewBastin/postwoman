@@ -84,7 +84,7 @@
                   <ButtonSecondary
                     v-tippy="{ theme: 'tooltip' }"
                     :title="t('action.remove')"
-                    :svg="IconTrash"
+                    :icon="IconTrash"
                     color="red"
                     :loading="isLoadingIndex === index"
                     @click="removeInvitee(invitee.id, index)"
@@ -118,7 +118,7 @@
           </label>
           <div class="flex">
             <ButtonSecondary
-              :svg="IconPlus"
+              :icon="IconPlus"
               :label="t('add.new')"
               filled
               @click="addNewInvitee"
@@ -210,7 +210,7 @@
                 id="member"
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('action.remove')"
-                :svg="IconTrash"
+                :icon="IconTrash"
                 color="red"
                 @click="removeNewInvitee(index)"
               />

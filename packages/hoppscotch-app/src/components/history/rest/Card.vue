@@ -28,7 +28,7 @@
     </span>
     <ButtonSecondary
       v-tippy="{ theme: 'tooltip' }"
-      :svg="IconTrash"
+      :icon="IconTrash"
       color="red"
       :title="t('action.remove')"
       class="hidden group-hover:inline-flex"
@@ -39,7 +39,7 @@
       v-tippy="{ theme: 'tooltip' }"
       :title="!entry.star ? t('add.star') : t('remove.star')"
       :class="{ 'group-hover:inline-flex hidden': !entry.star }"
-      :svg="entry.star ? IconStarOff : IconStar"
+      :icon="entry.star ? IconStarOff : IconStar"
       color="yellow"
       data-testid="star_button"
       @click="$emit('toggle-star')"

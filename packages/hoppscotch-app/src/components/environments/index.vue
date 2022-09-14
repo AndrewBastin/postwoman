@@ -55,7 +55,7 @@
       </tippy>
       <div class="flex justify-between flex-1 border-b border-dividerLight">
         <ButtonSecondary
-          :svg="IconPlus"
+          :icon="IconPlus"
           :label="`${t('action.new')}`"
           class="!rounded-none"
           @click="displayModalAdd(true)"
@@ -66,11 +66,11 @@
             to="https://docs.hoppscotch.io/features/environments"
             blank
             :title="t('app.wiki')"
-            :svg="IconHelpCircle"
+            :icon="IconHelpCircle"
           />
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
-            :svg="IconArchive"
+            :icon="IconArchive"
             :title="t('modal.import_export')"
             @click="displayModalImportExport(true)"
           />

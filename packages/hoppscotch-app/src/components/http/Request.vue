@@ -76,7 +76,11 @@
           arrow
           :on-shown="() => sendTippyActions.focus()"
         >
-          <ButtonPrimary class="rounded-l-none" filled :svg="IconChevronDown" />
+          <ButtonPrimary
+            class="rounded-l-none"
+            filled
+            :icon="IconChevronDown"
+          />
           <template #content="{ hide }">
             <div
               ref="sendTippyActions"
@@ -91,7 +95,7 @@
               <SmartItem
                 ref="curl"
                 :label="`${t('import.curl')}`"
-                :svg="IconFileCode"
+                :icon="IconFileCode"
                 :shortcut="['C']"
                 @click="
                   () => {
@@ -103,7 +107,7 @@
               <SmartItem
                 ref="show"
                 :label="`${t('show.code')}`"
-                :svg="IconCode2"
+                :icon="IconCode2"
                 :shortcut="['S']"
                 @click="
                   () => {
@@ -115,7 +119,7 @@
               <SmartItem
                 ref="clearAll"
                 :label="`${t('action.clear_all')}`"
-                :svg="IconRotateCCW"
+                :icon="IconRotateCCW"
                 :shortcut="['⌫']"
                 @click="
                   () => {
@@ -132,7 +136,7 @@
         class="flex-1 ml-2 rounded rounded-r-none"
         :label="COLUMN_LAYOUT ? `${t('request.save')}` : ''"
         filled
-        :svg="IconSave"
+        :icon="IconSave"
         @click="saveRequest()"
       />
       <span class="flex">
@@ -145,7 +149,7 @@
           :on-shown="() => saveTippyActions.focus()"
         >
           <ButtonSecondary
-            :svg="IconChevronDown"
+            :icon="IconChevronDown"
             filled
             class="rounded rounded-l-none"
           />
@@ -172,7 +176,7 @@
               <SmartItem
                 ref="copyRequestAction"
                 :label="shareButtonText"
-                :svg="copyLinkIcon"
+                :icon="copyLinkIcon"
                 :loading="fetchingShareLink"
                 :shortcut="['C']"
                 @click="
@@ -182,7 +186,7 @@
                 "
               />
               <SmartItem
-                :svg="IconLink2"
+                :icon="IconLink2"
                 :label="`${t('request.view_my_links')}`"
                 to="/profile"
               />
@@ -190,7 +194,7 @@
               <SmartItem
                 ref="saveRequestAction"
                 :label="`${t('request.save_as')}`"
-                :svg="IconFolderPlus"
+                :icon="IconFolderPlus"
                 :shortcut="['S']"
                 @click="
                   () => {

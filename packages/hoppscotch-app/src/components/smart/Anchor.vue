@@ -13,16 +13,10 @@
     ]"
     :disabled="disabled"
   >
-    <!-- icon and svg used to be different things, but they are not now-->
-    <!-- But I am keeping this for legacy now-->
     <component
       :is="icon"
       v-if="icon"
-      :class="label ? (reverse ? 'ml-2' : 'mr-2') : ''"
-    />
-    <component
-      :is="svg"
-      v-if="svg"
+      class="svg-icons"
       :class="label ? (reverse ? 'ml-2' : 'mr-2') : ''"
     />
     {{ label }}

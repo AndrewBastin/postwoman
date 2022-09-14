@@ -6,7 +6,7 @@
           class="flex items-center justify-between p-2 border-b border-dividerLight"
         >
           <h3 class="ml-4 heading">{{ t("app.shortcuts") }}</h3>
-          <ButtonSecondary :svg="IconX" @click="close()" />
+          <ButtonSecondary :icon="IconX" @click="close()" />
         </div>
         <div class="flex flex-col px-6 py-4 border-b border-dividerLight">
           <input

@@ -12,25 +12,25 @@
           to="https://docs.hoppscotch.io/features/headers"
           blank
           :title="t('app.wiki')"
-          :svg="IconHelpCircle"
+          :icon="IconHelpCircle"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear_all')"
-          :svg="IconTrash2"
+          :icon="IconTrash2"
           @click="clearContent()"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('state.bulk_mode')"
-          :svg="IconEdit"
+          :icon="IconEdit"
           :class="{ '!text-accent': bulkMode }"
           @click="bulkMode = !bulkMode"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('add.new')"
-          :svg="IconPlus"
+          :icon="IconPlus"
           :disabled="bulkMode"
           @click="addHeader"
         />
@@ -62,7 +62,7 @@
                       ? t('action.drag')
                       : null,
                 }"
-                :svg="IconGripVertical"
+                :icon="IconGripVertical"
                 class="cursor-auto text-primary hover:text-primary"
                 :class="{
                   'draggable-handle group-hover:text-secondaryLight !cursor-grab':
@@ -111,7 +111,7 @@
                       : t('action.turn_on')
                     : t('action.turn_off')
                 "
-                :svg="
+                :icon="
                   header.hasOwnProperty('active')
                     ? header.active
                       ? IconCheckCircle
@@ -133,7 +133,7 @@
               <ButtonSecondary
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('action.remove')"
-                :svg="IconTrash"
+                :icon="IconTrash"
                 color="red"
                 @click="deleteHeader(index)"
               />
@@ -158,7 +158,7 @@
           >
             <span>
               <ButtonSecondary
-                :svg="IconLock"
+                :icon="IconLock"
                 class="opacity-25 cursor-auto text-secondaryLight bg-divider"
                 tabindex="-1"
               />
@@ -176,18 +176,18 @@
             <span>
               <ButtonSecondary
                 v-if="header.source === 'auth'"
-                :svg="masking ? IconEye : IconEyeOff"
+                :icon="masking ? IconEye : IconEyeOff"
                 @click="toggleMask()"
               />
               <ButtonSecondary
                 v-else
-                :svg="IconArrowUpRight"
+                :icon="IconArrowUpRight"
                 class="cursor-auto text-primary hover:text-primary"
               />
             </span>
             <span>
               <ButtonSecondary
-                :svg="IconArrowUpRight"
+                :icon="IconArrowUpRight"
                 @click="changeTab(header.source)"
               />
             </span>
@@ -208,7 +208,7 @@
         <ButtonSecondary
           filled
           :label="`${t('add.new')}`"
-          :svg="IconPlus"
+          :icon="IconPlus"
           class="mb-4"
           @click="addHeader"
         />

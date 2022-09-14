@@ -12,25 +12,25 @@
           to="https://docs.hoppscotch.io/features/body"
           blank
           :title="t('app.wiki')"
-          :svg="IconHelpCircle"
+          :icon="IconHelpCircle"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear_all')"
-          :svg="IconTrash2"
+          :icon="IconTrash2"
           @click="clearContent()"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('state.bulk_mode')"
-          :svg="IconEdit"
+          :icon="IconEdit"
           :class="{ '!text-accent': bulkMode }"
           @click="bulkMode = !bulkMode"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('add.new')"
-          :svg="IconPlus"
+          :icon="IconPlus"
           :disabled="bulkMode"
           @click="addUrlEncodedParam"
         />
@@ -62,7 +62,7 @@
                       ? t('action.drag')
                       : null,
                 }"
-                :svg="IconGripVertical"
+                :icon="IconGripVertical"
                 class="cursor-auto text-primary hover:text-primary"
                 :class="{
                   'draggable-handle group-hover:text-secondaryLight !cursor-grab':
@@ -105,7 +105,7 @@
                       : t('action.turn_on')
                     : t('action.turn_off')
                 "
-                :svg="
+                :icon="
                   param.hasOwnProperty('active')
                     ? param.active
                       ? IconCheckCircle
@@ -127,7 +127,7 @@
               <ButtonSecondary
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('action.remove')"
-                :svg="IconTrash"
+                :icon="IconTrash"
                 color="red"
                 @click="deleteUrlEncodedParam(index)"
               />
@@ -151,7 +151,7 @@
         <ButtonSecondary
           filled
           :label="`${t('add.new')}`"
-          :svg="IconPlus"
+          :icon="IconPlus"
           class="mb-4"
           @click="addUrlEncodedParam"
         />

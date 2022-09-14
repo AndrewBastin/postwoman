@@ -11,7 +11,7 @@
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
-          :svg="downloadIcon"
+          :icon="downloadIcon"
           @click="downloadResponse"
         />
       </div>

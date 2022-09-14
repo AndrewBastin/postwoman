@@ -12,7 +12,7 @@
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.more')"
-            :svg="IconMoreVertical"
+            :icon="IconMoreVertical"
           />
           <template #content="{ hide }">
             <div
@@ -22,7 +22,7 @@
               @keyup.escape="hide()"
             >
               <SmartItem
-                :svg="IconGithub"
+                :icon="IconGithub"
                 :label="t('import.from_gist')"
                 @click="
                   () => {
@@ -49,7 +49,7 @@
                       ? true
                       : false
                   "
-                  :svg="IconGithub"
+                  :icon="IconGithub"
                   :label="t('export.create_secret_gist')"
                   @click="
                     () => {
@@ -67,7 +67,7 @@
     <template #body>
       <div class="flex flex-col px-2 space-y-2">
         <SmartItem
-          :svg="IconFolderPlus"
+          :icon="IconFolderPlus"
           :label="t('import.from_json')"
           @click="openDialogChooseFileToImportFrom"
         />
@@ -82,7 +82,7 @@
         <SmartItem
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
-          :svg="IconDownload"
+          :icon="IconDownload"
           :label="t('export.as_json')"
           @click="exportJSON"
         />

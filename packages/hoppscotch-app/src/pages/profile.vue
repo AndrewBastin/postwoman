@@ -64,7 +64,7 @@
                   <ButtonSecondary
                     v-else
                     :label="t('settings.verify_email')"
-                    :svg="IconVerified"
+                    :icon="IconVerified"
                     class="px-1 py-0 ml-2"
                     :loading="verifyingEmailAddress"
                     @click="sendEmailVerification"
@@ -76,7 +76,7 @@
               <div>
                 <SmartItem
                   to="/settings"
-                  :svg="IconSettings"
+                  :icon="IconSettings"
                   :label="t('profile.app_settings')"
                   outline
                 />

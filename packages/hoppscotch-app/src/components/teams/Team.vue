@@ -54,7 +54,7 @@
       <span>
         <ButtonSecondary
           v-if="team.myRole === 'OWNER'"
-          :svg="IconEdit"
+          :icon="IconEdit"
           class="rounded-none"
           :label="t('action.edit')"
           @click="
@@ -65,7 +65,7 @@
         />
         <ButtonSecondary
           v-if="team.myRole === 'OWNER'"
-          :svg="IconUserPlus"
+          :icon="IconUserPlus"
           class="rounded-none"
           :label="t('team.invite')"
           @click="
@@ -87,7 +87,7 @@
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.more')"
-            :svg="IconMoreVertical"
+            :icon="IconMoreVertical"
           />
           <template #content="{ hide }">
             <div
@@ -109,7 +109,7 @@
               <SmartItem
                 v-if="team.myRole === 'OWNER'"
                 ref="edit"
-                :svg="IconEdit"
+                :icon="IconEdit"
                 :label="t('action.edit')"
                 :shortcut="['E']"
                 @click="
@@ -122,7 +122,7 @@
               <SmartItem
                 v-if="!(team.myRole === 'OWNER' && team.ownersCount == 1)"
                 ref="exit"
-                :svg="IconUserX"
+                :icon="IconUserX"
                 :label="t('team.exit')"
                 :shortcut="['X']"
                 @click="
@@ -135,7 +135,7 @@
               <SmartItem
                 v-if="team.myRole === 'OWNER'"
                 ref="deleteAction"
-                :svg="IconTrash2"
+                :icon="IconTrash2"
                 :label="t('action.delete')"
                 :shortcut="['⌫']"
                 @click="

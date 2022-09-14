@@ -102,12 +102,12 @@
           to="https://docs.hoppscotch.io/features/authorization"
           blank
           :title="t('app.wiki')"
-          :svg="IconHelpCircle"
+          :icon="IconHelpCircle"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
-          :svg="IconTrash2"
+          :icon="IconTrash2"
           @click="clearContent"
         />
       </div>
@@ -130,7 +130,7 @@
         :label="t('app.documentation')"
         to="https://docs.hoppscotch.io/features/authorization"
         blank
-        :svg="IconExternalLink"
+        :icon="IconExternalLink"
         reverse
         class="mb-4"
       />

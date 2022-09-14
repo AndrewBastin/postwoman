@@ -16,7 +16,7 @@
           id="installPWA"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('header.install_pwa')"
-          :svg="IconDownload"
+          :icon="IconDownload"
           class="rounded hover:bg-primaryDark focus-visible:bg-primaryDark"
           :class="{ 'inline-flex': showInstallButton }"
           @click="installPWA()"
@@ -24,7 +24,7 @@
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip', allowHTML: true }"
           :title="`${t('app.search')} <xmp>/</xmp>`"
-          :svg="IconSearch"
+          :icon="IconSearch"
           class="rounded hover:bg-primaryDark focus-visible:bg-primaryDark"
           @click="invokeAction('modals.search.toggle')"
         />
@@ -33,13 +33,13 @@
           :title="`${
             mdAndLarger ? t('support.title') : t('app.options')
           } <xmp>?</xmp>`"
-          :svg="IconLifeBuoy"
+          :icon="IconLifeBuoy"
           class="rounded hover:bg-primaryDark focus-visible:bg-primaryDark"
           @click="invokeAction('modals.support.toggle')"
         />
         <ButtonSecondary
           v-if="currentUser === null"
-          :svg="IconUploadCloud"
+          :icon="IconUploadCloud"
           :label="t('header.save_workspace')"
           filled
           class="hidden md:flex"
@@ -55,7 +55,7 @@
             v-tippy="{ theme: 'tooltip' }"
             :title="t('team.invite_tooltip')"
             :label="t('team.invite')"
-            :svg="IconUserPlus"
+            :icon="IconUserPlus"
             class="!bg-green-500 !bg-opacity-15 !text-green-500 !hover:bg-opacity-10 !hover:bg-green-400 !hover:text-green-600"
             @click="showTeamsModal = true"
           />
@@ -113,7 +113,7 @@
                   <SmartItem
                     ref="profile"
                     to="/profile"
-                    :svg="IconUser"
+                    :icon="IconUser"
                     :label="t('navigation.profile')"
                     :shortcut="['↩']"
                     @click="hide()"
@@ -121,7 +121,7 @@
                   <SmartItem
                     ref="settings"
                     to="/settings"
-                    :svg="IconSettings"
+                    :icon="IconSettings"
                     :label="t('navigation.settings')"
                     :shortcut="['S']"
                     @click="hide()"

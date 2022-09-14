@@ -32,7 +32,7 @@
         <ButtonSecondary
           v-if="collectionsType.selectedTeam.myRole !== 'VIEWER'"
           v-tippy="{ theme: 'tooltip' }"
-          :svg="IconFilePlus"
+          :icon="IconFilePlus"
           :title="t('request.new')"
           class="hidden group-hover:inline-flex"
           @click="
@@ -45,7 +45,7 @@
         <ButtonSecondary
           v-if="collectionsType.selectedTeam.myRole !== 'VIEWER'"
           v-tippy="{ theme: 'tooltip' }"
-          :svg="IconFolderPlus"
+          :icon="IconFolderPlus"
           :title="t('folder.new')"
           class="hidden group-hover:inline-flex"
           @click="
@@ -68,7 +68,7 @@
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.more')"
-              :svg="IconMoreVertical"
+              :icon="IconMoreVertical"
             />
             <template #content="{ hide }">
               <div
@@ -85,7 +85,7 @@
               >
                 <SmartItem
                   ref="requestAction"
-                  :svg="IconFilePlus"
+                  :icon="IconFilePlus"
                   :label="t('request.new')"
                   :shortcut="['R']"
                   @click="
@@ -100,7 +100,7 @@
                 />
                 <SmartItem
                   ref="folderAction"
-                  :svg="IconFolderPlus"
+                  :icon="IconFolderPlus"
                   :label="t('folder.new')"
                   :shortcut="['N']"
                   @click="
@@ -115,7 +115,7 @@
                 />
                 <SmartItem
                   ref="edit"
-                  :svg="IconEdit"
+                  :icon="IconEdit"
                   :label="t('action.edit')"
                   :shortcut="['E']"
                   @click="
@@ -127,7 +127,7 @@
                 />
                 <SmartItem
                   ref="exportAction"
-                  :svg="IconDownload"
+                  :icon="IconDownload"
                   :label="t('export.title')"
                   :shortcut="['X']"
                   :loading="exportLoading"
@@ -135,7 +135,7 @@
                 />
                 <SmartItem
                   ref="deleteAction"
-                  :svg="IconTrash2"
+                  :icon="IconTrash2"
                   :label="t('action.delete')"
                   :shortcut="['⌫']"
                   @click="

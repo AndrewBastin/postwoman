@@ -17,7 +17,7 @@
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
-          :svg="IconTrash2"
+          :icon="IconTrash2"
           @click="clearContent()"
         />
       </div>
@@ -176,7 +176,7 @@
         :label="`${t('action.learn_more')}`"
         to="https://docs.hoppscotch.io/features/tests"
         blank
-        :svg="IconExternalLink"
+        :icon="IconExternalLink"
         reverse
         class="my-4"
       />

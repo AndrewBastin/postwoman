@@ -13,16 +13,9 @@
     ]"
     :disabled="disabled"
   >
-    <i
+    <component
+      :is="icon"
       v-if="icon"
-      class="opacity-75 material-icons"
-      :class="label ? (reverse ? 'ml-4' : 'mr-4') : ''"
-    >
-      {{ icon }}
-    </i>
-    <SmartIcon
-      v-if="svg"
-      :name="svg"
       class="opacity-75 svg-icons"
       :class="label ? (reverse ? 'ml-4' : 'mr-4') : ''"
     />

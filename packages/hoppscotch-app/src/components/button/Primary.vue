@@ -34,17 +34,9 @@
       <component
         :is="icon"
         v-if="icon"
-        :class="[
-          { '!text-2xl': large },
-          label ? (reverse ? 'ml-2' : 'mr-2') : '',
-        ]"
-      />
-      <component
-        :is="svg"
-        v-if="svg"
         class="svg-icons"
         :class="[
-          { '!h-6 !w-6': large },
+          { '!text-2xl': large },
           label ? (reverse ? 'ml-2' : 'mr-2') : '',
         ]"
       />

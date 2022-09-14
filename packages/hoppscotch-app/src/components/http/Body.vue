@@ -81,7 +81,7 @@
               ? `${t('request.overriden')}: ${overridenContentType}`
               : t('request.override')
           "
-          :svg="overridenContentType ? IconInfo : IconRefreshCW"
+          :icon="overridenContentType ? IconInfo : IconRefreshCW"
           :class="[
             '!px-1 !py-0.5',
             {
@@ -115,7 +115,7 @@
         :label="`${t('app.documentation')}`"
         to="https://docs.hoppscotch.io/features/body"
         blank
-        :svg="IconExternalLink"
+        :icon="IconExternalLink"
         reverse
         class="mb-4"
       />

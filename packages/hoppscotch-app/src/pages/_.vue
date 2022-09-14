@@ -16,9 +16,9 @@
     </h1>
     <p class="mb-4 text-secondaryLight">{{ message }}</p>
     <p class="mt-4 space-x-2">
-      <ButtonSecondary to="/" :svg="IconHome" filled :label="t('app.home')" />
+      <ButtonSecondary to="/" :icon="IconHome" filled :label="t('app.home')" />
       <ButtonSecondary
-        :svg="IconRefreshCW"
+        :icon="IconRefreshCW"
         :label="t('app.reload')"
         filled
         @click="reloadApplication"

@@ -50,7 +50,7 @@
         <ButtonSecondary
           v-if="!saveRequest"
           v-tippy="{ theme: 'tooltip' }"
-          :svg="IconRotateCCW"
+          :icon="IconRotateCCW"
           :title="t('action.restore')"
           class="hidden group-hover:inline-flex"
           @click="selectRequest()"
@@ -68,7 +68,7 @@
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.more')"
-              :svg="IconMoreVertical"
+              :icon="IconMoreVertical"
             />
             <template #content="{ hide }">
               <div
@@ -83,7 +83,7 @@
               >
                 <SmartItem
                   ref="edit"
-                  :svg="IconEdit"
+                  :icon="IconEdit"
                   :label="t('action.edit')"
                   :shortcut="['E']"
                   @click="
@@ -101,7 +101,7 @@
                 />
                 <SmartItem
                   ref="duplicate"
-                  :svg="IconCopy"
+                  :icon="IconCopy"
                   :label="t('action.duplicate')"
                   :shortcut="['D']"
                   @click="
@@ -117,7 +117,7 @@
                 />
                 <SmartItem
                   ref="deleteAction"
-                  :svg="IconTrash2"
+                  :icon="IconTrash2"
                   :label="t('action.delete')"
                   :shortcut="['⌫']"
                   @click="

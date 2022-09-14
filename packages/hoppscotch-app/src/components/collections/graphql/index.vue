@@ -14,7 +14,7 @@
       />
       <div class="flex justify-between flex-1">
         <ButtonSecondary
-          :svg="IconPlus"
+          :icon="IconPlus"
           :label="t('action.new')"
           class="!rounded-none"
           @click="displayModalAdd(true)"
@@ -25,13 +25,13 @@
             to="https://docs.hoppscotch.io/features/collections"
             blank
             :title="t('app.wiki')"
-            :svg="IconHelpCircle"
+            :icon="IconHelpCircle"
           />
           <ButtonSecondary
             v-if="showCollActions"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('modal.import_export')"
-            :svg="IconArchive"
+            :icon="IconArchive"
             @click="displayModalImportExport(true)"
           />
         </div>

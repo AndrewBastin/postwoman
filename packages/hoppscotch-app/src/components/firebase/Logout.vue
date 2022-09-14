@@ -2,7 +2,7 @@
   <div class="flex" @click="OpenLogoutModal()">
     <SmartItem
       ref="logoutItem"
-      :svg="IconLogOut"
+      :icon="IconLogOut"
       :label="`${t('auth.logout')}`"
       :outline="outline"
       :shortcut="shortcut"

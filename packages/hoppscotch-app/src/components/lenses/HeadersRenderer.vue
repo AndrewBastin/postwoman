@@ -11,7 +11,7 @@
           v-if="headers"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
-          :svg="copyIcon"
+          :icon="copyIcon"
           @click="copyHeaders"
         />
       </div>

@@ -6,7 +6,7 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('settings.choose_language')"
           class="pr-8"
-          :svg="IconLanguages"
+          :icon="IconLanguages"
           outline
           :label="currentLocale.name"
         />

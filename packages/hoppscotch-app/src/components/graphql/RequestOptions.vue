@@ -23,7 +23,7 @@
                 'request.run'
               )} <xmp>${getSpecialKey()}</xmp><xmp>G</xmp>`"
               :label="`${t('request.run')}`"
-              :svg="IconPlay"
+              :icon="IconPlay"
               class="rounded-none !text-accent !hover:text-accentDark"
               @click="runQuery()"
             />
@@ -34,7 +34,7 @@
                 'request.save'
               )} <xmp>${getSpecialKey()}</xmp><xmp>S</xmp>`"
               :label="`${t('request.save')}`"
-              :svg="IconSave"
+              :icon="IconSave"
               class="rounded-none"
               @click="saveRequest"
             />
@@ -43,24 +43,24 @@
               to="https://docs.hoppscotch.io/graphql"
               blank
               :title="t('app.wiki')"
-              :svg="IconHelpCircle"
+              :icon="IconHelpCircle"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
-              :svg="IconTrash2"
+              :icon="IconTrash2"
               @click="clearGQLQuery()"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.prettify')"
-              :svg="prettifyQueryIcon"
+              :icon="prettifyQueryIcon"
               @click="prettifyQuery"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.copy')"
-              :svg="copyQueryIcon"
+              :icon="copyQueryIcon"
               @click="copyQuery"
             />
           </div>
@@ -84,25 +84,25 @@
               to="https://docs.hoppscotch.io/graphql"
               blank
               :title="t('app.wiki')"
-              :svg="IconHelpCircle"
+              :icon="IconHelpCircle"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
-              :svg="IconTrash2"
+              :icon="IconTrash2"
               @click="clearGQLVariables()"
             />
             <ButtonSecondary
               ref="prettifyRequest"
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.prettify')"
-              :svg="prettifyVariablesIcon"
+              :icon="prettifyVariablesIcon"
               @click="prettifyVariableString"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.copy')"
-              :svg="copyVariablesIcon"
+              :icon="copyVariablesIcon"
               @click="copyVariables"
             />
           </div>
@@ -126,25 +126,25 @@
               to="https://docs.hoppscotch.io/graphql"
               blank
               :title="t('app.wiki')"
-              :svg="IconHelpCircle"
+              :icon="IconHelpCircle"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
-              :svg="IconTrash2"
+              :icon="IconTrash2"
               @click="clearContent()"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('state.bulk_mode')"
-              :svg="IconEdit"
+              :icon="IconEdit"
               :class="{ '!text-accent': bulkMode }"
               @click="bulkMode = !bulkMode"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('add.new')"
-              :svg="IconPlus"
+              :icon="IconPlus"
               :disabled="bulkMode"
               @click="addHeader"
             />
@@ -180,7 +180,7 @@
                           ? t('action.drag')
                           : null,
                     }"
-                    :svg="IconGripVertical"
+                    :icon="IconGripVertical"
                     class="cursor-auto text-primary hover:text-primary"
                     :class="{
                       'draggable-handle group-hover:text-secondaryLight !cursor-grab':
@@ -238,7 +238,7 @@
                           : t('action.turn_on')
                         : t('action.turn_off')
                     "
-                    :svg="
+                    :icon="
                       header.hasOwnProperty('active')
                         ? header.active
                           ? IconCheckCircle
@@ -260,7 +260,7 @@
                   <ButtonSecondary
                     v-tippy="{ theme: 'tooltip' }"
                     :title="t('action.remove')"
-                    :svg="IconTrash"
+                    :icon="IconTrash"
                     color="red"
                     @click="deleteHeader(index)"
                   />
@@ -284,7 +284,7 @@
             <ButtonSecondary
               :label="`${t('add.new')}`"
               filled
-              :svg="IconPlus"
+              :icon="IconPlus"
               class="mb-4"
               @click="addHeader"
             />

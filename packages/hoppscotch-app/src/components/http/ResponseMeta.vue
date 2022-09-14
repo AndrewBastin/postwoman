@@ -41,7 +41,7 @@
       <ButtonSecondary
         :label="t('app.documentation')"
         to="https://docs.hoppscotch.io/features/response"
-        :svg="IconExternalLink"
+        :icon="IconExternalLink"
         blank
         outline
         reverse

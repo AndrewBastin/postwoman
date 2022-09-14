@@ -17,7 +17,7 @@
       </span>
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
-        :svg="IconTrash"
+        :icon="IconTrash"
         color="red"
         :title="t('action.remove')"
         class="hidden group-hover:inline-flex"
@@ -27,14 +27,14 @@
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="expand ? t('hide.more') : t('show.more')"
-        :svg="expand ? IconMinimize2 : IconMaximize2"
+        :icon="expand ? IconMinimize2 : IconMaximize2"
         class="hidden group-hover:inline-flex"
         @click="expand = !expand"
       />
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="!entry.star ? t('add.star') : t('remove.star')"
-        :svg="entry.star ? IconStarOff : IconStar"
+        :icon="entry.star ? IconStarOff : IconStar"
         color="yellow"
         :class="{ 'group-hover:inline-flex hidden': !entry.star }"
         data-testid="star_button"

@@ -24,7 +24,7 @@
       </span>
       <span class="flex">
         <ButtonSecondary
-          :svg="pasteIcon"
+          :icon="pasteIcon"
           :label="`${t('action.paste')}`"
           filled
           @click="handlePaste"

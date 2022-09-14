@@ -15,14 +15,14 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('state.linewrap')"
           :class="{ '!text-accent': linewrapEnabled }"
-          :svg="IconWrapText"
+          :icon="IconWrapText"
           @click.prevent="linewrapEnabled = !linewrapEnabled"
         />
         <ButtonSecondary
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.filter_response')"
-          :svg="IconFilter"
+          :icon="IconFilter"
           :class="{ '!text-accent': toggleFilter }"
           @click.prevent="toggleFilterState"
         />
@@ -30,14 +30,14 @@
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
-          :svg="downloadIcon"
+          :icon="downloadIcon"
           @click="downloadResponse"
         />
         <ButtonSecondary
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
-          :svg="copyIcon"
+          :icon="copyIcon"
           @click="copyResponse"
         />
       </div>
@@ -76,7 +76,7 @@
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('app.wiki')"
-          :svg="IconHelpCircle"
+          :icon="IconHelpCircle"
           to="https://github.com/JSONPath-Plus/JSONPath"
           blank
         />

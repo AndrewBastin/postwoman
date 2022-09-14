@@ -11,7 +11,7 @@
         v-if="importerType !== null"
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.go_back')"
-        :svg="IconArrowLeft"
+        :icon="IconArrowLeft"
         @click="resetImport"
       />
     </template>
@@ -113,7 +113,7 @@
             <SmartItem
               v-for="(importer, index) in importerModules"
               :key="`importer-${index}`"
-              :svg="importer.icon"
+              :icon="importer.icon"
               :label="t(`${importer.name}`)"
               @click="importerType = index"
             />
@@ -124,7 +124,7 @@
           <SmartItem
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
-            :svg="IconDownload"
+            :icon="IconDownload"
             :label="t('export.as_json')"
             @click="exportJSON"
           />
@@ -147,7 +147,7 @@
                   ? true
                   : false
               "
-              :svg="IconGithub"
+              :icon="IconGithub"
               :label="t('export.create_secret_gist')"
               @click="
                 () => {

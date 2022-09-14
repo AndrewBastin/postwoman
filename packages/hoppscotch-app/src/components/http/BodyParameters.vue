@@ -12,18 +12,18 @@
           to="https://docs.hoppscotch.io/features/body"
           blank
           :title="t('app.wiki')"
-          :svg="IconHelpCircle"
+          :icon="IconHelpCircle"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear_all')"
-          :svg="IconTrash2"
+          :icon="IconTrash2"
           @click="clearContent"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('add.new')"
-          :svg="IconPlus"
+          :icon="IconPlus"
           @click="addBodyParam"
         />
       </div>
@@ -51,7 +51,7 @@
                 content:
                   index !== workingParams?.length - 1 ? t('action.drag') : null,
               }"
-              :svg="IconGripVertical"
+              :icon="IconGripVertical"
               class="cursor-auto text-primary hover:text-primary"
               :class="{
                 'draggable-handle group-hover:text-secondaryLight !cursor-grab':
@@ -118,7 +118,7 @@
                     : t('action.turn_on')
                   : t('action.turn_off')
               "
-              :svg="
+              :icon="
                 entry.hasOwnProperty('active')
                   ? entry.active
                     ? IconCheckCircle
@@ -142,7 +142,7 @@
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.remove')"
-              :svg="IconTrash"
+              :icon="IconTrash"
               color="red"
               @click="deleteBodyParam(index)"
             />
@@ -165,7 +165,7 @@
       <ButtonSecondary
         :label="`${t('add.new')}`"
         filled
-        :svg="IconPlus"
+        :icon="IconPlus"
         class="mb-4"
         @click="addBodyParam"
       />

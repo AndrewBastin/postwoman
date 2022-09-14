@@ -83,7 +83,7 @@
       <span class="flex">
         <ButtonPrimary
           :label="`${t('action.copy')}`"
-          :svg="copyIcon"
+          :icon="copyIcon"
           @click="copyRequestCode"
         />
         <ButtonSecondary :label="`${t('action.dismiss')}`" @click="hideModal" />

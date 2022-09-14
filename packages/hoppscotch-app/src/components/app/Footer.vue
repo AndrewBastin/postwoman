@@ -5,7 +5,7 @@
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="EXPAND_NAVIGATION ? t('hide.sidebar') : t('show.sidebar')"
-          :svg="IconSidebar"
+          :icon="IconSidebar"
           class="transform"
           :class="{ '-rotate-180': !EXPAND_NAVIGATION }"
           @click="EXPAND_NAVIGATION = !EXPAND_NAVIGATION"
@@ -15,7 +15,7 @@
           :title="`${ZEN_MODE ? t('action.turn_off') : t('action.turn_on')} ${t(
             'layout.zen_mode'
           )}`"
-          :svg="ZEN_MODE ? IconMinimize : IconMaximize"
+          :icon="ZEN_MODE ? IconMinimize : IconMaximize"
           :class="{
             '!text-accent !focus-visible:text-accentDark !hover:text-accentDark':
               ZEN_MODE,
@@ -26,7 +26,7 @@
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="t('settings.interceptor')"
-            :svg="IconShieldCheck"
+            :icon="IconShieldCheck"
           />
           <template #content>
             <AppInterceptor />
@@ -43,7 +43,7 @@
           :on-shown="() => tippyActions.focus()"
         >
           <ButtonSecondary
-            :svg="IconHelpCircle"
+            :icon="IconHelpCircle"
             class="!rounded-none"
             :label="`${t('app.help')}`"
           />
@@ -60,7 +60,7 @@
             >
               <SmartItem
                 ref="documentation"
-                :svg="IconBook"
+                :icon="IconBook"
                 :label="`${t('app.documentation')}`"
                 to="https://docs.hoppscotch.io"
                 blank
@@ -69,7 +69,7 @@
               />
               <SmartItem
                 ref="shortcuts"
-                :svg="IconZap"
+                :icon="IconZap"
                 :label="`${t('app.keyboard_shortcuts')}`"
                 :shortcut="['S']"
                 @click="
@@ -81,7 +81,7 @@
               />
               <SmartItem
                 ref="chat"
-                :svg="IconMessageCircle"
+                :icon="IconMessageCircle"
                 :label="`${t('app.chat_with_us')}`"
                 :shortcut="['C']"
                 @click="
@@ -92,14 +92,14 @@
                 "
               />
               <SmartItem
-                :svg="IconGift"
+                :icon="IconGift"
                 :label="`${t('app.whats_new')}`"
                 to="https://docs.hoppscotch.io/changelog"
                 blank
                 @click="hide()"
               />
               <SmartItem
-                :svg="IconActivity"
+                :icon="IconActivity"
                 :label="t('app.status')"
                 to="https://status.hoppscotch.io"
                 blank
@@ -107,21 +107,21 @@
               />
               <hr />
               <SmartItem
-                :svg="IconGithub"
+                :icon="IconGithub"
                 :label="`${t('app.github')}`"
                 to="https://github.com/hoppscotch/hoppscotch"
                 blank
                 @click="hide()"
               />
               <SmartItem
-                :svg="IconTwitter"
+                :icon="IconTwitter"
                 :label="`${t('app.twitter')}`"
                 to="https://hoppscotch.io/twitter"
                 blank
                 @click="hide()"
               />
               <SmartItem
-                :svg="IconUserPlus"
+                :icon="IconUserPlus"
                 :label="`${t('app.invite')}`"
                 @click="
                   () => {
@@ -131,7 +131,7 @@
                 "
               />
               <SmartItem
-                :svg="IconLock"
+                :icon="IconLock"
                 :label="`${t('app.terms_and_privacy')}`"
                 to="https://docs.hoppscotch.io/privacy"
                 blank
@@ -148,21 +148,21 @@
         </tippy>
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
-          :svg="IconZap"
+          :icon="IconZap"
           :title="t('app.shortcuts')"
           @click="showShortcuts = true"
         />
         <ButtonSecondary
           v-if="navigatorShare"
           v-tippy="{ theme: 'tooltip' }"
-          :svg="IconShare2"
+          :icon="IconShare2"
           :title="t('request.share')"
           @click="nativeShare()"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="COLUMN_LAYOUT ? t('layout.row') : t('layout.column')"
-          :svg="IconColumns"
+          :icon="IconColumns"
           class="transform"
           :class="{ 'rotate-90': !COLUMN_LAYOUT }"
           @click="COLUMN_LAYOUT = !COLUMN_LAYOUT"
@@ -176,7 +176,7 @@
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="SIDEBAR ? t('hide.sidebar') : t('show.sidebar')"
-            :svg="IconSidebarOpen"
+            :icon="IconSidebarOpen"
             class="transform"
             :class="{ 'rotate-180': !SIDEBAR }"
             @click="SIDEBAR = !SIDEBAR"

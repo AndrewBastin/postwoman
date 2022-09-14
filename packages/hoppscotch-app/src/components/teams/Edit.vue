@@ -23,7 +23,7 @@
           </label>
           <div class="flex">
             <ButtonSecondary
-              :svg="IconUserMinus"
+              :icon="IconUserMinus"
               :label="t('team.invite')"
               filled
               @click="
@@ -63,7 +63,7 @@
               {{ t("empty.members") }}
             </span>
             <ButtonSecondary
-              :svg="IconUserPlus"
+              :icon="IconUserPlus"
               :label="t('team.invite')"
               @click="
                 () => {
@@ -157,7 +157,7 @@
                   id="member"
                   v-tippy="{ theme: 'tooltip' }"
                   :title="t('action.remove')"
-                  :svg="IconUserMinus"
+                  :icon="IconUserMinus"
                   color="red"
                   :loading="isLoadingIndex === index"
                   @click="removeExistingTeamMember(member.userID, index)"

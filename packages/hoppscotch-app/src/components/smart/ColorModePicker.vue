@@ -9,7 +9,7 @@
         'bg-primaryLight !text-accent hover:text-accent': color === active,
       }"
       class="rounded"
-      :svg="getIcon(color)"
+      :icon="getIcon(color)"
       @click="setBGMode(color)"
     />
   </div>

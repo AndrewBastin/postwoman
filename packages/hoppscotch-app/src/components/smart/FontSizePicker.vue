@@ -6,7 +6,7 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('settings.change_font_size')"
           class="pr-8"
-          :svg="IconType"
+          :icon="IconType"
           outline
           :label="`${getFontSizeName(
             fontSizes.find((size) => size === active)

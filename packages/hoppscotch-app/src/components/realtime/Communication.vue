@@ -61,7 +61,7 @@
           :title="`${t('action.send')}`"
           :label="`${t('action.send')}`"
           :disabled="!communicationBody || !isConnected"
-          :svg="IconSend"
+          :icon="IconSend"
           class="rounded-none !text-accent !hover:text-accentDark"
           @click="sendMessage()"
         />
@@ -70,19 +70,19 @@
           to="https://docs.hoppscotch.io/features/body"
           blank
           :title="t('app.wiki')"
-          :svg="IconHelpCircle"
+          :icon="IconHelpCircle"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('state.linewrap')"
           :class="{ '!text-accent': linewrapEnabled }"
-          :svg="IconWrapText"
+          :icon="IconWrapText"
           @click.prevent="linewrapEnabled = !linewrapEnabled"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
-          :svg="IconTrash2"
+          :icon="IconTrash2"
           @click="clearContent"
         />
         <ButtonSecondary
@@ -90,14 +90,14 @@
           ref="prettifyRequest"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.prettify')"
-          :svg="prettifyIcon"
+          :icon="prettifyIcon"
           @click="prettifyRequestBody"
         />
         <label for="payload">
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="t('import.title')"
-            :svg="IconFilePlus"
+            :icon="IconFilePlus"
             @click="payload!.click()"
           />
         </label>

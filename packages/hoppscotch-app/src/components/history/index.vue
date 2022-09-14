@@ -14,13 +14,13 @@
           to="https://docs.hoppscotch.io/features/history"
           blank
           :title="t('app.wiki')"
-          :svg="IconHelpCircle"
+          :icon="IconHelpCircle"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           data-testid="clear_history"
           :disabled="history.length === 0"
-          :svg="IconTrash2"
+          :icon="IconTrash2"
           :title="t('action.clear_all')"
           @click="confirmRemove = true"
         />
@@ -48,7 +48,7 @@
           </span>
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
-            :svg="IconTrash"
+            :icon="IconTrash"
             color="red"
             :title="t('action.remove')"
             class="hidden group-hover:inline-flex"

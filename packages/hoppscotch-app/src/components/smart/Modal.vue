@@ -44,7 +44,7 @@
                   v-if="dimissible"
                   v-tippy="{ theme: 'tooltip', delay: [500, 20] }"
                   :title="t('action.close')"
-                  :svg="IconX"
+                  :icon="IconX"
                   @click="close"
                 />
               </span>

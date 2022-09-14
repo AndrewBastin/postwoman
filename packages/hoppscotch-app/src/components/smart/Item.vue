@@ -32,15 +32,6 @@
           { 'text-accent': active },
         ]"
       />
-      <component
-        :is="svg"
-        v-if="svg"
-        class="opacity-75 svg-icons"
-        :class="[
-          label ? (reverse ? 'ml-4' : 'mr-4') : '',
-          { 'text-accent': active },
-        ]"
-      />
     </span>
     <SmartSpinner v-else class="mr-4 text-secondaryDark" />
     <div

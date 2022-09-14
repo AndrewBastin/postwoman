@@ -20,21 +20,21 @@
         :title="t('action.open_workspace')"
         :to="`https://hopp.sh/r/${shortcode.id}`"
         blank
-        :svg="IconExternalLink"
+        :icon="IconExternalLink"
         class="px-3 text-accent hover:text-accent"
       />
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.copy')"
         color="green"
-        :svg="copyIconRefs"
+        :icon="copyIconRefs"
         class="px-3"
         @click="copyShortcode(shortcode.id)"
       />
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.delete')"
-        :svg="IconTrash"
+        :icon="IconTrash"
         color="red"
         class="px-3"
         @click="deleteShortcode(shortcode.id)"

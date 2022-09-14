@@ -31,12 +31,12 @@
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
-              :svg="clearIcon"
+              :icon="clearIcon"
               @click="clearContent()"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
-              :svg="IconPlus"
+              :icon="IconPlus"
               :title="t('add.new')"
               @click="addEnvironmentVariable"
             />
@@ -71,7 +71,7 @@
                 id="variable"
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('action.remove')"
-                :svg="IconTrash"
+                :icon="IconTrash"
                 color="red"
                 @click="removeEnvironmentVariable(index)"
               />

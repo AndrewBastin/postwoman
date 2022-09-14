@@ -9,7 +9,7 @@
     <template #body>
       <div class="flex flex-col space-y-2">
         <SmartItem
-          :svg="IconBook"
+          :icon="IconBook"
           :label="t('app.documentation')"
           to="https://docs.hoppscotch.io"
           :description="t('support.documentation')"
@@ -19,7 +19,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconZap"
+          :icon="IconZap"
           :label="t('app.keyboard_shortcuts')"
           :description="t('support.shortcuts')"
           :info-icon="IconChevronRight"
@@ -27,7 +27,7 @@
           @click="showShortcuts()"
         />
         <SmartItem
-          :svg="IconGift"
+          :icon="IconGift"
           :label="t('app.whats_new')"
           to="https://docs.hoppscotch.io/changelog"
           :description="t('support.changelog')"
@@ -37,7 +37,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconMessageCircle"
+          :icon="IconMessageCircle"
           :label="t('app.chat_with_us')"
           :description="t('support.chat')"
           :info-icon="IconChevronRight"
@@ -45,7 +45,7 @@
           @click="chatWithUs()"
         />
         <SmartItem
-          :svg="IconDiscord"
+          :icon="IconDiscord"
           :label="t('app.join_discord_community')"
           to="https://hoppscotch.io/discord"
           blank
@@ -55,7 +55,7 @@
           @click="hideModal()"
         />
         <SmartItem
-          :svg="IconTwitter"
+          :icon="IconTwitter"
           :label="t('app.twitter')"
           to="https://hoppscotch.io/twitter"
           blank

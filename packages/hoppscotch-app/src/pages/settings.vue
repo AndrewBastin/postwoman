@@ -130,7 +130,7 @@
                 <SmartItem
                   to="https://chrome.google.com/webstore/detail/hoppscotch-browser-extens/amknoiejhlmhancpahfcfcfhllgkpbld"
                   blank
-                  :svg="IconChrome"
+                  :icon="IconChrome"
                   label="Chrome"
                   :info-icon="hasChromeExtInstalled ? IconCheckCircle : null"
                   :active-info-icon="hasChromeExtInstalled"
@@ -141,7 +141,7 @@
                 <SmartItem
                   to="https://addons.mozilla.org/en-US/firefox/addon/hoppscotch"
                   blank
-                  :svg="IconFirefox"
+                  :icon="IconFirefox"
                   label="Firefox"
                   :info-icon="hasFirefoxExtInstalled ? IconCheckCircle : null"
                   :active-info-icon="hasFirefoxExtInstalled"
@@ -206,7 +206,7 @@
               <ButtonSecondary
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('settings.reset_default')"
-                :svg="clearIcon"
+                :icon="clearIcon"
                 outline
                 class="rounded"
                 @click="resetProxy"

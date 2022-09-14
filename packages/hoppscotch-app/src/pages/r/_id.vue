@@ -34,12 +34,12 @@
           <p class="mt-4">
             <ButtonSecondary
               to="/"
-              :svg="IconHome"
+              :icon="IconHome"
               filled
               :label="t('app.home')"
             />
             <ButtonSecondary
-              :svg="IconRefreshCW"
+              :icon="IconRefreshCW"
               :label="t('app.reload')"
               filled
               @click="reloadApplication"

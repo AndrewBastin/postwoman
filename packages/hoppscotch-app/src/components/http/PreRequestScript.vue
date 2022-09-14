@@ -12,19 +12,19 @@
           to="https://docs.hoppscotch.io/features/pre-request-script"
           blank
           :title="t('app.wiki')"
-          :svg="IconHelpCircle"
+          :icon="IconHelpCircle"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('state.linewrap')"
           :class="{ '!text-accent': linewrapEnabled }"
-          :svg="IconWrapText"
+          :icon="IconWrapText"
           @click.prevent="linewrapEnabled = !linewrapEnabled"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
-          :svg="IconTrash2"
+          :icon="IconTrash2"
           @click="clearContent"
         />
       </div>

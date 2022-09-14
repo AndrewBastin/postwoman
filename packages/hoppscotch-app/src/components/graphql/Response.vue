@@ -19,21 +19,21 @@
             v-tippy="{ theme: 'tooltip' }"
             :title="t('state.linewrap')"
             :class="{ '!text-accent': linewrapEnabled }"
-            :svg="IconWrapText"
+            :icon="IconWrapText"
             @click.prevent="linewrapEnabled = !linewrapEnabled"
           />
           <ButtonSecondary
             ref="downloadResponse"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
-            :svg="downloadResponseIcon"
+            :icon="downloadResponseIcon"
             @click="downloadResponse"
           />
           <ButtonSecondary
             ref="copyResponseButton"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
-            :svg="copyResponseIcon"
+            :icon="copyResponseIcon"
             @click="copyResponse"
           />
         </div>
@@ -65,7 +65,7 @@
       <ButtonSecondary
         :label="`${t('app.documentation')}`"
         to="https://docs.hoppscotch.io/features/response"
-        :svg="IconExternalLink"
+        :icon="IconExternalLink"
         blank
         outline
         reverse
