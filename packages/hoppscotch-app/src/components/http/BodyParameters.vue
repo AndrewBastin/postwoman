@@ -49,7 +49,9 @@
                 theme: 'tooltip',
                 delay: [500, 20],
                 content:
-                  index !== workingParams?.length - 1 ? t('action.drag') : null,
+                  index !== workingParams?.length - 1
+                    ? t('action.drag_to_reorder')
+                    : null,
               }"
               :icon="IconGripVertical"
               class="cursor-auto text-primary hover:text-primary"

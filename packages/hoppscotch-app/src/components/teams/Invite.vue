@@ -296,7 +296,8 @@
       >
         <SmartAnchor
           class="link"
-          :label="`← \xA0 ${t('team.invite_more')}`"
+          :label="t('team.invite_more')"
+          :icon="IconArrowLeft"
           @click="
             () => {
               sendInvitesResult = []
@@ -358,6 +359,7 @@ import IconAlertTriangle from "~icons/lucide/alert-triangle"
 import IconMailCheck from "~icons/lucide/mail-check"
 import IconCircleDot from "~icons/lucide/circle-dot"
 import IconCircle from "~icons/lucide/circle"
+import IconArrowLeft from "~icons/lucide/arrow-left"
 
 const t = useI18n()
 

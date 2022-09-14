@@ -16,21 +16,26 @@
         :key="`result-${index}`"
         class="flex items-center px-4 py-2"
       >
-        <component
-          :is="result.status === 'pass' ? IconCheck : IconClose"
-          class="mr-4 svg-icons"
-          :class="result.status === 'pass' ? 'text-green-500' : 'text-red-500'"
-        />
-        <span v-if="result.message" class="text-secondaryDark">
-          {{ result.message }}
-        </span>
-        <span class="text-secondaryLight">
-          {{
-            ` \xA0 — \xA0 ${
-              result.status === "pass" ? t("test.passed") : t("test.failed")
-            }`
-          }}
-        </span>
+        <div class="flex items-center flex-shrink overflow-x-auto">
+          <component
+            :is="result.status === 'pass' ? IconCheck : IconClose"
+            class="mr-4 svg-icons"
+            :class="
+              result.status === 'pass' ? 'text-green-500' : 'text-red-500'
+            "
+          />
+          <div class="flex items-center flex-shrink overflow-x-auto space-x-2">
+            <span v-if="result.message" class="inline-flex text-secondaryDark">
+              {{ result.message }}
+            </span>
+            <span class="inline-flex text-secondaryLight">
+              <icon-lucide-minus class="svg-icons mr-2" />
+              {{
+                result.status === "pass" ? t("test.passed") : t("test.failed")
+              }}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

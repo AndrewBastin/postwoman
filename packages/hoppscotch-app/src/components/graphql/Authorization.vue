@@ -233,9 +233,11 @@
         </div>
         <SmartAnchor
           class="link"
-          :label="`${t('authorization.learn')} \xA0 →`"
+          :label="t('authorization.learn')"
+          :icon="IconExternalLink"
           to="https://docs.hoppscotch.io/features/authorization"
           blank
+          reverse
         />
       </div>
     </div>

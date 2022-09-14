@@ -28,9 +28,12 @@
               class="flex items-center justify-between flex-1 min-w-0 cursor-pointer transition focus:outline-none text-secondaryLight text-tiny group"
             >
               <span
-                class="px-4 py-2 truncate transition group-hover:text-secondary capitalize-first"
+                class="inline-flex items-center justify-center px-4 py-2 transition group-hover:text-secondary"
               >
-                {{ t("environment.title") }}
+                <icon-lucide-chevron-right class="indicator mr-2" />
+                <span class="capitalize-first truncate">
+                  {{ t("environment.title") }}
+                </span>
               </span>
             </summary>
             <div class="divide-y divide-dividerLight">
@@ -115,23 +118,33 @@
             :key="`result-${index}`"
             class="flex items-center px-4 py-2"
           >
-            <component
-              :is="result.status === 'pass' ? IconCheck : IconClose"
-              class="mr-4 svg-icons"
-              :class="
-                result.status === 'pass' ? 'text-green-500' : 'text-red-500'
-              "
-            />
-            <span v-if="result.message" class="text-secondaryDark">
-              {{ result.message }}
-            </span>
-            <span class="text-secondaryLight">
-              {{
-                ` \xA0 — \xA0 ${
-                  result.status === "pass" ? t("test.passed") : t("test.failed")
-                }`
-              }}
-            </span>
+            <div class="flex items-center flex-shrink overflow-x-auto">
+              <component
+                :is="result.status === 'pass' ? IconCheck : IconClose"
+                class="mr-4 svg-icons"
+                :class="
+                  result.status === 'pass' ? 'text-green-500' : 'text-red-500'
+                "
+              />
+              <div
+                class="flex items-center flex-shrink overflow-x-auto space-x-2"
+              >
+                <span
+                  v-if="result.message"
+                  class="inline-flex text-secondaryDark"
+                >
+                  {{ result.message }}
+                </span>
+                <span class="inline-flex text-secondaryLight">
+                  <icon-lucide-minus class="svg-icons mr-2" />
+                  {{
+                    result.status === "pass"
+                      ? t("test.passed")
+                      : t("test.failed")
+                  }}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

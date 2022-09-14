@@ -215,9 +215,11 @@
                 </div>
                 <SmartAnchor
                   class="link"
-                  :label="`${t('authorization.learn')} \xA0 →`"
+                  :label="t('authorization.learn')"
+                  :icon="IconExternalLink"
                   to="https://docs.hoppscotch.io/features/authorization"
                   blank
+                  reverse
                 />
               </div>
             </div>
@@ -237,11 +239,13 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "vue"
+
 import IconCircleDot from "~icons/lucide/circle-dot"
 import IconCircle from "~icons/lucide/circle"
 import IconHelpCircle from "~icons/lucide/help-circle"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconExternalLink from "~icons/lucide/external-link"
+
 import debounce from "lodash/debounce"
 import {
   SIOConnection,

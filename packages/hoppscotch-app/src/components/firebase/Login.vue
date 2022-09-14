@@ -95,7 +95,8 @@
       <p v-if="mode === 'email'" class="text-secondaryLight">
         <SmartAnchor
           class="link"
-          :label="`← \xA0 ${t('auth.all_sign_in_options')}`"
+          :label="t('auth.all_sign_in_options')"
+          :icon="IconArrowLeft"
           @click="mode = 'sign-in'"
         />
       </p>
@@ -105,7 +106,8 @@
       >
         <SmartAnchor
           class="link"
-          :label="`← \xA0 ${t('auth.re_enter_email')}`"
+          :label="t('auth.re_enter_email')"
+          :icon="IconArrowLeft"
           @click="mode = 'email'"
         />
         <SmartAnchor
@@ -155,6 +157,7 @@ export default defineComponent({
       IconGoogle,
       IconEmail,
       IconMicrosoft,
+      IconArrowLeft,
     }
   },
   data() {

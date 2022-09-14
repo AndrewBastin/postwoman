@@ -190,7 +190,7 @@
                   <div class="my-1 text-secondaryLight">
                     {{ t("settings.short_codes_description") }}
                   </div>
-                  <div class="relative py-4 overflow-x-auto hide-scrollbar">
+                  <div class="relative py-4 overflow-x-auto">
                     <div
                       v-if="loading"
                       class="flex flex-col items-center justify-center"

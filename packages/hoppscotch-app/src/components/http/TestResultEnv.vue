@@ -1,29 +1,33 @@
 <template>
   <div class="flex items-center justify-between px-4 py-2">
-    <div class="flex items-center">
+    <div class="flex items-center flex-shrink overflow-x-auto">
       <component
         :is="getIcon(status)"
         v-tippy="{ theme: 'tooltip' }"
         class="mr-4 svg-icons cursor-help"
         :class="getStyle(status)"
         :title="`${t(getTooltip(status))}`"
-      ></component>
-      <span class="text-secondaryDark">
-        {{ env.key }}
-      </span>
-      <span class="text-secondaryDark pl-2 break-all">
-        {{ ` \xA0 — \xA0 ${env.value}` }}
-      </span>
-      <span
-        v-if="status === 'updations'"
-        class="text-secondaryLight px-2 break-all"
-      >
-        {{ ` \xA0 ← \xA0 ${env.previousValue}` }}
-      </span>
+      />
+      <div class="flex items-center flex-shrink overflow-x-auto space-x-2">
+        <span class="inline-flex text-secondaryDark">
+          {{ env.key }}
+        </span>
+        <span class="inline-flex text-secondaryDark">
+          <icon-lucide-minus class="svg-icons mr-2" />
+          {{ env.value }}
+        </span>
+        <span
+          v-if="status === 'updations'"
+          class="inline-flex text-secondaryLight"
+        >
+          <icon-lucide-arrow-left class="svg-icons mr-2" />
+          {{ env.previousValue }}
+        </span>
+      </div>
     </div>
     <span
       v-if="global"
-      class="px-1 rounded bg-accentLight text-accentContrast text-tiny"
+      class="px-1 ml-4 rounded bg-accentLight text-accentContrast text-tiny"
     >
       Global
     </span>

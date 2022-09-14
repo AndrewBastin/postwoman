@@ -6,8 +6,8 @@
         {{ t("state.loading") }}
       </div>
     </div>
-    <div v-else class="text-secondaryLight animate-pulse">
-      <AppLogo class="w-8 h-8" />
+    <div v-else class="text-secondaryLight">
+      <AppLogo class="w-16 h-16 rounded" />
     </div>
     <pre v-if="error" class="mt-4">{{ error }}</pre>
   </div>

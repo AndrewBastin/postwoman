@@ -59,7 +59,7 @@
                   delay: [500, 20],
                   content:
                     index !== workingUrlEncodedParams?.length - 1
-                      ? t('action.drag')
+                      ? t('action.drag_to_reorder')
                       : null,
                 }"
                 :icon="IconGripVertical"

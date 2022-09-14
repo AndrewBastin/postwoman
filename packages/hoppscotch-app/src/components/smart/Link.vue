@@ -27,9 +27,9 @@
   >
     <slot></slot>
   </a>
-  <router-link v-else :to="to" v-bind="updatedAttrs">
+  <RouterLink v-else :to="to" v-bind="updatedAttrs">
     <slot></slot>
-  </router-link>
+  </RouterLink>
 </template>
 
 <script lang="ts">
