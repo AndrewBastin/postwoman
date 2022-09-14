@@ -7,7 +7,7 @@
             <component
               :is="icon"
               :style="{ color: iconColor }"
-              @click.native="copyQuery(entry.payload)"
+              @click="copyQuery(entry.payload)"
             />
           </div>
           <div
@@ -39,13 +39,13 @@
           :title="t('action.copy')"
           :svg="copyQueryIcon"
           class="hidden group-hover:inline-flex"
-          @click.native="copyQuery(entry.payload)"
+          @click="copyQuery(entry.payload)"
         />
         <ButtonSecondary
           :svg="IconChevronDown"
           class="transform"
           :class="{ 'rotate-180': !minimized }"
-          @click.native="toggleExpandPayload()"
+          @click="toggleExpandPayload()"
         />
       </div>
     </div>
@@ -70,21 +70,21 @@
             :title="t('state.linewrap')"
             :class="{ '!text-accent': linewrapEnabled }"
             :svg="IconWrapText"
-            @click.native.prevent="linewrapEnabled = !linewrapEnabled"
+            @click.prevent="linewrapEnabled = !linewrapEnabled"
           />
           <ButtonSecondary
             ref="downloadResponse"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
             :svg="downloadIcon"
-            @click.native="downloadResponse"
+            @click="downloadResponse"
           />
           <ButtonSecondary
             ref="copyResponse"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
             :svg="copyIcon"
-            @click.native="copyResponse"
+            @click="copyResponse"
           />
         </div>
       </div>
@@ -124,7 +124,7 @@
                     v-for="(arrayMember, astIndex) in item.astParent.values"
                     :key="`ast-${astIndex}`"
                     :label="`${astIndex}`"
-                    @click.native="
+                    @click="
                       () => {
                         jumpCursor(arrayMember)
                         hide()
@@ -143,7 +143,7 @@
                     v-for="(objectMember, astIndex) in item.astParent.members"
                     :key="`ast-${astIndex}`"
                     :label="objectMember.key.value"
-                    @click.native="
+                    @click="
                       () => {
                         jumpCursor(objectMember)
                         hide()
@@ -159,7 +159,7 @@
               >
                 <SmartItem
                   label="{}"
-                  @click.native="
+                  @click="
                     () => {
                       jumpCursor(item.astValue)
                       hide()
@@ -174,7 +174,7 @@
               >
                 <SmartItem
                   label="[]"
-                  @click.native="
+                  @click="
                     () => {
                       jumpCursor(item.astValue)
                       hide()

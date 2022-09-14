@@ -47,7 +47,7 @@
                 : t('action.stop')
             "
             :loading="connectionState === 'STARTING'"
-            @click.native="toggleSSEConnection"
+            @click="toggleSSEConnection"
           />
         </div>
       </div>

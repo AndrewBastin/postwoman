@@ -57,7 +57,7 @@
           :svg="IconEdit"
           class="rounded-none"
           :label="t('action.edit')"
-          @click.native="
+          @click="
             () => {
               $emit('edit-team')
             }
@@ -68,7 +68,7 @@
           :svg="IconUserPlus"
           class="rounded-none"
           :label="t('team.invite')"
-          @click.native="
+          @click="
             () => {
               emit('invite-team')
             }
@@ -112,7 +112,7 @@
                 :svg="IconEdit"
                 :label="t('action.edit')"
                 :shortcut="['E']"
-                @click.native="
+                @click="
                   () => {
                     $emit('edit-team')
                     hide()
@@ -125,7 +125,7 @@
                 :svg="IconUserX"
                 :label="t('team.exit')"
                 :shortcut="['X']"
-                @click.native="
+                @click="
                   () => {
                     confirmExit = true
                     hide()
@@ -138,7 +138,7 @@
                 :svg="IconTrash2"
                 :label="t('action.delete')"
                 :shortcut="['⌫']"
-                @click.native="
+                @click="
                   () => {
                     confirmRemove = true
                     hide()

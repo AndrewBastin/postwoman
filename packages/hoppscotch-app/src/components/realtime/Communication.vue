@@ -44,7 +44,7 @@
                 :label="contentTypeItem"
                 :info-icon="contentTypeItem === contentType ? IconDone : null"
                 :active-info-icon="contentTypeItem === contentType"
-                @click.native="
+                @click="
                   () => {
                     contentType = contentTypeItem
                     hide()
@@ -63,7 +63,7 @@
           :disabled="!communicationBody || !isConnected"
           :svg="IconSend"
           class="rounded-none !text-accent !hover:text-accentDark"
-          @click.native="sendMessage()"
+          @click="sendMessage()"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
@@ -77,13 +77,13 @@
           :title="t('state.linewrap')"
           :class="{ '!text-accent': linewrapEnabled }"
           :svg="IconWrapText"
-          @click.native.prevent="linewrapEnabled = !linewrapEnabled"
+          @click.prevent="linewrapEnabled = !linewrapEnabled"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
           :svg="IconTrash2"
-          @click.native="clearContent"
+          @click="clearContent"
         />
         <ButtonSecondary
           v-if="contentType && contentType == 'JSON'"
@@ -91,14 +91,14 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.prettify')"
           :svg="prettifyIcon"
-          @click.native="prettifyRequestBody"
+          @click="prettifyRequestBody"
         />
         <label for="payload">
           <ButtonSecondary
             v-tippy="{ theme: 'tooltip' }"
             :title="t('import.title')"
             :svg="IconFilePlus"
-            @click.native="payload!.click()"
+            @click="payload!.click()"
           />
         </label>
         <input

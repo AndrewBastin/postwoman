@@ -24,7 +24,7 @@
               <SmartItem
                 :svg="IconGithub"
                 :label="t('import.from_gist')"
-                @click.native="
+                @click="
                   () => {
                     readCollectionGist()
                     hide()
@@ -51,7 +51,7 @@
                   "
                   :svg="IconGithub"
                   :label="t('export.create_secret_gist')"
-                  @click.native="
+                  @click="
                     () => {
                       createCollectionGist()
                       hide()
@@ -69,7 +69,7 @@
         <SmartItem
           :svg="IconFolderPlus"
           :label="t('import.from_json')"
-          @click.native="openDialogChooseFileToImportFrom"
+          @click="openDialogChooseFileToImportFrom"
         />
         <input
           ref="inputChooseFileToImportFrom"
@@ -84,7 +84,7 @@
           :title="t('action.download_file')"
           :svg="IconDownload"
           :label="t('export.as_json')"
-          @click.native="exportJSON"
+          @click="exportJSON"
         />
       </div>
     </template>

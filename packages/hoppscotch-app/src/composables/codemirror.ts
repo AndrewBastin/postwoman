@@ -11,17 +11,16 @@ import {
   Compartment,
   EditorSelection,
 } from "@codemirror/state"
-import { Language, LanguageSupport, StreamLanguage, syntaxHighlighting } from "@codemirror/language"
+import {
+  Language,
+  LanguageSupport,
+  StreamLanguage,
+  syntaxHighlighting,
+} from "@codemirror/language"
 import { defaultKeymap, indentLess, insertTab } from "@codemirror/commands"
 import { Completion, autocompletion } from "@codemirror/autocomplete"
 import { linter } from "@codemirror/lint"
-import {
-  watch,
-  ref,
-  Ref,
-  onMounted,
-  onBeforeUnmount,
-} from "vue"
+import { watch, ref, Ref, onMounted, onBeforeUnmount } from "vue"
 import { javascriptLanguage } from "@codemirror/lang-javascript"
 import { xmlLanguage } from "@codemirror/lang-xml"
 import { jsonLanguage } from "@codemirror/lang-json"
@@ -33,7 +32,11 @@ import { isJSONContentType } from "@helpers/utils/contenttypes"
 import { useStreamSubscriber } from "@composables/stream"
 import { Completer } from "@helpers/editor/completion"
 import { LinterDefinition } from "@helpers/editor/linting/linter"
-import { basicSetup, baseTheme, baseHighlightStyle } from "@helpers/editor/themes/baseTheme"
+import {
+  basicSetup,
+  baseTheme,
+  baseHighlightStyle,
+} from "@helpers/editor/themes/baseTheme"
 import { HoppEnvironmentPlugin } from "@helpers/editor/extensions/HoppEnvironment"
 // TODO: Migrate from legacy mode
 

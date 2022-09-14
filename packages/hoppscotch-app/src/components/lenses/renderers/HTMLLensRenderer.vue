@@ -13,7 +13,7 @@
           :title="t('state.linewrap')"
           :class="{ '!text-accent': linewrapEnabled }"
           :svg="IconWrapText"
-          @click.native.prevent="linewrapEnabled = !linewrapEnabled"
+          @click.prevent="linewrapEnabled = !linewrapEnabled"
         />
         <ButtonSecondary
           v-if="response.body"
@@ -22,21 +22,21 @@
             previewEnabled ? t('hide.preview') : t('response.preview_html')
           "
           :svg="!previewEnabled ? IconEye : IconEyeOff"
-          @click.native.prevent="togglePreview"
+          @click.prevent="togglePreview"
         />
         <ButtonSecondary
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
           :svg="downloadIcon"
-          @click.native="downloadResponse"
+          @click="downloadResponse"
         />
         <ButtonSecondary
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
           :svg="copyIcon"
-          @click.native="copyResponse"
+          @click="copyResponse"
         />
       </div>
     </div>

@@ -20,7 +20,7 @@ export default <HoppModule>{
           {
             name: "preventOverflow",
             options: {
-              rootBoundary: "document"
+              rootBoundary: "document",
             },
           },
         ],

@@ -26,7 +26,7 @@
             :label="`${getFontSizeName(size)}`"
             :icon="size === active ? IconCircleDot : IconCircle"
             :active="size === active"
-            @click.native="
+            @click="
               () => {
                 setActiveFont(size)
                 hide()

@@ -18,7 +18,7 @@
       class="rounded"
       :icon="color === active ? IconCircleDot : IconCircle"
       :color="color"
-      @click.native="setActiveColor(color)"
+      @click="setActiveColor(color)"
     />
   </div>
 </template>

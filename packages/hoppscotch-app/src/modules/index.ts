@@ -24,7 +24,11 @@ export type HoppModule = {
    * Called by the router to tell all the modules before a route navigation
    * is made.
    */
-  onBeforeRouteChange?: (to: RouteLocationNormalized, from: RouteLocationNormalized, router: Router) => void
+  onBeforeRouteChange?: (
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    router: Router
+  ) => void
 
   /**
    * Called by the router to tell all the modules that a route navigation has completed
@@ -40,4 +44,3 @@ export const HOPP_MODULES = pipe(
   Object.values,
   A.map(({ default: defaultVal }) => defaultVal as HoppModule)
 )
-

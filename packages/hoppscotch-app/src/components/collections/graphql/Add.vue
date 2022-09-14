@@ -26,12 +26,9 @@
       <span>
         <ButtonPrimary
           :label="`${t('action.save')}`"
-          @click.native="addNewCollection"
+          @click="addNewCollection"
         />
-        <ButtonSecondary
-          :label="`${t('action.cancel')}`"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="`${t('action.cancel')}`" @click="hideModal" />
       </span>
     </template>
   </SmartModal>
@@ -48,20 +45,18 @@ export default defineComponent({
   props: {
     show: Boolean,
   },
+  emits: ["hide-modal"],
+  setup() {
+    return {
+      toast: useToast(),
+      t: useI18n(),
+    }
+  },
   data() {
     return {
       name: null as string | null,
     }
   },
-  setup() {
-    return {
-      toast: useToast(),
-      t: useI18n()
-    }
-  },
-  emits: [
-    "hide-modal"
-  ],
   methods: {
     addNewCollection() {
       if (!this.name) {

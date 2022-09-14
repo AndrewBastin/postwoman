@@ -26,7 +26,7 @@
               :svg="IconUserMinus"
               :label="t('team.invite')"
               filled
-              @click.native="
+              @click="
                 () => {
                   $emit('invite-team')
                 }
@@ -65,7 +65,7 @@
             <ButtonSecondary
               :svg="IconUserPlus"
               :label="t('team.invite')"
-              @click.native="
+              @click="
                 () => {
                   emit('invite-team')
                 }
@@ -115,7 +115,7 @@
                           member.role === 'OWNER' ? IconCircleDot : IconCircle
                         "
                         :active="member.role === 'OWNER'"
-                        @click.native="
+                        @click="
                           () => {
                             updateMemberRole(member.userID, 'OWNER')
                             hide()
@@ -128,7 +128,7 @@
                           member.role === 'EDITOR' ? IconCircleDot : IconCircle
                         "
                         :active="member.role === 'EDITOR'"
-                        @click.native="
+                        @click="
                           () => {
                             updateMemberRole(member.userID, 'EDITOR')
                             hide()
@@ -141,7 +141,7 @@
                           member.role === 'VIEWER' ? IconCircleDot : IconCircle
                         "
                         :active="member.role === 'VIEWER'"
-                        @click.native="
+                        @click="
                           () => {
                             updateMemberRole(member.userID, 'VIEWER')
                             hide()
@@ -160,7 +160,7 @@
                   :svg="IconUserMinus"
                   color="red"
                   :loading="isLoadingIndex === index"
-                  @click.native="removeExistingTeamMember(member.userID, index)"
+                  @click="removeExistingTeamMember(member.userID, index)"
                 />
               </div>
             </div>
@@ -180,12 +180,9 @@
         <ButtonPrimary
           :label="t('action.save')"
           :loading="isLoading"
-          @click.native="saveTeam"
+          @click="saveTeam"
         />
-        <ButtonSecondary
-          :label="t('action.cancel')"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>

@@ -35,7 +35,7 @@
           :svg="IconFilePlus"
           :title="t('request.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="$emit('add-request', { folder, path: folderPath })"
+          @click="$emit('add-request', { folder, path: folderPath })"
         />
         <ButtonSecondary
           v-if="collectionsType.selectedTeam.myRole !== 'VIEWER'"
@@ -43,7 +43,7 @@
           :svg="IconFolderPlus"
           :title="t('folder.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="$emit('add-folder', { folder, path: folderPath })"
+          @click="$emit('add-folder', { folder, path: folderPath })"
         />
         <span>
           <tippy
@@ -78,7 +78,7 @@
                   :svg="IconFilePlus"
                   :label="t('request.new')"
                   :shortcut="['R']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-request', { folder, path: folderPath })
                       hide()
@@ -90,7 +90,7 @@
                   :svg="IconFolderPlus"
                   :label="t('folder.new')"
                   :shortcut="['N']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-folder', { folder, path: folderPath })
                       hide()
@@ -102,7 +102,7 @@
                   :svg="IconEdit"
                   :label="t('action.edit')"
                   :shortcut="['E']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('edit-folder', {
                         folder,
@@ -120,14 +120,14 @@
                   :label="t('export.title')"
                   :shortcut="['X']"
                   :loading="exportLoading"
-                  @click.native="exportFolder"
+                  @click="exportFolder"
                 />
                 <SmartItem
                   ref="deleteAction"
                   :svg="IconTrash2"
                   :label="t('action.delete')"
                   :shortcut="['⌫']"
-                  @click.native="
+                  @click="
                     () => {
                       removeFolder()
                       hide()

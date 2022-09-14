@@ -17,7 +17,7 @@
           :svg="IconPlus"
           :label="t('action.new')"
           class="!rounded-none"
-          @click.native="displayModalAdd(true)"
+          @click="displayModalAdd(true)"
         />
         <div class="flex">
           <ButtonSecondary
@@ -32,7 +32,7 @@
             v-tippy="{ theme: 'tooltip' }"
             :title="t('modal.import_export')"
             :svg="IconArchive"
-            @click.native="displayModalImportExport(true)"
+            @click="displayModalImportExport(true)"
           />
         </div>
       </div>
@@ -73,7 +73,7 @@
       <ButtonSecondary
         :label="t('add.new')"
         filled
-        @click.native="displayModalAdd(true)"
+        @click="displayModalAdd(true)"
       />
     </div>
     <div

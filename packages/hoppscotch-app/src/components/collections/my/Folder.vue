@@ -34,14 +34,14 @@
           :svg="IconFilePlus"
           :title="t('request.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="$emit('add-request', { path: folderPath })"
+          @click="$emit('add-request', { path: folderPath })"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :svg="IconFolderPlus"
           :title="t('folder.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="$emit('add-folder', { folder, path: folderPath })"
+          @click="$emit('add-folder', { folder, path: folderPath })"
         />
         <span>
           <tippy
@@ -75,7 +75,7 @@
                   :svg="IconFilePlus"
                   :label="t('request.new')"
                   :shortcut="['R']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-request', { path: folderPath })
                       hide()
@@ -87,7 +87,7 @@
                   :svg="IconFolderPlus"
                   :label="t('folder.new')"
                   :shortcut="['N']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-folder', { folder, path: folderPath })
                       hide()
@@ -99,7 +99,7 @@
                   :svg="IconEdit"
                   :label="t('action.edit')"
                   :shortcut="['E']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('edit-folder', {
                         folder,
@@ -116,7 +116,7 @@
                   :svg="IconDownload"
                   :label="t('export.title')"
                   :shortcut="['X']"
-                  @click.native="
+                  @click="
                     () => {
                       exportFolder()
                       hide()
@@ -128,7 +128,7 @@
                   :svg="IconTrash2"
                   :label="t('action.delete')"
                   :shortcut="['⌫']"
-                  @click.native="
+                  @click="
                     () => {
                       removeFolder()
                       hide()

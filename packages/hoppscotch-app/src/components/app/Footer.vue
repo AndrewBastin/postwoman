@@ -8,7 +8,7 @@
           :svg="IconSidebar"
           class="transform"
           :class="{ '-rotate-180': !EXPAND_NAVIGATION }"
-          @click.native="EXPAND_NAVIGATION = !EXPAND_NAVIGATION"
+          @click="EXPAND_NAVIGATION = !EXPAND_NAVIGATION"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
@@ -20,7 +20,7 @@
             '!text-accent !focus-visible:text-accentDark !hover:text-accentDark':
               ZEN_MODE,
           }"
-          @click.native="ZEN_MODE = !ZEN_MODE"
+          @click="ZEN_MODE = !ZEN_MODE"
         />
         <tippy interactive trigger="click" theme="popover" arrow>
           <ButtonSecondary
@@ -65,14 +65,14 @@
                 to="https://docs.hoppscotch.io"
                 blank
                 :shortcut="['D']"
-                @click.native="hide()"
+                @click="hide()"
               />
               <SmartItem
                 ref="shortcuts"
                 :svg="IconZap"
                 :label="`${t('app.keyboard_shortcuts')}`"
                 :shortcut="['S']"
-                @click.native="
+                @click="
                   () => {
                     showShortcuts = true
                     hide()
@@ -84,7 +84,7 @@
                 :svg="IconMessageCircle"
                 :label="`${t('app.chat_with_us')}`"
                 :shortcut="['C']"
-                @click.native="
+                @click="
                   () => {
                     chatWithUs()
                     hide()
@@ -96,14 +96,14 @@
                 :label="`${t('app.whats_new')}`"
                 to="https://docs.hoppscotch.io/changelog"
                 blank
-                @click.native="hide()"
+                @click="hide()"
               />
               <SmartItem
                 :svg="IconActivity"
                 :label="t('app.status')"
                 to="https://status.hoppscotch.io"
                 blank
-                @click.native="hide()"
+                @click="hide()"
               />
               <hr />
               <SmartItem
@@ -111,19 +111,19 @@
                 :label="`${t('app.github')}`"
                 to="https://github.com/hoppscotch/hoppscotch"
                 blank
-                @click.native="hide()"
+                @click="hide()"
               />
               <SmartItem
                 :svg="IconTwitter"
                 :label="`${t('app.twitter')}`"
                 to="https://hoppscotch.io/twitter"
                 blank
-                @click.native="hide()"
+                @click="hide()"
               />
               <SmartItem
                 :svg="IconUserPlus"
                 :label="`${t('app.invite')}`"
-                @click.native="
+                @click="
                   () => {
                     showShare = true
                     hide()
@@ -135,7 +135,7 @@
                 :label="`${t('app.terms_and_privacy')}`"
                 to="https://docs.hoppscotch.io/privacy"
                 blank
-                @click.native="hide()"
+                @click="hide()"
               />
               <div
                 class="flex px-4 py-2 opacity-50"
@@ -150,14 +150,14 @@
           v-tippy="{ theme: 'tooltip' }"
           :svg="IconZap"
           :title="t('app.shortcuts')"
-          @click.native="showShortcuts = true"
+          @click="showShortcuts = true"
         />
         <ButtonSecondary
           v-if="navigatorShare"
           v-tippy="{ theme: 'tooltip' }"
           :svg="IconShare2"
           :title="t('request.share')"
-          @click.native="nativeShare()"
+          @click="nativeShare()"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
@@ -165,7 +165,7 @@
           :svg="IconColumns"
           class="transform"
           :class="{ 'rotate-90': !COLUMN_LAYOUT }"
-          @click.native="COLUMN_LAYOUT = !COLUMN_LAYOUT"
+          @click="COLUMN_LAYOUT = !COLUMN_LAYOUT"
         />
         <span
           class="transition transform"
@@ -179,7 +179,7 @@
             :svg="IconSidebarOpen"
             class="transform"
             :class="{ 'rotate-180': !SIDEBAR }"
-            @click.native="SIDEBAR = !SIDEBAR"
+            @click="SIDEBAR = !SIDEBAR"
           />
         </span>
       </div>

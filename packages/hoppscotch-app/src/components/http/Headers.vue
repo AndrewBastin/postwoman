@@ -18,21 +18,21 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear_all')"
           :svg="IconTrash2"
-          @click.native="clearContent()"
+          @click="clearContent()"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('state.bulk_mode')"
           :svg="IconEdit"
           :class="{ '!text-accent': bulkMode }"
-          @click.native="bulkMode = !bulkMode"
+          @click="bulkMode = !bulkMode"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('add.new')"
           :svg="IconPlus"
           :disabled="bulkMode"
-          @click.native="addHeader"
+          @click="addHeader"
         />
       </div>
     </div>
@@ -119,7 +119,7 @@
                     : IconCheckCircle
                 "
                 color="green"
-                @click.native="
+                @click="
                   updateHeader(index, {
                     id: header.id,
                     key: header.key,
@@ -135,7 +135,7 @@
                 :title="t('action.remove')"
                 :svg="IconTrash"
                 color="red"
-                @click.native="deleteHeader(index)"
+                @click="deleteHeader(index)"
               />
             </span>
           </div>
@@ -177,7 +177,7 @@
               <ButtonSecondary
                 v-if="header.source === 'auth'"
                 :svg="masking ? IconEye : IconEyeOff"
-                @click.native="toggleMask()"
+                @click="toggleMask()"
               />
               <ButtonSecondary
                 v-else
@@ -188,7 +188,7 @@
             <span>
               <ButtonSecondary
                 :svg="IconArrowUpRight"
-                @click.native="changeTab(header.source)"
+                @click="changeTab(header.source)"
               />
             </span>
           </div>
@@ -210,7 +210,7 @@
           :label="`${t('add.new')}`"
           :svg="IconPlus"
           class="mb-4"
-          @click.native="addHeader"
+          @click="addHeader"
         />
       </div>
     </div>

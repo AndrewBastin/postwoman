@@ -50,7 +50,7 @@
                   :label="codegen.caption"
                   :info-icon="codegen.name === codegenType ? IconCheck : null"
                   :active-info-icon="codegen.name === codegenType"
-                  @click.native="
+                  @click="
                     () => {
                       codegenType = codegen.name
                       hide()
@@ -84,12 +84,9 @@
         <ButtonPrimary
           :label="`${t('action.copy')}`"
           :svg="copyIcon"
-          @click.native="copyRequestCode"
+          @click="copyRequestCode"
         />
-        <ButtonSecondary
-          :label="`${t('action.dismiss')}`"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="`${t('action.dismiss')}`" @click="hideModal" />
       </span>
     </template>
   </SmartModal>

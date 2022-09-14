@@ -25,7 +25,7 @@
               :label="`${t('request.run')}`"
               :svg="IconPlay"
               class="rounded-none !text-accent !hover:text-accentDark"
-              @click.native="runQuery()"
+              @click="runQuery()"
             />
             <ButtonSecondary
               ref="saveRequest"
@@ -36,7 +36,7 @@
               :label="`${t('request.save')}`"
               :svg="IconSave"
               class="rounded-none"
-              @click.native="saveRequest"
+              @click="saveRequest"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
@@ -49,19 +49,19 @@
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
               :svg="IconTrash2"
-              @click.native="clearGQLQuery()"
+              @click="clearGQLQuery()"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.prettify')"
               :svg="prettifyQueryIcon"
-              @click.native="prettifyQuery"
+              @click="prettifyQuery"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.copy')"
               :svg="copyQueryIcon"
-              @click.native="copyQuery"
+              @click="copyQuery"
             />
           </div>
         </div>
@@ -90,20 +90,20 @@
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
               :svg="IconTrash2"
-              @click.native="clearGQLVariables()"
+              @click="clearGQLVariables()"
             />
             <ButtonSecondary
               ref="prettifyRequest"
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.prettify')"
               :svg="prettifyVariablesIcon"
-              @click.native="prettifyVariableString"
+              @click="prettifyVariableString"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.copy')"
               :svg="copyVariablesIcon"
-              @click.native="copyVariables"
+              @click="copyVariables"
             />
           </div>
         </div>
@@ -132,21 +132,21 @@
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
               :svg="IconTrash2"
-              @click.native="clearContent()"
+              @click="clearContent()"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('state.bulk_mode')"
               :svg="IconEdit"
               :class="{ '!text-accent': bulkMode }"
-              @click.native="bulkMode = !bulkMode"
+              @click="bulkMode = !bulkMode"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('add.new')"
               :svg="IconPlus"
               :disabled="bulkMode"
-              @click.native="addHeader"
+              @click="addHeader"
             />
           </div>
         </div>
@@ -246,7 +246,7 @@
                         : IconCheckCircle
                     "
                     color="green"
-                    @click.native="
+                    @click="
                       updateHeader(index, {
                         id: header.id,
                         key: header.key,
@@ -262,7 +262,7 @@
                     :title="t('action.remove')"
                     :svg="IconTrash"
                     color="red"
-                    @click.native="deleteHeader(index)"
+                    @click="deleteHeader(index)"
                   />
                 </span>
               </div>
@@ -286,7 +286,7 @@
               filled
               :svg="IconPlus"
               class="mb-4"
-              @click.native="addHeader"
+              @click="addHeader"
             />
           </div>
         </div>

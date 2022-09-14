@@ -16,7 +16,7 @@
           :title="t('state.linewrap')"
           :class="{ '!text-accent': linewrapEnabled }"
           :svg="IconWrapText"
-          @click.native.prevent="linewrapEnabled = !linewrapEnabled"
+          @click.prevent="linewrapEnabled = !linewrapEnabled"
         />
         <ButtonSecondary
           v-if="response.body"
@@ -24,21 +24,21 @@
           :title="t('action.filter_response')"
           :svg="IconFilter"
           :class="{ '!text-accent': toggleFilter }"
-          @click.native.prevent="toggleFilterState"
+          @click.prevent="toggleFilterState"
         />
         <ButtonSecondary
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
           :svg="downloadIcon"
-          @click.native="downloadResponse"
+          @click="downloadResponse"
         />
         <ButtonSecondary
           v-if="response.body"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
           :svg="copyIcon"
-          @click.native="copyResponse"
+          @click="copyResponse"
         />
       </div>
     </div>
@@ -122,7 +122,7 @@
                   v-for="(arrayMember, astIndex) in item.astParent.values"
                   :key="`ast-${astIndex}`"
                   :label="`${astIndex}`"
-                  @click.native="
+                  @click="
                     () => {
                       jumpCursor(arrayMember)
                       hide()
@@ -141,7 +141,7 @@
                   v-for="(objectMember, astIndex) in item.astParent.members"
                   :key="`ast-${astIndex}`"
                   :label="objectMember.key.value"
-                  @click.native="
+                  @click="
                     () => {
                       jumpCursor(objectMember)
                       hide()
@@ -157,7 +157,7 @@
             >
               <SmartItem
                 label="{}"
-                @click.native="
+                @click="
                   () => {
                     jumpCursor(item.astValue)
                     hide()
@@ -172,7 +172,7 @@
             >
               <SmartItem
                 label="[]"
-                @click.native="
+                @click="
                   () => {
                     jumpCursor(item.astValue)
                     hide()

@@ -18,23 +18,23 @@ import { TabMeta, TabProvider } from "./Tabs.vue"
 
 const props = withDefaults(
   defineProps<{
-    id: string,
-    label: string,
-    icon?: Component | object | string | null,
-    info?: string | null,
-    indicator?: boolean,
+    id: string
+    label: string
+    icon?: Component | object | string | null
+    info?: string | null
+    indicator?: boolean
   }>(),
   {
     icon: null,
     indicator: false,
-    info: null
+    info: null,
   }
 )
 
 const tabMeta = computed<TabMeta>(() => ({
   // props.icon can store a component, which should not be made deeply reactive
   icon:
-    (props.icon && typeof props.icon === "object")
+    props.icon && typeof props.icon === "object"
       ? markRaw(props.icon)
       : props.icon,
 

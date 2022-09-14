@@ -29,7 +29,7 @@
               :label="`${t('environment.no_environment')}`"
               :info-icon="selectedEnvironmentIndex === -1 ? IconDone : null"
               :active-info-icon="selectedEnvironmentIndex === -1"
-              @click.native="
+              @click="
                 () => {
                   selectedEnvironmentIndex = -1
                   hide()
@@ -43,7 +43,7 @@
               :label="gen.name"
               :info-icon="index === selectedEnvironmentIndex ? IconDone : null"
               :active-info-icon="index === selectedEnvironmentIndex"
-              @click.native="
+              @click="
                 () => {
                   selectedEnvironmentIndex = index
                   hide()
@@ -58,7 +58,7 @@
           :svg="IconPlus"
           :label="`${t('action.new')}`"
           class="!rounded-none"
-          @click.native="displayModalAdd(true)"
+          @click="displayModalAdd(true)"
         />
         <div class="flex">
           <ButtonSecondary
@@ -72,7 +72,7 @@
             v-tippy="{ theme: 'tooltip' }"
             :svg="IconArchive"
             :title="t('modal.import_export')"
-            @click.native="displayModalImportExport(true)"
+            @click="displayModalImportExport(true)"
           />
         </div>
       </div>
@@ -109,7 +109,7 @@
         :label="`${t('add.new')}`"
         filled
         class="mb-4"
-        @click.native="displayModalAdd(true)"
+        @click="displayModalAdd(true)"
       />
     </div>
     <EnvironmentsDetails

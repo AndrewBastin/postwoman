@@ -12,7 +12,7 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.copy')"
           :svg="copyIcon"
-          @click.native="copyHeaders"
+          @click="copyHeaders"
         />
       </div>
     </div>

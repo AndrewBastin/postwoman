@@ -18,7 +18,7 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
           :svg="IconTrash2"
-          @click.native="clearContent()"
+          @click="clearContent()"
         />
       </div>
       <div class="border-b divide-y-4 divide-dividerLight border-dividerLight">
@@ -49,13 +49,13 @@
                       :label="t('environment.add_to_global')"
                       class="text-tiny !bg-primary"
                       filled
-                      @click.native="addEnvToGlobal()"
+                      @click="addEnvToGlobal()"
                     />
                     <ButtonSecondary
                       :label="t('environment.create_new')"
                       class="text-tiny !bg-primary"
                       filled
-                      @click.native="displayModalAdd(true)"
+                      @click="displayModalAdd(true)"
                     />
                   </p>
                 </div>

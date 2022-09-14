@@ -12,7 +12,7 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
           :svg="downloadIcon"
-          @click.native="downloadResponse"
+          @click="downloadResponse"
         />
       </div>
     </div>

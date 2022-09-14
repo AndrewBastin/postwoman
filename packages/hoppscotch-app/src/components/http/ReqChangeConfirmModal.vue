@@ -18,14 +18,14 @@
         <ButtonPrimary
           v-focus
           :label="t('action.save')"
-          @click.native="saveApiChange"
+          @click="saveApiChange"
         />
         <ButtonSecondary
           :label="t('action.dont_save')"
-          @click.native="discardApiChange"
+          @click="discardApiChange"
         />
       </span>
-      <ButtonSecondary :label="t('action.cancel')" @click.native="hideModal" />
+      <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
     </template>
   </SmartModal>
 </template>

@@ -10,7 +10,7 @@
       }"
       class="rounded"
       :svg="getIcon(color)"
-      @click.native="setBGMode(color)"
+      @click="setBGMode(color)"
     />
   </div>
 </template>
@@ -20,12 +20,8 @@ import IconMonitor from "~icons/lucide/monitor"
 import IconSun from "~icons/lucide/sun"
 import IconCloud from "~icons/lucide/cloud"
 import IconMoon from "~icons/lucide/moon"
-import {
-  applySetting,
-  HoppBgColor,
-  HoppBgColors,
-} from "~/newstore/settings"
-import { useSetting } from "@composables/settings";
+import { applySetting, HoppBgColor, HoppBgColors } from "~/newstore/settings"
+import { useSetting } from "@composables/settings"
 import { useI18n } from "@composables/i18n"
 
 const t = useI18n()

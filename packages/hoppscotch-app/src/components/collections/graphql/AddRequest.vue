@@ -24,11 +24,8 @@
     </template>
     <template #footer>
       <span>
-        <ButtonPrimary :label="t('action.save')" @click.native="addRequest" />
-        <ButtonSecondary
-          :label="t('action.cancel')"
-          @click.native="hideModal"
-        />
+        <ButtonPrimary :label="t('action.save')" @click="addRequest" />
+        <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>

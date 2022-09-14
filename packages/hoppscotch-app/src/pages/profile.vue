@@ -24,7 +24,7 @@
           <ButtonPrimary
             :label="t('auth.login')"
             class="mb-4"
-            @click.native="showLogin = true"
+            @click="showLogin = true"
           />
         </div>
         <div v-else class="space-y-8">
@@ -67,7 +67,7 @@
                     :svg="IconVerified"
                     class="px-1 py-0 ml-2"
                     :loading="verifyingEmailAddress"
-                    @click.native="sendEmailVerification"
+                    @click="sendEmailVerification"
                   />
                 </p>
               </div>
@@ -280,12 +280,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-.table-box {
-  @apply flex flex-1 items-center px-4 py-2 truncate;
-}
-</style>
-
 <script setup lang="ts">
 import { ref, defineComponent, watchEffect, computed } from "vue"
 import { pipe } from "fp-ts/function"
@@ -438,3 +432,9 @@ const getErrorMessage = (err: GQLError<string>) => {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.table-box {
+  @apply flex flex-1 items-center px-4 py-2 truncate;
+}
+</style>

@@ -59,7 +59,7 @@
                     team.id === collectionsType.selectedTeam?.id
                   "
                   :svg="IconUsers"
-                  @click.native="
+                  @click="
                     () => {
                       updateSelectedTeam(team)
                       hide()

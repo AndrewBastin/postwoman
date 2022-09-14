@@ -20,21 +20,21 @@
             :title="t('state.linewrap')"
             :class="{ '!text-accent': linewrapEnabled }"
             :svg="IconWrapText"
-            @click.native.prevent="linewrapEnabled = !linewrapEnabled"
+            @click.prevent="linewrapEnabled = !linewrapEnabled"
           />
           <ButtonSecondary
             ref="downloadResponse"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
             :svg="downloadResponseIcon"
-            @click.native="downloadResponse"
+            @click="downloadResponse"
           />
           <ButtonSecondary
             ref="copyResponseButton"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
             :svg="copyResponseIcon"
-            @click.native="copyResponse"
+            @click="copyResponse"
           />
         </div>
       </div>

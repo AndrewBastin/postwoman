@@ -29,7 +29,7 @@
         color="green"
         :svg="copyIconRefs"
         class="px-3"
-        @click.native="copyShortcode(shortcode.id)"
+        @click="copyShortcode(shortcode.id)"
       />
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
@@ -37,7 +37,7 @@
         :svg="IconTrash"
         color="red"
         class="px-3"
-        @click.native="deleteShortcode(shortcode.id)"
+        @click="deleteShortcode(shortcode.id)"
       />
     </div>
   </div>

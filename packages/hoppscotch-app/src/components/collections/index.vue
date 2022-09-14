@@ -38,7 +38,7 @@
           :svg="IconPlus"
           :label="t('action.new')"
           class="!rounded-none"
-          @click.native="displayModalAdd(true)"
+          @click="displayModalAdd(true)"
         />
         <span class="flex">
           <ButtonSecondary
@@ -57,7 +57,7 @@
             "
             :svg="IconArchive"
             :title="t('modal.import_export')"
-            @click.native="displayModalImportExport(true)"
+            @click="displayModalImportExport(true)"
           />
         </span>
       </div>
@@ -131,7 +131,7 @@
         :label="t('add.new')"
         filled
         class="mb-4"
-        @click.native="displayModalAdd(true)"
+        @click="displayModalAdd(true)"
       />
     </div>
     <div
@@ -261,6 +261,15 @@ export default defineComponent({
     saveRequest: Boolean,
     picked: { type: Object, default: () => {} },
   },
+  emits: [
+    "update-collection",
+    "update-coll-type",
+    "update-team-collections",
+    "select-request",
+    "select",
+    "use-collection",
+    "remove-collection",
+  ],
   setup() {
     const { subscribeToStream } = useStreamSubscriber()
 
@@ -308,15 +317,6 @@ export default defineComponent({
       loadingCollectionIDs: [],
     }
   },
-  emits: [
-    "update-collection",
-    "update-coll-type",
-    "update-team-collections",
-    "select-request",
-    "select",
-    "use-collection",
-    "remove-collection",
-  ],
   computed: {
     showTeamCollections() {
       if (this.currentUser == null) {

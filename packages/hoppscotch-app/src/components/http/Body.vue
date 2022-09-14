@@ -31,7 +31,7 @@
                 :label="t('state.none')"
                 :info-icon="contentType === null ? IconDone : null"
                 :active-info-icon="contentType === null"
-                @click.native="
+                @click="
                   () => {
                     contentType = null
                     hide()
@@ -61,7 +61,7 @@
                       contentTypeItem === contentType ? IconDone : null
                     "
                     :active-info-icon="contentTypeItem === contentType"
-                    @click.native="
+                    @click="
                       () => {
                         contentType = contentTypeItem
                         hide()
@@ -90,7 +90,7 @@
           ]"
           filled
           outline
-          @click.native="contentTypeOverride('headers')"
+          @click="contentTypeOverride('headers')"
         />
       </span>
     </div>

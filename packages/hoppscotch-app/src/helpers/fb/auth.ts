@@ -29,12 +29,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore"
-import {
-  BehaviorSubject,
-  filter,
-  Subject,
-  Subscription,
-} from "rxjs"
+import { BehaviorSubject, filter, Subject, Subscription } from "rxjs"
 import {
   setLocalConfig,
   getLocalConfig,
@@ -407,4 +402,3 @@ async function reauthenticateUser() {
 export function getGithubCredentialFromResult(result: UserCredential) {
   return GithubAuthProvider.credentialFromResult(result)
 }
-

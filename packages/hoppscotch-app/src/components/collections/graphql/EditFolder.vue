@@ -24,14 +24,8 @@
     </template>
     <template #footer>
       <span>
-        <ButtonPrimary
-          :label="`${t('action.save')}`"
-          @click.native="editFolder"
-        />
-        <ButtonSecondary
-          :label="`${t('action.cancel')}`"
-          @click.native="hideModal"
-        />
+        <ButtonPrimary :label="`${t('action.save')}`" @click="editFolder" />
+        <ButtonSecondary :label="`${t('action.cancel')}`" @click="hideModal" />
       </span>
     </template>
   </SmartModal>
@@ -50,20 +44,18 @@ export default defineComponent({
     folderPath: { type: String, default: null },
     editingFolderName: { type: String, default: null },
   },
+  emits: ["hide-modal"],
+  setup() {
+    return {
+      toast: useToast(),
+      t: useI18n(),
+    }
+  },
   data() {
     return {
       name: "",
     }
   },
-  setup() {
-    return {
-      toast: useToast(),
-      t: useI18n()
-    }
-  },
-  emits: [
-    "hide-modal"
-  ],
   watch: {
     editingFolderName(val) {
       this.name = val

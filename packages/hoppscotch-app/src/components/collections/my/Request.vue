@@ -85,7 +85,7 @@
                   :svg="IconEdit"
                   :label="t('action.edit')"
                   :shortcut="['E']"
-                  @click.native="
+                  @click="
                     () => {
                       emit('edit-request', {
                         collectionIndex,
@@ -104,7 +104,7 @@
                   :svg="IconCopy"
                   :label="t('action.duplicate')"
                   :shortcut="['D']"
-                  @click.native="
+                  @click="
                     () => {
                       emit('duplicate-request', {
                         collectionIndex,
@@ -123,7 +123,7 @@
                   :svg="IconTrash2"
                   :label="t('action.delete')"
                   :shortcut="['⌫']"
-                  @click.native="
+                  @click="
                     () => {
                       removeRequest()
                       hide()

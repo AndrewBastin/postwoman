@@ -6,7 +6,7 @@
       :label="`${t('auth.logout')}`"
       :outline="outline"
       :shortcut="shortcut"
-      @click.native="OpenLogoutModal()"
+      @click="OpenLogoutModal()"
     />
     <SmartConfirmModal
       :show="confirmLogout"

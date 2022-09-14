@@ -27,12 +27,9 @@
         <ButtonPrimary
           :label="t('action.save')"
           :loading="loadingState"
-          @click.native="saveCollection"
+          @click="saveCollection"
         />
-        <ButtonSecondary
-          :label="t('action.cancel')"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>
@@ -49,15 +46,15 @@ export default defineComponent({
     editingCollectionName: { type: String, default: null },
     loadingState: Boolean,
   },
-  data() {
-    return {
-      name: null,
-    }
-  },
   setup() {
     return {
       toast: useToast(),
-      i18n: useI18n()
+      i18n: useI18n(),
+    }
+  },
+  data() {
+    return {
+      name: null,
     }
   },
   watch: {

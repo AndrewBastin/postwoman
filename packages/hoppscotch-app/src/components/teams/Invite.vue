@@ -87,7 +87,7 @@
                     :svg="IconTrash"
                     color="red"
                     :loading="isLoadingIndex === index"
-                    @click.native="removeInvitee(invitee.id, index)"
+                    @click="removeInvitee(invitee.id, index)"
                   />
                 </div>
               </div>
@@ -121,7 +121,7 @@
               :svg="IconPlus"
               :label="t('add.new')"
               filled
-              @click.native="addNewInvitee"
+              @click="addNewInvitee"
             />
           </div>
         </div>
@@ -168,7 +168,7 @@
                         invitee.value === 'OWNER' ? IconCircleDot : IconCircle
                       "
                       :active="invitee.value === 'OWNER'"
-                      @click.native="
+                      @click="
                         () => {
                           updateNewInviteeRole(index, 'OWNER')
                           newInviteeOptions[index].tippy().hide()
@@ -181,7 +181,7 @@
                         invitee.value === 'EDITOR' ? IconCircleDot : IconCircle
                       "
                       :active="invitee.value === 'EDITOR'"
-                      @click.native="
+                      @click="
                         () => {
                           updateNewInviteeRole(index, 'EDITOR')
                           newInviteeOptions[index].tippy().hide()
@@ -194,7 +194,7 @@
                         invitee.value === 'VIEWER' ? IconCircleDot : IconCircle
                       "
                       :active="invitee.value === 'VIEWER'"
-                      @click.native="
+                      @click="
                         () => {
                           updateNewInviteeRole(index, 'VIEWER')
                           newInviteeOptions[index].tippy().hide()
@@ -212,7 +212,7 @@
                 :title="t('action.remove')"
                 :svg="IconTrash"
                 color="red"
-                @click.native="removeNewInvitee(index)"
+                @click="removeNewInvitee(index)"
               />
             </div>
           </div>
@@ -232,7 +232,7 @@
             <ButtonSecondary
               :label="t('add.new')"
               filled
-              @click.native="addNewInvitee"
+              @click="addNewInvitee"
             />
           </div>
         </div>
@@ -297,7 +297,7 @@
         <SmartAnchor
           class="link"
           :label="`← \xA0 ${t('team.invite_more')}`"
-          @click.native="
+          @click="
             () => {
               sendInvitesResult = []
               newInvites = [
@@ -312,15 +312,12 @@
         <SmartAnchor
           class="link"
           :label="`${t('action.dismiss')}`"
-          @click.native="hideModal"
+          @click="hideModal"
         />
       </p>
       <span v-else>
-        <ButtonPrimary :label="t('team.invite')" @click.native="sendInvites" />
-        <ButtonSecondary
-          :label="t('action.cancel')"
-          @click.native="hideModal"
-        />
+        <ButtonPrimary :label="t('team.invite')" @click="sendInvites" />
+        <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>

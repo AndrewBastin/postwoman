@@ -118,7 +118,6 @@ authIdToken$.subscribe(() => {
   client.value = createHoppClient()
 })
 
-
 type RunQueryOptions<T = any, V = object> = {
   query: TypedDocumentNode<T, V>
   variables?: V
@@ -237,7 +236,6 @@ export const runGQLSubscription = <
   // Returns the stream and a subscription handle to unsub
   return [result$, sub] as const
 }
-
 
 export const parseGQLErrorString = (s: string) =>
   s.startsWith("[GraphQL] ") ? s.split("[GraphQL] ")[1] : s

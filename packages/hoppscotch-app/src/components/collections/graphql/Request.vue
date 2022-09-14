@@ -34,7 +34,7 @@
           :svg="IconRotateCCW"
           :title="t('action.restore')"
           class="hidden group-hover:inline-flex"
-          @click.native="selectRequest()"
+          @click="selectRequest()"
         />
         <span>
           <tippy
@@ -66,7 +66,7 @@
                   :svg="IconEdit"
                   :label="`${t('action.edit')}`"
                   :shortcut="['E']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('edit-request', {
                         request,
@@ -82,7 +82,7 @@
                   :svg="IconCopy"
                   :label="`${t('action.duplicate')}`"
                   :shortcut="['D']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('duplicate-request', {
                         request,
@@ -98,7 +98,7 @@
                   :svg="IconTrash2"
                   :label="`${t('action.delete')}`"
                   :shortcut="['⌫']"
-                  @click.native="
+                  @click="
                     () => {
                       confirmRemove = true
                       hide()

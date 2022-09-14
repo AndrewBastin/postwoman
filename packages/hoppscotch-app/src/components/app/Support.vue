@@ -16,7 +16,7 @@
           :info-icon="IconChevronRight"
           active
           blank
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconZap"
@@ -24,7 +24,7 @@
           :description="t('support.shortcuts')"
           :info-icon="IconChevronRight"
           active
-          @click.native="showShortcuts()"
+          @click="showShortcuts()"
         />
         <SmartItem
           :svg="IconGift"
@@ -34,7 +34,7 @@
           :info-icon="IconChevronRight"
           active
           blank
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconMessageCircle"
@@ -42,7 +42,7 @@
           :description="t('support.chat')"
           :info-icon="IconChevronRight"
           active
-          @click.native="chatWithUs()"
+          @click="chatWithUs()"
         />
         <SmartItem
           :svg="IconDiscord"
@@ -52,7 +52,7 @@
           :description="t('support.community')"
           :info-icon="IconChevronRight"
           active
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconTwitter"
@@ -62,7 +62,7 @@
           :description="t('support.twitter')"
           :info-icon="IconChevronRight"
           active
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
       </div>
     </template>

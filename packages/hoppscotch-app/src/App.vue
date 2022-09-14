@@ -1,16 +1,13 @@
 <template>
-  <ErrorPage
-    v-if="errorInfo !== null"
-    :error="errorInfo"
-  />
-  <router-view v-else />
+  <ErrorPage v-if="errorInfo !== null" :error="errorInfo" />
+  <RouterView v-else />
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import ErrorPage, { ErrorPageData } from "~/pages/_.vue";
-import { HOPP_MODULES } from '@modules/.';
-import { useI18n } from "@composables/i18n";
+import { ref } from "vue"
+import ErrorPage, { ErrorPageData } from "~/pages/_.vue"
+import { HOPP_MODULES } from "@modules/."
+import { useI18n } from "@composables/i18n"
 
 const t = useI18n()
 
@@ -26,7 +23,7 @@ const formatErrorMessage = (err: Error | null | undefined) => {
 window.onerror = (_, _1, _2, _3, err) => {
   errorInfo.value = {
     statusCode: 500,
-    message: formatErrorMessage(err) ?? t("error.something_went_wrong")
+    message: formatErrorMessage(err) ?? t("error.something_went_wrong"),
   }
 }
 

@@ -19,7 +19,7 @@
         name="get"
         :label="!connected ? t('action.connect') : t('action.disconnect')"
         class="w-32"
-        @click.native="onConnectClick"
+        @click="onConnectClick"
       />
     </div>
   </div>

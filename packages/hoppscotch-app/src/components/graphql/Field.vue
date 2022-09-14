@@ -67,7 +67,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      t: useI18n()
+      t: useI18n(),
     }
   },
   computed: {

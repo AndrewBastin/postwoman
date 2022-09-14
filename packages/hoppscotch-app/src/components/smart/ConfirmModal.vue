@@ -20,12 +20,9 @@
           v-focus
           :label="yes ?? t('action.yes')"
           :loading="!!loadingState"
-          @click.native="resolve"
+          @click="resolve"
         />
-        <ButtonSecondary
-          :label="no ?? t('action.no')"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="no ?? t('action.no')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>
@@ -38,22 +35,22 @@ const t = useI18n()
 
 const props = withDefaults(
   defineProps<{
-    show: boolean,
-    title?: string | null,
-    yes?: string | null,
-    no?: string | null,
+    show: boolean
+    title?: string | null
+    yes?: string | null
+    no?: string | null
     loadingState?: boolean | null
   }>(),
   {
     title: null,
     yes: null,
     no: null,
-    loadingState: null
+    loadingState: null,
   }
 )
 
 const emit = defineEmits<{
-  (e: "hide-modal"): void,
+  (e: "hide-modal"): void
   (e: "resolve", title: string | null): void
 }>()
 

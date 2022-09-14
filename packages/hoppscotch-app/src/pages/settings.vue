@@ -209,7 +209,7 @@
                 :svg="clearIcon"
                 outline
                 class="rounded"
-                @click.native="resetProxy"
+                @click="resetProxy"
               />
             </div>
           </section>

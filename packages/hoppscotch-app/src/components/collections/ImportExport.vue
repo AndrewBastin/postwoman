@@ -12,7 +12,7 @@
         v-tippy="{ theme: 'tooltip' }"
         :title="t('action.go_back')"
         :svg="IconArrowLeft"
-        @click.native="resetImport"
+        @click="resetImport"
       />
     </template>
     <template #body>
@@ -104,7 +104,7 @@
           :disabled="enableImportButton"
           class="mx-2"
           :loading="importingMyCollections"
-          @click.native="finishImport"
+          @click="finishImport"
         />
       </div>
       <div v-else class="flex flex-col px-2">
@@ -115,7 +115,7 @@
               :key="`importer-${index}`"
               :svg="importer.icon"
               :label="t(`${importer.name}`)"
-              @click.native="importerType = index"
+              @click="importerType = index"
             />
           </template>
         </SmartExpand>
@@ -126,7 +126,7 @@
             :title="t('action.download_file')"
             :svg="IconDownload"
             :label="t('export.as_json')"
-            @click.native="exportJSON"
+            @click="exportJSON"
           />
           <span
             v-tippy="{ theme: 'tooltip' }"
@@ -149,7 +149,7 @@
               "
               :svg="IconGithub"
               :label="t('export.create_secret_gist')"
-              @click.native="
+              @click="
                 () => {
                   createCollectionGist()
                 }

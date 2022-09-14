@@ -94,7 +94,7 @@ export function useStreamStatic<T>(
         },
       }
     }),
-    stopper
+    stopper,
   ]
 }
 

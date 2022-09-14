@@ -33,7 +33,7 @@
                       v-for="version in SIOVersions"
                       :key="`client-${version}`"
                       :label="`Client ${version}`"
-                      @click.native="
+                      @click="
                         () => {
                           onSelectVersion(version)
                           hide()
@@ -82,7 +82,7 @@
                 : t('action.disconnect')
             "
             :loading="connectionState === 'CONNECTING'"
-            @click.native="toggleConnection"
+            @click="toggleConnection"
           />
         </div>
       </div>
@@ -129,7 +129,7 @@
                       label="None"
                       :icon="authType === 'None' ? IconCircleDot : IconCircle"
                       :active="authType === 'None'"
-                      @click.native="
+                      @click="
                         () => {
                           authType = 'None'
                           hide()
@@ -140,7 +140,7 @@
                       label="Bearer Token"
                       :icon="authType === 'Bearer' ? IconCircleDot : IconCircle"
                       :active="authType === 'Bearer'"
-                      @click.native="
+                      @click="
                         () => {
                           authType = 'Bearer'
                           hide()
@@ -170,7 +170,7 @@
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('action.clear')"
                 :svg="IconTrash2"
-                @click.native="clearContent"
+                @click="clearContent"
               />
             </div>
           </div>

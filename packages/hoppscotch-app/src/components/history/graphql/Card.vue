@@ -22,14 +22,14 @@
         :title="t('action.remove')"
         class="hidden group-hover:inline-flex"
         data-testid="delete_history_entry"
-        @click.native="$emit('delete-entry')"
+        @click="$emit('delete-entry')"
       />
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
         :title="expand ? t('hide.more') : t('show.more')"
         :svg="expand ? IconMinimize2 : IconMaximize2"
         class="hidden group-hover:inline-flex"
-        @click.native="expand = !expand"
+        @click="expand = !expand"
       />
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
@@ -38,7 +38,7 @@
         color="yellow"
         :class="{ 'group-hover:inline-flex hidden': !entry.star }"
         data-testid="star_button"
-        @click.native="$emit('toggle-star')"
+        @click="$emit('toggle-star')"
       />
     </div>
     <div class="flex flex-col text-tiny">

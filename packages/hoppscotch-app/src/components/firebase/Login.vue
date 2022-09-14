@@ -12,24 +12,24 @@
           :loading="signingInWithGitHub"
           :svg="IconGithub"
           :label="`${t('auth.continue_with_github')}`"
-          @click.native="signInWithGithub"
+          @click="signInWithGithub"
         />
         <SmartItem
           :loading="signingInWithGoogle"
           :svg="IconGoogle"
           :label="`${t('auth.continue_with_google')}`"
-          @click.native="signInWithGoogle"
+          @click="signInWithGoogle"
         />
         <SmartItem
           :loading="signingInWithMicrosoft"
           :svg="IconMicrosoft"
           :label="`${t('auth.continue_with_microsoft')}`"
-          @click.native="signInWithMicrosoft"
+          @click="signInWithMicrosoft"
         />
         <SmartItem
           :svg="IconEmail"
           :label="`${t('auth.continue_with_email')}`"
-          @click.native="mode = 'email'"
+          @click="mode = 'email'"
         />
       </div>
       <form
@@ -96,7 +96,7 @@
         <SmartAnchor
           class="link"
           :label="`← \xA0 ${t('auth.all_sign_in_options')}`"
-          @click.native="mode = 'sign-in'"
+          @click="mode = 'sign-in'"
         />
       </p>
       <p
@@ -106,12 +106,12 @@
         <SmartAnchor
           class="link"
           :label="`← \xA0 ${t('auth.re_enter_email')}`"
-          @click.native="mode = 'email'"
+          @click="mode = 'email'"
         />
         <SmartAnchor
           class="link"
           :label="`${t('action.dismiss')}`"
-          @click.native="hideModal"
+          @click="hideModal"
         />
       </p>
     </template>

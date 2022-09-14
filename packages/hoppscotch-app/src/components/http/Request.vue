@@ -37,7 +37,7 @@
                   v-for="(method, index) in methods"
                   :key="`method-${index}`"
                   :label="method"
-                  @click.native="
+                  @click="
                     () => {
                       onSelectMethod(method)
                       hide()
@@ -65,7 +65,7 @@
         id="send"
         class="flex-1 rounded-r-none min-w-20"
         :label="`${!loading ? t('action.send') : t('action.cancel')}`"
-        @click.native="!loading ? newSendRequest() : cancelRequest()"
+        @click="!loading ? newSendRequest() : cancelRequest()"
       />
       <span class="flex">
         <tippy
@@ -93,7 +93,7 @@
                 :label="`${t('import.curl')}`"
                 :svg="IconFileCode"
                 :shortcut="['C']"
-                @click.native="
+                @click="
                   () => {
                     showCurlImportModal = !showCurlImportModal
                     hide()
@@ -105,7 +105,7 @@
                 :label="`${t('show.code')}`"
                 :svg="IconCode2"
                 :shortcut="['S']"
-                @click.native="
+                @click="
                   () => {
                     showCodegenModal = !showCodegenModal
                     hide()
@@ -117,7 +117,7 @@
                 :label="`${t('action.clear_all')}`"
                 :svg="IconRotateCCW"
                 :shortcut="['⌫']"
-                @click.native="
+                @click="
                   () => {
                     clearContent()
                     hide()
@@ -133,7 +133,7 @@
         :label="COLUMN_LAYOUT ? `${t('request.save')}` : ''"
         filled
         :svg="IconSave"
-        @click.native="saveRequest()"
+        @click="saveRequest()"
       />
       <span class="flex">
         <tippy
@@ -175,7 +175,7 @@
                 :svg="copyLinkIcon"
                 :loading="fetchingShareLink"
                 :shortcut="['C']"
-                @click.native="
+                @click="
                   () => {
                     copyRequest()
                   }
@@ -192,7 +192,7 @@
                 :label="`${t('request.save_as')}`"
                 :svg="IconFolderPlus"
                 :shortcut="['S']"
-                @click.native="
+                @click="
                   () => {
                     showSaveRequestModal = true
                     hide()

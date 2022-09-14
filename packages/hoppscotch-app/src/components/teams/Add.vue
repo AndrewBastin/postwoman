@@ -22,12 +22,9 @@
         <ButtonPrimary
           :label="t('action.save')"
           :loading="isLoading"
-          @click.native="addNewTeam"
+          @click="addNewTeam"
         />
-        <ButtonSecondary
-          :label="t('action.cancel')"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>

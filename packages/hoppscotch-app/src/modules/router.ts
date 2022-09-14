@@ -11,7 +11,7 @@ export default <HoppModule>{
   onVueAppInit(app) {
     const router = createRouter({
       history: createWebHistory(),
-      routes
+      routes,
     })
 
     router.beforeEach((to, from) => {
@@ -32,5 +32,5 @@ export default <HoppModule>{
     })
 
     app.use(router)
-  }
+  },
 }

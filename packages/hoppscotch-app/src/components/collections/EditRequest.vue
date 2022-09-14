@@ -27,12 +27,9 @@
         <ButtonPrimary
           :label="t('action.save')"
           :loading="loadingState"
-          @click.native="saveRequest"
+          @click="saveRequest"
         />
-        <ButtonSecondary
-          :label="t('action.cancel')"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>
@@ -52,7 +49,7 @@ export default defineComponent({
   setup() {
     return {
       t: useI18n(),
-      toast: useToast()
+      toast: useToast(),
     }
   },
   data() {

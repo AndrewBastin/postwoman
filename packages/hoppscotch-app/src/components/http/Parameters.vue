@@ -18,21 +18,21 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear_all')"
           :svg="IconTrash2"
-          @click.native="clearContent()"
+          @click="clearContent()"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('state.bulk_mode')"
           :svg="IconEdit"
           :class="{ '!text-accent': bulkMode }"
-          @click.native="bulkMode = !bulkMode"
+          @click="bulkMode = !bulkMode"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('add.new')"
           :svg="IconPlus"
           :disabled="bulkMode"
-          @click.native="addParam"
+          @click="addParam"
         />
       </div>
     </div>
@@ -113,7 +113,7 @@
                     : IconCheckCircle
                 "
                 color="green"
-                @click.native="
+                @click="
                   updateParam(index, {
                     id: param.id,
                     key: param.key,
@@ -131,7 +131,7 @@
                 :title="t('action.remove')"
                 :svg="IconTrash"
                 color="red"
-                @click.native="deleteParam(index)"
+                @click="deleteParam(index)"
               />
             </span>
           </div>
@@ -154,7 +154,7 @@
           :svg="IconPlus"
           filled
           class="mb-4"
-          @click.native="addParam"
+          @click="addParam"
         />
       </div>
     </div>

@@ -12,7 +12,7 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.download_file')"
           :svg="downloadIcon === 'download' ? IconDownload : IconCheck"
-          @click.native="downloadResponse"
+          @click="downloadResponse"
         />
       </div>
     </div>
@@ -36,16 +36,16 @@ export default defineComponent({
   props: {
     response: { type: Object, default: () => {} },
   },
-  data() {
-    return {
-      imageSource: "",
-      downloadIcon: "download",
-    }
-  },
   setup() {
     return {
       t: useI18n(),
       toast: useToast(),
+    }
+  },
+  data() {
+    return {
+      imageSource: "",
+      downloadIcon: "download",
     }
   },
   computed: {

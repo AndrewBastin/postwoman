@@ -15,7 +15,11 @@
     >
       <Collections />
     </SmartTab>
-    <SmartTab :id="'env'" :icon="IconLayers" :label="`${t('environment.title')}`">
+    <SmartTab
+      :id="'env'"
+      :icon="IconLayers"
+      :label="`${t('environment.title')}`"
+    >
       <Environments />
     </SmartTab>
   </SmartTabs>

@@ -24,11 +24,8 @@
     </template>
     <template #footer>
       <span>
-        <ButtonPrimary :label="t('action.save')" @click.native="addFolder" />
-        <ButtonSecondary
-          :label="t('action.cancel')"
-          @click.native="hideModal"
-        />
+        <ButtonPrimary :label="t('action.save')" @click="addFolder" />
+        <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>
@@ -45,15 +42,15 @@ export default defineComponent({
     folderPath: { type: String, default: null },
     collectionIndex: { type: Number, default: null },
   },
-  data() {
-    return {
-      name: null,
-    }
-  },
   setup() {
     return {
       toast: useToast(),
-      t: useI18n()
+      t: useI18n(),
+    }
+  },
+  data() {
+    return {
+      name: null,
     }
   },
   methods: {

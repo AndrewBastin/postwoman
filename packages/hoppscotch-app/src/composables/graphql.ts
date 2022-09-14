@@ -1,8 +1,26 @@
 import * as E from "fp-ts/Either"
 import { pipe } from "fp-ts/function"
-import { reactive, ref, Ref, unref, isRef, watchEffect, WatchStopHandle, watchSyncEffect } from "vue"
-import { client, GQLError, parseGQLErrorString } from "@helpers/backend/GQLClient"
-import { createRequest, GraphQLRequest, OperationResult, TypedDocumentNode } from "@urql/core"
+import {
+  reactive,
+  ref,
+  Ref,
+  unref,
+  isRef,
+  watchEffect,
+  WatchStopHandle,
+  watchSyncEffect,
+} from "vue"
+import {
+  client,
+  GQLError,
+  parseGQLErrorString,
+} from "@helpers/backend/GQLClient"
+import {
+  createRequest,
+  GraphQLRequest,
+  OperationResult,
+  TypedDocumentNode,
+} from "@urql/core"
 import { Source, pipe as wonkaPipe, onEnd, subscribe } from "wonka"
 
 type MaybeRef<X> = X | Ref<X>

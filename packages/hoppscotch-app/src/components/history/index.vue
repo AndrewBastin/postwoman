@@ -22,7 +22,7 @@
           :disabled="history.length === 0"
           :svg="IconTrash2"
           :title="t('action.clear_all')"
-          @click.native="confirmRemove = true"
+          @click="confirmRemove = true"
         />
       </div>
     </div>
@@ -52,7 +52,7 @@
             color="red"
             :title="t('action.remove')"
             class="hidden group-hover:inline-flex"
-            @click.native="deleteBatchHistoryEntry(filteredHistoryGroup)"
+            @click="deleteBatchHistoryEntry(filteredHistoryGroup)"
           />
         </summary>
         <component

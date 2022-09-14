@@ -31,7 +31,7 @@
                 : t('action.disconnect')
             "
             :loading="connectionState === 'CONNECTING'"
-            @click.native="toggleConnection"
+            @click="toggleConnection"
           />
         </div>
       </div>
@@ -61,13 +61,13 @@
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('action.clear_all')"
                 :svg="IconTrash2"
-                @click.native="clearContent"
+                @click="clearContent"
               />
               <ButtonSecondary
                 v-tippy="{ theme: 'tooltip' }"
                 :title="t('add.new')"
                 :svg="IconPlus"
-                @click.native="addProtocol"
+                @click="addProtocol"
               />
             </div>
           </div>
@@ -136,7 +136,7 @@
                         : IconCheckCircle
                     "
                     color="green"
-                    @click.native="
+                    @click="
                       updateProtocol(index, {
                         value: protocol.value,
                         active: !protocol.active,
@@ -150,7 +150,7 @@
                     :title="t('action.remove')"
                     :svg="IconTrash"
                     color="red"
-                    @click.native="deleteProtocol(index)"
+                    @click="deleteProtocol(index)"
                   />
                 </span>
               </div>

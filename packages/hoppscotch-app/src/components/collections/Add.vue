@@ -27,12 +27,9 @@
         <ButtonPrimary
           :label="t('action.save')"
           :loading="loadingState"
-          @click.native="addNewCollection"
+          @click="addNewCollection"
         />
-        <ButtonSecondary
-          :label="t('action.cancel')"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="t('action.cancel')" @click="hideModal" />
       </span>
     </template>
   </SmartModal>

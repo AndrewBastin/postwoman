@@ -2,14 +2,14 @@ import * as R from "fp-ts/Record"
 import * as A from "fp-ts/Array"
 import * as O from "fp-ts/Option"
 import { pipe } from "fp-ts/function"
-import { createI18n, I18n, I18nOptions } from "vue-i18n";
-import { HoppModule } from ".";
+import { createI18n, I18n, I18nOptions } from "vue-i18n"
+import { HoppModule } from "."
 
 import languages from "../../languages.json"
 
 import en from "../../locales/en.json"
-import { throwError } from "~/helpers/functional/error";
-import { getLocalConfig, setLocalConfig } from "~/newstore/localpersistence";
+import { throwError } from "~/helpers/functional/error"
+import { getLocalConfig, setLocalConfig } from "~/newstore/localpersistence"
 
 /*
   In context of this file, we have 2 main kinds of things.
@@ -53,33 +53,38 @@ export const APP_LANG_CODES = languages.map(({ code }) => code)
 export const FALLBACK_LANG = pipe(
   APP_LANGUAGES,
   A.findFirst((x) => x.code === FALLBACK_LANG_CODE),
-  O.getOrElseW(() => throwError(`Could not find the fallback language '${FALLBACK_LANG_CODE}'`))
+  O.getOrElseW(() =>
+    throwError(`Could not find the fallback language '${FALLBACK_LANG_CODE}'`)
+  )
 )
 
 // A reference to the i18n instance
 let i18nInstance: I18n<any, any, any> | null = null
 
-const resolveCurrentLocale = () => pipe(
-  // Resolve from locale and make sure it is in languages
-  getLocalConfig("locale"),
-  O.fromNullable,
-  O.filter((locale) => pipe(
-    APP_LANGUAGES,
-    A.some(({ code }) => code === locale)
-  )),
+const resolveCurrentLocale = () =>
+  pipe(
+    // Resolve from locale and make sure it is in languages
+    getLocalConfig("locale"),
+    O.fromNullable,
+    O.filter((locale) =>
+      pipe(
+        APP_LANGUAGES,
+        A.some(({ code }) => code === locale)
+      )
+    ),
 
-  // Else load from navigator.language
-  O.alt(() =>
-    pipe(
-      APP_LANGUAGES,
-      A.findFirst(({ code }) => navigator.language.startsWith(code)), // en-US should also match to en
-      O.map(({ code }) => code)
-    )
-  ),
+    // Else load from navigator.language
+    O.alt(() =>
+      pipe(
+        APP_LANGUAGES,
+        A.findFirst(({ code }) => navigator.language.startsWith(code)), // en-US should also match to en
+        O.map(({ code }) => code)
+      )
+    ),
 
-  // Else load fallback
-  O.getOrElse(() => FALLBACK_LANG_CODE)
-)
+    // Else load fallback
+    O.getOrElse(() => FALLBACK_LANG_CODE)
+  )
 
 /**
  * Changes the application language. This function returns a promise as
@@ -87,11 +92,17 @@ const resolveCurrentLocale = () => pipe(
  * @param locale The locale code of the language to load
  */
 export const changeAppLanguage = async (locale: string) => {
-  const localeData = (await pipe(
-    LOCALES,
-    R.lookup(`../../locales/${locale}.json`),
-    O.getOrElseW(() => throwError(`Tried to change app language to non-existent locale '${locale}'`))
-  )() as any).default
+  const localeData = (
+    (await pipe(
+      LOCALES,
+      R.lookup(`../../locales/${locale}.json`),
+      O.getOrElseW(() =>
+        throwError(
+          `Tried to change app language to non-existent locale '${locale}'`
+        )
+      )
+    )()) as any
+  ).default
 
   if (!i18nInstance) {
     throw new Error("Tried to change language without active i18n instance")
@@ -108,15 +119,15 @@ export const changeAppLanguage = async (locale: string) => {
 export default <HoppModule>{
   onVueAppInit(app) {
     const i18n = createI18n(<I18nOptions>{
-      locale: 'en', // TODO: i18n system!
-      fallbackLocale: 'en',
+      locale: "en", // TODO: i18n system!
+      fallbackLocale: "en",
       legacy: false,
       allowComposition: true,
 
       // TODO: Fix this to allow for dynamic imports
       messages: {
-        en
-      }
+        en,
+      },
     })
 
     app.use(i18n)

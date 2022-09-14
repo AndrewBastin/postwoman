@@ -1,7 +1,10 @@
-import { HoppModule } from ".";
-import { changeExtensionStatus, ExtensionStatus } from "~/newstore/HoppExtension";
-import { ref } from "vue";
-import { defineSubscribableObject } from "~/helpers/strategies/ExtensionStrategy";
+import { HoppModule } from "."
+import {
+  changeExtensionStatus,
+  ExtensionStatus,
+} from "~/newstore/HoppExtension"
+import { ref } from "vue"
+import { defineSubscribableObject } from "~/helpers/strategies/ExtensionStrategy"
 
 /* Module defining the hooking mechanism between Hoppscotch and the Hoppscotch Browser Extension */
 
@@ -51,5 +54,5 @@ export default <HoppModule>{
         }
       }, 2000)
     }
-  }
+  },
 }

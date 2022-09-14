@@ -18,19 +18,16 @@
         <ButtonPrimary
           ref="importButton"
           :label="`${t('import.title')}`"
-          @click.native="handleImport"
+          @click="handleImport"
         />
-        <ButtonSecondary
-          :label="`${t('action.cancel')}`"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="`${t('action.cancel')}`" @click="hideModal" />
       </span>
       <span class="flex">
         <ButtonSecondary
           :svg="pasteIcon"
           :label="`${t('action.paste')}`"
           filled
-          @click.native="handlePaste"
+          @click="handlePaste"
         />
       </span>
     </template>

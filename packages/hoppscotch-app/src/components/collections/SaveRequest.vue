@@ -44,14 +44,8 @@
     </template>
     <template #footer>
       <span>
-        <ButtonPrimary
-          :label="`${t('action.save')}`"
-          @click.native="saveRequestAs"
-        />
-        <ButtonSecondary
-          :label="`${t('action.cancel')}`"
-          @click.native="hideModal"
-        />
+        <ButtonPrimary :label="`${t('action.save')}`" @click="saveRequestAs" />
+        <ButtonSecondary :label="`${t('action.cancel')}`" @click="hideModal" />
       </span>
     </template>
   </SmartModal>

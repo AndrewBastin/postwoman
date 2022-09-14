@@ -24,12 +24,11 @@ import { GQLConnection } from "@helpers/GQLConnection"
 const t = useI18n()
 
 usePageHead({
-  title: computed(() => t("navigation.graphql"))
+  title: computed(() => t("navigation.graphql")),
 })
 
 const gqlConn = new GQLConnection()
 const isLoading = useReadonlyStream(gqlConn.isLoading$, false)
-
 
 onBeforeUnmount(() => {
   if (gqlConn.connected$.value) {

@@ -10,7 +10,7 @@
         :label="expand ? t('action.less') : t('action.more')"
         filled
         rounded
-        @click.native="expand = !expand"
+        @click="expand = !expand"
       />
     </div>
   </div>

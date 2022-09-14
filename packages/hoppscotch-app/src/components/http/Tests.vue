@@ -19,13 +19,13 @@
           :title="t('state.linewrap')"
           :class="{ '!text-accent': linewrapEnabled }"
           :svg="IconWrapText"
-          @click.native.prevent="linewrapEnabled = !linewrapEnabled"
+          @click.prevent="linewrapEnabled = !linewrapEnabled"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
           :svg="IconTrash2"
-          @click.native="clearContent"
+          @click="clearContent"
         />
       </div>
     </div>
@@ -53,7 +53,7 @@
             :key="`snippet-${index}`"
             :label="snippet.name"
             active
-            @click.native="useSnippet(snippet.script)"
+            @click="useSnippet(snippet.script)"
           />
         </div>
       </div>

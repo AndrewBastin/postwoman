@@ -17,12 +17,17 @@ import {
   foldGutter,
   indentOnInput,
   bracketMatching,
-  syntaxHighlighting
+  syntaxHighlighting,
 } from "@codemirror/language"
 import { tags as t } from "@lezer/highlight"
 import { Extension, EditorState } from "@codemirror/state"
 import { history, historyKeymap, defaultKeymap } from "@codemirror/commands"
-import { closeBrackets, closeBracketsKeymap, autocompletion, completionKeymap } from "@codemirror/autocomplete"
+import {
+  closeBrackets,
+  closeBracketsKeymap,
+  autocompletion,
+  completionKeymap,
+} from "@codemirror/autocomplete"
 import {
   searchKeymap,
   highlightSelectionMatches,

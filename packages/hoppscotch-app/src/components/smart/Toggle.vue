@@ -17,7 +17,7 @@ defineProps({
   on: {
     type: Boolean,
     default: false,
-  }
+  },
 })
 
 const emit = defineEmits<{

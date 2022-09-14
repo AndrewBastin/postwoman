@@ -42,7 +42,7 @@
               :svg="IconRefreshCW"
               :label="t('app.reload')"
               filled
-              @click.native="reloadApplication"
+              @click="reloadApplication"
             />
           </p>
         </div>

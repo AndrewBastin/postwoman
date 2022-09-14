@@ -20,7 +20,7 @@
         :title="t('action.copy')"
         :svg="copyIcon"
         class="hidden group-hover:inline-flex !py-0"
-        @click.native="copyHeader(header.value)"
+        @click="copyHeader(header.value)"
       />
     </span>
   </div>

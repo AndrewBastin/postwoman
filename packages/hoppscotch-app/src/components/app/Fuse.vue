@@ -8,7 +8,7 @@
         :active="shortcutIndex === selectedEntry"
         :shortcut="shortcut.item"
         @action="emit('action', shortcut.item.action)"
-        @mouseover.native="selectedEntry = shortcutIndex"
+        @mouseover="selectedEntry = shortcutIndex"
       />
     </div>
     <div

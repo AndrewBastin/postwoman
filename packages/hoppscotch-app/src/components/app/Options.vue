@@ -18,7 +18,7 @@
           :description="t('layout.collapse_sidebar')"
           :info-icon="IconChevronRight"
           active
-          @click.native="expandNavigation"
+          @click="expandNavigation"
         />
         <SmartItem
           :svg="IconSidebarOpen"
@@ -26,7 +26,7 @@
           :description="t('layout.collapse_collection')"
           :info-icon="IconChevronRight"
           active
-          @click.native="expandCollection"
+          @click="expandCollection"
         />
         <h2 class="p-2 font-semibold font-bold text-secondaryDark">
           {{ t("support.title") }}
@@ -39,7 +39,7 @@
           :info-icon="IconChevronRight"
           active
           blank
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconGift"
@@ -49,7 +49,7 @@
           :info-icon="IconChevronRight"
           active
           blank
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconActivity"
@@ -59,7 +59,7 @@
           :description="t('app.status_description')"
           :info-icon="IconChevronRight"
           active
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconLock"
@@ -69,7 +69,7 @@
           :description="t('app.terms_and_privacy')"
           :info-icon="IconChevronRight"
           active
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <h2 class="p-2 font-semibold font-bold text-secondaryDark">
           {{ t("settings.follow") }}
@@ -82,7 +82,7 @@
           :description="t('app.join_discord_community')"
           :info-icon="IconChevronRight"
           active
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconTwitter"
@@ -92,7 +92,7 @@
           :description="t('support.twitter')"
           :info-icon="IconChevronRight"
           active
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconGithub"
@@ -102,7 +102,7 @@
           :description="t('support.github')"
           :info-icon="IconChevronRight"
           active
-          @click.native="hideModal()"
+          @click="hideModal()"
         />
         <SmartItem
           :svg="IconMessageCircle"
@@ -110,7 +110,7 @@
           :description="t('support.chat')"
           :info-icon="IconChevronRight"
           active
-          @click.native="chatWithUs()"
+          @click="chatWithUs()"
         />
         <SmartItem
           :svg="IconUserPlus"
@@ -118,7 +118,7 @@
           :description="t('shortcut.miscellaneous.invite')"
           :info-icon="IconChevronRight"
           active
-          @click.native="expandInvite()"
+          @click="expandInvite()"
         />
         <SmartItem
           v-if="navigatorShare"
@@ -128,7 +128,7 @@
           :description="t('request.share_description')"
           :info-icon="IconChevronRight"
           active
-          @click.native="nativeShare()"
+          @click="nativeShare()"
         />
       </div>
       <AppShare :show="showShare" @hide-modal="showShare = false" />

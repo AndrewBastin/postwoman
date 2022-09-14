@@ -24,14 +24,8 @@
     </template>
     <template #footer>
       <span>
-        <ButtonPrimary
-          :label="`${t('action.save')}`"
-          @click.native="saveCollection"
-        />
-        <ButtonSecondary
-          :label="`${t('action.cancel')}`"
-          @click.native="hideModal"
-        />
+        <ButtonPrimary :label="`${t('action.save')}`" @click="saveCollection" />
+        <ButtonSecondary :label="`${t('action.cancel')}`" @click="hideModal" />
       </span>
     </template>
   </SmartModal>
@@ -59,9 +53,12 @@ const toast = useToast()
 
 const name = ref<string | null>()
 
-watch(() => props.editingCollectionName, (val) => {
-  name.value = val
-})
+watch(
+  () => props.editingCollectionName,
+  (val) => {
+    name.value = val
+  }
+)
 
 const saveCollection = () => {
   if (!name.value) {

@@ -28,7 +28,7 @@
                 label="None"
                 :icon="authName === 'None' ? IconCircleDot : IconCircle"
                 :active="authName === 'None'"
-                @click.native="
+                @click="
                   () => {
                     authType = 'none'
                     hide()
@@ -39,7 +39,7 @@
                 label="Basic Auth"
                 :icon="authName === 'Basic Auth' ? IconCircleDot : IconCircle"
                 :active="authName === 'Basic Auth'"
-                @click.native="
+                @click="
                   () => {
                     authType = 'basic'
                     hide()
@@ -50,7 +50,7 @@
                 label="Bearer Token"
                 :icon="authName === 'Bearer' ? IconCircleDot : IconCircle"
                 :active="authName === 'Bearer'"
-                @click.native="
+                @click="
                   () => {
                     authType = 'bearer'
                     hide()
@@ -61,7 +61,7 @@
                 label="OAuth 2.0"
                 :icon="authName === 'OAuth 2.0' ? IconCircleDot : IconCircle"
                 :active="authName === 'OAuth 2.0'"
-                @click.native="
+                @click="
                   () => {
                     authType = 'oauth-2'
                     hide()
@@ -72,7 +72,7 @@
                 label="API key"
                 :icon="authName === 'API key' ? IconCircleDot : IconCircle"
                 :active="authName === 'API key'"
-                @click.native="
+                @click="
                   () => {
                     authType = 'api-key'
                     hide()
@@ -108,7 +108,7 @@
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.clear')"
           :svg="IconTrash2"
-          @click.native="clearContent"
+          @click="clearContent"
         />
       </div>
     </div>
@@ -198,7 +198,7 @@
                       :icon="addTo === 'Headers' ? IconCircleDot : IconCircle"
                       :active="addTo === 'Headers'"
                       :label="'Headers'"
-                      @click.native="
+                      @click="
                         () => {
                           addTo = 'Headers'
                           hide()
@@ -211,7 +211,7 @@
                       "
                       :active="addTo === 'Query params'"
                       :label="'Query params'"
-                      @click.native="
+                      @click="
                         () => {
                           addTo = 'Query params'
                           hide()

@@ -34,7 +34,7 @@
           :svg="IconFilePlus"
           :title="t('request.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="
+          @click="
             $emit('add-request', {
               path: `${collectionIndex}`,
             })
@@ -45,7 +45,7 @@
           :svg="IconFolderPlus"
           :title="t('folder.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="
+          @click="
             $emit('add-folder', {
               folder: collection,
               path: `${collectionIndex}`,
@@ -84,7 +84,7 @@
                   :svg="IconFilePlus"
                   :label="t('request.new')"
                   :shortcut="['R']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-request', {
                         path: `${collectionIndex}`,
@@ -98,7 +98,7 @@
                   :svg="IconFolderPlus"
                   :label="t('folder.new')"
                   :shortcut="['N']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-folder', {
                         folder: collection,
@@ -113,7 +113,7 @@
                   :svg="IconEdit"
                   :label="t('action.edit')"
                   :shortcut="['E']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('edit-collection')
                       hide()
@@ -125,7 +125,7 @@
                   :svg="IconDownload"
                   :label="t('export.title')"
                   :shortcut="['X']"
-                  @click.native="
+                  @click="
                     () => {
                       exportCollection()
                       hide()
@@ -137,7 +137,7 @@
                   :svg="IconTrash2"
                   :label="t('action.delete')"
                   :shortcut="['⌫']"
-                  @click.native="
+                  @click="
                     () => {
                       removeCollection()
                       hide()
@@ -243,6 +243,22 @@ export default defineComponent({
     collectionsType: { type: Object, default: () => {} },
     picked: { type: Object, default: () => {} },
   },
+  emits: [
+    "select",
+    "expand-collection",
+    "add-collection",
+    "remove-collection",
+    "add-folder",
+    "add-request",
+    "edit-folder",
+    "edit-request",
+    "duplicate-request",
+    "remove-folder",
+    "remove-request",
+    "select-collection",
+    "unselect-collection",
+    "edit-collection",
+  ],
   setup() {
     return {
       colorMode: useColorMode(),
@@ -277,22 +293,6 @@ export default defineComponent({
       pageNo: 0,
     }
   },
-  emits: [
-    "select",
-    "expand-collection",
-    "add-collection",
-    "remove-collection",
-    "add-folder",
-    "add-request",
-    "edit-folder",
-    "edit-request",
-    "duplicate-request",
-    "remove-folder",
-    "remove-request",
-    "select-collection",
-    "unselect-collection",
-    "edit-collection",
-  ],
   computed: {
     isSelected(): boolean {
       return (

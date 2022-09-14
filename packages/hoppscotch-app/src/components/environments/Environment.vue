@@ -49,7 +49,7 @@
               :svg="IconEdit"
               :label="`${t('action.edit')}`"
               :shortcut="['E']"
-              @click.native="
+              @click="
                 () => {
                   emit('edit-environment')
                   hide()
@@ -61,7 +61,7 @@
               :svg="IconCopy"
               :label="`${t('action.duplicate')}`"
               :shortcut="['D']"
-              @click.native="
+              @click="
                 () => {
                   duplicateEnvironments()
                   hide()
@@ -74,7 +74,7 @@
               :svg="IconTrash2"
               :label="`${t('action.delete')}`"
               :shortcut="['⌫']"
-              @click.native="
+              @click="
                 () => {
                   confirmRemove = true
                   hide()

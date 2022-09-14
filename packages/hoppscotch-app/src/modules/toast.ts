@@ -1,6 +1,6 @@
 import Toasted from "@hoppscotch/vue-toasted"
-import type { ToastOptions } from "@hoppscotch/vue-toasted";
-import { HoppModule } from ".";
+import type { ToastOptions } from "@hoppscotch/vue-toasted"
+import { HoppModule } from "."
 
 import "@hoppscotch/vue-toasted/style.css"
 
@@ -13,7 +13,7 @@ export default <HoppModule>{
     app.use(Toasted, <ToastOptions>{
       position: "bottom-center",
       duration: 3000,
-      keepOnHover: true
+      keepOnHover: true,
     })
   },
 }

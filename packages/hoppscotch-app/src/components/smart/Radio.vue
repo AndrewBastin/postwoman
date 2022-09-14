@@ -5,7 +5,7 @@
     :active="selected"
     role="radio"
     :aria-checked="selected"
-    @click.native="emit('change', value)"
+    @click="emit('change', value)"
   />
 </template>
 

@@ -25,7 +25,7 @@
       <ButtonSecondary
         filled
         :label="`${t('authorization.generate_token')}`"
-        @click.native="handleAccessTokenRequest()"
+        @click="handleAccessTokenRequest()"
       />
     </div>
   </div>

@@ -24,14 +24,8 @@
     </template>
     <template #footer>
       <span>
-        <ButtonPrimary
-          :label="`${t('action.save')}`"
-          @click.native="saveRequest"
-        />
-        <ButtonSecondary
-          :label="`${t('action.cancel')}`"
-          @click.native="hideModal"
-        />
+        <ButtonPrimary :label="`${t('action.save')}`" @click="saveRequest" />
+        <ButtonSecondary :label="`${t('action.cancel')}`" @click="hideModal" />
       </span>
     </template>
   </SmartModal>
@@ -52,6 +46,13 @@ export default defineComponent({
     requestIndex: { type: Number, default: null },
     editingRequestName: { type: String, default: null },
   },
+  emits: ["hide-modal"],
+  setup() {
+    return {
+      toast: useToast(),
+      t: useI18n(),
+    }
+  },
   data() {
     return {
       requestUpdateData: {
@@ -59,15 +60,6 @@ export default defineComponent({
       },
     }
   },
-  setup() {
-    return {
-      toast: useToast(),
-      t: useI18n()
-    }
-  },
-  emits: [
-    "hide-modal"
-  ],
   watch: {
     editingRequestName(val) {
       this.requestUpdateData.name = val

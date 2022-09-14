@@ -5,6 +5,10 @@
   </span>
 </template>
 
+<script setup lang="ts">
+import IconFile from "~icons/lucide/file"
+</script>
+
 <style scoped lang="scss">
 .chip {
   @apply inline-flex;
@@ -16,7 +20,3 @@
   @apply bg-primaryDark;
 }
 </style>
-
-<script setup lang="ts">
-import IconFile from "~icons/lucide/file"
-</script>

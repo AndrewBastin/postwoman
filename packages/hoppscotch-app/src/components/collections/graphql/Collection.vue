@@ -34,7 +34,7 @@
           :svg="IconFilePlus"
           :title="t('request.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="
+          @click="
             emit('add-request', {
               path: `${collectionIndex}`,
             })
@@ -45,7 +45,7 @@
           :svg="IconFolderPlus"
           :title="t('folder.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="
+          @click="
             emit('add-folder', {
               path: `${collectionIndex}`,
             })
@@ -83,7 +83,7 @@
                   :svg="IconFilePlus"
                   :label="`${t('request.new')}`"
                   :shortcut="['R']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-request', {
                         path: `${collectionIndex}`,
@@ -97,7 +97,7 @@
                   :svg="IconFolderPlus"
                   :label="`${t('folder.new')}`"
                   :shortcut="['N']"
-                  @click.native="
+                  @click="
                     () => {
                       emit('add-folder', {
                         path: `${collectionIndex}`,
@@ -111,7 +111,7 @@
                   :svg="IconEdit"
                   :label="`${t('action.edit')}`"
                   :shortcut="['E']"
-                  @click.native="
+                  @click="
                     () => {
                       emit('edit-collection')
                       hide()
@@ -123,7 +123,7 @@
                   :svg="IconTrash2"
                   :label="`${t('action.delete')}`"
                   :shortcut="['⌫']"
-                  @click.native="
+                  @click="
                     () => {
                       confirmRemove = true
                       hide()

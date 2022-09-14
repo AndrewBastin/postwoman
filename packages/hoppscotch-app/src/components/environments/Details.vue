@@ -32,13 +32,13 @@
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.clear_all')"
               :svg="clearIcon"
-              @click.native="clearContent()"
+              @click="clearContent()"
             />
             <ButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :svg="IconPlus"
               :title="t('add.new')"
-              @click.native="addEnvironmentVariable"
+              @click="addEnvironmentVariable"
             />
           </div>
         </div>
@@ -73,7 +73,7 @@
                 :title="t('action.remove')"
                 :svg="IconTrash"
                 color="red"
-                @click.native="removeEnvironmentVariable(index)"
+                @click="removeEnvironmentVariable(index)"
               />
             </div>
           </div>
@@ -94,7 +94,7 @@
               :label="`${t('add.new')}`"
               filled
               class="mb-4"
-              @click.native="addEnvironmentVariable"
+              @click="addEnvironmentVariable"
             />
           </div>
         </div>
@@ -104,12 +104,9 @@
       <span>
         <ButtonPrimary
           :label="`${t('action.save')}`"
-          @click.native="saveEnvironment"
+          @click="saveEnvironment"
         />
-        <ButtonSecondary
-          :label="`${t('action.cancel')}`"
-          @click.native="hideModal"
-        />
+        <ButtonSecondary :label="`${t('action.cancel')}`" @click="hideModal" />
       </span>
     </template>
   </SmartModal>

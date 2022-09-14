@@ -29,7 +29,7 @@
                 : t('action.disconnect')
             "
             :loading="connectionState === 'CONNECTING'"
-            @click.native="toggleConnection"
+            @click="toggleConnection"
           />
         </div>
         <div class="flex space-x-2">
@@ -96,7 +96,7 @@
           name="get"
           :disabled="!canPublish"
           :label="t('mqtt.publish')"
-          @click.native="publish"
+          @click="publish"
         />
       </div>
       <div
@@ -124,7 +124,7 @@
             subscriptionState ? t('mqtt.unsubscribe') : t('mqtt.subscribe')
           "
           reverse
-          @click.native="toggleSubscription"
+          @click="toggleSubscription"
         />
       </div>
     </template>

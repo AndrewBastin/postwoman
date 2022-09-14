@@ -4,7 +4,7 @@
       <ButtonSecondary
         :label="`${t('team.create_new')}`"
         outline
-        @click.native="displayModalAdd(true)"
+        @click="displayModalAdd(true)"
       />
       <div v-if="loading" class="flex flex-col items-center justify-center">
         <SmartSpinner class="mb-4" />
@@ -26,7 +26,7 @@
         <ButtonSecondary
           :label="`${t('team.create_new')}`"
           filled
-          @click.native="displayModalAdd(true)"
+          @click="displayModalAdd(true)"
         />
       </div>
       <div

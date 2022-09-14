@@ -27,7 +27,7 @@
       <ButtonPrimary
         :label="t('auth.login_to_hoppscotch')"
         class="mt-8"
-        @click.native="showLogin = true"
+        @click="showLogin = true"
       />
     </div>
     <div v-else class="flex flex-col items-center justify-center flex-1 p-4">
@@ -93,7 +93,7 @@
               "
               :loading="loading"
               :disabled="revokedLink"
-              @click.native="joinTeam"
+              @click="joinTeam"
             />
           </div>
         </div>

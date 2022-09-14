@@ -19,14 +19,14 @@
           :svg="IconDownload"
           class="rounded hover:bg-primaryDark focus-visible:bg-primaryDark"
           :class="{ 'inline-flex': showInstallButton }"
-          @click.native="installPWA()"
+          @click="installPWA()"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip', allowHTML: true }"
           :title="`${t('app.search')} <xmp>/</xmp>`"
           :svg="IconSearch"
           class="rounded hover:bg-primaryDark focus-visible:bg-primaryDark"
-          @click.native="invokeAction('modals.search.toggle')"
+          @click="invokeAction('modals.search.toggle')"
         />
         <ButtonSecondary
           v-tippy="{ theme: 'tooltip', allowHTML: true }"
@@ -35,7 +35,7 @@
           } <xmp>?</xmp>`"
           :svg="IconLifeBuoy"
           class="rounded hover:bg-primaryDark focus-visible:bg-primaryDark"
-          @click.native="invokeAction('modals.support.toggle')"
+          @click="invokeAction('modals.support.toggle')"
         />
         <ButtonSecondary
           v-if="currentUser === null"
@@ -43,12 +43,12 @@
           :label="t('header.save_workspace')"
           filled
           class="hidden md:flex"
-          @click.native="showLogin = true"
+          @click="showLogin = true"
         />
         <ButtonPrimary
           v-if="currentUser === null"
           :label="t('header.login')"
-          @click.native="showLogin = true"
+          @click="showLogin = true"
         />
         <div v-else class="inline-flex items-center space-x-2">
           <ButtonPrimary
@@ -57,7 +57,7 @@
             :label="t('team.invite')"
             :svg="IconUserPlus"
             class="!bg-green-500 !bg-opacity-15 !text-green-500 !hover:bg-opacity-10 !hover:bg-green-400 !hover:text-green-600"
-            @click.native="showTeamsModal = true"
+            @click="showTeamsModal = true"
           />
           <span class="px-2">
             <tippy
@@ -116,7 +116,7 @@
                     :svg="IconUser"
                     :label="t('navigation.profile')"
                     :shortcut="['↩']"
-                    @click.native="hide()"
+                    @click="hide()"
                   />
                   <SmartItem
                     ref="settings"
@@ -124,7 +124,7 @@
                     :svg="IconSettings"
                     :label="t('navigation.settings')"
                     :shortcut="['S']"
-                    @click.native="hide()"
+                    @click="hide()"
                   />
                   <FirebaseLogout
                     ref="logout"

@@ -35,7 +35,7 @@
           :svg="IconFilePlus"
           :title="t('request.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="
+          @click="
             $emit('add-request', {
               folder: collection,
               path: `${collectionIndex}`,
@@ -48,7 +48,7 @@
           :svg="IconFolderPlus"
           :title="t('folder.new')"
           class="hidden group-hover:inline-flex"
-          @click.native="
+          @click="
             $emit('add-folder', {
               folder: collection,
               path: `${collectionIndex}`,
@@ -88,7 +88,7 @@
                   :svg="IconFilePlus"
                   :label="t('request.new')"
                   :shortcut="['R']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-request', {
                         folder: collection,
@@ -103,7 +103,7 @@
                   :svg="IconFolderPlus"
                   :label="t('folder.new')"
                   :shortcut="['N']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('add-folder', {
                         folder: collection,
@@ -118,7 +118,7 @@
                   :svg="IconEdit"
                   :label="t('action.edit')"
                   :shortcut="['E']"
-                  @click.native="
+                  @click="
                     () => {
                       $emit('edit-collection')
                       hide()
@@ -131,14 +131,14 @@
                   :label="t('export.title')"
                   :shortcut="['X']"
                   :loading="exportLoading"
-                  @click.native="exportCollection"
+                  @click="exportCollection"
                 />
                 <SmartItem
                   ref="deleteAction"
                   :svg="IconTrash2"
                   :label="t('action.delete')"
                   :shortcut="['⌫']"
-                  @click.native="
+                  @click="
                     () => {
                       removeCollection()
                       hide()

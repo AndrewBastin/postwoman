@@ -45,7 +45,7 @@
                   :title="t('action.close')"
                   v-if="dimissible"
                   :svg="IconX"
-                  @click.native="close"
+                  @click="close"
                 />
               </span>
             </div>

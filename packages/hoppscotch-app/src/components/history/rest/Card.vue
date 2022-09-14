@@ -33,7 +33,7 @@
       :title="t('action.remove')"
       class="hidden group-hover:inline-flex"
       data-testid="delete_history_entry"
-      @click.native="$emit('delete-entry')"
+      @click="$emit('delete-entry')"
     />
     <ButtonSecondary
       v-tippy="{ theme: 'tooltip' }"
@@ -42,7 +42,7 @@
       :svg="entry.star ? IconStarOff : IconStar"
       color="yellow"
       data-testid="star_button"
-      @click.native="$emit('toggle-star')"
+      @click="$emit('toggle-star')"
     />
   </div>
 </template>
