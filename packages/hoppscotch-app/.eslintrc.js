@@ -13,10 +13,9 @@ module.exports = {
     requireConfigFile: false,
   },
   extends: [
-    "eslint:recommended",
+    "@vue/typescript/recommended",
     "plugin:vue/vue3-recommended",
     "plugin:prettier/recommended",
-    "@vue/eslint-config-typescript",
   ],
   ignorePatterns: [
     "static/**/*",
@@ -36,6 +35,7 @@ module.exports = {
     "vue/multi-word-component-names": "off",
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "import/default": "off",
     "no-undef": "off",
     // localStorage block
