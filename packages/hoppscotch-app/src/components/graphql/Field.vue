@@ -61,8 +61,8 @@ import { useI18n } from "@composables/i18n"
 
 export default defineComponent({
   props: {
-    gqlField: { type: Object, default: () => {} },
-    jumpTypeCallback: { type: Function, default: () => {} },
+    gqlField: { type: Object, default: () => ({}) },
+    jumpTypeCallback: { type: Function, default: () => ({}) },
     isHighlighted: { type: Boolean, default: false },
   },
   setup() {

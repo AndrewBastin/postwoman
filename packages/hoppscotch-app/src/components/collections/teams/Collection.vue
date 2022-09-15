@@ -238,7 +238,7 @@ import IconCircle from "~icons/lucide/circle"
 import IconCheckCircle from "~icons/lucide/check-circle"
 import IconFolder from "~icons/lucide/folder"
 import IconFolderOpen from "~icons/lucide/folder-open"
-import { defineComponent, markRaw, ref } from "vue"
+import { defineComponent, ref } from "vue"
 import * as E from "fp-ts/Either"
 import {
   getCompleteCollectionTree,
@@ -252,13 +252,26 @@ import { useToast } from "@composables/toast"
 export default defineComponent({
   props: {
     collectionIndex: { type: Number, default: null },
-    collection: { type: Object, default: () => {} },
+    collection: { type: Object, default: () => ({}) },
     isFiltered: Boolean,
     saveRequest: Boolean,
-    collectionsType: { type: Object, default: () => {} },
-    picked: { type: Object, default: () => {} },
+    collectionsType: { type: Object, default: () => ({}) },
+    picked: { type: Object, default: () => ({}) },
     loadingCollectionIDs: { type: Array, default: () => [] },
   },
+  emits: [
+    "edit-collection",
+    "add-request",
+    "add-folder",
+    "edit-folder",
+    "edit-request",
+    "remove-folder",
+    "select",
+    "remove-request",
+    "duplicate-request",
+    "expand-collection",
+    "remove-collection",
+  ],
   setup() {
     const t = useI18n()
 

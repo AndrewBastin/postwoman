@@ -15,5 +15,5 @@ export const optionChoose =
     pipe(
       choice,
       A.findFirst(([pred]) => pred(input)),
-      O.map(([_, value]) => value)
+      O.map(([, value]) => value)
     )

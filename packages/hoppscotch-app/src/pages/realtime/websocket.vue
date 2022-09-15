@@ -256,8 +256,6 @@ const isUrlValid = ref(true)
 
 const activeProtocols = ref<string[]>([])
 
-const idTicker = ref(0)
-
 let worker: Worker
 
 watch(url, (newUrl) => {

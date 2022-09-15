@@ -3,7 +3,7 @@ import { GraphCacheUpdaters } from "../graphql"
 
 export const updatesDef: GraphCacheUpdaters = {
   Subscription: {
-    teamMemberAdded: (_r, { teamID }, cache, _info) => {
+    teamMemberAdded: (_r, { teamID }, cache) => {
       cache.invalidate(
         {
           __typename: "Team",
@@ -12,7 +12,7 @@ export const updatesDef: GraphCacheUpdaters = {
         "teamMembers"
       )
     },
-    teamMemberUpdated: (_r, { teamID }, cache, _info) => {
+    teamMemberUpdated: (_r, { teamID }, cache) => {
       cache.invalidate(
         {
           __typename: "Team",
@@ -29,7 +29,7 @@ export const updatesDef: GraphCacheUpdaters = {
         "myRole"
       )
     },
-    teamMemberRemoved: (_r, { teamID }, cache, _info) => {
+    teamMemberRemoved: (_r, { teamID }, cache) => {
       cache.invalidate(
         {
           __typename: "Team",
@@ -38,7 +38,7 @@ export const updatesDef: GraphCacheUpdaters = {
         "teamMembers"
       )
     },
-    teamInvitationAdded: (_r, { teamID }, cache, _info) => {
+    teamInvitationAdded: (_r, { teamID }, cache) => {
       cache.invalidate(
         {
           __typename: "Team",
@@ -47,7 +47,7 @@ export const updatesDef: GraphCacheUpdaters = {
         "teamInvitations"
       )
     },
-    teamInvitationRemoved: (_r, { teamID }, cache, _info) => {
+    teamInvitationRemoved: (_r, { teamID }, cache) => {
       cache.invalidate(
         {
           __typename: "Team",
@@ -58,7 +58,7 @@ export const updatesDef: GraphCacheUpdaters = {
     },
   },
   Mutation: {
-    createTeamInvitation: (result, _args, cache, _info) => {
+    createTeamInvitation: (result, _args, cache) => {
       cache.invalidate(
         {
           __typename: "Team",
@@ -67,10 +67,10 @@ export const updatesDef: GraphCacheUpdaters = {
         "teamInvitations"
       )
     },
-    acceptTeamInvitation: (_result, _args, cache, _info) => {
+    acceptTeamInvitation: (_result, _args, cache) => {
       cache.invalidate({ __typename: "Query" }, "myTeams")
     },
-    revokeTeamInvitation: (_result, args, cache, _info) => {
+    revokeTeamInvitation: (_result, args, cache) => {
       const targetTeamID = cache.resolve(
         {
           __typename: "TeamInvitation",
@@ -104,7 +104,7 @@ export const updatesDef: GraphCacheUpdaters = {
         )
       }
     },
-    createShortcode: (result, _args, cache, _info) => {
+    createShortcode: (result, _args, cache) => {
       cache.writeFragment(
         gql`
           fragment _ on Shortcode {

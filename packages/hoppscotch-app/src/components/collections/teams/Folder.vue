@@ -238,16 +238,28 @@ import { useColorMode } from "@composables/theming"
 export default defineComponent({
   name: "Folder",
   props: {
-    folder: { type: Object, default: () => {} },
+    folder: { type: Object, default: () => ({}) },
     folderIndex: { type: Number, default: null },
     collectionIndex: { type: Number, default: null },
     folderPath: { type: String, default: null },
     saveRequest: Boolean,
     isFiltered: Boolean,
-    collectionsType: { type: Object, default: () => {} },
-    picked: { type: Object, default: () => {} },
+    collectionsType: { type: Object, default: () => ({}) },
+    picked: { type: Object, default: () => ({}) },
     loadingCollectionIDs: { type: Array, default: () => [] },
   },
+  emits: [
+    "add-request",
+    "add-folder",
+    "edit-folder",
+    "update-team-collections",
+    "edit-request",
+    "remove-request",
+    "duplicate-request",
+    "select",
+    "remove-folder",
+    "expand-collection",
+  ],
   setup() {
     return {
       tippyActions: ref<any | null>(null),

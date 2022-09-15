@@ -26,7 +26,7 @@ export default class ShortcodeListAdapter {
   private myShortcodesCreatedSub: WSubscription | null
   private myShortcodesRevokedSub: WSubscription | null
 
-  constructor(deferInit: boolean = false) {
+  constructor(deferInit = false) {
     this.error$ = new BehaviorSubject<GQLError<string> | null>(null)
     this.loading$ = new BehaviorSubject<boolean>(false)
     this.shortcodes$ = new BehaviorSubject<

@@ -4,11 +4,9 @@
 // NOTE : Don't use lambda functions as this doesn't get bound properly in them, use the 'function (args) {}' format
 const debounce = (func, delay) => {
   let inDebounce
-  return function () {
-    const context = this
-    const args = arguments
+  return function (...args) {
     clearTimeout(inDebounce)
-    inDebounce = setTimeout(() => func.apply(context, args), delay)
+    inDebounce = setTimeout(() => func.apply(this, args), delay)
   }
 }
 

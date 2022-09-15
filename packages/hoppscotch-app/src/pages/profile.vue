@@ -281,7 +281,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineComponent, watchEffect, computed } from "vue"
+import { ref, watchEffect, computed } from "vue"
 import { pipe } from "fp-ts/function"
 import * as TE from "fp-ts/TaskEither"
 import { GQLError } from "~/helpers/backend/GQLClient"

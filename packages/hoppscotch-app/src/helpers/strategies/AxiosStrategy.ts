@@ -55,7 +55,10 @@ const preProcessRequest = (req: AxiosRequestConfig): AxiosRequestConfig => {
       }
 
       reqClone.url = url.toString()
-    } catch (e) {}
+    } catch (e) {
+      // making this a non-empty block, so we can make the linter happy.
+      // we should probably use, allowEmptyCatch, or take the time to do something with the caught errors :)
+    }
 
     reqClone.params = {}
   }

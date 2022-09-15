@@ -124,6 +124,8 @@ export default defineComponent({
       shortcodeDetails,
       reloadApplication,
       t,
+      IconHome,
+      IconRefreshCW,
     }
   },
   data() {

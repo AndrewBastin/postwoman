@@ -14,7 +14,7 @@ export default class TeamListAdapter {
   private timeoutHandle: ReturnType<typeof setTimeout> | null
   private isDispose: boolean
 
-  constructor(deferInit: boolean = false) {
+  constructor(deferInit = false) {
     this.error$ = new BehaviorSubject<GQLError<string> | null>(null)
     this.loading$ = new BehaviorSubject<boolean>(false)
     this.teamList$ = new BehaviorSubject<GetMyTeamsQuery["myTeams"]>([])

@@ -56,7 +56,7 @@ export default defineComponent({
     ...getLensRenderers(),
   },
   props: {
-    response: { type: Object, default: () => {} },
+    response: { type: Object, default: () => ({}) },
   },
   setup() {
     const testResults = useReadonlyStream(restTestResults$, null)

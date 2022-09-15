@@ -292,7 +292,6 @@ if (typeof addTo.value === "undefined") {
   apiValue.value = ""
 }
 
-const URLExcludes = useSetting("URL_EXCLUDES")
 const clearContent = () => {
   auth.value = {
     authType: "none",

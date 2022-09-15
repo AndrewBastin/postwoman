@@ -35,7 +35,7 @@
   </SmartModal>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue"
 import { useToast } from "@composables/toast"
 import { useI18n } from "@composables/i18n"
@@ -45,6 +45,7 @@ export default defineComponent({
     show: Boolean,
     loadingState: Boolean,
   },
+  emits: ["submit", "hide-modal"],
   setup() {
     return {
       toast: useToast(),

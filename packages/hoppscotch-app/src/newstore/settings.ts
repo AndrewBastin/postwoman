@@ -1,10 +1,9 @@
 import { pluck, distinctUntilChanged } from "rxjs/operators"
 import has from "lodash/has"
 import { Observable } from "rxjs"
-import { Ref } from "vue"
+
 import DispatchingStore, { defineDispatchers } from "./DispatchingStore"
 import type { KeysMatching } from "~/types/ts-utils"
-import { useStream, useStreamStatic } from "@composables/stream"
 
 export const HoppBgColors = ["system", "light", "dark", "black"] as const
 

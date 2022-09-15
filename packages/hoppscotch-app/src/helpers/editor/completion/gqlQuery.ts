@@ -1,4 +1,4 @@
-import { Ref } from "@nuxtjs/composition-api"
+import { Ref } from "vue"
 import { GraphQLSchema } from "graphql"
 import { getAutocompleteSuggestions } from "graphql-language-service-interface"
 import { Completer, CompleterResult, CompletionEntry } from "."

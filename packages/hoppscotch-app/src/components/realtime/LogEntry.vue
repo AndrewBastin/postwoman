@@ -225,7 +225,6 @@ import { shortDateTime } from "~/helpers/utils/date"
 const t = useI18n()
 
 const props = defineProps<{ entry: LogEntryData }>()
-const outlineOptions = ref<any | null>(null)
 const editor = ref<any | null>(null)
 const linewrapEnabled = ref(true)
 const logPayload = computed(() => props.entry.payload)

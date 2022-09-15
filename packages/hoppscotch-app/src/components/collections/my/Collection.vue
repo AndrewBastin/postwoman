@@ -237,11 +237,11 @@ import { moveRESTRequest } from "~/newstore/collections"
 export default defineComponent({
   props: {
     collectionIndex: { type: Number, default: null },
-    collection: { type: Object, default: () => {} },
+    collection: { type: Object, default: () => ({}) },
     isFiltered: Boolean,
     saveRequest: Boolean,
-    collectionsType: { type: Object, default: () => {} },
-    picked: { type: Object, default: () => {} },
+    collectionsType: { type: Object, default: () => ({}) },
+    picked: { type: Object, default: () => ({}) },
   },
   emits: [
     "select",

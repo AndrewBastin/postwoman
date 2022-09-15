@@ -6,7 +6,7 @@
       :class="entryStatus.className"
       data-testid="restore_history_entry"
       :title="`${duration}`"
-      @click="$emit('use-entry')"
+      @click="emit('use-entry')"
     >
       <span class="truncate text-tiny font-semibold">
         {{ entry.request.method }}
@@ -20,7 +20,7 @@
       }"
       class="flex flex-1 min-w-0 py-2 pr-2 cursor-pointer transition group-hover:text-secondaryDark"
       data-testid="restore_history_entry"
-      @click="$emit('use-entry')"
+      @click="emit('use-entry')"
     >
       <span class="truncate">
         {{ entry.request.endpoint }}
@@ -33,7 +33,7 @@
       :title="t('action.remove')"
       class="hidden group-hover:inline-flex"
       data-testid="delete_history_entry"
-      @click="$emit('delete-entry')"
+      @click="emit('delete-entry')"
     />
     <ButtonSecondary
       v-tippy="{ theme: 'tooltip' }"
@@ -42,7 +42,7 @@
       :icon="entry.star ? IconStarOff : IconStar"
       color="yellow"
       data-testid="star_button"
-      @click="$emit('toggle-star')"
+      @click="emit('toggle-star')"
     />
   </div>
 </template>
@@ -60,7 +60,13 @@ import IconTrash from "~icons/lucide/trash"
 
 const props = defineProps<{
   entry: RESTHistoryEntry
-  showMore: Boolean
+  showMore: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: "use-entry"): void
+  (e: "delete-entry"): void
+  (e: "toggle-star"): void
 }>()
 
 const t = useI18n()

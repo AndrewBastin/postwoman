@@ -93,7 +93,7 @@ import { useI18n } from "@composables/i18n"
 
 const t = useI18n()
 
-const props = defineProps({
+defineProps({
   dialog: {
     type: Boolean,
     default: false,

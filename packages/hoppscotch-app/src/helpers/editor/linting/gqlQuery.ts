@@ -1,4 +1,4 @@
-import { Ref } from "@nuxtjs/composition-api"
+import { Ref } from "vue"
 import {
   GraphQLError,
   GraphQLSchema,

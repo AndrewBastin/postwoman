@@ -36,7 +36,7 @@ import { useI18n } from "@composables/i18n"
 const t = useI18n()
 
 defineProps<{
-  show: Boolean
+  show: boolean
 }>()
 
 const emit = defineEmits<{

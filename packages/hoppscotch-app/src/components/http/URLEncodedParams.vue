@@ -169,10 +169,9 @@ import IconGripVertical from "~icons/lucide/grip-vertical"
 import IconCheckCircle from "~icons/lucide/check-circle"
 import IconCircle from "~icons/lucide/circle"
 import IconTrash from "~icons/lucide/trash"
-import { computed, Ref, ref, watch } from "vue"
+import { computed, ref, watch } from "vue"
 import isEqual from "lodash/isEqual"
 import {
-  HoppRESTReqBody,
   parseRawKeyValueEntries,
   parseRawKeyValueEntriesE,
   rawKeyValueEntriesToString,

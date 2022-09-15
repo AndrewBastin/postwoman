@@ -46,9 +46,9 @@ const objectHasProperty = <T extends string>(
   Object.prototype.hasOwnProperty.call(obj, propName)
 
 type OpenAPIPathInfoType =
-  | OpenAPIV2.PathItemObject<{}>
-  | OpenAPIV3.PathItemObject<{}>
-  | OpenAPIV31.PathItemObject<{}>
+  | OpenAPIV2.PathItemObject<Record<string, unknown>>
+  | OpenAPIV3.PathItemObject<Record<string, unknown>>
+  | OpenAPIV31.PathItemObject<Record<string, unknown>>
 
 type OpenAPIParamsType =
   | OpenAPIV2.ParameterObject

@@ -36,6 +36,7 @@ describe("DispatchingStore", () => {
     const store = new DispatchingStore(
       {},
       {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         testDispatcher(_currentValue, _payload) {
           // Nothing here
         },

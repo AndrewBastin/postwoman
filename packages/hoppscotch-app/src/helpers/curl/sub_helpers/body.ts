@@ -155,7 +155,7 @@ export function getFArgumentMultipartData(
                 O.match(
                   // leave the value field empty for files
                   () => [k, v[0] === "@" || v[0] === "<" ? "" : v],
-                  (_) => [k, v]
+                  () => [k, v]
                 )
               )
             ),

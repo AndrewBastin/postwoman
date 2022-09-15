@@ -76,7 +76,7 @@ export default defineComponent({
       default: "",
     },
   },
-
+  emits: ["input", "change"],
   data() {
     return {
       text: this.value,

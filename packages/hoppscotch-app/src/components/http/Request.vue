@@ -464,14 +464,11 @@ const copyShareLink = (shareLink: string) => {
   if (navigator.share) {
     const time = new Date().toLocaleTimeString()
     const date = new Date().toLocaleDateString()
-    navigator
-      .share({
-        title: "Hoppscotch",
-        text: `Hoppscotch • Open source API development ecosystem at ${time} on ${date}`,
-        url: `https://hopp.sh/r${shareLink}`,
-      })
-      .then(() => {})
-      .catch(() => {})
+    navigator.share({
+      title: "Hoppscotch",
+      text: `Hoppscotch • Open source API development ecosystem at ${time} on ${date}`,
+      url: `https://hopp.sh/r${shareLink}`,
+    })
   } else {
     copyLinkIcon.value = IconCheck
     copyToClipboard(`https://hopp.sh/r${shareLink}`)

@@ -52,7 +52,6 @@ const t = useI18n()
 
 const fontSizes = HoppFontSizes
 const active = useSetting("FONT_SIZE")
-const fontSize = ref<any | null>(null)
 
 const getFontSizeName = (size: HoppFontSize) => {
   return t(`settings.font_size_${size}`)

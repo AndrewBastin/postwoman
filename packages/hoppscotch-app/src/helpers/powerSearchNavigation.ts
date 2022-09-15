@@ -6,7 +6,7 @@ export function useArrowKeysNavigation(searchItems: any, options: any = {}) {
   function handleArrowKeysNavigation(
     event: any,
     itemIndex: any,
-    preventPropagation: Boolean
+    preventPropagation: boolean
   ) {
     if (!NAVIGATION_KEYS.includes(event.key)) return
 

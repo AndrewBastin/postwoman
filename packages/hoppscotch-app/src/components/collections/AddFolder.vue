@@ -35,7 +35,7 @@
   </SmartModal>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue"
 import { useI18n } from "@composables/i18n"
 import { useToast } from "@composables/toast"
@@ -43,11 +43,12 @@ import { useToast } from "@composables/toast"
 export default defineComponent({
   props: {
     show: Boolean,
-    folder: { type: Object, default: () => {} },
+    folder: { type: Object, default: () => ({}) },
     folderPath: { type: String, default: null },
     collectionIndex: { type: Number, default: null },
     loadingState: Boolean,
   },
+  emits: ["hide-modal", "add-folder"],
   setup() {
     return {
       toast: useToast(),

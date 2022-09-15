@@ -212,6 +212,7 @@ export default defineComponent({
       currentUser,
       toast: useToast(),
       t: useI18n(),
+      IconHome,
     }
   },
   data() {

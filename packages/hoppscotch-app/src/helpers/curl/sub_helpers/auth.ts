@@ -85,7 +85,7 @@ const getAuthFromURLObject = (urlObject: URL) =>
     urlObject,
     (url) => [url.username, url.password ?? ""],
     // can have a username with no password
-    O.fromPredicate(([username, _]) => !!username && username.length > 0),
+    O.fromPredicate(([username]) => !!username && username.length > 0),
     O.map(
       ([username, password]) =>
         <HoppRESTAuth>{

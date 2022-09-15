@@ -146,6 +146,7 @@ export default defineComponent({
   props: {
     show: Boolean,
   },
+  emits: ["hide-modal"],
   setup() {
     const { subscribeToStream } = useStreamSubscriber()
 

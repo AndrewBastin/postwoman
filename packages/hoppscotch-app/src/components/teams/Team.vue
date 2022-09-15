@@ -204,6 +204,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "edit-team"): void
+  (e: "invite-team"): void
 }>()
 
 const toast = useToast()

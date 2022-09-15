@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import IconDownload from "~icons/lucide/download"
 import IconCheck from "~icons/lucide/check"
 import { useI18n } from "@composables/i18n"
@@ -34,12 +34,14 @@ import { defineComponent } from "vue"
 
 export default defineComponent({
   props: {
-    response: { type: Object, default: () => {} },
+    response: { type: Object, default: () => ({}) },
   },
   setup() {
     return {
       t: useI18n(),
       toast: useToast(),
+      IconDownload,
+      IconCheck,
     }
   },
   data() {

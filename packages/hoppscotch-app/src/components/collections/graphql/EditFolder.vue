@@ -40,7 +40,7 @@ import { editGraphqlFolder } from "~/newstore/collections"
 export default defineComponent({
   props: {
     show: Boolean,
-    folder: { type: Object, default: () => {} },
+    folder: { type: Object, default: () => ({}) },
     folderPath: { type: String, default: null },
     editingFolderName: { type: String, default: null },
   },

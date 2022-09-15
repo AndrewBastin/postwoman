@@ -8,21 +8,21 @@ import {
 
 export const resolversDef: GraphCacheResolvers = {
   Query: {
-    team: (_parent, { teamID }, _cache, _info) =>
+    team: (_parent, { teamID }) =>
       <WithTypename<Team>>{
         __typename: "Team" as const,
         id: teamID,
       },
-    user: (_parent, { uid }, _cache, _info) => ({
+    user: (_parent, { uid }) => ({
       __typename: "User",
       uid,
     }),
-    teamInvitation: (_parent, args, _cache, _info) =>
+    teamInvitation: (_parent, args) =>
       <WithTypename<TeamInvitation>>{
         __typename: "TeamInvitation",
         id: args.inviteID,
       },
-    shortcode: (_parent, args, _cache, _info) =>
+    shortcode: (_parent, args) =>
       <WithTypename<Shortcode>>{
         __typename: "Shortcode",
         id: args.code,

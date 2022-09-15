@@ -54,7 +54,8 @@ const applyColorMode = (app: App) => {
   app.provide("colorMode", exposed)
 }
 
-const applyAccentColor = (app: App) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const applyAccentColor = (_app: App) => {
   const [pref] = useSettingStatic("THEME_COLOR")
 
   watch(
@@ -66,7 +67,8 @@ const applyAccentColor = (app: App) => {
   )
 }
 
-const applyFontSize = (app: App) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const applyFontSize = (_app: App) => {
   const [pref] = useSettingStatic("FONT_SIZE")
 
   watch(

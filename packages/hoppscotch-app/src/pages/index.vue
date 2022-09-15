@@ -81,6 +81,8 @@ function oAuthURL() {
           oauth2Token.value = tokenInfo.access_token
         }
       }
+
+      // eslint-disable-next-line no-empty
     } catch (_) {}
   })
 }

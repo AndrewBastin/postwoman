@@ -53,7 +53,7 @@ const t = useI18n()
 const toast = useToast()
 
 defineProps<{
-  show: Boolean
+  show: boolean
 }>()
 
 const emit = defineEmits<{

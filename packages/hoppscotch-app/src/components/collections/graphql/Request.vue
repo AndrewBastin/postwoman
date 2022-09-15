@@ -150,7 +150,7 @@ const props = defineProps({
   picked: { type: Object, default: null },
   // Whether the request is being saved (activate 'select' event)
   savingMode: { type: Boolean, default: false },
-  request: { type: Object as PropType<HoppGQLRequest>, default: () => {} },
+  request: { type: Object as PropType<HoppGQLRequest>, default: () => ({}) },
   folderPath: { type: String, default: null },
   requestIndex: { type: Number, default: null },
 })

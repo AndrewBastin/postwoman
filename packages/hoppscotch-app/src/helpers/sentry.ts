@@ -1,4 +1,4 @@
-import { useContext } from "@nuxtjs/composition-api"
+import { useContext } from "vue"
 import * as Sentry from "@sentry/browser"
 
 export function useSentry() {

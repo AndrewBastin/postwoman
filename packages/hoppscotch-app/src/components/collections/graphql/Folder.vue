@@ -214,7 +214,7 @@ const props = defineProps({
   picked: { type: Object, default: null },
   // Whether the request is in a selectable mode (activates 'select' event)
   savingMode: { type: Boolean, default: false },
-  folder: { type: Object, default: () => {} },
+  folder: { type: Object, default: () => ({}) },
   folderIndex: { type: Number, default: null },
   collectionIndex: { type: Number, default: null },
   folderPath: { type: String, default: null },

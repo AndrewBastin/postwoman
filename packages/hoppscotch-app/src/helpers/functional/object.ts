@@ -40,11 +40,11 @@ type TypeFromPrimitiveArray<P extends JSPrimitive | undefined> =
     : P extends "number"
     ? number[]
     : P extends "bigint"
-    ? BigInt[]
+    ? bigint[]
     : P extends "string"
     ? string[]
     : P extends "symbol"
-    ? Symbol[]
+    ? symbol[]
     : P extends "function"
     ? Function[]
     : unknown[]

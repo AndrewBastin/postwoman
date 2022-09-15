@@ -258,7 +258,6 @@ const nativeShare = () => {
         text: "Hoppscotch • Open source API development ecosystem - Helps you create requests faster, saving precious time on development.",
         url: "https://hoppscotch.io",
       })
-      .then(() => {})
       .catch(console.error)
   } else {
     // fallback

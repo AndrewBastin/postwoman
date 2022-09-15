@@ -259,7 +259,7 @@ export default defineComponent({
   },
   props: {
     saveRequest: Boolean,
-    picked: { type: Object, default: () => {} },
+    picked: { type: Object, default: () => ({}) },
   },
   emits: [
     "update-collection",

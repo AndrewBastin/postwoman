@@ -42,6 +42,7 @@ export default defineComponent({
     folderPath: { type: String, default: null },
     collectionIndex: { type: Number, default: null },
   },
+  emits: ["hide-modal", "add-folder"],
   setup() {
     return {
       toast: useToast(),

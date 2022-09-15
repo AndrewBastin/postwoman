@@ -4,7 +4,7 @@ import * as A from "fp-ts/Array"
 import * as Sep from "fp-ts/Separated"
 import { HoppRESTParam } from "@hoppscotch/data"
 
-const isDangling = ([_, value]: [string, string]) => !value
+const isDangling = ([, value]: [string, string]) => !value
 
 /**
  * Converts queries to HoppRESTParam format and separates dangling ones

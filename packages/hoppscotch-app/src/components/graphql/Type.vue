@@ -70,7 +70,7 @@ export default defineComponent({
     // eslint-disable-next-line vue/require-default-prop, vue/require-prop-types
     gqlType: {},
     gqlTypes: { type: Array, default: () => [] },
-    jumpTypeCallback: { type: Function, default: () => {} },
+    jumpTypeCallback: { type: Function, default: () => ({}) },
     isHighlighted: { type: Boolean, default: false },
     highlightedFields: { type: Array, default: () => [] },
   },

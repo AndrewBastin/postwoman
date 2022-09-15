@@ -42,7 +42,7 @@ export default defineComponent({
   props: {
     show: Boolean,
     folderPath: { type: String, default: null },
-    request: { type: Object as PropType<HoppGQLRequest>, default: () => {} },
+    request: { type: Object as PropType<HoppGQLRequest>, default: () => ({}) },
     requestIndex: { type: Number, default: null },
     editingRequestName: { type: String, default: null },
   },

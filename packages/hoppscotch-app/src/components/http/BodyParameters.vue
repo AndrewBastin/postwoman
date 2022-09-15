@@ -39,7 +39,7 @@
       chosen-class="bg-primaryLight"
       drag-class="cursor-grabbing"
     >
-      <template #item="{ element: { id, entry }, index }">
+      <template #item="{ element: { entry }, index }">
         <div
           class="flex border-b divide-x divide-dividerLight border-dividerLight draggable-content group"
         >
@@ -183,7 +183,7 @@ import IconGripVertical from "~icons/lucide/grip-vertical"
 import IconCheckCircle from "~icons/lucide/check-circle"
 import IconCircle from "~icons/lucide/circle"
 import IconTrash from "~icons/lucide/trash"
-import { ref, Ref, watch, computed } from "vue"
+import { ref, watch } from "vue"
 import { flow, pipe } from "fp-ts/function"
 import * as O from "fp-ts/Option"
 import * as A from "fp-ts/Array"

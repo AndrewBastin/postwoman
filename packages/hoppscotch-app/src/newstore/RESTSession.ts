@@ -287,6 +287,7 @@ const dispatchers = defineDispatchers({
       response: updatedRes,
     }
   },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   clearResponse(_curr: RESTSession) {
     return {
       response: null,

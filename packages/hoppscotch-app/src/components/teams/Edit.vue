@@ -28,7 +28,7 @@
               filled
               @click="
                 () => {
-                  $emit('invite-team')
+                  emit('invite-team')
                 }
               "
             />
@@ -224,6 +224,7 @@ const colorMode = useColorMode()
 const emit = defineEmits<{
   (e: "hide-modal"): void
   (e: "refetch-teams"): void
+  (e: "invite-team"): void
 }>()
 
 const memberOptions = ref<any | null>(null)

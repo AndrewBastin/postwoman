@@ -22,7 +22,7 @@
         :title="t('action.remove')"
         class="hidden group-hover:inline-flex"
         data-testid="delete_history_entry"
-        @click="$emit('delete-entry')"
+        @click="emit('delete-entry')"
       />
       <ButtonSecondary
         v-tippy="{ theme: 'tooltip' }"
@@ -38,7 +38,7 @@
         color="yellow"
         :class="{ 'group-hover:inline-flex hidden': !entry.star }"
         data-testid="star_button"
-        @click="$emit('toggle-star')"
+        @click="emit('toggle-star')"
       />
     </div>
     <div class="flex flex-col text-tiny">
@@ -74,7 +74,12 @@ const t = useI18n()
 
 const props = defineProps<{
   entry: GQLHistoryEntry
-  showMore: Boolean
+  showMore: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: "delete-entry"): void
+  (e: "toggle-star"): void
 }>()
 
 const expand = ref(false)

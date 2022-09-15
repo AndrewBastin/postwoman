@@ -215,7 +215,7 @@ const evnExpandError = computed(() => {
 })
 
 const liveEnvs = computed(() => {
-  if (evnExpandError) {
+  if (evnExpandError.value) {
     return []
   }
 

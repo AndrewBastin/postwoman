@@ -39,7 +39,7 @@ import { useI18n } from "@composables/i18n"
 
 const props = defineProps({
   show: Boolean,
-  editingCollection: { type: Object, default: () => {} },
+  editingCollection: { type: Object, default: () => ({}) },
   editingCollectionIndex: { type: Number, default: null },
   editingCollectionName: { type: String, default: null },
 })

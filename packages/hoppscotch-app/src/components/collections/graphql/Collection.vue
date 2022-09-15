@@ -224,7 +224,7 @@ const props = defineProps({
   // Whether the viewing context is related to picking (activates 'select' events)
   savingMode: { type: Boolean, default: false },
   collectionIndex: { type: Number, default: null },
-  collection: { type: Object, default: () => {} },
+  collection: { type: Object, default: () => ({}) },
   isFiltered: Boolean,
 })
 
@@ -252,7 +252,7 @@ const deleteAction = ref<any | null>(null)
 
 const showChildren = ref(false)
 const dragging = ref(false)
-const selectedFolder = ref({})
+
 const confirmRemove = ref(false)
 
 const isSelected = computed(

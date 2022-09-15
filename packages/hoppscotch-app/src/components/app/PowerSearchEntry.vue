@@ -40,7 +40,7 @@ defineProps<{
     action: string
     icon: object | Component
   }
-  active: Boolean
+  active: boolean
 }>()
 
 const emit = defineEmits<{
