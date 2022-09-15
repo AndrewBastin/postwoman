@@ -27,6 +27,5 @@ dist-ssr
 .env
 
 # Backend Code generation
-src/helpers/backend/graphql
-src/helpers/backend/backend-schema
-
+src/helpers/backend/graphql.ts
+src/helpers/backend/backend-schema.json

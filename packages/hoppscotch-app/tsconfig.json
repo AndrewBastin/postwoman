@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
+    "noUnusedLocals": true,
     "paths": {
       "~/*": [ "./src/*" ],
       "@composables/*": [ "./src/composables/*" ],

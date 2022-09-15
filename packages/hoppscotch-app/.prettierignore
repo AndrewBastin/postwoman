@@ -9,3 +9,4 @@ dist
 static
 components.d.ts
 src/types
+src/helpers/backend/graphql.ts

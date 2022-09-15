@@ -19,7 +19,7 @@ module.exports = {
   ],
   ignorePatterns: [
     "static/**/*",
-    "helpers/backend/graphql.ts",
+    "./helpers/backend/graphql.ts",
     "**/*.d.ts",
     "types/**/*",
   ],
