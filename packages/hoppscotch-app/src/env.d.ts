@@ -1,6 +1,8 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-pages/client" />
 
+import '@vue/runtime-core'
+
 // Environment Variables Intellisense
 interface ImportMetaEnv {
   readonly VITE_GA_ID: string
