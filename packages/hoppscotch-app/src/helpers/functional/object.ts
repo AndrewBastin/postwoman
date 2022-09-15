@@ -46,8 +46,11 @@ type TypeFromPrimitiveArray<P extends JSPrimitive | undefined> =
     : P extends "symbol"
     ? symbol[]
     : P extends "function"
-    ? Function[]
+    ? Function[] // eslint-disable-line @typescript-eslint/ban-types
     : unknown[]
+
+// The ban-types silence is because in this case,
+// we can't get the Function type info to make a better guess
 
 export const objHasArrayProperty =
   <O extends object, K extends string, P extends JSPrimitive>(
