@@ -33,9 +33,11 @@ module.exports = {
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     "prettier/prettier": "warn",
     "vue/multi-word-component-names": "off",
+    "vue/no-side-effects-in-computed-properties": "off",
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "import/default": "off",
     "no-undef": "off",
     // localStorage block

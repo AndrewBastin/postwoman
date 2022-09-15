@@ -54,6 +54,7 @@ import { SIORequest$, setSIORequest } from "./SocketIOSession"
 import { SSERequest$, setSSERequest } from "./SSESession"
 import { MQTTRequest$, setMQTTRequest } from "./MQTTSession"
 import { bulkApplyLocalState, localStateStore } from "./localstate"
+import { StorageLike } from "@vueuse/core"
 
 function checkAndMigrateOldSettings() {
   const vuexData = JSON.parse(window.localStorage.getItem("vuex") || "{}")
@@ -367,3 +368,13 @@ export function setLocalConfig(key: string, value: string) {
 export function removeLocalConfig(key: string) {
   window.localStorage.removeItem(key)
 }
+
+/**
+ * The storage system we are using in the application.
+ * NOTE: This is a placeholder for being used in app.
+ * This entire redirection of localStorage is to allow for
+ * not refactoring the entire app code when we refactor when
+ * we are building the native (which may lack localStorage,
+ * or use a custom system)
+ */
+export const hoppLocalConfigStorage: StorageLike = localStorage

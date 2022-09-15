@@ -3,6 +3,7 @@ import { App, computed, reactive, Ref, watch } from "vue"
 import type { HoppBgColor } from "~/newstore/settings"
 import { useSettingStatic } from "@composables/settings"
 import { HoppModule } from "."
+import { hoppLocalConfigStorage } from "~/newstore/localpersistence"
 
 export type HoppColorMode = {
   preference: HoppBgColor
@@ -15,7 +16,7 @@ const applyColorMode = (app: App) => {
   const currentLocalPreference = useStorage<HoppBgColor>(
     "nuxt-color-mode",
     "system",
-    localStorage,
+    hoppLocalConfigStorage,
     {
       listenToStorageChanges: true,
     }
