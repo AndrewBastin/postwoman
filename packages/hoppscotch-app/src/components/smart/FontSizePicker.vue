@@ -40,7 +40,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
 import IconCircleDot from "~icons/lucide/circle-dot"
 import IconCircle from "~icons/lucide/circle"
 import IconType from "~icons/lucide/type"

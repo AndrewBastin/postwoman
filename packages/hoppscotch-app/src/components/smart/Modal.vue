@@ -2,7 +2,7 @@
   <Transition name="fade" appear @leave="onTransitionLeaveStart">
     <div
       ref="modal"
-      class="fixed inset-0 z-10 z-50 overflow-y-auto transition"
+      class="fixed inset-0 z-50 overflow-y-auto transition"
       role="dialog"
       aria-modal="true"
     >
@@ -11,12 +11,18 @@
       >
         <Transition name="fade" appear>
           <div
-            class="fixed inset-0 transition bg-primaryLight opacity-90"
+            class="fixed inset-0 transition-opacity"
             @touchstart="!dialog ? close() : null"
             @touchend="!dialog ? close() : null"
             @mouseup="!dialog ? close() : null"
             @mousedown="!dialog ? close() : null"
-          ></div>
+          >
+            <div
+              class="absolute inset-0 bg-primaryLight opacity-90"
+              tabindex="0"
+              @click="!dialog ? close() : null"
+            ></div>
+          </div>
         </Transition>
         <span
           v-if="placement === 'center'"
@@ -24,7 +30,7 @@
           aria-hidden="true"
           >&#8203;</span
         >
-        <Transition appear name="bounce">
+        <Transition name="bounce" appear>
           <div
             class="inline-block w-full overflow-hidden text-left align-bottom shadow-lg transition-all transform bg-primary sm:rounded-xl sm:align-middle"
             :class="[

@@ -256,7 +256,6 @@ import {
 } from "@hoppscotch/data"
 import { pluckRef } from "@composables/ref"
 import { useStream } from "@composables/stream"
-import { useSetting } from "@composables/settings"
 import { useI18n } from "@composables/i18n"
 import { useColorMode } from "@composables/theming"
 import { restAuth$, setRESTAuth } from "~/newstore/RESTSession"

@@ -1,21 +1,19 @@
 <template>
-  <Transition name="fade" appear>
-    <GithubButton
-      title="Star Hoppscotch"
-      href="https://github.com/hoppscotch/hoppscotch"
-      :data-color-scheme="
-        colorMode.value != 'light'
-          ? colorMode.value == 'black'
-            ? 'dark'
-            : 'dark_dimmed'
-          : 'light'
-      "
-      data-show-count="true"
-      data-text="Star"
-      aria-label="Star Hoppscotch on GitHub"
-      :data-size="size"
-    />
-  </Transition>
+  <GithubButton
+    title="Star Hoppscotch on GitHub"
+    href="https://github.com/hoppscotch/hoppscotch"
+    :data-color-scheme="
+      colorMode.value != 'light'
+        ? colorMode.value == 'black'
+          ? 'dark'
+          : 'dark_dimmed'
+        : 'light'
+    "
+    data-show-count="true"
+    data-text="Star"
+    aria-label="Star Hoppscotch on GitHub"
+    :data-size="size"
+  />
 </template>
 
 <script setup lang="ts">

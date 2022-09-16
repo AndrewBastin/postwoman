@@ -9,7 +9,7 @@
       <History
         ref="graphqlHistoryComponent"
         :page="'graphql'"
-        @useHistory="handleUseHistory"
+        @use-history="handleUseHistory"
       />
     </SmartTab>
     <SmartTab
