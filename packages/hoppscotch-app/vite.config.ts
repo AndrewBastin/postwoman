@@ -67,6 +67,7 @@ export default defineConfig({
     },
   },
   build: {
+    sourcemap: true,
     commonjsOptions: {
       include: ["@hoppscotch/data"],
     },
