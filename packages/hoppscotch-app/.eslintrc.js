@@ -28,10 +28,10 @@ module.exports = {
   rules: {
     semi: [2, "never"],
     "import/named": "off", // because, named import issue with typescript see: https://github.com/typescript-eslint/typescript-eslint/issues/154
-    // TODO: Check if this still works in Vue 3 + Vite ?
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-    "prettier/prettier": "warn",
+    "no-console": "off",
+    "no-debugger": process.env.HOPP_LINT_FOR_PROD === "true" ? "error" : "warn",
+    "prettier/prettier":
+      process.env.HOPP_LINT_FOR_PROD === "true" ? "error" : "warn",
     "vue/multi-word-component-names": "off",
     "vue/no-side-effects-in-computed-properties": "off",
     "import/no-named-as-default": "off",
