@@ -205,7 +205,7 @@
 
 <script setup lang="ts">
 import { computed, Ref, ref } from "vue"
-import isEqual from "lodash/isEqual"
+import { isEqual } from "lodash-es"
 import { useReadonlyStream, useStream } from "@composables/stream"
 import { useI18n } from "@composables/i18n"
 import {

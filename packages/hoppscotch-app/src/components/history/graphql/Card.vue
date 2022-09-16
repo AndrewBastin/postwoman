@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
 import { makeGQLRequest } from "@hoppscotch/data"
-import { cloneDeep } from "lodash"
+import { cloneDeep } from "lodash-es"
 import { setGQLSession } from "~/newstore/GQLSession"
 import { GQLHistoryEntry } from "~/newstore/history"
 import { shortDateTime } from "~/helpers/utils/date"

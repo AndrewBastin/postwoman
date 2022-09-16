@@ -1,6 +1,6 @@
 import { runPreRequestScript } from "@hoppscotch/js-sandbox"
 import { Environment } from "@hoppscotch/data"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import {
   getCurrentEnvironment,
   getGlobalVariables,

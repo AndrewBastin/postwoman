@@ -165,7 +165,7 @@ import {
   isEqualHoppRESTRequest,
 } from "@hoppscotch/data"
 import * as E from "fp-ts/Either"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import { useI18n } from "@composables/i18n"
 import { useToast } from "@composables/toast"
 import { useReadonlyStream } from "@composables/stream"

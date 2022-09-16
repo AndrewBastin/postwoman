@@ -133,7 +133,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from "vue"
-import debounce from "lodash/debounce"
+import { debounce } from "lodash-es"
 import { MQTTConnection, MQTTError } from "~/helpers/realtime/MQTTConnection"
 import { useI18n } from "@composables/i18n"
 import { useToast } from "@composables/toast"

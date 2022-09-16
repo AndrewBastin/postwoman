@@ -170,7 +170,7 @@ import IconCheckCircle from "~icons/lucide/check-circle"
 import IconCircle from "~icons/lucide/circle"
 import IconTrash from "~icons/lucide/trash"
 import { computed, ref, watch } from "vue"
-import isEqual from "lodash/isEqual"
+import { isEqual, cloneDeep } from "lodash-es"
 import {
   parseRawKeyValueEntries,
   parseRawKeyValueEntriesE,
@@ -182,7 +182,6 @@ import * as A from "fp-ts/Array"
 import * as O from "fp-ts/Option"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as E from "fp-ts/Either"
-import cloneDeep from "lodash/cloneDeep"
 import draggable from "vuedraggable"
 import { useCodemirror } from "@composables/codemirror"
 import linter from "~/helpers/editor/linting/rawKeyValue"

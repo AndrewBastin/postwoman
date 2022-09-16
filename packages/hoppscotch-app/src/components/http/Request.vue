@@ -239,7 +239,7 @@ import IconFolderPlus from "~icons/lucide/folder-plus"
 import { computed, ref, watch } from "vue"
 import { isLeft, isRight } from "fp-ts/lib/Either"
 import * as E from "fp-ts/Either"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import { refAutoReset } from "@vueuse/core"
 import {
   updateRESTResponse,

@@ -1,5 +1,5 @@
 import { pluck, distinctUntilChanged } from "rxjs/operators"
-import has from "lodash/has"
+import { has } from "lodash-es"
 import { Observable } from "rxjs"
 
 import DispatchingStore, { defineDispatchers } from "./DispatchingStore"

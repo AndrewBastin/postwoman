@@ -1,6 +1,5 @@
 import { Environment } from "@hoppscotch/data"
-import { cloneDeep } from "lodash"
-import isEqual from "lodash/isEqual"
+import { cloneDeep, isEqual } from "lodash-es"
 import { combineLatest, Observable } from "rxjs"
 import { distinctUntilChanged, map, pluck } from "rxjs/operators"
 import DispatchingStore, {

@@ -246,7 +246,7 @@ import IconHelpCircle from "~icons/lucide/help-circle"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconExternalLink from "~icons/lucide/external-link"
 
-import debounce from "lodash/debounce"
+import { debounce } from "lodash-es"
 import {
   SIOConnection,
   SIOError,

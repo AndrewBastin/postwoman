@@ -184,7 +184,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watch, onUnmounted, onMounted, computed } from "vue"
-import debounce from "lodash/debounce"
+import { debounce } from "lodash-es"
 import IconTrash2 from "~icons/lucide/trash-2"
 import IconPlus from "~icons/lucide/plus"
 import IconCheckCircle from "~icons/lucide/check-circle"

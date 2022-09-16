@@ -8,7 +8,7 @@ import {
   HoppCollection,
   HoppRESTRequest,
 } from "@hoppscotch/data"
-import _isPlainObject from "lodash/isPlainObject"
+import { isPlainObject as _isPlainObject } from "lodash-es"
 import { step } from "../steps"
 import { defineImporter, IMPORTER_INVALID_FILE_FORMAT } from "."
 import { safeParseJSON } from "~/helpers/functional/json"

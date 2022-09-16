@@ -1,7 +1,6 @@
 import { Subject, BehaviorSubject } from "rxjs"
 import { map } from "rxjs/operators"
-import assign from "lodash/assign"
-import clone from "lodash/clone"
+import { assign, clone } from "lodash-es"
 
 type dispatcherFunc<StoreType> = (
   currentVal: StoreType,

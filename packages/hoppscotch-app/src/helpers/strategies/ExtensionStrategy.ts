@@ -2,7 +2,7 @@ import * as TE from "fp-ts/TaskEither"
 import * as O from "fp-ts/Option"
 import { pipe } from "fp-ts/function"
 import { AxiosRequestConfig } from "axios"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import { NetworkResponse, NetworkStrategy } from "../network"
 import { browserIsChrome, browserIsFirefox } from "../utils/userAgent"
 

@@ -1,8 +1,6 @@
 /* eslint-disable no-restricted-globals, no-restricted-syntax */
 
-import clone from "lodash/clone"
-import assign from "lodash/assign"
-import isEmpty from "lodash/isEmpty"
+import { clone, cloneDeep, assign, isEmpty } from "lodash-es"
 import * as O from "fp-ts/Option"
 import { pipe } from "fp-ts/function"
 import {
@@ -12,7 +10,6 @@ import {
   translateToNewGQLCollection,
   Environment,
 } from "@hoppscotch/data"
-import { cloneDeep } from "lodash"
 import {
   settingsStore,
   bulkApplySettings,

@@ -11,7 +11,7 @@ import {
   TestDescriptor,
 } from "@hoppscotch/js-sandbox"
 import { isRight } from "fp-ts/Either"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import {
   getCombinedEnvVariables,
   getFinalEnvsFromPreRequest,

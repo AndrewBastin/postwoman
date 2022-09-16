@@ -101,7 +101,7 @@ import IconCopy from "~icons/lucide/copy"
 import IconTrash2 from "~icons/lucide/trash-2"
 import { ref } from "vue"
 import { Environment } from "@hoppscotch/data"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import {
   deleteEnvironment,
   duplicateEnvironment,

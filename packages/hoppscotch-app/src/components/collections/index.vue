@@ -212,7 +212,7 @@
 import IconArchive from "~icons/lucide/archive"
 import IconPlus from "~icons/lucide/plus"
 import IconHelpCircle from "~icons/lucide/help-circle"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import { defineComponent, markRaw } from "vue"
 import { makeCollection } from "@hoppscotch/data"
 import { useColorMode } from "@composables/theming"

@@ -150,8 +150,7 @@ defineEmits(["select", "use-collection"])
 <script>
 // TODO: TypeScript + Script Setup this :)
 import { defineComponent } from "vue"
-import cloneDeep from "lodash/cloneDeep"
-import clone from "lodash/clone"
+import { cloneDeep, clone } from "lodash-es"
 import {
   graphqlCollections$,
   addGraphqlFolder,

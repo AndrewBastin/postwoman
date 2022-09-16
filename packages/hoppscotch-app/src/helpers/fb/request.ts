@@ -8,7 +8,7 @@ import {
   Subscription,
 } from "rxjs"
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import { HoppRESTRequest, translateToNewRequest } from "@hoppscotch/data"
 import { currentUser$, HoppUser } from "./auth"
 import { restRequest$ } from "~/newstore/RESTSession"

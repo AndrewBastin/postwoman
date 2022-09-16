@@ -26,7 +26,7 @@ import {
   tooltips,
 } from "@codemirror/view"
 import { EditorState, Extension } from "@codemirror/state"
-import clone from "lodash/clone"
+import { clone } from "lodash-es"
 import { history, historyKeymap } from "@codemirror/commands"
 import { inputTheme } from "~/helpers/editor/themes/baseTheme"
 import { HoppReactiveEnvPlugin } from "~/helpers/editor/extensions/HoppEnvironment"

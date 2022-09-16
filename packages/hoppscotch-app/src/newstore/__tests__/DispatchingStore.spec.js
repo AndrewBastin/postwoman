@@ -1,5 +1,5 @@
 import { BehaviorSubject, Subject } from "rxjs"
-import isEqual from "lodash/isEqual"
+import { isEqual } from "lodash-es"
 import DispatchingStore from "~/newstore/DispatchingStore"
 
 describe("DispatchingStore", () => {

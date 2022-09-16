@@ -75,7 +75,7 @@ importers:
       '@sentry/tracing': ^7.13.0
       '@sentry/vue': ^7.13.0
       '@types/js-yaml': ^4.0.5
-      '@types/lodash': ^4.14.181
+      '@types/lodash-es': ^4.17.6
       '@types/lossless-json': ^1.0.1
       '@types/nprogress': ^0.2.0
       '@types/paho-mqtt': ^1.0.6
@@ -111,7 +111,7 @@ importers:
       io-ts: ^2.2.16
       js-yaml: ^4.1.0
       jsonpath-plus: ^7.0.0
-      lodash: ^4.17.21
+      lodash-es: ^4.17.21
       lossless-json: ^1.0.5
       npm-run-all: ^4.1.5
       nprogress: ^0.2.0
@@ -195,7 +195,7 @@ importers:
       io-ts: 2.2.16_fp-ts@2.12.1
       js-yaml: 4.1.0
       jsonpath-plus: 7.0.0
-      lodash: 4.17.21
+      lodash-es: 4.17.21
       lossless-json: 1.0.5
       nprogress: 0.2.0
       paho-mqtt: 1.1.0
@@ -236,7 +236,7 @@ importers:
       '@intlify/vite-plugin-vue-i18n': 6.0.1_vite@3.1.0+vue-i18n@9.2.2
       '@rushstack/eslint-patch': 1.1.4
       '@types/js-yaml': 4.0.5
-      '@types/lodash': 4.14.182
+      '@types/lodash-es': 4.17.6
       '@types/lossless-json': 1.0.1
       '@types/nprogress': 0.2.0
       '@types/paho-mqtt': 1.0.6
@@ -4010,6 +4010,12 @@ packages:
     resolution: {integrity: sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==}
     dependencies:
       '@types/node': 17.0.45
+    dev: true
+
+  /@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
+    dependencies:
+      '@types/lodash': 4.14.182
     dev: true
 
   /@types/lodash/4.14.182:
@@ -8873,6 +8879,10 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
+
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
     dev: false
@@ -10880,7 +10890,7 @@ packages:
     hasBin: true
     dependencies:
       '@jridgewell/source-map': 0.3.2
-      acorn: 8.7.1
+      acorn: 8.8.0
       commander: 2.20.3
       source-map-support: 0.5.21
     dev: true

@@ -122,7 +122,7 @@ import {
   isEqualHoppRESTRequest,
   safelyExtractRESTRequest,
 } from "@hoppscotch/data"
-import groupBy from "lodash/groupBy"
+import { groupBy } from "lodash-es"
 import { useTimeAgo } from "@vueuse/core"
 import { pipe } from "fp-ts/function"
 import * as A from "fp-ts/Array"

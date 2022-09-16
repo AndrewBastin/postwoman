@@ -1,6 +1,6 @@
 import { AxiosResponse, AxiosRequestConfig } from "axios"
 import { BehaviorSubject, Observable } from "rxjs"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import * as T from "fp-ts/Task"
 import * as TE from "fp-ts/TaskEither"
 import { pipe } from "fp-ts/function"

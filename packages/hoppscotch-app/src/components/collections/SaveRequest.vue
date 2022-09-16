@@ -55,7 +55,7 @@
 import { reactive, ref, watch } from "vue"
 import * as E from "fp-ts/Either"
 import { HoppGQLRequest, isHoppRESTRequest } from "@hoppscotch/data"
-import cloneDeep from "lodash/cloneDeep"
+import { cloneDeep } from "lodash-es"
 import {
   editGraphqlRequest,
   editRESTRequest,
