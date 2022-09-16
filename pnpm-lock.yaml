@@ -127,6 +127,7 @@ importers:
       socket.io-client-v4: npm:socket.io-client@^4.4.1
       socketio-wildcard: ^2.0.0
       splitpanes: ^3.1.1
+      stream-browserify: ^3.0.0
       subscriptions-transport-ws: ^0.11.0
       tern: ^0.24.3
       tippy.js: ^6.3.7
@@ -256,6 +257,7 @@ importers:
       openapi-types: 12.0.0
       rollup-plugin-polyfill-node: 0.10.1
       sass: 1.53.0
+      stream-browserify: 3.0.0
       typescript: 4.7.4
       unplugin-icons: 0.14.9_6igbc34rdygfc6m44bomdw5yyu
       unplugin-vue-components: 0.21.0_vite@3.1.0+vue@3.2.37
@@ -328,8 +330,8 @@ importers:
       io-ts: ^2.2.16
       lodash: ^4.17.21
       parser-ts: ^0.6.16
-      tsup: ^5.12.5
       typescript: ^4.6.3
+      vite: ^3.1.0
     dependencies:
       fp-ts: 2.12.1
       io-ts: 2.2.16_fp-ts@2.12.1
@@ -337,8 +339,8 @@ importers:
       parser-ts: 0.6.16_fp-ts@2.12.1
     devDependencies:
       '@types/lodash': 4.14.182
-      tsup: 5.12.9_typescript@4.7.4
       typescript: 4.7.4
+      vite: 3.1.0
 
   packages/hoppscotch-js-sandbox:
     specifiers:
@@ -10582,6 +10584,13 @@ packages:
       escape-string-regexp: 2.0.0
     dev: true
 
+  /stream-browserify/3.0.0:
+    resolution: {integrity: sha512-H73RAHsVBapbim0tU2JwwOiXUj+fikfiaoYAKHF3VJfA0pe2BCzkhAHBlLG6REzE+2WNZcxOXjK7lkso+9euLA==}
+    dependencies:
+      inherits: 2.0.4
+      readable-stream: 3.6.0
+    dev: true
+
   /stream-combiner/0.0.4:
     resolution: {integrity: sha512-rT00SPnTVyRsaSz5zgSPma/aHSOic5U1prhYdRy5HS2kTZviFpmDgzilbtsJsxiroqACmayynDN/9VzIbX5DOw==}
     dependencies:
@@ -11195,6 +11204,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - ts-node
+    dev: false
 
   /tsutils/3.21.0_typescript@4.7.4:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
@@ -11667,6 +11677,33 @@ packages:
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /vite/3.1.0:
+    resolution: {integrity: sha512-YBg3dUicDpDWFCGttmvMbVyS9ydjntwEjwXRj2KBFwSB8SxmGcudo1yb8FW5+M/G86aS8x828ujnzUVdsLjs9g==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      less: '*'
+      sass: '*'
+      stylus: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      esbuild: 0.15.7
+      postcss: 8.4.16
+      resolve: 1.22.1
+      rollup: 2.78.1
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /vite/3.1.0_sass@1.53.0:

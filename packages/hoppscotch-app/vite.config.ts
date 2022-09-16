@@ -49,8 +49,6 @@ export default defineConfig({
     port: 3000,
   },
   optimizeDeps: {
-    include: ["@hoppscotch/data"],
-
     esbuildOptions: {
       // Node.js global to browser globalThis
       define: {
@@ -69,7 +67,7 @@ export default defineConfig({
   build: {
     sourcemap: true,
     commonjsOptions: {
-      include: ["@hoppscotch/data"],
+      exclude: ["paho-mqtt"],
     },
     rollupOptions: {
       plugins: [NodePolyfills()],
