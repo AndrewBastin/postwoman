@@ -6,7 +6,7 @@
     "dev": "pnpm exec npm-run-all -p -l dev:*",
     "dev:vite": "vite",
     "dev:gql-codegen": "graphql-codegen --config gql-codegen.yml --watch",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "lint": "eslint src --ext .ts,.js,.vue --ignore-path .gitignore .",
     "prod-lint": "HOPP_LINT_FOR_PROD=true pnpm run lint",
     "lintfix": "eslint --fix src --ext .ts,.js,.vue --ignore-path .gitignore .",
