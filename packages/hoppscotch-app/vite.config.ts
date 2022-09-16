@@ -159,6 +159,12 @@ export default defineConfig({
           customCollections: ["hopp", "auth", "brands"],
         }),
       ],
+      types: [
+        {
+          from: "vue-tippy",
+          names: ["Tippy"],
+        },
+      ],
     }),
     Icons({
       customCollections: {
