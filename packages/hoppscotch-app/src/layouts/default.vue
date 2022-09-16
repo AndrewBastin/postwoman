@@ -118,6 +118,8 @@ const spacerClass = computed(() => {
     !expandNavigation.value
   )
     return "spacer-expand"
+
+  return ""
 })
 
 defineActionHandler("navigation.jump.rest", () => {

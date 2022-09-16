@@ -150,7 +150,7 @@ export function initAuth() {
     if (!wasLoggedIn && user) {
       authEvents$.next({
         event: "login",
-        user: currentUser$.value!!,
+        user: currentUser$.value!,
       })
     } else if (wasLoggedIn && !user) {
       // User was found before, but now is not there (logout happened)
@@ -167,7 +167,7 @@ export function initAuth() {
       authEvents$.next({
         event: "authTokenUpdate",
         newToken: authIdToken$.value,
-        user: currentUser$.value!!, // Force not-null because user is defined
+        user: currentUser$.value!, // Force not-null because user is defined
       })
 
       setLocalConfig("login_state", JSON.stringify(user))
