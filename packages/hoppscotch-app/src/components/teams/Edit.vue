@@ -23,7 +23,7 @@
           </label>
           <div class="flex">
             <ButtonSecondary
-              :icon="IconUserMinus"
+              :icon="IconUserPlus"
               :label="t('team.invite')"
               filled
               @click="
