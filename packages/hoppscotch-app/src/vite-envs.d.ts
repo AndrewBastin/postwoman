@@ -19,6 +19,9 @@ interface ImportMetaEnv {
 
   readonly VITE_BACKEND_GQL_URL: string
   readonly VITE_BACKEND_WS_URL: string
+
+  readonly VITE_SENTRY_DSN?: string
+  readonly VITE_SENTRY_ENVIRONMENT?: string
 }
 
 interface ImportMeta {

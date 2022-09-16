@@ -12,6 +12,12 @@ export type HoppModule = {
   onVueAppInit?: (app: App) => void
 
   /**
+   * Called when the router is done initializing.
+   * Used if a module requires access to the router instance
+   */
+  onRouterInit?: (app: App, router: Router) => void
+
+  /**
    * Called when the root component (App.vue) is running setup.
    * This function is generally called last in the lifecycle.
    * This function executes with a component setup context, so you can

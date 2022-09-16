@@ -167,6 +167,7 @@ export default defineConfig({
       ],
     }),
     Icons({
+      compiler: "vue3",
       customCollections: {
         hopp: FileSystemIconLoader("./assets/icons"),
         auth: FileSystemIconLoader("./assets/icons/auth"),

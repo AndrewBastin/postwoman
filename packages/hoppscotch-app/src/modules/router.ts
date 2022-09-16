@@ -31,5 +31,7 @@ export default <HoppModule>{
     })
 
     app.use(router)
+
+    HOPP_MODULES.forEach((mod) => mod.onRouterInit?.(app, router))
   },
 }
