@@ -9,6 +9,9 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist"
   },
   "include": ["src/*.ts"]
 }
