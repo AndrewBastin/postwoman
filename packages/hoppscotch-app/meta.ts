@@ -13,7 +13,7 @@ export const APP_INFO = {
   },
 } as const
 
-export const META_TAGS = [
+export const META_TAGS = (env: Record<string, string>) => [
   {
     name: "keywords",
     content: APP_INFO.keywords,
@@ -32,7 +32,7 @@ export const META_TAGS = [
   },
   {
     itemprop: "image",
-    content: `${process.env.BASE_URL}/banner.png`,
+    content: `${env.VITE_BASE_URL}/banner.png`,
   },
   // Add to homescreen for Chrome on Android. Fallback for PWA (handled by nuxt)
   {

@@ -1,4 +1,4 @@
-import { defineConfig } from "vite"
+import { defineConfig, loadEnv } from "vite"
 import { META_TAGS } from "./meta"
 import HtmlConfig from "vite-plugin-html-config"
 import Vue from "@vitejs/plugin-vue"
@@ -15,6 +15,8 @@ import IconResolver from "unplugin-icons/resolver"
 import { FileSystemIconLoader } from "unplugin-icons/loaders"
 import * as path from "path"
 import { VitePluginFonts } from "vite-plugin-fonts"
+
+const ENV = loadEnv("development", process.cwd())
 
 export const APP_INFO = {
   name: "Hoppscotch",
@@ -75,7 +77,7 @@ export default defineConfig({
       },
     }),
     HtmlConfig({
-      metas: META_TAGS,
+      metas: META_TAGS(ENV),
     }),
     Vue(),
     Pages({
