@@ -13,12 +13,14 @@
         ></div>
       </div>
     </Transition>
-    <aside
-      class="fixed top-0 right-0 z-30 flex flex-col h-full max-w-full overflow-auto transition duration-300 ease-in-out transform bg-primary w-96"
-      :class="show ? 'shadow-xl translate-x-0' : 'translate-x-full'"
-    >
-      <slot name="content"></slot>
-    </aside>
+    <Transition name="slide" appear>
+      <aside
+        v-if="show"
+        class="fixed top-0 right-0 z-30 flex flex-col h-full max-w-full overflow-auto bg-primary w-96 shadow-xl"
+      >
+        <slot name="content"></slot>
+      </aside>
+    </Transition>
   </div>
 </template>
 

@@ -76,9 +76,21 @@ body {
   @apply transition-opacity;
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   @apply opacity-0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  @apply transition;
+  @apply duration-300;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  @apply transform;
+  @apply translate-x-full;
 }
 
 .svg-icons {
