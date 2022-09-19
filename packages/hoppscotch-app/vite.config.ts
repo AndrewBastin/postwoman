@@ -89,7 +89,7 @@ export default defineConfig({
       defaultLayout: "default",
     }),
     VueI18n({
-      runtimeOnly: true,
+      runtimeOnly: false,
       compositionOnly: true,
       include: [path.resolve(__dirname, "locales")],
     }),
