@@ -23,14 +23,12 @@
             @click.prevent="linewrapEnabled = !linewrapEnabled"
           />
           <ButtonSecondary
-            ref="downloadResponse"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
             :icon="downloadResponseIcon"
             @click="downloadResponse"
           />
           <ButtonSecondary
-            ref="copyResponseButton"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
             :icon="copyResponseIcon"

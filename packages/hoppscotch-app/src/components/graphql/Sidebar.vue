@@ -6,11 +6,7 @@
     render-inactive-tabs
   >
     <SmartTab :id="'history'" :icon="IconClock" :label="`${t('tab.history')}`">
-      <History
-        ref="graphqlHistoryComponent"
-        :page="'graphql'"
-        @use-history="handleUseHistory"
-      />
+      <History :page="'graphql'" @use-history="handleUseHistory" />
     </SmartTab>
     <SmartTab
       :id="'collections'"
@@ -152,14 +148,12 @@
             @click.prevent="linewrapEnabled = !linewrapEnabled"
           />
           <ButtonSecondary
-            ref="downloadSchema"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.download_file')"
             :icon="downloadSchemaIcon"
             @click="downloadSchema"
           />
           <ButtonSecondary
-            ref="copySchemaCode"
             v-tippy="{ theme: 'tooltip' }"
             :title="t('action.copy')"
             :icon="copySchemaIcon"

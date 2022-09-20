@@ -4,7 +4,6 @@
       <AppPowerSearchEntry
         v-for="(shortcut, shortcutIndex) in searchResults"
         :key="`shortcut-${shortcutIndex}`"
-        :ref="`item-${shortcutIndex}`"
         :active="shortcutIndex === selectedEntry"
         :shortcut="shortcut.item"
         @action="emit('action', shortcut.item.action)"

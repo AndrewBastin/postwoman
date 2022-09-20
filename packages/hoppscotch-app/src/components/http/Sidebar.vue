@@ -6,7 +6,7 @@
     render-inactive-tabs
   >
     <SmartTab :id="'history'" :icon="IconClock" :label="`${t('tab.history')}`">
-      <History ref="historyComponent" :page="'rest'" />
+      <History :page="'rest'" />
     </SmartTab>
     <SmartTab
       :id="'collections'"

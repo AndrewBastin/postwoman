@@ -7,13 +7,7 @@
         <label class="font-semibold text-secondaryLight">
           {{ t("request.content_type") }}
         </label>
-        <tippy
-          ref="contentTypeOptions"
-          interactive
-          trigger="click"
-          theme="popover"
-          arrow
-        >
+        <tippy interactive trigger="click" theme="popover" arrow>
           <span class="select-wrapper">
             <ButtonSecondary
               :label="contentType || t('state.none')"

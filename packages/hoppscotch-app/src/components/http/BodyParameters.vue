@@ -101,7 +101,6 @@
             <label :for="`attachment${index}`" class="p-0">
               <input
                 :id="`attachment${index}`"
-                :ref="`attachment${index}`"
                 :name="`attachment${index}`"
                 type="file"
                 multiple

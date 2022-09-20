@@ -87,7 +87,6 @@
         />
         <ButtonSecondary
           v-if="contentType && contentType == 'JSON'"
-          ref="prettifyRequest"
           v-tippy="{ theme: 'tooltip' }"
           :title="t('action.prettify')"
           :icon="prettifyIcon"

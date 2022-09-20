@@ -28,7 +28,6 @@
               @click="runQuery()"
             />
             <ButtonSecondary
-              ref="saveRequest"
               v-tippy="{ theme: 'tooltip', delay: [500, 20], allowHTML: true }"
               :title="`${t(
                 'request.save'
@@ -93,7 +92,6 @@
               @click="clearGQLVariables()"
             />
             <ButtonSecondary
-              ref="prettifyRequest"
               v-tippy="{ theme: 'tooltip' }"
               :title="t('action.prettify')"
               :icon="prettifyVariablesIcon"
