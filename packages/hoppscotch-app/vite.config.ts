@@ -83,6 +83,7 @@ export default defineConfig({
     Pages({
       routeStyle: "nuxt",
       dirs: "src/pages",
+      importMode: "async",
     }),
     Layouts({
       layoutsDirs: "./src/layouts",
