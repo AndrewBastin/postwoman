@@ -312,11 +312,14 @@ const graphqlTypes = useReadonlyStream(
   []
 )
 
-const downloadSchemaIcon = refAutoReset<IconDownload | IconCheck>(
+const downloadSchemaIcon = refAutoReset<typeof IconDownload | typeof IconCheck>(
   IconDownload,
   1000
 )
-const copySchemaIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
+const copySchemaIcon = refAutoReset<typeof IconCopy | typeof IconCheck>(
+  IconCopy,
+  1000
+)
 
 const graphqlFieldsFilterText = ref("")
 

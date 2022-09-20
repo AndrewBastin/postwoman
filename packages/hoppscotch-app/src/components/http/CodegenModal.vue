@@ -134,7 +134,10 @@ const request = ref(getRESTRequest())
 const codegenType = ref<CodegenName>("shell-curl")
 const errorState = ref(false)
 
-const copyIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
+const copyIcon = refAutoReset<typeof IconCopy | typeof IconCheck>(
+  IconCopy,
+  1000
+)
 
 const requestCode = computed(() => {
   const aggregateEnvs = getAggregateEnvs()

@@ -86,7 +86,10 @@ const requestMethodLabels = {
 
 const timeStampRef = ref()
 
-const copyIconRefs = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
+const copyIconRefs = refAutoReset<typeof IconCopy | typeof IconCheck>(
+  IconCopy,
+  1000
+)
 
 const parseShortcodeRequest = computed(() =>
   pipe(props.shortcode.request, JSON.parse, translateToNewRequest)

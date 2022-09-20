@@ -111,11 +111,13 @@ useCodemirror(
   })
 )
 
-const downloadResponseIcon = refAutoReset<IconDownload | IconCheck>(
-  IconDownload,
+const downloadResponseIcon = refAutoReset<
+  typeof IconDownload | typeof IconCheck
+>(IconDownload, 1000)
+const copyResponseIcon = refAutoReset<typeof IconCopy | typeof IconCheck>(
+  IconCopy,
   1000
 )
-const copyResponseIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
 
 const copyResponse = () => {
   copyToClipboard(responseString.value!)

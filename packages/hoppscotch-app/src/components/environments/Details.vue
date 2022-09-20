@@ -178,7 +178,10 @@ const vars = ref<EnvironmentVariable[]>([
   { id: idTicker.value++, env: { key: "", value: "" } },
 ])
 
-const clearIcon = refAutoReset<IconTrash2 | IconCheck>(IconTrash2, 1000)
+const clearIcon = refAutoReset<typeof IconTrash2 | typeof IconCheck>(
+  IconTrash2,
+  1000
+)
 
 const globalVars = useReadonlyStream(globalEnv$, [])
 

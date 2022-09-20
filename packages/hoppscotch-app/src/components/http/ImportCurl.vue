@@ -97,14 +97,17 @@ const handleImport = () => {
   hideModal()
 }
 
-const pasteIcon = refAutoReset<IconClipboard | IconCheck>(IconClipboard, 1000)
+const pasteIcon = refAutoReset<typeof IconClipboard | typeof IconCheck>(
+  IconClipboard,
+  1000
+)
 
 const handlePaste = async () => {
   try {
     const text = await navigator.clipboard.readText()
     if (text) {
       curl.value = text
-      pasteIcon.value = "check"
+      pasteIcon.value = IconCheck
     }
   } catch (e) {
     console.error("Failed to copy: ", e)

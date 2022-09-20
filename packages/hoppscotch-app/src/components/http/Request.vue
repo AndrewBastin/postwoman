@@ -417,10 +417,9 @@ const clearContent = () => {
   resetRESTRequest()
 }
 
-const copyLinkIcon = refAutoReset<IconShare2 | IconCopy | IconCheck>(
-  hasNavigatorShare ? IconShare2 : IconCopy,
-  1000
-)
+const copyLinkIcon = refAutoReset<
+  typeof IconShare2 | typeof IconCopy | typeof IconCheck
+>(hasNavigatorShare ? IconShare2 : IconCopy, 1000)
 
 const shareLink = ref<string | null>("")
 const fetchingShareLink = ref(false)

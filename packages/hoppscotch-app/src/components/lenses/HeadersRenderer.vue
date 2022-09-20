@@ -41,7 +41,10 @@ const props = defineProps<{
   headers: Array<HoppRESTHeader>
 }>()
 
-const copyIcon = refAutoReset<IconCopy | IconCheck>(IconCopy, 1000)
+const copyIcon = refAutoReset<typeof IconCopy | typeof IconCheck>(
+  IconCopy,
+  1000
+)
 
 const copyHeaders = () => {
   copyToClipboard(JSON.stringify(props.headers))
