@@ -130,6 +130,7 @@ export default defineConfig({
       registerType: "prompt",
       workbox: {
         cleanupOutdatedCaches: true,
+        maximumFileSizeToCacheInBytes: 4194304,
       },
     }),
     VitePluginFonts({
