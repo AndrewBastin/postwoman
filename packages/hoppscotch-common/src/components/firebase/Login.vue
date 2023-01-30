@@ -180,7 +180,6 @@ export default defineComponent({
 
       try {
         await platform.auth.signInUserWithGoogle()
-        this.showLoginSuccess()
       } catch (e) {
         console.error(e)
         /*
@@ -198,7 +197,7 @@ export default defineComponent({
       const result = await platform.auth.signInUserWithGithub()
 
       if (result.type === "success") {
-        this.showLoginSuccess()
+        // this.showLoginSuccess()
       } else if (result.type === "account-exists-with-different-cred") {
         this.toast.info(`${this.t("auth.account_exists")}`, {
           duration: 0,
@@ -225,7 +224,7 @@ export default defineComponent({
 
       try {
         await platform.auth.signInUserWithMicrosoft()
-        this.showLoginSuccess()
+        // this.showLoginSuccess()
       } catch (e) {
         console.error(e)
         /*

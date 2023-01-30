@@ -1,3 +1,4 @@
+import { ClientOptions } from "@urql/core"
 import { Observable } from "rxjs"
 
 /**
@@ -117,6 +118,12 @@ export type AuthPlatformDef = {
   onBackendGQLClientShouldReconnect: (func: () => void) => void
 
   /**
+   * provide the client options for GqlClient
+   * @returns
+   */
+  getGQLClientOptions?: () => ClientOptions
+
+  /**
    * Returns the string content that should be returned when the user selects to
    * copy auth token from Developer Options.
    *
@@ -147,6 +154,12 @@ export type AuthPlatformDef = {
    * @returns Whether this is valid or not (NOTE: This is just a structural check not whether this is accepted (hence, not async))
    */
   isSignInWithEmailLink: (url: string) => boolean
+
+  /**
+   * TODO: add comments
+   */
+  processMagicLink: () => Promise<void>
+
   /**
    * Sends email verification email (the checkmark besides the email)
    * @returns When the check has succeed and completed
