@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app"
 import { platform } from "~/platform"
 import { initAnalytics } from "./analytics"
-import { initHistory } from "./history"
 import { initSettings } from "./settings"
 
 const firebaseConfig = {
@@ -25,7 +24,7 @@ export function initializeFirebase() {
       platform.auth.performAuthInit()
       initSettings()
       platform.sync.collections.initCollectionsSync()
-      initHistory()
+      platform.sync.history.initHistorySync()
       platform.sync.environments.initEnvironmentsSync()
       initAnalytics()
 
