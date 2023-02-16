@@ -129,6 +129,8 @@ const dispatchers = defineDispatchers({
 
 export const settingsStore = new DispatchingStore(defaultSettings, dispatchers)
 
+export type SettingsStoreDef = typeof settingsStore
+
 /**
  * An observable value to make avail all the state information at once
  */

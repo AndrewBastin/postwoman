@@ -549,8 +549,10 @@ importers:
   packages/hoppscotch-web:
     specifiers:
       '@hoppscotch/common': workspace:^
+      '@hoppscotch/data': workspace:^
       '@intlify/vite-plugin-vue-i18n': ^6.0.1
       '@rushstack/eslint-patch': ^1.1.4
+      '@types/lodash-es': ^4.17.6
       '@typescript-eslint/eslint-plugin': ^5.19.0
       '@typescript-eslint/parser': ^5.19.0
       '@vitejs/plugin-legacy': ^2.3.0
@@ -562,6 +564,7 @@ importers:
       eslint-plugin-prettier: ^4.2.1
       eslint-plugin-vue: ^9.5.1
       firebase: ^9.8.4
+      lodash-es: ^4.17.21
       process: ^0.11.10
       rxjs: ^7.5.5
       stream-browserify: ^3.0.0
@@ -585,8 +588,10 @@ importers:
       workbox-window: ^6.5.4
     dependencies:
       '@hoppscotch/common': link:../hoppscotch-common
+      '@hoppscotch/data': link:../hoppscotch-data
       buffer: 6.0.3
       firebase: 9.8.4
+      lodash-es: 4.17.21
       process: 0.11.10
       rxjs: 7.5.5
       stream-browserify: 3.0.0
@@ -596,6 +601,7 @@ importers:
     devDependencies:
       '@intlify/vite-plugin-vue-i18n': 6.0.1_vite@3.2.4
       '@rushstack/eslint-patch': 1.1.4
+      '@types/lodash-es': 4.17.6
       '@typescript-eslint/eslint-plugin': 5.30.6_tzuem642amzz36tmpo2cu7h24a
       '@typescript-eslint/parser': 5.30.6_tqvwk7sh3taph5wf7sr5z34mke
       '@vitejs/plugin-legacy': 2.3.0_vite@3.2.4
@@ -3454,8 +3460,8 @@ packages:
       - supports-color
     dev: true
 
-  /@intlify/bundle-utils/3.4.0:
-    resolution: {integrity: sha512-2UQkqiSAOSPEHMGWlybqWm4G2K0X+FyYho5AwXz6QklSX1EY5EDmOSxZmwscn2qmKBnp6OYsme5kUrnN9xrWzQ==}
+  /@intlify/bundle-utils/4.0.0:
+    resolution: {integrity: sha512-klXrYT9VXyKEXsD6UY3pShg0O5MPC07n0TZ5RrSs5ry6T1eZVolIFGJi9c3qcDrh1qjJxgikRnPBmD7qGDqbjw==}
     engines: {node: '>= 12'}
     peerDependencies:
       petite-vue-i18n: '*'
@@ -3473,8 +3479,8 @@ packages:
       yaml-eslint-parser: 0.3.2
     dev: true
 
-  /@intlify/bundle-utils/3.4.0_vue-i18n@9.2.2:
-    resolution: {integrity: sha512-2UQkqiSAOSPEHMGWlybqWm4G2K0X+FyYho5AwXz6QklSX1EY5EDmOSxZmwscn2qmKBnp6OYsme5kUrnN9xrWzQ==}
+  /@intlify/bundle-utils/4.0.0_vue-i18n@9.2.2:
+    resolution: {integrity: sha512-klXrYT9VXyKEXsD6UY3pShg0O5MPC07n0TZ5RrSs5ry6T1eZVolIFGJi9c3qcDrh1qjJxgikRnPBmD7qGDqbjw==}
     engines: {node: '>= 12'}
     peerDependencies:
       petite-vue-i18n: '*'
@@ -3547,7 +3553,7 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/bundle-utils': 3.4.0_vue-i18n@9.2.2
+      '@intlify/bundle-utils': 4.0.0_vue-i18n@9.2.2
       '@intlify/shared': 9.3.0-beta.16
       '@rollup/pluginutils': 4.2.1
       debug: 4.3.4
@@ -3574,13 +3580,13 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/bundle-utils': 3.4.0
+      '@intlify/bundle-utils': 4.0.0
       '@intlify/shared': 9.3.0-beta.16
       '@rollup/pluginutils': 4.2.1
       debug: 4.3.4
       fast-glob: 3.2.11
       source-map: 0.6.1
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4997,7 +5003,7 @@ packages:
       magic-string: 0.26.7
       regenerator-runtime: 0.13.10
       systemjs: 6.13.0
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
 
   /@vitejs/plugin-vue/3.1.0_vite@3.1.4+vue@3.2.37:
     resolution: {integrity: sha512-fmxtHPjSOEIRg6vHYDaem+97iwCUg/uSIaTzp98lhELt2ISOQuDo2hbkBdXod0g15IhfPMQmAxh4heUks2zvDA==}
@@ -5017,7 +5023,7 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
       vue: 3.2.45
     dev: true
 
@@ -13324,7 +13330,7 @@ packages:
     dependencies:
       acorn: 8.8.0
       chokidar: 3.5.3
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.4.4
     dev: true
@@ -13372,7 +13378,7 @@ packages:
     dependencies:
       acorn: 8.8.0
       chokidar: 3.5.3
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.4.4
     dev: true
@@ -13616,7 +13622,7 @@ packages:
       vite: ^2.0.0 || ^3.0.0
     dependencies:
       fast-glob: 3.2.11
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
     dev: true
 
   /vite-plugin-html-config/1.0.10_vite@3.1.4:
@@ -13634,7 +13640,7 @@ packages:
     peerDependencies:
       vite: '>=2.0.0'
     dependencies:
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
     dev: true
 
   /vite-plugin-inspect/0.7.4_vite@3.1.4:
@@ -13666,7 +13672,7 @@ packages:
       kolorist: 1.5.1
       sirv: 2.0.2
       ufo: 0.8.5
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -13885,7 +13891,7 @@ packages:
       '@windicss/plugin-utils': 1.8.8
       debug: 4.3.4
       kolorist: 1.5.1
-      vite: 3.2.4_sass@1.53.0
+      vite: 3.2.4
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
@@ -13949,7 +13955,6 @@ packages:
       rollup: 2.79.1
     optionalDependencies:
       fsevents: 2.3.2
-    dev: true
 
   /vite/3.2.4_sass@1.53.0:
     resolution: {integrity: sha512-Z2X6SRAffOUYTa+sLy3NQ7nlHFU100xwanq1WDwqaiFiCe+25zdxP1TfCS5ojPV2oDDcXudHIoPnI1Z/66B7Yw==}

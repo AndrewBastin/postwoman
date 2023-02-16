@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app"
+import {
+  graphqlCollectionStore,
+  restCollectionStore,
+} from "~/newstore/collections"
+import { settingsStore } from "~/newstore/settings"
 import { platform } from "~/platform"
 import { initAnalytics } from "./analytics"
-import { initCollections } from "./collections"
 import { initEnvironments } from "./environments"
 import { initHistory } from "./history"
 import { initSettings } from "./settings"
@@ -26,7 +30,13 @@ export function initializeFirebase() {
 
       platform.auth.performAuthInit()
       initSettings()
-      initCollections()
+
+      platform.sync.collections.performCollectionsSyncInit(
+        restCollectionStore,
+        graphqlCollectionStore,
+        settingsStore
+      )
+
       initHistory()
       initEnvironments()
       initAnalytics()

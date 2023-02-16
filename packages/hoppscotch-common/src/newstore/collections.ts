@@ -596,6 +596,9 @@ export const graphqlCollectionStore = new DispatchingStore(
   gqlCollectionDispatchers
 )
 
+export type RESTCollectionStoreDef = typeof restCollectionStore
+export type GraphqlCollectionStoreDef = typeof graphqlCollectionStore
+
 export function setRESTCollections(entries: HoppCollection<HoppRESTRequest>[]) {
   restCollectionStore.dispatch({
     dispatcher: "setCollections",
