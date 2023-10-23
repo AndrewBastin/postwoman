@@ -466,6 +466,9 @@ importers:
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
+      cookie-es:
+        specifier: ^1.0.0
+        version: 1.0.0
       dioc:
         specifier: workspace:^
         version: link:../dioc
@@ -538,6 +541,12 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
+      set-cookie-parser:
+        specifier: ^2.6.0
+        version: 2.6.0
+      set-cookie-parser-es:
+        specifier: ^1.0.5
+        version: 1.0.5
       socket.io-client-v2:
         specifier: npm:socket.io-client@^2.4.0
         version: /socket.io-client@2.4.0
@@ -11313,6 +11322,10 @@ packages:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
     dev: true
 
+  /cookie-es@1.0.0:
+    resolution: {integrity: sha512-mWYvfOLrfEc996hlKcdABeIiPHUPC6DM2QYZdGGOvhOTbA3tjm2eBwqlJpoFdjC89NI4Qt6h0Pu06Mp+1Pj5OQ==}
+    dev: false
+
   /cookie-parser@1.4.6:
     resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==}
     engines: {node: '>= 0.8.0'}
@@ -19782,6 +19795,14 @@ packages:
 
   /set-blocking@2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
+
+  /set-cookie-parser-es@1.0.5:
+    resolution: {integrity: sha512-nU27kVj4O6+a1wOOWB6uezxB9SWLCjEmYJr6eRBmkAZfOx/TBg2p0jkCl1dMgeYtmFRAJSGe4u9VN7dwPu9PRQ==}
+    dev: false
+
+  /set-cookie-parser@2.6.0:
+    resolution: {integrity: sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==}
+    dev: false
 
   /set-function-name@2.0.1:
     resolution: {integrity: sha512-tMNCiqYVkXIZgc2Hnoy2IvC/f8ezc5koaRFkCjrpWzGpCd3qbZXPzVy9MAZzK1ch/X0jvSkojys3oqJN0qCmdA==}
