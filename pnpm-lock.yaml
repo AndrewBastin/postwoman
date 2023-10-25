@@ -616,6 +616,9 @@ importers:
       yargs-parser:
         specifier: ^21.1.1
         version: 21.1.1
+      zod:
+        specifier: ^3.22.2
+        version: 3.22.2
     devDependencies:
       '@esbuild-plugins/node-globals-polyfill':
         specifier: ^0.2.3
@@ -23930,4 +23933,3 @@ packages:
 
   /zod@3.22.2:
     resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
-    dev: true
