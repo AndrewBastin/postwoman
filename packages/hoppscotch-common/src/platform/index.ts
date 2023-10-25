@@ -26,6 +26,12 @@ export type PlatformDef = {
   additionalInspectors?: InspectorsPlatformDef
   platformFeatureFlags: {
     exportAsGIST: boolean
+
+    /**
+     *  Whether the platform supports cookies (affects whether the cookies footer item is shown)
+     *  If a value is not given, then the value is assumed to be false
+     */
+    cookiesEnabled?: boolean
   }
 }
 
