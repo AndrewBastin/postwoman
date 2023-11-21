@@ -12,15 +12,22 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { GithubStrategy } from './strategies/github.strategy';
 import { MicrosoftStrategy } from './strategies/microsoft.strategy';
 import { AuthProvider, authProviderCheck } from './helper';
+import { ConfigModule } from 'src/config/config.module';
+import { ConfigService } from 'src/config/config.service';
 
 @Module({
   imports: [
+    ConfigModule,
     PrismaModule,
     UserModule,
     MailerModule,
     PassportModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get('JWT_SECRET'),
+      }),
     }),
   ],
   providers: [

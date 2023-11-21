@@ -20,13 +20,17 @@ import { ShortcodeModule } from './shortcode/shortcode.module';
 import { COOKIES_NOT_FOUND } from './errors';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
+import { ConfigService } from './config/config.service';
+import { ConfigModule } from './config/config.module';
 
 @Module({
   imports: [
+    ConfigModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       buildSchemaOptions: {
         numberScalarMode: 'integer',
       },
+      // Not resolved through config module as this is a more runtime thing
       playground: process.env.PRODUCTION !== 'true',
       autoSchemaFile: true,
       installSubscriptionHandlers: true,
@@ -57,12 +61,18 @@ import { AppController } from './app.controller';
       }),
       driver: ApolloDriver,
     }),
-    ThrottlerModule.forRoot([
-      {
-        ttl: +process.env.RATE_LIMIT_TTL,
-        limit: +process.env.RATE_LIMIT_MAX,
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        return [
+          {
+            ttl: +configService.get('RATE_LIMIT_TTL'),
+            limit: +configService.get('RATE_LIMIT_MAX'),
+          },
+        ];
       },
-    ]),
+    }),
     UserModule,
     AuthModule,
     AdminModule,
