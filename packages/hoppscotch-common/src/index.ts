@@ -5,6 +5,9 @@ import { performMigrations } from "./helpers/migrations"
 import { initializeApp } from "./helpers/app"
 import { initBackendGQLClient } from "./helpers/backend/GQLClient"
 import { HOPP_MODULES } from "@modules/."
+import { getService } from "./modules/dioc"
+import { TestWorkspaceProviderService } from "./services/new-workspace/providers/test.workspace"
+import { PersonalWorkspaceProviderService } from "./services/new-workspace/providers/personal.workspace"
 
 import "../assets/scss/tailwind.scss"
 import "../assets/themes/themes.scss"
@@ -26,6 +29,10 @@ export function createHoppApp(el: string | Element, platformDef: PlatformDef) {
   initializeApp()
   setupLocalPersistence()
   performMigrations()
+
+  // TODO: Remove this
+  getService(TestWorkspaceProviderService)
+  getService(PersonalWorkspaceProviderService)
 
   HOPP_MODULES.forEach((mod) => mod.onVueAppInit?.(app))
   platformDef.addedHoppModules?.forEach((mod) => mod.onVueAppInit?.(app))

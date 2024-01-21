@@ -173,6 +173,10 @@ declare module 'vue' {
     LensesRenderersVideoLensRenderer: typeof import('./components/lenses/renderers/VideoLensRenderer.vue')['default']
     LensesRenderersXMLLensRenderer: typeof import('./components/lenses/renderers/XMLLensRenderer.vue')['default']
     LensesResponseBodyRenderer: typeof import('./components/lenses/ResponseBodyRenderer.vue')['default']
+    NewCollections: typeof import('./components/new-collections/index.vue')['default']
+    NewCollectionsRest: typeof import('./components/new-collections/rest/index.vue')['default']
+    NewCollectionsRestCollection: typeof import('./components/new-collections/rest/Collection.vue')['default']
+    NewCollectionsRestRequest: typeof import('./components/new-collections/rest/Request.vue')['default']
     ProfileShortcode: typeof import('./components/profile/Shortcode.vue')['default']
     ProfileShortcodes: typeof import('./components/profile/Shortcodes.vue')['default']
     ProfileUserDelete: typeof import('./components/profile/UserDelete.vue')['default']
@@ -224,6 +228,8 @@ declare module 'vue' {
     TeamsTeam: typeof import('./components/teams/Team.vue')['default']
     Tippy: typeof import('vue-tippy')['Tippy']
     WorkspaceCurrent: typeof import('./components/workspace/Current.vue')['default']
+    WorkspacePersonalWorkspaceSelector: typeof import('./components/workspace/PersonalWorkspaceSelector.vue')['default']
     WorkspaceSelector: typeof import('./components/workspace/Selector.vue')['default']
+    WorkspaceTestWorkspaceSelector: typeof import('./components/workspace/TestWorkspaceSelector.vue')['default']
   }
 }

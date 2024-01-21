@@ -110,8 +110,8 @@
             <HoppButtonSecondary
               v-tippy="{ theme: 'tooltip' }"
               :title="t('workspace.change')"
-              :label="mdAndLarger ? workspaceName : ``"
-              :icon="workspace.type === 'personal' ? IconUser : IconUsers"
+              :label="mdAndLarger ? activeWorkspaceName : ``"
+              :icon="activeWorkspaceIcon"
               class="select-wrapper !focus-visible:text-blue-600 !hover:text-blue-600 rounded border border-blue-600/25 bg-blue-500/[.15] py-[0.4375rem] pr-8 !text-blue-500 hover:border-blue-800/50 hover:bg-blue-400/10 focus-visible:border-blue-800/50 focus-visible:bg-blue-400/10"
             />
             <template #content="{ hide }">
@@ -271,6 +271,7 @@ import {
   BannerContent,
   BANNER_PRIORITY_HIGH,
 } from "~/services/banner.service"
+import { NewWorkspaceService } from "~/services/new-workspace"
 
 const t = useI18n()
 const toast = useToast()
@@ -370,6 +371,20 @@ watch(
     }
   }
 )
+
+const newWorkspaceService = useService(NewWorkspaceService)
+
+const activeWorkspaceName = computed(() => {
+  if (newWorkspaceService.activeWorkspaceHandle.value?.value.type === "ok") {
+    return newWorkspaceService.activeWorkspaceHandle.value?.value.data.name
+  }
+
+  return t("workspace.no_workspace")
+})
+
+const activeWorkspaceIcon = computed(() => {
+  return newWorkspaceService.activeWorkspaceDecor.value?.value.headerCurrentIcon
+})
 
 const showModalInvite = ref(false)
 const showModalEdit = ref(false)

@@ -114,9 +114,7 @@ const highlightNode = ref(false)
 /**
  * Fetch the child nodes from the adapter by passing the node id of the current node
  */
-const childNodes = computed(
-  () => props.adapter.getChildren(props.nodeItem.id).value
-)
+const childNodes = props.adapter.getChildren(props.nodeItem.id)
 
 const toggleNodeChildren = () => {
   if (!childrenRendered.value) childrenRendered.value = true
