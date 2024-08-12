@@ -6,6 +6,13 @@
     render-inactive-tabs
   >
     <HoppSmartTab
+      :id="'collections-new'"
+      :icon="IconFolder"
+      :label="`${t('tab.collections')}`"
+    >
+      <NewWorkspaceCollections />
+    </HoppSmartTab>
+    <HoppSmartTab
       :id="'collections'"
       :icon="IconFolder"
       :label="`${t('tab.collections')}`"
@@ -68,6 +75,7 @@ const t = useI18n()
 type RequestOptionTabs =
   | "history"
   | "collections"
+  | "collections-new"
   | "env"
   | "share-request"
   | "codegen"

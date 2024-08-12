@@ -195,6 +195,7 @@ declare module 'vue' {
     ModalsNativeCACertificates: typeof import('./../../hoppscotch-selfhost-desktop/src/components/modals/NativeCACertificates.vue')['default']
     ModalsNativeClientCertificates: typeof import('./../../hoppscotch-selfhost-desktop/src/components/modals/NativeClientCertificates.vue')['default']
     ModalsNativeClientCertsAdd: typeof import('./../../hoppscotch-selfhost-desktop/src/components/modals/NativeClientCertsAdd.vue')['default']
+    NewWorkspaceCollections: typeof import('./components/new-workspace/collections/index.vue')['default']
     ProfileUserDelete: typeof import('./components/profile/UserDelete.vue')['default']
     RealtimeCommunication: typeof import('./components/realtime/Communication.vue')['default']
     RealtimeConnectionConfig: typeof import('./components/realtime/ConnectionConfig.vue')['default']
