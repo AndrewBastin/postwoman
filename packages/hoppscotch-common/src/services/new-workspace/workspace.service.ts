@@ -1,3 +1,4 @@
+import { HoppRESTRequest } from "@hoppscotch/data"
 import { Service } from "dioc"
 import { reactive } from "vue"
 import { useReadonlyStream } from "~/composables/stream"
@@ -54,6 +55,8 @@ export interface WorkspaceProvider {
   getRESTCollectionChildren(
     handle: RESTCollectionHandle
   ): Resource<RESTCollectionChildren>
+
+  getRESTRequest(handle: RESTRequestHandle): Resource<HoppRESTRequest>
 }
 
 export const PERSONAL_WORKSPACE_HANDLE = "personal" as WorkspaceHandle
@@ -117,8 +120,118 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
             this.state.value.state.length - dispatch.payload.entries.length - 1
           )
           break
+
+        case "removeFolder":
+          this.handleFolderRemove(dispatch.payload.path)
+          break
+
+        case "removeCollection":
+          this.handleFolderRemove(`${dispatch.payload.collectionIndex}`)
+          break
+
+        case "removeRequest":
+          this.handleRequestRemove(
+            dispatch.payload.path,
+            dispatch.payload.requestIndex
+          )
+          break
       }
     })
+  }
+
+  private handleRequestRemove(folderPath: string, requestIndex: number) {
+    // The game plan for request moves
+    // 1. We remove the request handle from the map
+    // 2. We shift up the indexes of the requests in the same folder that come after the removed request
+
+    const reqHandle = this.resolveRESTRequestHandleFromFolderPath(
+      `${folderPath}/${requestIndex}`
+    )
+    const [parentHandle, indexInParent] =
+      this.requestHandleToParentIndex.get(reqHandle)!
+
+    // Remove the request handle from the map
+    this.requestHandleToParentIndex.delete(reqHandle)
+
+    // Shift up the indexes of the requests in the same folder that come after the removed
+    for (const [
+      checkedHandle,
+      [checkedParentHandle, checkedIndexInParent],
+    ] of this.requestHandleToParentIndex.entries()) {
+      if (
+        checkedParentHandle === parentHandle &&
+        checkedIndexInParent > indexInParent
+      ) {
+        this.requestHandleToParentIndex.set(checkedHandle, [
+          checkedParentHandle,
+          checkedIndexInParent - 1,
+        ])
+      }
+    }
+  }
+
+  private handleFolderRemove(folderPath: string) {
+    // The game plan for folder removes
+    // 1. We update the parent index of all the siblings of the folder because all folders after the removed will be shifted up 1
+    // 2. We remove the immediate children folder of the folder
+    // 3. We remove the folder handle from the map
+    //
+    // NOTE: We don't remove the grand children of the folder because traversing for them will be a more expensive operation
+    // because we would have to do [n = depth] passes over the map to clear them all out. Instead they will be removed when a
+    // getter tries to resolve their or their children's handles, when they try to build up the folder paths from the handles
+    // (see: resolveRESTCollectionHandleFromFolderPath and resolveRESTRequestHandleFromFolderPath). We also do not delete the
+    // request handles for the same reason, why traverse over them and increase computation time here again, while the memory
+    // savings is pretty less
+    //
+
+    const handle = this.resolveRESTCollectionHandleFromFolderPath(folderPath)
+    const [parentHandle, indexInParent] =
+      this.collectionHandleToParentIndex.get(handle)!
+
+    // Remove the folder handle from the map
+    this.collectionHandleToParentIndex.delete(handle)
+
+    // Make a pass over the map to update the parent index of the siblings, add clear the immediate children of the folder as a bonus
+    for (const [
+      checkedHandle,
+      [checkedParentHandle, checkedIndexInParent],
+    ] of this.collectionHandleToParentIndex.entries()) {
+      // Sibling to the removed folder
+      if (
+        checkedParentHandle === parentHandle &&
+        checkedIndexInParent > indexInParent
+      ) {
+        this.collectionHandleToParentIndex.set(checkedHandle, [
+          checkedParentHandle,
+          checkedIndexInParent - 1,
+        ])
+      } else if (checkedParentHandle === handle) {
+        // Child of the removed folder
+        this.collectionHandleToParentIndex.delete(checkedHandle)
+      }
+    }
+  }
+
+  private createAssociatedRESTCollectionHandle(
+    parentHandle: RESTCollectionHandle | null,
+    index: number
+  ): RESTCollectionHandle {
+    const handle = `${this.handleIDTicker++}` as RESTCollectionHandle
+
+    this.collectionHandleToParentIndex.set(handle, [parentHandle, index])
+
+    return handle
+  }
+
+  private createAssociatedRESTRequestHandle(
+    parentHandle: RESTCollectionHandle,
+    requestIndex: number
+  ): RESTRequestHandle {
+    const handle = `${this.handleIDTicker++}` as RESTRequestHandle
+
+    this.requestHandleToParentIndex.set(handle, [parentHandle, requestIndex])
+
+    return handle
   }
 
   private generateHandlesForCollections(
@@ -166,9 +279,7 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
         )!.folders.length - 1
       : this.state.value.state.length - 1
 
-    const handle = `${this.handleIDTicker++}` as RESTCollectionHandle
-
-    this.collectionHandleToParentIndex.set(handle, [parentHandle, folderIndex])
+    this.createAssociatedRESTCollectionHandle(parentHandle, folderIndex)
   }
 
   private handleRequestAdd(parentFolderPath: string) {
@@ -290,15 +401,10 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
     parent: RESTCollectionHandle | null,
     index: number
   ): RESTCollectionHandle {
-    let result = this.getAssociatedRESTCollectionHandle(parent, index)
-
-    if (result === null) {
-      result = `${this.handleIDTicker++}` as RESTCollectionHandle
-
-      this.collectionHandleToParentIndex.set(result, [parent, index])
-    }
-
-    return result
+    return (
+      this.getAssociatedRESTCollectionHandle(parent, index) ??
+      this.createAssociatedRESTCollectionHandle(parent, index)
+    )
   }
 
   private getAssociatedRESTRequestHandle(
@@ -325,30 +431,90 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
     parent: RESTCollectionHandle,
     index: number
   ): RESTRequestHandle {
-    let result = this.getAssociatedRESTRequestHandle(parent, index)
-
-    if (result === null) {
-      result = `${this.handleIDTicker++}` as RESTRequestHandle
-
-      this.requestHandleToParentIndex.set(result, [parent, index])
-    }
-
-    return result
+    return (
+      this.getAssociatedRESTRequestHandle(parent, index) ??
+      this.createAssociatedRESTRequestHandle(parent, index)
+    )
   }
 
+  // If this returns null that means, the collection was invalidated somehow
+  // probably this collection doesn't exist anymore (either because it was removed or its parents were removed)
   private resolveIndexPathFromRESTCollectionHandle(
     handle: RESTCollectionHandle
-  ): number[] {
-    const parents: Array<number> = []
+  ): number[] | null {
+    const parents: number[] = []
+
+    const visitedHandles: RESTCollectionHandle[] = []
 
     let current: RESTCollectionHandle | null = handle
 
     while (current !== null) {
-      // We can expect handle entries to be present
-      const [parentHandle, index]: [RESTCollectionHandle | null, number] =
-        this.collectionHandleToParentIndex.get(current)!
+      const entry = this.collectionHandleToParentIndex.get(current)
+
+      // If the entry is invalid, then the collection was removed, then all the visited handles are invalid, so lets clear them
+      if (entry === undefined) {
+        this.collectionHandleToParentIndex.delete(current)
+
+        for (const visitedHandle of visitedHandles) {
+          this.collectionHandleToParentIndex.delete(visitedHandle)
+        }
+
+        return null
+      }
+
+      const [parentHandle, index] = entry
 
       parents.push(index)
+      visitedHandles.push(current)
+
+      current = parentHandle
+    }
+
+    return parents.reverse()
+  }
+
+  // If this returns null that means, the collection was invalidated somehow
+  // probably this collection doesn't exist anymore (either because it was removed or its parents were removed)
+  private resolveIndexPathFromRESTRequestHandle(
+    handle: RESTRequestHandle
+  ): number[] | null {
+    const entry = this.requestHandleToParentIndex.get(handle)
+
+    if (entry === undefined) {
+      return null
+    }
+
+    const [parentHandle, index] = entry
+
+    // The last index in the index path will be the request index
+    const parents: number[] = [index]
+
+    const visitedHandles: RESTCollectionHandle[] = []
+
+    let current: RESTCollectionHandle | null = parentHandle
+
+    while (current !== null) {
+      const collEntry = this.collectionHandleToParentIndex.get(current)
+
+      // If the entry is invalid, then the collection was removed, then all the visited handles are invalid, so lets clear them and delete this handle too
+      if (collEntry === undefined) {
+        this.collectionHandleToParentIndex.delete(current)
+
+        // Delete the visited handles because their ancestor was removed
+        for (const visitedHandle of visitedHandles) {
+          this.collectionHandleToParentIndex.delete(visitedHandle)
+        }
+
+        // Delete the request because its ancestor was removed
+        this.requestHandleToParentIndex.delete(handle)
+
+        return null
+      }
+
+      const [parentHandle, index] = collEntry
+
+      parents.push(index)
+      visitedHandles.push(current)
 
       current = parentHandle
     }
@@ -374,8 +540,15 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
     folderPath: string
   ): RESTRequestHandle {
     const requestIndex = folderPath.split("/").map(Number).at(-1)!
-    const folderHandle =
-      this.resolveRESTCollectionHandleFromFolderPath(folderPath)
+
+    const folderPathWithoutRequest = folderPath
+      .split("/")
+      .slice(0, -1)
+      .join("/")
+
+    const folderHandle = this.resolveRESTCollectionHandleFromFolderPath(
+      folderPathWithoutRequest
+    )
 
     return this.getAssociatedRESTRequestHandle(folderHandle, requestIndex)!
   }
@@ -405,6 +578,11 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
   ): Resource<RESTCollectionChildren> {
     const folderPath = this.resolveIndexPathFromRESTCollectionHandle(handle)
 
+    // If the folderPath is null, that means the collection was removed
+    if (folderPath === null) {
+      return { type: "unavailable" }
+    }
+
     const coll = navigateToFolderWithIndexPath(
       this.state.value.state,
       folderPath
@@ -433,6 +611,27 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
           }
         }),
       },
+    }
+  }
+
+  public getRESTRequest(handle: RESTRequestHandle): Resource<HoppRESTRequest> {
+    const indexPath = this.resolveIndexPathFromRESTRequestHandle(handle)
+
+    if (indexPath === null) {
+      return { type: "unavailable" }
+    }
+
+    const requestIndex = indexPath.pop()! // NOTE: This mutates indexPath and makes it a proper folder path
+
+    const parentFolder = navigateToFolderWithIndexPath(
+      this.state.value.state,
+      indexPath
+    )!
+    const request = parentFolder.requests[requestIndex]
+
+    return {
+      type: "available",
+      data: request as HoppRESTRequest, // TODO: Fix this, weird typing issue created by a messy Zod type
     }
   }
 }
