@@ -58,6 +58,9 @@ export interface WorkspaceProvider {
 
 export const PERSONAL_WORKSPACE_HANDLE = "personal" as WorkspaceHandle
 
+// TODO: Don't try to infer this here, use the actual type (currently just lazy :P)
+type StoreRESTCollection = (typeof restCollectionStore.value.state)[number]
+
 export class NewWorkspaceService extends Service implements WorkspaceProvider {
   public static readonly ID = "NEW_WORKSPACE_SERVICE"
 
@@ -77,31 +80,53 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
   )
 
   public override onServiceInit() {
-    this.generateHandlesForAllCollectionsAndRequests()
+    this.generateHandlesForCollections(this.state.value.state, 0)
 
     // Listen for state changes
     restCollectionStore.dispatches$.subscribe((dispatch) => {
       switch (dispatch.dispatcher) {
         case "moveFolder":
-          this.moveFolder(
+          this.handleFolderMove(
             dispatch.payload.path,
             dispatch.payload.destinationPath
           )
           break
 
         case "moveRequest":
-          this.moveRequest(
+          this.handleRequestMove(
             `${dispatch.payload.path}/${dispatch.payload.requestIndex}`,
             dispatch.payload.destinationPath
+          )
+          break
+
+        case "addCollection":
+          this.handleFolderAdd(null)
+          break
+
+        case "addFolder":
+          this.handleFolderAdd(dispatch.payload.path)
+          break
+
+        case "saveRequestAs":
+          this.handleRequestAdd(dispatch.payload.path)
+          break
+
+        case "appendCollections":
+          this.generateHandlesForCollections(
+            dispatch.payload.entries,
+            this.state.value.state.length - dispatch.payload.entries.length - 1
           )
           break
       }
     })
   }
 
-  private generateHandlesForAllCollectionsAndRequests() {
-    const stack: [any[], RESTCollectionHandle | null][] = [
-      [this.state.value.state, null],
+  private generateHandlesForCollections(
+    colls: StoreRESTCollection[],
+    startingPointIndex: number
+  ) {
+    const stack: [StoreRESTCollection[], RESTCollectionHandle | null][] = [
+      [colls, null],
     ]
 
     while (stack.length > 0) {
@@ -110,7 +135,7 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
       for (const [index, collection] of collections.entries()) {
         const collectionHandle = this.getOrCreateAssociatedRESTCollectionHandle(
           parentHandle,
-          index
+          index + startingPointIndex
         )
 
         // Generate handles for requests in this collection
@@ -129,7 +154,42 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
     }
   }
 
-  private moveFolder(srcFolderPath: string, destFolderPath: string | null) {
+  private handleFolderAdd(parentFolderPath: string | null) {
+    const parentHandle = parentFolderPath
+      ? this.resolveRESTCollectionHandleFromFolderPath(parentFolderPath)
+      : null
+
+    const folderIndex = parentFolderPath
+      ? navigateToFolderWithIndexPath(
+          this.state.value.state,
+          parentFolderPath.split("/").map(Number)
+        )!.folders.length - 1
+      : this.state.value.state.length - 1
+
+    const handle = `${this.handleIDTicker++}` as RESTCollectionHandle
+
+    this.collectionHandleToParentIndex.set(handle, [parentHandle, folderIndex])
+  }
+
+  private handleRequestAdd(parentFolderPath: string) {
+    const parentHandle =
+      this.resolveRESTCollectionHandleFromFolderPath(parentFolderPath)
+
+    const requestIndex =
+      navigateToFolderWithIndexPath(
+        this.state.value.state,
+        parentFolderPath.split("/").map(Number)
+      )!.requests.length - 1
+
+    const handle = `${this.handleIDTicker++}` as RESTRequestHandle
+
+    this.requestHandleToParentIndex.set(handle, [parentHandle, requestIndex])
+  }
+
+  private handleFolderMove(
+    srcFolderPath: string,
+    destFolderPath: string | null
+  ) {
     const destHandle: RESTCollectionHandle | null = destFolderPath
       ? this.resolveRESTCollectionHandleFromFolderPath(destFolderPath)
       : null
@@ -166,7 +226,7 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
     }
   }
 
-  private moveRequest(srcFolderPath: string, destFolderPath: string) {
+  private handleRequestMove(srcFolderPath: string, destFolderPath: string) {
     const destHandle: RESTCollectionHandle | null =
       this.resolveRESTCollectionHandleFromFolderPath(destFolderPath)
     const destPosition =
