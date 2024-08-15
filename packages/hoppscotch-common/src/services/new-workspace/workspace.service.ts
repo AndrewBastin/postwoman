@@ -135,8 +135,115 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
             dispatch.payload.requestIndex
           )
           break
+
+        case "updateRequestOrder":
+          this.handleRequestReorder(
+            dispatch.payload.destinationCollectionPath,
+            dispatch.payload.requestIndex,
+            dispatch.payload.destinationRequestIndex
+          )
+          break
+
+        case "updateCollectionOrder":
+          this.handleFolderReorder(
+            dispatch.payload.collectionIndex,
+            dispatch.payload.destinationCollectionIndex
+          )
+          break
       }
     })
+  }
+
+  private handleFolderReorder(
+    srcFolderPath: string,
+    destFolderPath: string | null
+  ) {
+    // The game plan for folder reorders
+    // 1. Update the folder handle to the new position
+    // 2. Shift up the indices of the folders in the same folder that come after the moved till the destination
+
+    const srcIndexPath = srcFolderPath.split("/").map(Number)
+    const srcFolderIndex = srcIndexPath.pop()!
+
+    const srcParentFolder = navigateToFolderWithIndexPath(
+      this.state.value.state,
+      srcIndexPath
+    )!
+    const destFolderIndex =
+      destFolderPath !== null
+        ? destFolderPath.split("/").map(Number).pop()!
+        : srcParentFolder.folders.length - 1
+
+    // Since we pop the folder index above, if the srcIndexPath is empty, then this is a root collection
+    const srcParentHandle =
+      srcIndexPath.length !== 0
+        ? this.resolveRESTCollectionHandleFromFolderPath(srcFolderPath)
+        : null
+
+    for (const [
+      folderHandle,
+      [parentHandle, index],
+    ] of this.collectionHandleToParentIndex.entries()) {
+      if (parentHandle === srcParentHandle && index === srcFolderIndex) {
+        // Update the folder handle to the new position
+        this.collectionHandleToParentIndex.set(folderHandle, [
+          parentHandle,
+          destFolderIndex,
+        ])
+      } else if (
+        parentHandle === srcParentHandle &&
+        index > srcFolderIndex &&
+        index <= destFolderIndex
+      ) {
+        // Shift up the indices of the folders in the same folder that come after the moved till the destination
+        this.collectionHandleToParentIndex.set(folderHandle, [
+          parentHandle,
+          index - 1,
+        ])
+      }
+    }
+  }
+
+  private handleRequestReorder(
+    destCollectionPath: string,
+    srcRequestIndex: number,
+    destRequestIndex: number | null
+  ) {
+    // The game plan for request reorders
+    // 1. Update the handle for the request to the new position
+    // 2. Shift up the indices of the requests in the same folder that come after the moved till the destination
+
+    const destCollection = navigateToFolderWithIndexPath(
+      this.state.value.state,
+      destCollectionPath.split("/").map(Number)
+    )!
+    const destCollectionHandle =
+      this.resolveRESTCollectionHandleFromFolderPath(destCollectionPath)
+    const actualDestRequestIndex =
+      destRequestIndex ?? destCollection.requests.length
+
+    for (const [
+      reqHandle,
+      [parentHandle, index],
+    ] of this.requestHandleToParentIndex.entries()) {
+      if (parentHandle === destCollectionHandle && index === srcRequestIndex) {
+        // Update the handle for the request to the new position
+        this.requestHandleToParentIndex.set(reqHandle, [
+          parentHandle,
+          destRequestIndex ?? actualDestRequestIndex,
+        ])
+      } else if (
+        parentHandle === destCollectionHandle &&
+        index > srcRequestIndex &&
+        index <= actualDestRequestIndex
+      ) {
+        // Shift up the indices of the requests in the same folder that come after the moved till the destination
+        this.requestHandleToParentIndex.set(reqHandle, [
+          parentHandle,
+          index - 1,
+        ])
+      }
+    }
   }
 
   private handleRequestRemove(folderPath: string, requestIndex: number) {
