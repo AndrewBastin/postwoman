@@ -110,6 +110,10 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
           this.handleFolderAdd(dispatch.payload.path)
           break
 
+        case "duplicateCollection":
+          this.handleFolderDuplication(dispatch.payload.path)
+          break
+
         case "saveRequestAs":
           this.handleRequestAdd(dispatch.payload.path)
           break
@@ -154,6 +158,38 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
     })
   }
 
+  private handleFolderDuplication(folderPath: string) {
+    // The game plan for folder duplication
+    // 1. Use `generateHandlesForCollections` to generate handles for all the collections and requests inside
+
+    const folderHandle =
+      this.resolveRESTCollectionHandleFromFolderPath(folderPath)
+    const [parentHandle] = this.collectionHandleToParentIndex.get(folderHandle)!
+
+    if (parentHandle !== null) {
+      const indexPath = folderPath.split("/").map(Number)
+      indexPath.pop()
+
+      const folder = navigateToFolderWithIndexPath(
+        this.state.value.state,
+        indexPath
+      )!
+
+      const destIndex = folder.folders.length - 1
+
+      this.generateHandlesForCollections(
+        [folder.folders[destIndex]],
+        destIndex,
+        parentHandle
+      )
+    } else {
+      this.generateHandlesForCollections(
+        [this.state.value.state[this.state.value.state.length - 1]],
+        this.state.value.state.length - 1
+      )
+    }
+  }
+
   private handleFolderReorder(
     srcFolderPath: string,
     destFolderPath: string | null
@@ -167,7 +203,7 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
 
     const srcParentFolder = navigateToFolderWithIndexPath(
       this.state.value.state,
-      srcIndexPath
+      [...srcIndexPath] // navigateToFolderWithIndexPath mutates this
     )!
     const destFolderIndex =
       destFolderPath !== null
@@ -343,10 +379,11 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
 
   private generateHandlesForCollections(
     colls: StoreRESTCollection[],
-    startingPointIndex: number
+    startingPointIndex: number,
+    parentCollHandle: RESTCollectionHandle | null = null
   ) {
     const stack: [StoreRESTCollection[], RESTCollectionHandle | null][] = [
-      [colls, null],
+      [colls, parentCollHandle],
     ]
 
     while (stack.length > 0) {
