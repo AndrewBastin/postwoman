@@ -37,7 +37,8 @@ export default class DispatchingStore<
 > {
   #state$: BehaviorSubject<StoreType>
   #dispatchers: DispatchersType
-  #dispatches$: Subject<Dispatch<StoreType, DispatchersType>> = new Subject()
+  #dispatches$: Subject<[Dispatch<StoreType, DispatchersType>, StoreType]> =
+    new Subject()
 
   constructor(initialValue: StoreType, dispatchers: DispatchersType) {
     this.#state$ = new BehaviorSubject(initialValue)
@@ -45,7 +46,7 @@ export default class DispatchingStore<
 
     this.#dispatches$
       .pipe(
-        map(({ dispatcher, payload }) =>
+        map(([{ dispatcher, payload }]) =>
           this.#dispatchers[dispatcher](this.value, payload)
         )
       )
@@ -66,13 +67,20 @@ export default class DispatchingStore<
   }
 
   get dispatches$() {
-    return this.#dispatches$
+    return this.#dispatches$.pipe(map(([dispatch]) => dispatch))
+  }
+
+  get dispatchesWithState$() {
+    return this.#dispatches$.asObservable()
   }
 
   dispatch({ dispatcher, payload }: Dispatch<StoreType, DispatchersType>) {
     if (!this.#dispatchers[dispatcher])
       throw new Error(`Undefined dispatch type '${String(dispatcher)}'`)
 
-    this.#dispatches$.next({ dispatcher, payload })
+    this.#dispatches$.next([{ dispatcher, payload }, this.value] as [
+      Dispatch<StoreType, DispatchersType>,
+      StoreType,
+    ])
   }
 }
