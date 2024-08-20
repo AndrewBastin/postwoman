@@ -26,6 +26,7 @@ import * as S from "fp-ts/string"
 import * as A from "fp-ts/Array"
 import * as O from "fp-ts/Option"
 import * as TE from "fp-ts/TaskEither"
+import { v4 as uuidV4 } from "uuid"
 import { IMPORTER_INVALID_FILE_FORMAT } from "."
 import { PMRawLanguage } from "~/types/pm-coll-exts"
 import { stringArrayJoin } from "~/helpers/functional/array"
@@ -317,6 +318,8 @@ const getHoppRequest = (item: Item): HoppRESTRequest => {
     // TODO: Decide about this
     preRequestScript: "",
     testScript: "",
+
+    _ref_id: uuidV4(),
   })
 }
 
@@ -331,6 +334,8 @@ const getHoppFolder = (ig: ItemGroup<Item>): HoppCollection =>
     requests: pipe(ig.items.all(), A.filter(isPMItem), A.map(getHoppRequest)),
     auth: { authType: "inherit", authActive: true },
     headers: [],
+
+    _ref_id: uuidV4(),
   })
 
 export const getHoppCollections = (collections: PMCollection[]) => {

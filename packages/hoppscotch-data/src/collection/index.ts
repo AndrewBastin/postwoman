@@ -1,7 +1,9 @@
 import { InferredEntity, createVersionedEntity } from "verzod"
+import { v4 as uuidV4 } from "uuid"
 
 import V1_VERSION from "./v/1"
 import V2_VERSION from "./v/2"
+import V3_VERSION from "./v/3"
 
 import { z } from "zod"
 import { translateToNewRequest } from "../rest"
@@ -12,10 +14,11 @@ const versionedObject = z.object({
 })
 
 export const HoppCollection = createVersionedEntity({
-  latestVersion: 2,
+  latestVersion: 3,
   versionMap: {
     1: V1_VERSION,
     2: V2_VERSION,
+    3: V3_VERSION
   },
   getVersion(data) {
     const versionCheck = versionedObject.safeParse(data)
@@ -31,7 +34,7 @@ export const HoppCollection = createVersionedEntity({
 
 export type HoppCollection = InferredEntity<typeof HoppCollection>
 
-export const CollectionSchemaVersion = 2
+export const CollectionSchemaVersion = 3
 
 /**
  * Generates a Collection object. This ignores the version number object
@@ -59,12 +62,15 @@ export function translateToNewRESTCollection(x: any): HoppCollection {
   const auth = x.auth ?? { authType: "inherit", authActive: true }
   const headers = x.headers ?? []
 
+  const _ref_id = x._ref_id ?? uuidV4()
+
   const obj = makeCollection({
     name,
     folders,
     requests,
     auth,
     headers,
+    _ref_id
   })
 
   if (x.id) obj.id = x.id
@@ -86,12 +92,15 @@ export function translateToNewGQLCollection(x: any): HoppCollection {
   const auth = x.auth ?? { authType: "inherit", authActive: true }
   const headers = x.headers ?? []
 
+  const _ref_id = x._ref_id ?? uuidV4()
+
   const obj = makeCollection({
     name,
     folders,
     requests,
     auth,
     headers,
+    _ref_id
   })
 
   if (x.id) obj.id = x.id

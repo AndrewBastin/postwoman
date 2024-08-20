@@ -10,6 +10,7 @@ import * as O from "fp-ts/Option"
 import * as RA from "fp-ts/ReadonlyArray"
 import * as TE from "fp-ts/TaskEither"
 import { flow, pipe } from "fp-ts/function"
+import { v4 as uuidV4 } from "uuid"
 
 import { HoppGQLRequest, translateToNewGQLCollection } from "@hoppscotch/data"
 import { safeParseJSON } from "~/helpers/functional/json"
@@ -43,9 +44,15 @@ const validateCollection = (collection: unknown) => {
       (request) => {
         const requestSchemaParsedResult = HoppRESTRequest.safeParse(request)
 
-        return requestSchemaParsedResult.type === "ok"
-          ? requestSchemaParsedResult.value
-          : getDefaultRESTRequest()
+        const req =
+          requestSchemaParsedResult.type === "ok"
+            ? requestSchemaParsedResult.value
+            : getDefaultRESTRequest()
+
+        // Imported collections need to have a unique UUID
+        req._ref_id = uuidV4()
+
+        return req
       }
     )
 
@@ -54,6 +61,9 @@ const validateCollection = (collection: unknown) => {
       requests,
     })
   }
+
+  const coll = translateToNewRESTCollection(collection)
+  coll._ref_id = uuidV4()
 
   return O.some(translateToNewRESTCollection(collection))
 }
@@ -99,6 +109,7 @@ export const validateGQLCollection = (collection: unknown) => {
 
     return O.some({
       ...collectionSchemaParsedResult.value,
+      _ref_id: collectionSchemaParsedResult.value._ref_id ?? uuidV4(),
       requests,
     })
   }

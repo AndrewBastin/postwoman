@@ -27,6 +27,7 @@ import * as TE from "fp-ts/TaskEither"
 import * as RA from "fp-ts/ReadonlyArray"
 import { IMPORTER_INVALID_FILE_FORMAT } from "."
 import { cloneDeep } from "lodash-es"
+import { v4 as uuidV4 } from "uuid"
 
 export const OPENAPI_DEREF_ERROR = "openapi/deref_error" as const
 
@@ -656,6 +657,8 @@ const convertPathToHoppReqs = (
           requestVariables: parseOpenAPIVariables(
             (info.parameters as OpenAPIParamsType[] | undefined) ?? []
           ),
+
+          _ref_id: uuidV4(),
         }),
         metadata: {
           tags: info.tags ?? [],
@@ -710,11 +713,13 @@ const convertOpenApiDocsToHopp = (
           folders: [],
           auth: { authType: "inherit", authActive: true },
           headers: [],
+          _ref_id: uuidV4(),
         })
       ),
       requests: requestsWithoutTags,
       auth: { authType: "inherit", authActive: true },
       headers: [],
+      _ref_id: uuidV4(),
     })
   })
 

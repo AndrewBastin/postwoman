@@ -10,6 +10,7 @@ import {
   makeRESTRequest,
   HoppRESTRequestVariable,
 } from "@hoppscotch/data"
+import { v4 as uuidV4 } from "uuid"
 
 import * as A from "fp-ts/Array"
 import * as TE from "fp-ts/TaskEither"
@@ -219,6 +220,7 @@ const getHoppRequest = (req: InsomniaRequestResource): HoppRESTRequest =>
     body: getHoppReqBody(req),
     headers: getHoppReqHeaders(req),
     params: getHoppReqParams(req),
+    _ref_id: uuidV4(),
 
     preRequestScript: "",
     testScript: "",
@@ -238,6 +240,7 @@ const getHoppFolder = (
     requests: getRequestsIn(folderRes, resources).map(getHoppRequest),
     auth: { authType: "inherit", authActive: true },
     headers: [],
+    _ref_id: uuidV4(),
   })
 
 const getHoppCollections = (docs: InsomniaDoc[]) => {
