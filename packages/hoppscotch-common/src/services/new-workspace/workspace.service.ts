@@ -1,4 +1,4 @@
-import { HoppRESTRequest } from "@hoppscotch/data"
+import { HoppCollection, HoppRESTRequest } from "@hoppscotch/data"
 import { Service } from "dioc"
 import { reactive } from "vue"
 import { useReadonlyStream } from "~/composables/stream"
@@ -86,76 +86,279 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
     this.generateHandlesForCollections(this.state.value.state, 0)
 
     // Listen for state changes
-    restCollectionStore.dispatches$.subscribe((dispatch) => {
-      switch (dispatch.dispatcher) {
-        case "moveFolder":
-          this.handleFolderMove(
-            dispatch.payload.path,
-            dispatch.payload.destinationPath
-          )
-          break
+    restCollectionStore.dispatchesWithState$.subscribe(
+      ([dispatch, prevState]) => {
+        switch (dispatch.dispatcher) {
+          case "moveFolder":
+            this.handleFolderMove(
+              dispatch.payload.path,
+              dispatch.payload.destinationPath
+            )
+            break
 
-        case "moveRequest":
-          this.handleRequestMove(
-            `${dispatch.payload.path}/${dispatch.payload.requestIndex}`,
-            dispatch.payload.destinationPath
-          )
-          break
+          case "moveRequest":
+            this.handleRequestMove(
+              `${dispatch.payload.path}/${dispatch.payload.requestIndex}`,
+              dispatch.payload.destinationPath
+            )
+            break
 
-        case "addCollection":
-          this.handleFolderAdd(null)
-          break
+          case "addCollection":
+            this.handleFolderAdd(null)
+            break
 
-        case "addFolder":
-          this.handleFolderAdd(dispatch.payload.path)
-          break
+          case "addFolder":
+            this.handleFolderAdd(dispatch.payload.path)
+            break
 
-        case "duplicateCollection":
-          this.handleFolderDuplication(dispatch.payload.path)
-          break
+          case "duplicateCollection":
+            this.handleFolderDuplication(dispatch.payload.path)
+            break
 
-        case "saveRequestAs":
-          this.handleRequestAdd(dispatch.payload.path)
-          break
+          case "saveRequestAs":
+            this.handleRequestAdd(dispatch.payload.path)
+            break
 
-        case "appendCollections":
-          this.generateHandlesForCollections(
-            dispatch.payload.entries,
-            this.state.value.state.length - dispatch.payload.entries.length - 1
-          )
-          break
+          case "appendCollections":
+            this.generateHandlesForCollections(
+              dispatch.payload.entries,
+              this.state.value.state.length -
+                dispatch.payload.entries.length -
+                1
+            )
+            break
 
-        case "removeFolder":
-          this.handleFolderRemove(dispatch.payload.path)
-          break
+          case "removeFolder":
+            this.handleFolderRemove(dispatch.payload.path)
+            break
 
-        case "removeCollection":
-          this.handleFolderRemove(`${dispatch.payload.collectionIndex}`)
-          break
+          case "removeCollection":
+            this.handleFolderRemove(`${dispatch.payload.collectionIndex}`)
+            break
 
-        case "removeRequest":
-          this.handleRequestRemove(
-            dispatch.payload.path,
-            dispatch.payload.requestIndex
-          )
-          break
+          case "removeRequest":
+            this.handleRequestRemove(
+              dispatch.payload.path,
+              dispatch.payload.requestIndex
+            )
+            break
 
-        case "updateRequestOrder":
-          this.handleRequestReorder(
-            dispatch.payload.destinationCollectionPath,
-            dispatch.payload.requestIndex,
-            dispatch.payload.destinationRequestIndex
-          )
-          break
+          case "updateRequestOrder":
+            this.handleRequestReorder(
+              dispatch.payload.destinationCollectionPath,
+              dispatch.payload.requestIndex,
+              dispatch.payload.destinationRequestIndex
+            )
+            break
 
-        case "updateCollectionOrder":
-          this.handleFolderReorder(
-            dispatch.payload.collectionIndex,
-            dispatch.payload.destinationCollectionIndex
-          )
-          break
+          case "updateCollectionOrder":
+            this.handleFolderReorder(
+              dispatch.payload.collectionIndex,
+              dispatch.payload.destinationCollectionIndex
+            )
+            break
+
+          case "setCollections":
+            this.handleSetCollections(prevState.state)
+            break
+        }
       }
-    })
+    )
+  }
+
+  private getRefIDToRequestHandleMap(
+    state: StoreRESTCollection[]
+  ): Map<string, RESTRequestHandle> {
+    const result = new Map<string, RESTRequestHandle>()
+
+    for (const [
+      handle,
+      [parentHandle, index],
+    ] of this.requestHandleToParentIndex.entries()) {
+      const parentIndexPath =
+        this.resolveIndexPathFromRESTCollectionHandle(parentHandle)
+
+      if (parentIndexPath === null) {
+        continue
+      }
+
+      const req = this.getRequestFromState(parentIndexPath, index, state)
+
+      result.set(req._ref_id, handle)
+    }
+
+    return result
+  }
+
+  private getRefIDToCollectionHandleMap(
+    state: StoreRESTCollection[]
+  ): Map<string, RESTCollectionHandle> {
+    const result = new Map<string, RESTCollectionHandle>()
+
+    for (const [
+      handle,
+      [parentHandle, index],
+    ] of this.collectionHandleToParentIndex.entries()) {
+      const parentIndexPath =
+        parentHandle !== null
+          ? this.resolveIndexPathFromRESTCollectionHandle(parentHandle)
+          : null
+
+      const coll = navigateToFolderWithIndexPath(
+        state,
+        parentIndexPath ?? [index]
+      )!
+
+      result.set(coll._ref_id, handle)
+    }
+
+    return result
+  }
+
+  private getRefIDToRequestFolderPathMap(
+    state: StoreRESTCollection[]
+  ): Map<string, number[]> {
+    const result = new Map<string, number[]>()
+
+    const foldersToProcess = state.map(
+      (coll, index) => [coll, [index]] as [HoppCollection, number[]]
+    )
+
+    while (foldersToProcess.length > 0) {
+      const [coll, indexPath] = foldersToProcess.pop()!
+
+      for (const [reqIndex, req] of coll.requests.entries()) {
+        result.set((req as HoppRESTRequest)._ref_id, [...indexPath, reqIndex])
+      }
+
+      for (const [folderIndex, folder] of coll.folders.entries()) {
+        foldersToProcess.push([folder, [...indexPath, folderIndex]])
+      }
+    }
+
+    return result
+  }
+
+  private getRefIDToCollectionFolderPathMap(
+    state: StoreRESTCollection[]
+  ): Map<string, number[]> {
+    const result = new Map<string, number[]>()
+
+    const foldersToProcess = state.map(
+      (coll, index) => [coll, [index]] as [HoppCollection, number[]]
+    )
+
+    while (foldersToProcess.length > 0) {
+      const [coll, indexPath] = foldersToProcess.pop()!
+
+      result.set(coll._ref_id, indexPath)
+
+      for (const [folderIndex, folder] of coll.folders.entries()) {
+        foldersToProcess.push([folder, [...indexPath, folderIndex]])
+      }
+    }
+
+    return result
+  }
+
+  private handleSetCollections(prevState: StoreRESTCollection[]) {
+    // Game plan for setCollections
+    // 1. Make a map from prev state ref ids to the handles
+    // 2. Traverse the new tree, get the handle
+    //    - If the handle exists, update the parent index, if needed
+    //    - If the handle doesn't exist, create the handle
+    // 3. Remove the handles (associated via ref_ids) that are not present in the new tree
+
+    // 1. Make a map from prev state ref ids to the handles
+    const oldRefIDToRequestHandleMap: Map<string, RESTRequestHandle> =
+      this.getRefIDToRequestHandleMap(prevState)
+    const oldRefIDToCollectionHandleMap: Map<string, RESTCollectionHandle> =
+      this.getRefIDToCollectionHandleMap(prevState)
+
+    const newRefIDToRequestFolderPathMap: Map<string, number[]> =
+      this.getRefIDToRequestFolderPathMap(this.state.value.state)
+    const newRefIDToCollectionFolderPathMap: Map<string, number[]> =
+      this.getRefIDToCollectionFolderPathMap(this.state.value.state)
+
+    // 2. Traverse the new tree, get the handle
+    for (const [refID, folderPath] of newRefIDToRequestFolderPathMap) {
+      const existingHandle = oldRefIDToRequestHandleMap.get(refID)
+
+      if (!existingHandle) {
+        const parent = this.resolveRESTCollectionHandleFromFolderPath(
+          folderPath.slice(0, -1).join("/")
+        )
+        const requestIndex = folderPath[folderPath.length - 1]
+
+        this.createAssociatedRESTRequestHandle(parent, requestIndex)
+
+        continue
+      }
+
+      const [parentHandle, indexInParent] =
+        this.requestHandleToParentIndex.get(existingHandle)!
+
+      const newParentHandle = this.resolveRESTCollectionHandleFromFolderPath(
+        folderPath.slice(0, -1).join("/")
+      )
+      const newRequestIndex = folderPath[folderPath.length - 1]
+
+      if (
+        parentHandle !== newParentHandle ||
+        indexInParent !== newRequestIndex
+      ) {
+        this.requestHandleToParentIndex.set(existingHandle, [
+          newParentHandle,
+          newRequestIndex,
+        ])
+      }
+    }
+
+    for (const [refID, folderPath] of newRefIDToCollectionFolderPathMap) {
+      const existingHandle = oldRefIDToCollectionHandleMap.get(refID)
+
+      if (!existingHandle) {
+        const parent =
+          folderPath.length > 1
+            ? this.resolveRESTCollectionHandleFromFolderPath(
+                folderPath.slice(0, -1).join("/")
+              )
+            : null
+
+        const index = folderPath[folderPath.length - 1]
+
+        this.createAssociatedRESTCollectionHandle(parent, index)
+        continue
+      }
+
+      const [parentHandle, indexInParent] =
+        this.collectionHandleToParentIndex.get(existingHandle)!
+
+      const newParentHandle = this.resolveRESTCollectionHandleFromFolderPath(
+        folderPath.slice(0, -1).join("/")
+      )
+      const newIndex = folderPath[folderPath.length - 1]
+
+      if (parentHandle !== newParentHandle || indexInParent !== newIndex) {
+        this.collectionHandleToParentIndex.set(existingHandle, [
+          newParentHandle,
+          newIndex,
+        ])
+      }
+    }
+
+    // 3. Remove the handles (associated via ref_ids) that are not present in the new tree
+    for (const [refID, handle] of oldRefIDToRequestHandleMap.entries()) {
+      if (!newRefIDToRequestFolderPathMap.has(refID)) {
+        this.requestHandleToParentIndex.delete(handle)
+      }
+    }
+
+    for (const [refID, handle] of oldRefIDToCollectionHandleMap.entries()) {
+      if (!newRefIDToCollectionFolderPathMap.has(refID)) {
+        this.collectionHandleToParentIndex.delete(handle)
+      }
+    }
   }
 
   private handleFolderDuplication(folderPath: string) {
@@ -758,6 +961,16 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
     }
   }
 
+  private getRequestFromState(
+    indexPath: number[],
+    requestIndex: number,
+    state: StoreRESTCollection[] = this.state.value.state
+  ): HoppRESTRequest {
+    const parentFolder = navigateToFolderWithIndexPath(state, indexPath)!
+
+    return parentFolder.requests[requestIndex] as HoppRESTRequest // TODO: Fix this, weird typing issue created by a messy Zod type
+  }
+
   public getRESTRequest(handle: RESTRequestHandle): Resource<HoppRESTRequest> {
     const indexPath = this.resolveIndexPathFromRESTRequestHandle(handle)
 
@@ -767,15 +980,11 @@ export class NewWorkspaceService extends Service implements WorkspaceProvider {
 
     const requestIndex = indexPath.pop()! // NOTE: This mutates indexPath and makes it a proper folder path
 
-    const parentFolder = navigateToFolderWithIndexPath(
-      this.state.value.state,
-      indexPath
-    )!
-    const request = parentFolder.requests[requestIndex]
+    const request = this.getRequestFromState(indexPath, requestIndex)
 
     return {
       type: "available",
-      data: request as HoppRESTRequest, // TODO: Fix this, weird typing issue created by a messy Zod type
+      data: request as HoppRESTRequest,
     }
   }
 }
