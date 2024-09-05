@@ -1,6 +1,6 @@
 import { HoppRESTRequest } from "@hoppscotch/data"
 import { Service } from "dioc"
-import { reactive } from "vue"
+import { reactive, ref, Ref } from "vue"
 import { Brand } from "~/types/ts-utils"
 
 export type WorkspaceHandle = Brand<string, "WorkspaceHandle">
@@ -72,11 +72,24 @@ export interface WorkspaceProvider {
   getRESTRequest(handle: RESTRequestHandle): Resource<HoppRESTRequest>
 }
 
+/**
+ * This service deals with the management and access of workspaces and
+ * workspace owned resources.
+ */
 export class NewWorkspaceService extends Service {
   public static readonly ID = "NEW_WORKSPACE_SERVICE"
 
   private providerMap: Map<ProviderID, WorkspaceProvider> = reactive(new Map())
 
+  public currentWorkspace: Ref<{
+    provider: ProviderID
+    handle: WorkspaceHandle
+  } | null> = ref(null)
+
+  /**
+   * Registers a workspace provider with the service. This allows
+   * for the user to access resources from the provider.
+   */
   public registerWorkspaceProvider(provider: WorkspaceProvider) {
     if (this.providerMap.has(provider.providerID)) {
       console.warn(

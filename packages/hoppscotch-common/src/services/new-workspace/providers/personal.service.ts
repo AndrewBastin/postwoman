@@ -1,5 +1,6 @@
 import { Service } from "dioc"
 import {
+  NewWorkspaceService,
   ProviderID,
   RESTCollectionChildren,
   RESTCollectionHandle,
@@ -23,7 +24,7 @@ export const PERSONAL_WORKSPACE_HANDLE = "personal" as WorkspaceHandle
 // TODO: Don't try to infer this here, use the actual type (currently just lazy :P)
 type StoreRESTCollection = (typeof restCollectionStore.value.state)[number]
 
-export default class PersonalWorkspaceService
+export class PersonalWorkspaceService
   extends Service
   implements WorkspaceProvider
 {
@@ -45,6 +46,8 @@ export default class PersonalWorkspaceService
     restCollectionStore.subject$,
     restCollectionStore.value
   )
+
+  private workspaceService = this.bind(NewWorkspaceService)
 
   public override onServiceInit() {
     this.generateHandlesForCollections(this.state.value.state, 0)
@@ -128,6 +131,17 @@ export default class PersonalWorkspaceService
         }
       }
     )
+
+    // TODO: Remove this, instead make providers register over
+    // a platform abstraction
+    this.workspaceService.registerWorkspaceProvider(this)
+
+    // TODO: Remove this, instead make a default current workspace
+    // set over a platform abstraction
+    this.workspaceService.currentWorkspace.value = {
+      provider: this.providerID,
+      handle: PERSONAL_WORKSPACE_HANDLE,
+    }
   }
 
   private getRefIDToRequestHandleMap(
