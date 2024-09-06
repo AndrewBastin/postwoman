@@ -927,11 +927,13 @@ export class PersonalWorkspaceService
             },
           }
         }),
-        requests: coll.requests.map((req, index) => {
+        // Type casting because of the weird REST Collection type
+        requests: (coll.requests as HoppRESTRequest[]).map((req, index) => {
           return {
             handle: this.getOrCreateAssociatedRESTRequestHandle(handle, index),
             data: {
               name: req.name,
+              method: req.method,
             },
           }
         }),

@@ -224,7 +224,6 @@
               </template>
             </NewWorkspaceCollectionsCollection>
 
-            <!-- TODO: Integrate getting method info -->
             <!-- TODO: Integrate loading state, request move loading -->
             <!-- TODO: Integrate isActive, check against the current tab -->
             <!-- TODO: Integrate isSelected, for use in SaveRequest modal -->
@@ -232,7 +231,7 @@
             <NewWorkspaceCollectionsRequest
               v-else-if="node.data.type === 'request'"
               :name="node.data.name"
-              :method="'get'"
+              :method="node.data.method"
               :loading="false"
               :is-active="false"
               :is-selected="false"
@@ -403,7 +402,7 @@ type CollectionNode =
       handle: RESTCollectionHandle
       name: string
     }
-  | { type: "request"; handle: RESTRequestHandle; name: string }
+  | { type: "request"; handle: RESTRequestHandle; name: string; method: string }
 
 class WorkspaceCollectionAdapter implements SmartTreeAdapter<CollectionNode> {
   constructor(
@@ -468,6 +467,7 @@ class WorkspaceCollectionAdapter implements SmartTreeAdapter<CollectionNode> {
                 type: "request",
                 handle: req.handle,
                 name: req.data.name,
+                method: req.data.method,
               },
             }
           }),

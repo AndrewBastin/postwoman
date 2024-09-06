@@ -3,10 +3,22 @@ import { Service } from "dioc"
 import { reactive, ref, Ref } from "vue"
 import { Brand } from "~/types/ts-utils"
 
+/**
+ * A branded unique identifier for a workspace. Only cast to this type within
+ * a workspace provider. Values of this type should not be considered as persistable.
+ */
 export type WorkspaceHandle = Brand<string, "WorkspaceHandle">
 
+/**
+ * A branded unique identifier for a workspace REST Collection. Only cast to this type
+ * within a workspace provider. Values of this type should not be considered as persistable.
+ */
 export type RESTCollectionHandle = Brand<string, "RESTCollectionHandle">
 
+/**
+ * A branded unique identifier for a workspace REST Request. Only cast to this type
+ * within a workspace provider. Valujes of this type should not be considered as persistable.
+ */
 export type RESTRequestHandle = Brand<string, "RESTRequestHandle">
 
 export type Resource<T> =
@@ -25,6 +37,7 @@ export type RESTCollectionMeta = {
 
 export type RESTRequestMeta = {
   name: string
+  method: string
 }
 
 export type RootRESTCollections = Array<{
