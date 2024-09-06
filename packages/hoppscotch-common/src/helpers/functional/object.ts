@@ -63,3 +63,17 @@ export const objHasArrayProperty =
     (obj as any)[prop].every(
       (val: unknown) => typeof val === type // eslint-disable-line
     )
+
+type FilterUndefinedFields<T> = {
+  [K in keyof T as T[K] extends null | undefined ? never : K]: T[K]
+}
+
+export function filterUndefinedFields<T extends object>(
+  obj: T
+): FilterUndefinedFields<T> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(
+      ([, value]) => value !== null && value !== undefined
+    )
+  ) as FilterUndefinedFields<T>
+}

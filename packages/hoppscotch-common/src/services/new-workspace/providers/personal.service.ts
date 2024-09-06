@@ -17,6 +17,7 @@ import {
   restCollectionStore,
   addRESTCollection,
   addRESTFolder,
+  editRESTFolder,
 } from "~/newstore/collections"
 import { reactive } from "vue"
 import { useReadonlyStream } from "~/composables/stream"
@@ -26,6 +27,7 @@ import {
   makeCollection,
 } from "@hoppscotch/data"
 import { v4 as uuidV4 } from "uuid"
+import { filterUndefinedFields } from "~/helpers/functional/object"
 
 export const PERSONAL_WORKSPACE_HANDLE = "personal" as WorkspaceHandle
 
@@ -1003,7 +1005,7 @@ export class PersonalWorkspaceService
         })
       )
 
-      const collIndex = restCollectionStore.value.state.length - 1
+      const collIndex = restCollectionStore.value.state.length - 1 // Assuming the newly added collection is the last one
 
       return Promise.resolve(
         this.getOrCreateAssociatedRESTCollectionHandle(null, collIndex)
@@ -1019,18 +1021,26 @@ export class PersonalWorkspaceService
 
     addRESTFolder(input.name, indexPath.join("/"))
 
-    // TODO: Assign folder data gotten from the input!
-
     const parentFolder = navigateToFolderWithIndexPath(
       this.state.value.state,
       indexPath
     )
 
+    // This is an assertion to make sure parentFolder is not null, if so, something
+    // horrible has happened and crashing is better than continuing
     if (!parentFolder) {
       return Promise.reject(new Error("Invalid parent folder")) // TODO: Change this into error as values
     }
 
-    const folderIndexInParent = parentFolder.folders.length - 1
+    const folderIndexInParent = parentFolder.folders.length - 1 // Assuming the newly added folder is the last one
+
+    editRESTFolder(
+      `${indexPath.join("/")}/${folderIndexInParent}`,
+      filterUndefinedFields({
+        headers: input.headers,
+        auth: input.auth,
+      })
+    )
 
     return Promise.resolve(
       this.getOrCreateAssociatedRESTCollectionHandle(
