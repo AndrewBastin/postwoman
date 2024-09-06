@@ -1,6 +1,6 @@
 import { HoppRESTRequest } from "@hoppscotch/data"
 import { Service } from "dioc"
-import { reactive, ref, Ref } from "vue"
+import { ref, Ref, shallowReactive } from "vue"
 import { Brand } from "~/types/ts-utils"
 
 /**
@@ -92,7 +92,9 @@ export interface WorkspaceProvider {
 export class NewWorkspaceService extends Service {
   public static readonly ID = "NEW_WORKSPACE_SERVICE"
 
-  private providerMap: Map<ProviderID, WorkspaceProvider> = reactive(new Map())
+  private providerMap: Map<ProviderID, WorkspaceProvider> = shallowReactive(
+    new Map()
+  )
 
   public currentWorkspace: Ref<{
     provider: ProviderID

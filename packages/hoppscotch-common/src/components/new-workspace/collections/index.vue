@@ -410,18 +410,50 @@ type CollectionNode =
     }
   | { type: "request"; handle: RESTRequestHandle; name: string; method: string }
 
-class WorkspaceCollectionAdapter implements SmartTreeAdapter<CollectionNode> {
+class WorkspaceRESTCollectionAdapter
+  implements SmartTreeAdapter<CollectionNode>
+{
   constructor(
-    private rootCollections: Ref<RootRESTCollections>,
-    private personalWorkspace: PersonalWorkspaceService
+    private workspaceService: NewWorkspaceService,
+    private trackedWorkspace: Ref<{
+      provider: ProviderID
+      handle: WorkspaceHandle
+    } | null>
   ) {}
 
   getChildren(nodeID: string | null): Ref<ChildrenResult<CollectionNode>> {
     return computed<ChildrenResult<CollectionNode>>(() => {
+      // Assume a loading status if a workspace is not yet being tracked
+      if (this.trackedWorkspace.value === null) {
+        return <ChildrenResult<CollectionNode>>{
+          status: "loading",
+        }
+      }
+
       if (nodeID === null) {
+        const rootCollectionsRes = this.workspaceService.getRootRESTCollections(
+          this.trackedWorkspace.value.provider,
+          this.trackedWorkspace.value.handle
+        )
+
+        if (rootCollectionsRes.type === "loading") {
+          return <ChildrenResult<CollectionNode>>{
+            status: "loading",
+          }
+        }
+
+        // TODO: Better error handling mechanism ?
+        if (rootCollectionsRes.type !== "available") {
+          console.error(
+            "Root Collections are not available",
+            rootCollectionsRes
+          )
+          throw new Error("Root collections not available")
+        }
+
         return <ChildrenResult<CollectionNode>>{
           status: "loaded",
-          data: this.rootCollections.value.map(
+          data: rootCollectionsRes.data.map(
             (coll): TreeNode<CollectionNode> => {
               return {
                 id: coll.handle,
@@ -435,7 +467,9 @@ class WorkspaceCollectionAdapter implements SmartTreeAdapter<CollectionNode> {
           ),
         }
       }
-      const children = this.personalWorkspace.getRESTCollectionChildren(
+
+      const children = this.workspaceService.getRESTCollectionChildren(
+        this.trackedWorkspace.value.provider,
         nodeID as RESTCollectionHandle
       )
 
@@ -493,13 +527,11 @@ import { useI18n } from "~/composables/i18n"
 import { useReadonlyStream } from "~/composables/stream"
 import { currentReorderingStatus$ } from "~/newstore/reordering"
 import {
-  PersonalWorkspaceService,
-  PERSONAL_WORKSPACE_HANDLE,
-} from "~/services/new-workspace/providers/personal.service"
-import {
+  NewWorkspaceService,
+  ProviderID,
   RESTCollectionHandle,
   RESTRequestHandle,
-  RootRESTCollections,
+  WorkspaceHandle,
 } from "~/services/new-workspace/workspace.service"
 import IconPlus from "~icons/lucide/plus"
 import IconHelpCircle from "~icons/lucide/help-circle"
@@ -515,6 +547,7 @@ import IconSettings2 from "~icons/lucide/settings-2"
 import IconRotateCCW from "~icons/lucide/rotate-ccw"
 import IconShare2 from "~icons/lucide/share-2"
 import { useColorMode } from "~/composables/theming"
+import { PersonalWorkspaceService } from "~/services/new-workspace/providers/personal.service"
 
 withDefaults(
   defineProps<{
@@ -540,22 +573,17 @@ const currentReorderingStatus = useReadonlyStream(currentReorderingStatus$, {
   parentID: "",
 })
 
+// TODO: Move this to platform definition based loading
+useService(PersonalWorkspaceService)
+
 const filterText = ref("")
-const personalWorkspace = useService(PersonalWorkspaceService)
-
-const rootCollections = computed(() => {
-  const colls = personalWorkspace.getRootRESTCollections(
-    PERSONAL_WORKSPACE_HANDLE
-  )
-
-  if (colls.type !== "available") {
-    return []
-  }
-  return colls.data
-})
+const workspaceService = useService(NewWorkspaceService)
 
 const adapter: SmartTreeAdapter<CollectionNode> =
-  new WorkspaceCollectionAdapter(rootCollections, personalWorkspace)
+  new WorkspaceRESTCollectionAdapter(
+    workspaceService,
+    workspaceService.currentWorkspace
+  )
 
 function resetSelectedData() {
   // TODO: Implement
