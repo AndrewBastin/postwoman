@@ -39,7 +39,7 @@
           :icon="IconPlus"
           :label="t('action.new')"
           class="!rounded-none"
-          @click="displayModalAdd(true)"
+          @click="showAddModalFor = { type: 'collection' }"
         />
         <span class="flex">
           <HoppButtonSecondary
@@ -64,7 +64,9 @@
             <!-- TODO: Implement loading state, combines previous exportLoading and duplicateLoading -->
             <!-- TODO: Implement isDraggable, check if the person has team write access -->
             <NewWorkspaceCollectionsCollection
-              v-if="node.data.type === 'collection'"
+              v-if="
+                node.data.type === 'collection' || node.data.type === 'folder'
+              "
               :name="node.data.name"
               :is-open="isOpen"
               :is-draggable="true"
@@ -84,6 +86,12 @@
                   :icon="IconFolderPlus"
                   :title="t('folder.new')"
                   class="hidden group-hover:inline-flex"
+                  @click="
+                    showAddModalFor = {
+                      type: 'folder',
+                      parentHandle: node.data.handle,
+                    }
+                  "
                 />
 
                 <!-- TODO: Set the v-if to check if this is a team collection -->
@@ -134,7 +142,10 @@
                     :shortcut="['N']"
                     @click="
                       () => {
-                        emit('add-folder')
+                        showAddModalFor = {
+                          type: 'folder',
+                          parentHandle: node.data.handle,
+                        }
                         hide()
                       }
                     "
@@ -351,7 +362,12 @@
                       :label="t('add.new')"
                       filled
                       outline
-                      @click="displayModalAdd(true)"
+                      @click="
+                        showAddModalFor = {
+                          type: 'folder',
+                          parentHandle: node.data.handle,
+                        }
+                      "
                     />
                   </div>
                 </div>
@@ -371,11 +387,10 @@
                   filled
                   outline
                   @click="
-                    node.data.type === 'collection' &&
-                      emit('add-folder', {
-                        path: node.id,
-                        folder: node.data.data.data,
-                      })
+                    showAddModalFor = {
+                      type: 'folder',
+                      parentHandle: node.data.handle,
+                    }
                   "
                 />
               </template>
@@ -394,10 +409,10 @@
     </div>
   </div>
   <NewWorkspaceCollectionsAdd
-    :show="showModalAdd"
+    :show-for="showAddModalFor"
     :loading-state="modalLoading"
     @submit="addNewRootCollection"
-    @hide-modal="displayModalAdd(false)"
+    @hide-modal="showAddModalFor = null"
   />
 </template>
 
@@ -494,7 +509,7 @@ class WorkspaceRESTCollectionAdapter
             return {
               id: coll.handle,
               data: {
-                type: "collection",
+                type: "folder",
                 handle: coll.handle,
                 name: coll.data.name,
               },
@@ -547,7 +562,9 @@ import IconSettings2 from "~icons/lucide/settings-2"
 import IconRotateCCW from "~icons/lucide/rotate-ccw"
 import IconShare2 from "~icons/lucide/share-2"
 import { useColorMode } from "~/composables/theming"
+import { useToast } from "~/composables/toast"
 import { PersonalWorkspaceService } from "~/services/new-workspace/providers/personal.service"
+import { AddFor } from "./Add.vue"
 
 withDefaults(
   defineProps<{
@@ -559,9 +576,10 @@ withDefaults(
 )
 const t = useI18n()
 const colorMode = useColorMode()
+const toast = useToast()
 
 // Modals
-const showModalAdd = ref(false)
+const showAddModalFor = ref<AddFor>(null)
 
 const modalLoading = ref(false) // Whether any of the modals are in a loading state
 
@@ -585,10 +603,6 @@ const adapter: SmartTreeAdapter<CollectionNode> =
     workspaceService.currentWorkspace
   )
 
-function resetSelectedData() {
-  // TODO: Implement
-}
-
 /**
  * This function is called when the user drops the collection
  * to the root
@@ -598,17 +612,44 @@ function dropToRoot({ dataTransfer }: DragEvent) {
   // TODO: Implement
 }
 
-function displayModalAdd(show: boolean) {
-  showModalAdd.value = show
-
-  if (!show) resetSelectedData()
-}
-
 function displayModalImportExport(show: boolean) {
   // TODO: Implement
 }
 
-function addNewRootCollection(name: string) {
-  // TODO: Implement
+async function addNewRootCollection({
+  name,
+  showFor,
+}: {
+  name: string
+  showFor: NonNullable<AddFor>
+}) {
+  try {
+    modalLoading.value = true
+
+    const currentWorkspace = workspaceService.currentWorkspace.value
+
+    if (currentWorkspace === null) {
+      return
+    }
+
+    await workspaceService.createRESTCollection(
+      currentWorkspace.provider,
+      currentWorkspace.handle,
+      showFor.type === "collection" ? null : showFor.parentHandle,
+      { name }
+    )
+
+    // TODO: Handle errors
+  } finally {
+    modalLoading.value = false
+
+    toast.success(
+      showFor.type === "collection"
+        ? t("collection.created")
+        : t("folder.created")
+    )
+
+    showAddModalFor.value = null
+  }
 }
 </script>

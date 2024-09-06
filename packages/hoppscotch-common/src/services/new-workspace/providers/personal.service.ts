@@ -1,5 +1,6 @@
 import { Service } from "dioc"
 import {
+  CreateRESTCollectionInput,
   NewWorkspaceService,
   ProviderID,
   RESTCollectionChildren,
@@ -14,10 +15,17 @@ import {
 import {
   navigateToFolderWithIndexPath,
   restCollectionStore,
+  addRESTCollection,
+  addRESTFolder,
 } from "~/newstore/collections"
 import { reactive } from "vue"
 import { useReadonlyStream } from "~/composables/stream"
-import { HoppCollection, HoppRESTRequest } from "@hoppscotch/data"
+import {
+  HoppCollection,
+  HoppRESTRequest,
+  makeCollection,
+} from "@hoppscotch/data"
+import { v4 as uuidV4 } from "uuid"
 
 export const PERSONAL_WORKSPACE_HANDLE = "personal" as WorkspaceHandle
 
@@ -593,6 +601,8 @@ export class PersonalWorkspaceService
   }
 
   private handleFolderAdd(parentFolderPath: string | null) {
+    // We assume that a newly added folder is always at the end of the list
+
     const parentHandle = parentFolderPath
       ? this.resolveRESTCollectionHandleFromFolderPath(parentFolderPath)
       : null
@@ -966,5 +976,67 @@ export class PersonalWorkspaceService
       type: "available",
       data: request as HoppRESTRequest,
     }
+  }
+
+  public createRESTCollection(
+    workspace: WorkspaceHandle,
+    parent: RESTCollectionHandle | null,
+    input: CreateRESTCollectionInput
+  ): Promise<RESTCollectionHandle> {
+    if (workspace !== PERSONAL_WORKSPACE_HANDLE) {
+      return Promise.reject(new Error("Invalid workspace")) // TODO: Change this into error as values
+    }
+
+    // Creating a root collection
+    if (parent === null) {
+      addRESTCollection(
+        makeCollection({
+          _ref_id: uuidV4(),
+
+          name: input.name,
+          headers: input.headers ?? [],
+          auth: input.auth ?? { authType: "none", authActive: true },
+
+          // TODO: Maybe visit this in the future to add subfolders and requests into input
+          requests: [],
+          folders: [],
+        })
+      )
+
+      const collIndex = restCollectionStore.value.state.length - 1
+
+      return Promise.resolve(
+        this.getOrCreateAssociatedRESTCollectionHandle(null, collIndex)
+      )
+    }
+
+    // Creating a child collection (folder)
+    const indexPath = this.resolveIndexPathFromRESTCollectionHandle(parent)
+
+    if (indexPath === null) {
+      return Promise.reject(new Error("Invalid parent folder"))
+    }
+
+    addRESTFolder(input.name, indexPath.join("/"))
+
+    // TODO: Assign folder data gotten from the input!
+
+    const parentFolder = navigateToFolderWithIndexPath(
+      this.state.value.state,
+      indexPath
+    )
+
+    if (!parentFolder) {
+      return Promise.reject(new Error("Invalid parent folder")) // TODO: Change this into error as values
+    }
+
+    const folderIndexInParent = parentFolder.folders.length - 1
+
+    return Promise.resolve(
+      this.getOrCreateAssociatedRESTCollectionHandle(
+        parent,
+        folderIndexInParent
+      )
+    )
   }
 }

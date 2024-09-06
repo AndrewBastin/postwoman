@@ -1,4 +1,4 @@
-import { HoppRESTRequest } from "@hoppscotch/data"
+import { HoppCollection, HoppRESTRequest } from "@hoppscotch/data"
 import { Service } from "dioc"
 import { ref, Ref, shallowReactive } from "vue"
 import { Brand } from "~/types/ts-utils"
@@ -56,6 +56,12 @@ export type RESTCollectionChildren = {
   }>
 }
 
+export type CreateRESTCollectionInput = {
+  name: string
+  headers?: HoppCollection["headers"]
+  auth?: HoppCollection["auth"]
+}
+
 /**
  * A branded unique identifier for a provider. Only cast to this type when defining
  * a workspace provider. This value can be persisted and should generally remain as constants
@@ -73,16 +79,52 @@ export type ProviderID = Brand<string, "ProviderID">
  *   - DOING ALL THE ABOVE AGAINST REACTIVE STORES SO THE GETTERS ARE REACTIVE GETTERS
  */
 export interface WorkspaceProvider {
+  /**
+   * A unique identifier for the provider. This value should be a constant
+   * and is deemed to be persistable. You may need to cast the string to the ProviderID type,
+   * if you are defining a provider. DO NOT CAST TO THE ProviderID TYPE in other cases.
+   */
   providerID: ProviderID
 
+  /**
+   * [REACTIVE GETTER] Resolves a workspace handle and return the metadata
+   * corresponding to the workspace referred by the handle.
+   */
   getWorkspace(handle: WorkspaceHandle): Resource<WorkspaceMeta>
 
+  /**
+   * [REACTIVE GETTER] Resolves the root REST collections for a workspace.
+   */
   getRootRESTCollections(handle: WorkspaceHandle): Resource<RootRESTCollections>
+
+  /**
+   * [REACTIVE GETTER] Resolves the children of a REST collection referred
+   * to by the handle.
+   */
   getRESTCollectionChildren(
     handle: RESTCollectionHandle
   ): Resource<RESTCollectionChildren>
 
+  /**
+   * [REACTIVE GETTER] Resolves the request data for a REST request referred
+   * to by the handle.
+   */
   getRESTRequest(handle: RESTRequestHandle): Resource<HoppRESTRequest>
+
+  /**
+   * Creates a REST collection in the given workspace.
+   *
+   * @param workspace A handle to the workspace where the collection should be created
+   * @param parent A handle to the collection where the collection should be created under, or null if it should be in the root
+   * @param input Information about how the collection should be created (name etc.)
+   *
+   * @returns A promise to a handle referring to the collection that was created
+   */
+  createRESTCollection(
+    workspace: WorkspaceHandle,
+    parent: RESTCollectionHandle | null,
+    input: CreateRESTCollectionInput
+  ): Promise<RESTCollectionHandle>
 }
 
 /**
@@ -167,5 +209,20 @@ export class NewWorkspaceService extends Service {
     }
 
     return resolvedProvider.getRESTRequest(handle)
+  }
+
+  public createRESTCollection(
+    provider: ProviderID,
+    workspace: WorkspaceHandle,
+    parent: RESTCollectionHandle | null,
+    input: CreateRESTCollectionInput
+  ): Promise<RESTCollectionHandle> {
+    const resolvedProvider = this.providerMap.get(provider)
+
+    if (!resolvedProvider) {
+      throw new Error(`Provider not found: ${provider}`)
+    }
+
+    return resolvedProvider.createRESTCollection(workspace, parent, input)
   }
 }
