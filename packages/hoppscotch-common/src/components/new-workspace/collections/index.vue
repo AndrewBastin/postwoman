@@ -393,6 +393,12 @@
       </div>
     </div>
   </div>
+  <NewWorkspaceCollectionsAdd
+    :show="showModalAdd"
+    :loading-state="modalLoading"
+    @submit="addNewRootCollection"
+    @hide-modal="displayModalAdd(false)"
+  />
 </template>
 
 <script lang="ts">
@@ -521,6 +527,11 @@ withDefaults(
 const t = useI18n()
 const colorMode = useColorMode()
 
+// Modals
+const showModalAdd = ref(false)
+
+const modalLoading = ref(false) // Whether any of the modals are in a loading state
+
 // Dragging
 const draggingToRoot = ref(false)
 const currentReorderingStatus = useReadonlyStream(currentReorderingStatus$, {
@@ -546,6 +557,10 @@ const rootCollections = computed(() => {
 const adapter: SmartTreeAdapter<CollectionNode> =
   new WorkspaceCollectionAdapter(rootCollections, personalWorkspace)
 
+function resetSelectedData() {
+  // TODO: Implement
+}
+
 /**
  * This function is called when the user drops the collection
  * to the root
@@ -555,11 +570,17 @@ function dropToRoot({ dataTransfer }: DragEvent) {
   // TODO: Implement
 }
 
-const displayModalAdd = (show: boolean) => {
-  // TODO: Implement
+function displayModalAdd(show: boolean) {
+  showModalAdd.value = show
+
+  if (!show) resetSelectedData()
 }
 
 function displayModalImportExport(show: boolean) {
+  // TODO: Implement
+}
+
+function addNewRootCollection(name: string) {
   // TODO: Implement
 }
 </script>
