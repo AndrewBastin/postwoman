@@ -20,6 +20,8 @@ import {
   editRESTFolder,
   saveRESTRequestAs,
   removeRESTRequest,
+  removeRESTCollection,
+  removeRESTFolder,
 } from "~/newstore/collections"
 import { reactive } from "vue"
 import { useReadonlyStream } from "~/composables/stream"
@@ -1089,6 +1091,28 @@ export class PersonalWorkspaceService
     const requestIndex = indexPath.pop()!
 
     removeRESTRequest(indexPath.join("/"), requestIndex)
+
+    return Promise.resolve()
+  }
+
+  public deleteRESTCollection(handle: RESTCollectionHandle): Promise<void> {
+    // We will just delete the collection from the store, that should update
+    // the resources issued to us easily, the store listeners will update
+    // the handle pointers
+
+    const indexPath = this.resolveIndexPathFromRESTCollectionHandle(handle)
+
+    if (indexPath === null) {
+      // TODO: Should we return a value/error here ?
+      return Promise.resolve()
+    }
+
+    if (indexPath.length === 1) {
+      // It is a collection
+      removeRESTCollection(indexPath[0])
+    } else {
+      removeRESTFolder(indexPath.join("/"))
+    }
 
     return Promise.resolve()
   }

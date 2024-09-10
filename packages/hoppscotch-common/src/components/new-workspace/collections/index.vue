@@ -199,7 +199,13 @@
                     :shortcut="['⌫']"
                     @click="
                       () => {
-                        emit('remove-collection')
+                        showConfirmModalFor = {
+                          type:
+                            node.data.type === 'collection'
+                              ? 'delete-collection'
+                              : 'delete-folder',
+                          handle: node.data.handle,
+                        }
                         hide()
                       }
                     "
@@ -581,10 +587,13 @@ import { PersonalWorkspaceService } from "~/services/new-workspace/providers/per
 import { AddFor } from "./Add.vue"
 import { makeRESTRequest, getDefaultRESTRequest } from "@hoppscotch/data"
 
-type ConfirmModalFor = {
-  type: "delete-request"
-  handle: RESTRequestHandle
-} | null
+type ConfirmModalFor =
+  | { type: "delete-request"; handle: RESTRequestHandle }
+  | {
+      type: "delete-folder" | "delete-collection"
+      handle: RESTCollectionHandle
+    }
+  | null
 
 withDefaults(
   defineProps<{
@@ -614,6 +623,12 @@ const confirmModalTitle = computed<string | null>(() => {
   switch (showConfirmModalFor.value.type) {
     case "delete-request":
       return t("confirm.remove_request")
+
+    case "delete-collection":
+      return t("confirm.remove_collection")
+
+    case "delete-folder":
+      return t("confirm.remove_folder")
   }
 })
 
@@ -729,21 +744,47 @@ async function addNewRequest(
 async function resolveConfirmModal() {
   const currentWorkspace = workspaceService.currentWorkspace.value
 
+  const modalState = showConfirmModalFor.value
+
   if (currentWorkspace === null) {
     return
   }
 
-  if (showConfirmModalFor.value === null) {
+  if (modalState === null) {
     return
   }
 
-  if (showConfirmModalFor.value.type === "delete-request") {
+  // Delete Request
+  if (modalState.type === "delete-request") {
     try {
       modalLoading.value = true
 
       await workspaceService.deleteRESTRequest(
         currentWorkspace.provider,
-        showConfirmModalFor.value.handle
+        modalState.handle
+      )
+
+      // TODO: Handle Errors
+
+      showConfirmModalFor.value = null
+
+      toast.success(t("state.deleted"))
+    } finally {
+      modalLoading.value = false
+    }
+  }
+
+  // Delete Collection/Folder
+  if (
+    modalState.type === "delete-collection" ||
+    modalState.type === "delete-folder"
+  ) {
+    try {
+      modalLoading.value = true
+
+      await workspaceService.deleteRESTCollection(
+        currentWorkspace.provider,
+        modalState.handle
       )
 
       // TODO: Handle Errors

@@ -145,6 +145,13 @@ export interface WorkspaceProvider {
    * @param handle The handle of the request to be deleted
    */
   deleteRESTRequest(handle: RESTRequestHandle): Promise<void>
+
+  /**
+   * Deletes a given REST collection
+   *
+   * @param handle The handle of the collection to be deleted
+   */
+  deleteRESTCollection(handle: RESTCollectionHandle): Promise<void>
 }
 
 /**
@@ -252,5 +259,12 @@ export class NewWorkspaceService extends Service {
     handle: RESTRequestHandle
   ): Promise<void> {
     return this.resolveProvider(provider).deleteRESTRequest(handle)
+  }
+
+  public deleteRESTCollection(
+    provider: ProviderID,
+    handle: RESTCollectionHandle
+  ): Promise<void> {
+    return this.resolveProvider(provider).deleteRESTCollection(handle)
   }
 }
