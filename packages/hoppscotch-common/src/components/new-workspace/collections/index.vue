@@ -266,10 +266,6 @@
                   ref="tippyActions"
                   class="flex flex-col focus:outline-none"
                   tabindex="0"
-                  @keyup.e="edit?.$el.click()"
-                  @keyup.d="duplicate?.$el.click()"
-                  @keyup.delete="deleteAction?.$el.click()"
-                  @keyup.s="shareAction?.$el.click()"
                   @keyup.escape="hide()"
                 >
                   <HoppSmartItem
@@ -304,7 +300,10 @@
                     :shortcut="['⌫']"
                     @click="
                       () => {
-                        emit('remove-request')
+                        showConfirmModalFor = {
+                          type: 'delete-request',
+                          handle: node.data.handle,
+                        }
                         hide()
                       }
                     "
@@ -420,6 +419,14 @@
     :loading-state="modalLoading"
     @add-request="addNewRequest($event, showAddRequestModalFor)"
     @hide-modal="showAddRequestModalFor = null"
+  />
+
+  <HoppSmartConfirmModal
+    :show="showConfirmModalFor !== null"
+    :title="confirmModalTitle"
+    :loading-state="modalLoading"
+    @hide-modal="showConfirmModalFor = null"
+    @resolve="resolveConfirmModal"
   />
 </template>
 
@@ -574,6 +581,11 @@ import { PersonalWorkspaceService } from "~/services/new-workspace/providers/per
 import { AddFor } from "./Add.vue"
 import { makeRESTRequest, getDefaultRESTRequest } from "@hoppscotch/data"
 
+type ConfirmModalFor = {
+  type: "delete-request"
+  handle: RESTRequestHandle
+} | null
+
 withDefaults(
   defineProps<{
     saveRequest: boolean
@@ -582,6 +594,7 @@ withDefaults(
     saveRequest: false,
   }
 )
+
 const t = useI18n()
 const colorMode = useColorMode()
 const toast = useToast()
@@ -589,6 +602,20 @@ const toast = useToast()
 // Modals
 const showAddModalFor = ref<AddFor>(null)
 const showAddRequestModalFor = ref<RESTCollectionHandle | null>(null)
+const showConfirmModalFor = ref<ConfirmModalFor>(null)
+
+// Disable lint because the lint would like for us to have a return in the root
+// eslint-disable-next-line vue/return-in-computed-property
+const confirmModalTitle = computed<string | null>(() => {
+  if (showConfirmModalFor.value === null) {
+    return null
+  }
+
+  switch (showConfirmModalFor.value.type) {
+    case "delete-request":
+      return t("confirm.remove_request")
+  }
+})
 
 const modalLoading = ref(false) // Whether any of the modals are in a loading state
 
@@ -692,8 +719,41 @@ async function addNewRequest(
     // TODO: Handle errors
 
     showAddRequestModalFor.value = null
+
+    // TODO: Open the request in a new tab
   } finally {
     modalLoading.value = false
+  }
+}
+
+async function resolveConfirmModal() {
+  const currentWorkspace = workspaceService.currentWorkspace.value
+
+  if (currentWorkspace === null) {
+    return
+  }
+
+  if (showConfirmModalFor.value === null) {
+    return
+  }
+
+  if (showConfirmModalFor.value.type === "delete-request") {
+    try {
+      modalLoading.value = true
+
+      await workspaceService.deleteRESTRequest(
+        currentWorkspace.provider,
+        showConfirmModalFor.value.handle
+      )
+
+      // TODO: Handle Errors
+
+      showConfirmModalFor.value = null
+
+      toast.success(t("state.deleted"))
+    } finally {
+      modalLoading.value = false
+    }
   }
 }
 </script>

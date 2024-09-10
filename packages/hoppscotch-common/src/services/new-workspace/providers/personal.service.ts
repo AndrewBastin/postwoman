@@ -19,6 +19,7 @@ import {
   addRESTFolder,
   editRESTFolder,
   saveRESTRequestAs,
+  removeRESTRequest,
 } from "~/newstore/collections"
 import { reactive } from "vue"
 import { useReadonlyStream } from "~/composables/stream"
@@ -1071,5 +1072,24 @@ export class PersonalWorkspaceService
     return Promise.resolve(
       this.getOrCreateAssociatedRESTRequestHandle(parent, insertionIndex)
     )
+  }
+
+  public deleteRESTRequest(handle: RESTRequestHandle): Promise<void> {
+    // We will just delete the request from the store, that should update
+    // the resources issued to us easily, the store listeners will update
+    // the handle pointers
+
+    const indexPath = this.resolveIndexPathFromRESTRequestHandle(handle)
+
+    if (indexPath === null) {
+      // TODO: Should we return a value/error here ?
+      return Promise.resolve()
+    }
+
+    const requestIndex = indexPath.pop()!
+
+    removeRESTRequest(indexPath.join("/"), requestIndex)
+
+    return Promise.resolve()
   }
 }

@@ -138,6 +138,13 @@ export interface WorkspaceProvider {
     parent: RESTCollectionHandle,
     req: HoppRESTRequest
   ): Promise<RESTRequestHandle>
+
+  /**
+   * Deletes a given REST request
+   *
+   * @param handle The handle of the request to be deleted
+   */
+  deleteRESTRequest(handle: RESTRequestHandle): Promise<void>
 }
 
 /**
@@ -238,5 +245,12 @@ export class NewWorkspaceService extends Service {
       parent,
       input
     )
+  }
+
+  public deleteRESTRequest(
+    provider: ProviderID,
+    handle: RESTRequestHandle
+  ): Promise<void> {
+    return this.resolveProvider(provider).deleteRESTRequest(handle)
   }
 }
