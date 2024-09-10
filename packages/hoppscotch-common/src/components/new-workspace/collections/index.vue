@@ -73,13 +73,13 @@
               :loading="false"
               @toggle-children="toggleChildren"
             >
-              <!-- TODO: Implement click handlers -->
               <template #quick-actions>
                 <HoppButtonSecondary
                   v-tippy="{ theme: 'tooltip' }"
                   :icon="IconFilePlus"
                   :title="t('request.new')"
                   class="hidden group-hover:inline-flex"
+                  @click="showAddRequestModalFor = node.data.handle"
                 />
                 <HoppButtonSecondary
                   v-tippy="{ theme: 'tooltip' }"
@@ -414,6 +414,13 @@
     @submit="addNewRootCollection"
     @hide-modal="showAddModalFor = null"
   />
+
+  <NewWorkspaceCollectionsAddRequest
+    :show="showAddRequestModalFor !== null"
+    :loading-state="modalLoading"
+    @add-request="addNewRequest($event, showAddRequestModalFor)"
+    @hide-modal="showAddRequestModalFor = null"
+  />
 </template>
 
 <script lang="ts">
@@ -565,6 +572,7 @@ import { useColorMode } from "~/composables/theming"
 import { useToast } from "~/composables/toast"
 import { PersonalWorkspaceService } from "~/services/new-workspace/providers/personal.service"
 import { AddFor } from "./Add.vue"
+import { makeRESTRequest, getDefaultRESTRequest } from "@hoppscotch/data"
 
 withDefaults(
   defineProps<{
@@ -580,6 +588,7 @@ const toast = useToast()
 
 // Modals
 const showAddModalFor = ref<AddFor>(null)
+const showAddRequestModalFor = ref<RESTCollectionHandle | null>(null)
 
 const modalLoading = ref(false) // Whether any of the modals are in a loading state
 
@@ -640,8 +649,6 @@ async function addNewRootCollection({
     )
 
     // TODO: Handle errors
-  } finally {
-    modalLoading.value = false
 
     toast.success(
       showFor.type === "collection"
@@ -650,6 +657,43 @@ async function addNewRootCollection({
     )
 
     showAddModalFor.value = null
+  } finally {
+    modalLoading.value = false
+  }
+}
+
+async function addNewRequest(
+  name: string,
+  parentHandle: RESTCollectionHandle | null
+) {
+  if (parentHandle === null) {
+    return
+  }
+
+  try {
+    modalLoading.value = true
+
+    const currentWorkspace = workspaceService.currentWorkspace.value
+
+    if (currentWorkspace === null) {
+      return
+    }
+
+    await workspaceService.createRESTRequest(
+      currentWorkspace.provider,
+      currentWorkspace.handle,
+      parentHandle,
+      makeRESTRequest({
+        ...getDefaultRESTRequest(),
+        name,
+      })
+    )
+
+    // TODO: Handle errors
+
+    showAddRequestModalFor.value = null
+  } finally {
+    modalLoading.value = false
   }
 }
 </script>

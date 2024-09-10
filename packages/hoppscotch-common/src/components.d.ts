@@ -197,6 +197,7 @@ declare module 'vue' {
     ModalsNativeClientCertsAdd: typeof import('./../../hoppscotch-selfhost-desktop/src/components/modals/NativeClientCertsAdd.vue')['default']
     NewWorkspaceCollections: typeof import('./components/new-workspace/collections/index.vue')['default']
     NewWorkspaceCollectionsAdd: typeof import('./components/new-workspace/collections/Add.vue')['default']
+    NewWorkspaceCollectionsAddRequest: typeof import('./components/new-workspace/collections/AddRequest.vue')['default']
     NewWorkspaceCollectionsCollection: typeof import('./components/new-workspace/collections/Collection.vue')['default']
     NewWorkspaceCollectionsRequest: typeof import('./components/new-workspace/collections/Request.vue')['default']
     NewWorkspaceCurrent: typeof import('./components/new-workspace/Current.vue')['default']

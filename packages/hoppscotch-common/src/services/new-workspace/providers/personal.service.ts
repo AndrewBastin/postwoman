@@ -18,6 +18,7 @@ import {
   addRESTCollection,
   addRESTFolder,
   editRESTFolder,
+  saveRESTRequestAs,
 } from "~/newstore/collections"
 import { reactive } from "vue"
 import { useReadonlyStream } from "~/composables/stream"
@@ -1047,6 +1048,28 @@ export class PersonalWorkspaceService
         parent,
         folderIndexInParent
       )
+    )
+  }
+
+  public createRESTRequest(
+    workspace: WorkspaceHandle,
+    parent: RESTCollectionHandle,
+    req: HoppRESTRequest
+  ): Promise<RESTRequestHandle> {
+    if (workspace !== PERSONAL_WORKSPACE_HANDLE) {
+      return Promise.reject(new Error("Invalid workspace")) // TODO: Change this into error as values
+    }
+
+    const indexPath = this.resolveIndexPathFromRESTCollectionHandle(parent)
+
+    if (indexPath === null) {
+      return Promise.reject(new Error("Invalid parent folder"))
+    }
+
+    const insertionIndex = saveRESTRequestAs(indexPath.join("/"), req)
+
+    return Promise.resolve(
+      this.getOrCreateAssociatedRESTRequestHandle(parent, insertionIndex)
     )
   }
 }

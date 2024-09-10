@@ -125,6 +125,19 @@ export interface WorkspaceProvider {
     parent: RESTCollectionHandle | null,
     input: CreateRESTCollectionInput
   ): Promise<RESTCollectionHandle>
+
+  /**
+   * Creates a REST request in the given workspace.
+   *
+   * @param workspace A handle to the workspace where the request should be created
+   * @param parent A handle to the collection where the request should be created
+   * @param input The contents of the request
+   */
+  createRESTRequest(
+    workspace: WorkspaceHandle,
+    parent: RESTCollectionHandle,
+    req: HoppRESTRequest
+  ): Promise<RESTRequestHandle>
 }
 
 /**
@@ -159,56 +172,46 @@ export class NewWorkspaceService extends Service {
     this.providerMap.set(provider.providerID, provider)
   }
 
-  public getWorkspace(
-    provider: ProviderID,
-    handle: WorkspaceHandle
-  ): Resource<WorkspaceMeta> {
+  /**
+   * A helper function to resolve a provider from the provider ID.
+   * If the provider is not found, an error is thrown.
+   */
+  private resolveProvider(provider: ProviderID) {
     const resolvedProvider = this.providerMap.get(provider)
 
     if (!resolvedProvider) {
       throw new Error(`Provider not found: ${provider}`)
     }
 
-    return resolvedProvider.getWorkspace(handle)
+    return resolvedProvider
+  }
+
+  public getWorkspace(
+    provider: ProviderID,
+    handle: WorkspaceHandle
+  ): Resource<WorkspaceMeta> {
+    return this.resolveProvider(provider).getWorkspace(handle)
   }
 
   public getRootRESTCollections(
     provider: ProviderID,
     handle: WorkspaceHandle
   ): Resource<RootRESTCollections> {
-    const resolvedProvider = this.providerMap.get(provider)
-
-    if (!resolvedProvider) {
-      throw new Error(`Provider not found: ${provider}`)
-    }
-
-    return resolvedProvider.getRootRESTCollections(handle)
+    return this.resolveProvider(provider).getRootRESTCollections(handle)
   }
 
   public getRESTCollectionChildren(
     provider: ProviderID,
     handle: RESTCollectionHandle
   ): Resource<RESTCollectionChildren> {
-    const resolvedProvider = this.providerMap.get(provider)
-
-    if (!resolvedProvider) {
-      throw new Error(`Provider not found: ${provider}`)
-    }
-
-    return resolvedProvider.getRESTCollectionChildren(handle)
+    return this.resolveProvider(provider).getRESTCollectionChildren(handle)
   }
 
   public getRESTRequest(
     provider: ProviderID,
     handle: RESTRequestHandle
   ): Resource<HoppRESTRequest> {
-    const resolvedProvider = this.providerMap.get(provider)
-
-    if (!resolvedProvider) {
-      throw new Error(`Provider not found: ${provider}`)
-    }
-
-    return resolvedProvider.getRESTRequest(handle)
+    return this.resolveProvider(provider).getRESTRequest(handle)
   }
 
   public createRESTCollection(
@@ -217,12 +220,23 @@ export class NewWorkspaceService extends Service {
     parent: RESTCollectionHandle | null,
     input: CreateRESTCollectionInput
   ): Promise<RESTCollectionHandle> {
-    const resolvedProvider = this.providerMap.get(provider)
+    return this.resolveProvider(provider).createRESTCollection(
+      workspace,
+      parent,
+      input
+    )
+  }
 
-    if (!resolvedProvider) {
-      throw new Error(`Provider not found: ${provider}`)
-    }
-
-    return resolvedProvider.createRESTCollection(workspace, parent, input)
+  public createRESTRequest(
+    provider: ProviderID,
+    workspace: WorkspaceHandle,
+    parent: RESTCollectionHandle,
+    input: HoppRESTRequest
+  ): Promise<RESTRequestHandle> {
+    return this.resolveProvider(provider).createRESTRequest(
+      workspace,
+      parent,
+      input
+    )
   }
 }
