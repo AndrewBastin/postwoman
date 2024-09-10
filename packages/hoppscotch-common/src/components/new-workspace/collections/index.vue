@@ -130,7 +130,7 @@
                     :shortcut="['R']"
                     @click="
                       () => {
-                        emit('add-request')
+                        showAddRequestModalFor = node.data.handle
                         hide()
                       }
                     "
